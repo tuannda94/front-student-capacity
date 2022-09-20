@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user';
 import { ConfigViewService } from 'src/app/services/config-view.service';
 import { GetValueLocalService } from 'src/app/services/get-value-local.service';
 import * as $ from 'jquery';
+import Echo from 'laravel-echo';
 
 @Component({
     selector: 'app-home-layout',
@@ -21,6 +22,18 @@ export class HomeLayoutComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        const token = (localStorage.getItem("auth_token") as string).split("|")[1];
+        (window as any).Echo = new Echo({
+            broadcaster: "socket.io",
+            host: `${window.location.protocol}//${window.location.hostname}:6001`,
+            withCredentials: true,
+            auth: {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+            },
+        });
+
         this.backTop(); 
         this.winBackTop();
         window.addEventListener('scroll', () => {

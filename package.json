@@ -7,7 +7,8 @@
     "build": "ng build",
     "build-prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "server": "laravel-echo-server start"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +36,7 @@
     "bootstrap-icons": "1.8.1",
     "file-saver": "2.0.5",
     "jquery": "3.6.0",
+    "laravel-echo": "^1.14.0",
     "moment": "2.29.1",
     "ng-angular-popup": "0.1.2",
     "ng-zorro-antd": "13.2.2",

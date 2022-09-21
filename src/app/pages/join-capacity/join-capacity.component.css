@@ -1,0 +1,15 @@
+.capacity__container {
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.capacity__container-form {
+  width: 300px;
+  max-width: 100%;
+}
+
+.btn-enter {
+  width: 100%;
+}

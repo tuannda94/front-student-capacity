@@ -86,6 +86,8 @@ import { ListTagComponent } from "./component/list-tag/list-tag.component";
 import { PostCategoryComponent } from "./pages/post-category/post-category.component";
 import { PostResultSearchComponent } from "./pages/post-result-search/post-result-search.component";
 import { TestCapacityComponent } from "./pages/test-capacity/test-capacity.component";
+import { JoinCapacityComponent } from './pages/join-capacity/join-capacity.component';
+import { CapacityPlayComponent } from './pages/capacity-play/capacity-play.component';
 
 
 
@@ -145,7 +147,9 @@ import { TestCapacityComponent } from "./pages/test-capacity/test-capacity.compo
     ProfileLayoutComponent,
     MyCapacityTestComponent,
     ContestAsideComponent,
-    TestCapacityComponent
+    TestCapacityComponent,
+    JoinCapacityComponent,
+    CapacityPlayComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { jwtApiUrl } from "./../../environments/environment";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -26,5 +27,10 @@ export class CapacityService {
     return this.http.post<ResponseCapacityHistory>(`${environment.takeExamUrl}/student-capacity-history`, {
       result_capacity_id: capacity_id,
     });
+  }
+
+  // real time
+  checkCode(code: string): Observable<ResponsePayload> {
+    return this.http.get<ResponsePayload>(`${jwtApiUrl}/auth-room-play/${code}`);
   }
 }

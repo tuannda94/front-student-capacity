@@ -1,6 +1,19 @@
 <div class="container capacity__container">
-  <form action="" method="post" class="capacity__container-form">
-    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Game PIN" />
+  <form
+    action=""
+    method="post"
+    class="capacity__container-form"
+    (ngSubmit)="handleCheckCode()"
+    [formGroup]="formCheckCode"
+  >
+    <input
+      type="text"
+      class="form-control"
+      formControlName="code"
+      id=""
+      aria-describedby="helpId"
+      placeholder="Game PIN"
+    />
     <button class="btn btn-primary mt-1 btn-enter">Enter</button>
   </form>
 </div>

@@ -123,7 +123,7 @@ const routes: Routes = [
         component: JoinCapacityComponent,
       },
       {
-        path: "capacity-play",
+        path: "capacity-play/:code",
         component: CapacityPlayComponent,
       },
     ],

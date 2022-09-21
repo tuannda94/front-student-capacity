@@ -1,32 +1,144 @@
-import { ActivatedRoute } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CapacityService } from 'src/app/services/capacity.service';
 
 @Component({
-  selector: "app-capacity-play",
-  templateUrl: "./capacity-play.component.html",
-  styleUrls: ["./capacity-play.component.css"],
+  selector: 'app-capacity-play',
+  templateUrl: './capacity-play.component.html',
+  styleUrls: ['./capacity-play.component.css'],
 })
 export class CapacityPlayComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private capacityService: CapacityService
+  ) {}
+  users: any = [];
+  flagStart: any = false;
+  flagEnd: any = false;
+  question: any = {};
+  answers: any = [];
+  usersRanks: any = [];
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const { code } = params;
-      console.log("Params", code);
+      const that = this;
+      this.capacityService.connectRoom(code).subscribe(
+        (res: any) => {
+          if (res.payload.exam.status == 2) that.flagEnd = true;
+          if (res.payload.status == false) return;
 
-      (window as any).Echo.join("room." + code)
+          that.usersRanks = res.payload.ranks;
+          that.answers = [];
+          that.question = res.payload.question;
+          that.flagStart = true;
+        },
+        (err: any) => {
+          alert('Đã xảy ra lỗi !');
+          that.router.navigate(['/capacity-join']);
+        }
+      );
+      (window as any).Echo.join('room.' + code)
         .here((users: any) => {
-          console.log("User online ", users); // Chạy lần đầu tiên
+          this.users = users;
+          console.log('User online ', users); //
         })
         .joining((user: any) => {
-          console.log("User joining", user); // User  khác tham gia sẽ chạy hàm này
+          this.users.push(user);
+          console.log('User joining', user); //
         })
         .leaving((user: any) => {
-          console.log("User leave ", user); //  User thoát phòng
+          var us = this.users.filter(function (data: any) {
+            return data.id !== user.id;
+          });
+          this.users = us;
+          console.log('User leave ', user); //
         })
-        .listen("PersenChannel", function (data: any) {
-          console.log(data); // Lắng nghe sự kiện
+        .listen('PlayGameEvent', function (data: any) {
+          that.flagStart = true;
+          that.usersRanks = data.ranks;
+          that.question = data.question;
+          console.log('Start', data); //
+        })
+        .listen('NextGameEvent', function (data: any) {
+          that.capacityService
+            .submitCode(code, {
+              question_id: that.question.id,
+              answers: that.answers,
+            })
+            .subscribe(
+              (res) => {
+                that.usersRanks = res.payload.ranks;
+              },
+              (err) => {
+                alert('Đã xảy ra lỗi !');
+                that.router.navigate(['/capacity-join']);
+              }
+            );
+          that.answers = [];
+          that.question = data.question;
+          that.flagStart = true;
+          console.log('Next', data); //
+        })
+        .listen('EndGameEvent', function (data: any) {
+          that.capacityService
+            .submitCode(code, {
+              question_id: that.question.id,
+              answers: that.answers,
+            })
+            .subscribe(
+              (res) => {
+                that.usersRanks = res.payload.ranks;
+                that.flagEnd = true;
+              },
+              (err) => {
+                alert('Đã xảy ra lỗi !');
+                that.router.navigate(['/capacity-join', code]);
+              }
+            );
+        })
+        .listen('UpdateGameEvent', function (data: any) {
+          console.log(data);
+
+          that.usersRanks = data.ranks;
         });
     });
+  }
+
+  clickAnswer(id: any) {
+    var key = 0;
+    var keyAnswer = null;
+    this.question.answers.filter(function (data: any, k: any) {
+      if (data.id == id) key = k;
+      return data.id == id;
+    });
+    var check = this.answers.filter(function (data: any, k: any) {
+      if (data == id) keyAnswer = k;
+      return data == id;
+    });
+    if (this.question.type == 1) {
+      if (check.length > 0) {
+        this.question.answers[key].status = false;
+        this.answers.splice(keyAnswer, 1);
+      } else {
+        this.answers.push(id);
+        this.question.answers[key].status = true;
+      }
+    } else {
+      this.answers = [id];
+      this.question.answers = this.question.answers.map(function (data: any) {
+        return {
+          content: data.content,
+          id: data.id,
+          question_id: data.question_id,
+          status: false,
+        };
+      });
+      this.question.answers[key].status = true;
+    }
+  }
+  renderContent(content: string, type: number) {
+    return ` ${content} ( ${type == 1 ? 'Nhiều đáp án' : 'Một đáp án '} ) `;
   }
 }

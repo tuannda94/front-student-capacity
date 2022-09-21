@@ -1,36 +1,56 @@
-import { jwtApiUrl } from "./../../environments/environment";
-import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
-import { ResponsePayload } from "../models/response-payload";
-import { ResponseCapacityHistory } from "../models/capacity";
+import { jwtApiUrl } from './../../environments/environment';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { ResponsePayload } from '../models/response-payload';
+import { ResponseCapacityHistory } from '../models/capacity';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class CapacityService {
   constructor(private http: HttpClient) {}
 
   // test năng lực theo id
   getWhereId(id: number): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.capacityListUrl}/${id}`);
+    return this.http.get<ResponsePayload>(
+      `${environment.capacityListUrl}/${id}`
+    );
   }
 
   // bài test liên quan
   getRelated(capacity_id: number): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.capacityListUrl}/${capacity_id}/related`);
+    return this.http.get<ResponsePayload>(
+      `${environment.capacityListUrl}/${capacity_id}/related`
+    );
   }
 
   // lịch sử làm bài
   getHistoryExam(capacity_id: number): Observable<ResponseCapacityHistory> {
-    return this.http.post<ResponseCapacityHistory>(`${environment.takeExamUrl}/student-capacity-history`, {
-      result_capacity_id: capacity_id,
-    });
+    return this.http.post<ResponseCapacityHistory>(
+      `${environment.takeExamUrl}/student-capacity-history`,
+      {
+        result_capacity_id: capacity_id,
+      }
+    );
   }
 
   // real time
   checkCode(code: string): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${jwtApiUrl}/auth-room-play/${code}`);
+    return this.http.get<ResponsePayload>(
+      `${jwtApiUrl}/auth-room-play/${code}`
+    );
+  }
+
+  connectRoom(code: string): Observable<ResponsePayload> {
+    return this.http.get<ResponsePayload>(`${jwtApiUrl}/connect-room/${code}`);
+  }
+
+  submitCode(code: string, data: any): Observable<ResponsePayload> {
+    return this.http.post<ResponsePayload>(
+      `${jwtApiUrl}/sumit-room/${code}`,
+      data
+    );
   }
 }

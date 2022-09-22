@@ -12,10 +12,6 @@
   align-items: center;
   justify-content: center;
 }
-.ansswer-active{
-  background: #ff6f05;
-  color: white
-}
 
 .capacity__footer {
   position: absolute;
@@ -58,10 +54,6 @@
   cursor: pointer;
 }
 
-.list-users__item:hover {
-  text-decoration: line-through;
-}
-
 .capacity__header {
   position: fixed;
   top: 0;
@@ -79,54 +71,96 @@
   color: #46178f;
   font-weight: bold;
   border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
 .capacity__header-bottom {
-  font-size: 40px;
-  height: 80px;
-  line-height: 80px;
+  font-size: 28px;
+  min-height: 60px;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0px 15px;
   text-align: center;
   font-weight: bold;
   color: #46178f;
+  line-height: 1.2;
+  padding-top: 8px;
 }
 
-.answers {
-  /* background-color: #fff; */
+.capacity__play {
   width: 100%;
-  height: 100%;
+  padding: 0px 15px;
+}
+
+.answers > div {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2vh;
 }
 
 .answer {
- border: 1px solid #ccc;
-    padding: 10px 14px;
-    border-radius: 3px;
-    margin-bottom: 6px;
-    font-size: 25px;
-    color: white;
-    cursor: pointer;
-    border-radius: 2vh;
+  padding: 6px 12px;
+  background-color: #fff;
+  box-shadow: rgb(0 0 0 / 15%) 0px -0.25rem 0px 0px inset;
+  border-radius: 4px;
+  font-size: 25px;
+  font-weight: bold;
+  min-height: 100px;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  line-height: 1.2;
+  word-break: break-word;
+  flex: 1;
+  transition: all 0.25s linear;
 }
 
-.top-user{
+.answer.active,
+.answer:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.top-user {
   position: fixed;
-    right: 2vh;
-    top: 2vh;
+  right: 2vh;
+  top: 110px;
 }
 
-.title{
+.title {
   font-size: 30px;
-  color: white
+  color: white;
 }
 
-.my-history{
-      color: white;
-    background: rgb(114 23 133 / 30%);
-    border-radius: 2vh;
-    padding: 2vh;
-    font-size: 15px;
+.my-history {
+  color: white;
+  background: rgb(114 23 133 / 30%);
+  border-radius: 2vh;
+  padding: 2vh;
+  font-size: 15px;
+}
+
+/* button back */
+.button-back {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  background-color: var(--primary);
+  font-size: 16px;
+  color: #fff;
+  border-radius: 4px;
+  transition: all 0.25s linear;
+}
+
+.button-back__icon {
+  margin-right: 10px;
+  padding-top: 2px;
+}
+
+.button-back:hover {
+  opacity: 0.8;
 }

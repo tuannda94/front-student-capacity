@@ -1,76 +1,76 @@
 <div class="capacity__container">
-  <!-- <header class="capacity__header">
-    <div class="capacity__header-top">1 of 20</div>
+  <a *ngIf="flagEnd" routerLink="/capacity-join" class="button-back">
+    <div class="button-back__icon">
+      <i class="fa-solid fa-left-long"></i>
+    </div>
+    Thoát
+  </a>
 
-    <div class="capacity__header-bottom">1 + 1 = ...</div>
-  </header> -->
+  <header class="capacity__header" *ngIf="!flagEnd && flagStart">
+    <div class="capacity__header-top">{{ question.type === 1 ? "Nhiều đáp án đúng" : "Một đáp án đúng" }}</div>
+
+    <div class="capacity__header-bottom" [innerHTML]="question.content">.</div>
+  </header>
+
   <ng-container *ngIf="!flagEnd; else elseTemplate">
     <main *ngIf="!flagStart; else elseFlag">
       <p class="text-white text-center fs-5 mb-3">Chờ máy chủ khởi động!</p>
 
-      <ul class="list-users d-flex align-items-center flex-wrap">
-
-        <li *ngFor="let user of users" class="list-users__item">{{ user.name }}#{{ user.email }}</li>
-
+      <ul class="list-users d-flex align-items-center flex-wrap" *ngIf="users.length">
+        <li *ngFor="let user of users" class="list-users__item">
+          <div nz-tooltip [nzTooltipTitle]="user.email" nzTooltipColor="#000">
+            <span>{{ user.name }}</span>
+            <span *ngIf="user.id === userLogged.id"> (Bạn)</span>
+          </div>
+        </li>
       </ul>
 
-
+      <ul class="list-users d-flex align-items-center flex-wrap justify-content-center" *ngIf="!users.length">
+        <span>Bạn là người đầu tiên!</span>
+      </ul>
     </main>
+
+    <!-- play game -->
     <ng-template #elseFlag>
-      <main>
-
-
-
-        <!-- <ul *ngFor="let answer of question.answers" class="list-users d-flex align-items-center flex-wrap">
-            <li (click)="clickAnswer(answer.id)" class="list-users__item">{{ answer.status }} {{ answer.content }}</li>
-          </ul> -->
-
+      <main class="capacity__play">
         <div class="p-2 top-user">
-          <!-- <h2>TOP USER</h2> -->
-          <ul class="list-users   align-items-center  ">
-            <li *ngFor="let usersRank of usersRanks, let key = index" class="list-users__item">Top {{ key + 1 }} : {{
-              usersRank.user.name }} {{
-              usersRank.true_answer }}</li>
+          <!-- rank -->
+          <ul class="list-users align-items-center m-0">
+            <li *ngFor="let usersRank of usersRanks; let key = index" class="list-users__item">
+              Top {{ key + 1 }} : {{ usersRank.user.name }} {{ usersRank.true_answer }}
+            </li>
           </ul>
         </div>
 
-        <h2 class="title" [innerHTML]="renderContent(question.content,question.type)"> </h2>
-        <ul class="answers">
-          <li *ngFor="let answer of question.answers" (click)="clickAnswer(answer.id)"
-            class="answer {{ answer.status ? 'ansswer-active' : '' }}">
-            <!-- {{ answer.status }}  -->
-            {{ answer.content }}
-          </li>
-        </ul>
-
-
+        <div class="answers row g-4 row-cols-1 row-cols-md-2">
+          <div *ngFor="let answer of question.answers">
+            <div (click)="clickAnswer(answer.id)" class="answer {{ answer.status ? 'active' : '' }}">
+              {{ answer.content }}
+            </div>
+          </div>
+        </div>
       </main>
-
     </ng-template>
   </ng-container>
+
   <ng-template #elseTemplate>
-    <h2 class="title">Trò chơi đã kết thúc
-    </h2>
+    <h2 class="title">Trò chơi đã kết thúc</h2>
     <div *ngIf="userRank" class="my-history">
       <p>{{ userRank.user.name }}</p>
-      <p>Điểm : {{ userRank.scores}}</p>
-      <p>Số câu trả lời đúng : {{ userRank.true_answer}}</p>
-      <p>Số câu trả lời sai : {{ userRank.false_answer}}</p>
+      <p>Điểm : {{ userRank.scores }}</p>
+      <p>Số câu trả lời đúng : {{ userRank.true_answer }}</p>
+      <p>Số câu trả lời sai : {{ userRank.false_answer }}</p>
       <p>Số câu không trả lời : {{ userRank.donot_answer }}</p>
     </div>
-    <ul class="list-users top-user  align-items-center  ">
-      <li *ngFor="let usersRank of usersRanks, let key = index" class="list-users__item">Top {{ key + 1 }} : {{
-        usersRank.user.name }} {{
-        usersRank.true_answer }}</li>
+    <ul class="list-users top-user align-items-center">
+      <li *ngFor="let usersRank of usersRanks; let key = index" class="list-users__item">
+        Top {{ key + 1 }} : {{ usersRank.user.name }} {{ usersRank.true_answer }}
+      </li>
     </ul>
   </ng-template>
 
-
-  <!-- màn làm bài -->
-
-
   <footer class="capacity__footer d-flex align-items-center">
-    <span class="user-name"></span>
-    <span class="user-point">Top {{ rank }}</span>
+    <span class="user-name">{{ userLogged.name }}</span>
+    <span class="user-point" *ngIf="rank">Top {{ rank }}</span>
   </footer>
 </div>

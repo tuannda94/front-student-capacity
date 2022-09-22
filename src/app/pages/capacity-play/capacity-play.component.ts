@@ -1,18 +1,16 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { CapacityService } from 'src/app/services/capacity.service';
+import { UserService } from "src/app/services/user.service";
+import { User } from "src/app/models/user";
+import { NgToastService } from "ng-angular-popup";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { CapacityService } from "src/app/services/capacity.service";
 
 @Component({
-  selector: 'app-capacity-play',
-  templateUrl: './capacity-play.component.html',
-  styleUrls: ['./capacity-play.component.css'],
+  selector: "app-capacity-play",
+  templateUrl: "./capacity-play.component.html",
+  styleUrls: ["./capacity-play.component.css"],
 })
 export class CapacityPlayComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private capacityService: CapacityService
-  ) {}
   users: any = [];
   flagStart: any = false;
   flagEnd: any = false;
@@ -22,7 +20,27 @@ export class CapacityPlayComponent implements OnInit {
   userRank: any = [];
   rank: any = 0;
   audio: any;
+  userLogged: User;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private capacityService: CapacityService,
+    private toastService: NgToastService,
+    private userService: UserService,
+  ) {}
+
   ngOnInit(): void {
+    const user = this.userService.getUserValue();
+    const token = this.userService.getJwtToken();
+    const isLogged = user && token;
+    if (!isLogged) {
+      this.router.navigate(["/login"]);
+      return;
+    }
+
+    this.userLogged = user;
+
     this.route.params.subscribe((params) => {
       const { code } = params;
       const that = this;
@@ -31,17 +49,19 @@ export class CapacityPlayComponent implements OnInit {
           that.userRank = res.payload.rank;
           that.usersRanks = res.payload.ranks;
           that.renderRankUser();
+
           if (res.payload.exam.status == 2) that.flagEnd = true;
           that.channel(code, that);
+
           if (res.payload.status == false) return;
           that.answers = [];
           that.question = res.payload.question;
           that.flagStart = true;
         },
-        (err: any) => {
-          alert('Đã xảy ra lỗi !');
-          that.router.navigate(['/capacity-join']);
-        }
+        (err) => {
+          this.toastService.warning({ summary: "Đã có lỗi xảy ra" });
+          that.router.navigate(["/capacity-join"]);
+        },
       );
     });
   }
@@ -56,15 +76,14 @@ export class CapacityPlayComponent implements OnInit {
   }
 
   channel(code: any, that: any) {
-    (window as any).Echo.join('room.' + code)
+    (window as any).Echo.join("room." + code)
       .here((users: any) => {
         this.users = users;
-
-        console.log('User online ', users); //
+        console.log("User online ", users); //
       })
       .joining((user: any) => {
         this.users.push(user);
-        console.log('User joining', user); //
+        console.log("User joining", user); //
       })
       .leaving((user: any) => {
         var us = this.users.filter(function (data: any) {
@@ -72,14 +91,14 @@ export class CapacityPlayComponent implements OnInit {
         });
         this.users = us;
       })
-      .listen('PlayGameEvent', function (data: any) {
+      .listen("PlayGameEvent", function (data: any) {
         that.flagStart = true;
         that.usersRanks = data.ranks;
         that.renderRankUser();
         that.question = data.question;
-        console.log('Start', data); //
+        console.log("Start", data); //
       })
-      .listen('NextGameEvent', function (data: any) {
+      .listen("NextGameEvent", function (data: any) {
         that.capacityService
           .submitCode(code, {
             question_id: that.question.id,
@@ -91,16 +110,16 @@ export class CapacityPlayComponent implements OnInit {
               that.renderRankUser();
             },
             (err: any) => {
-              alert('Đã xảy ra lỗi !');
-              that.router.navigate(['/capacity-join']);
-            }
+              alert("Đã xảy ra lỗi !");
+              that.router.navigate(["/capacity-join"]);
+            },
           );
         that.answers = [];
         that.question = data.question;
         that.flagStart = true;
-        console.log('Next', data); //
+        console.log("Next", data); //
       })
-      .listen('EndGameEvent', function (data: any) {
+      .listen("EndGameEvent", function (data: any) {
         that.capacityService
           .submitCode(code, {
             question_id: that.question.id,
@@ -115,12 +134,12 @@ export class CapacityPlayComponent implements OnInit {
               that.renderRankUser();
             },
             (err: any) => {
-              alert('Đã xảy ra lỗi !');
-              that.router.navigate(['/capacity-join', code]);
-            }
+              alert("Đã xảy ra lỗi !");
+              that.router.navigate(["/capacity-join", code]);
+            },
           );
       })
-      .listen('UpdateGameEvent', function (data: any) {
+      .listen("UpdateGameEvent", function (data: any) {
         console.log(data);
         that.usersRanks = data.ranks;
         that.renderRankUser();
@@ -159,7 +178,8 @@ export class CapacityPlayComponent implements OnInit {
       this.question.answers[key].status = true;
     }
   }
+
   renderContent(content: string, type: number) {
-    return ` ${content} ( ${type == 1 ? 'Nhiều đáp án' : 'Một đáp án '} ) `;
+    return ` ${content} ( ${type == 1 ? "Nhiều đáp án" : "Một đáp án "} ) `;
   }
 }

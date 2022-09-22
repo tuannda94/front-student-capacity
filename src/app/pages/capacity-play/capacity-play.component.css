@@ -12,6 +12,10 @@
   align-items: center;
   justify-content: center;
 }
+.ansswer-active{
+  background: #ff6f05;
+  color: white
+}
 
 .capacity__footer {
   position: absolute;
@@ -88,19 +92,41 @@
 }
 
 .answers {
-  background-color: #fff;
+  /* background-color: #fff; */
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  gap: 2vh;
 }
 
 .answer {
-  border: 1px solid #ccc;
-  padding: 6px 12px;
-  border-radius: 3px;
-  margin-bottom: 6px;
-  cursor: pointer;
+ border: 1px solid #ccc;
+    padding: 10px 14px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+    border-radius: 2vh;
+}
+
+.top-user{
+  position: fixed;
+    right: 2vh;
+    top: 2vh;
+}
+
+.title{
+  font-size: 30px;
+  color: white
+}
+
+.my-history{
+      color: white;
+    background: rgb(114 23 133 / 30%);
+    border-radius: 2vh;
+    padding: 2vh;
+    font-size: 15px;
 }

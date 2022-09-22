@@ -25,9 +25,8 @@
             <li (click)="clickAnswer(answer.id)" class="list-users__item">{{ answer.status }} {{ answer.content }}</li>
           </ul> -->
 
-        <div class="p-2">
-          <h2>TOP USER</h2>
-          <br>
+        <div class="p-2 top-user">
+          <!-- <h2>TOP USER</h2> -->
           <ul class="list-users   align-items-center  ">
             <li *ngFor="let usersRank of usersRanks, let key = index" class="list-users__item">Top {{ key + 1 }} : {{
               usersRank.user.name }} {{
@@ -35,10 +34,12 @@
           </ul>
         </div>
 
+        <h2 class="title" [innerHTML]="renderContent(question.content,question.type)"> </h2>
         <ul class="answers">
-          <h2 [innerHTML]="renderContent(question.content,question.type)"> </h2>
-          <li *ngFor="let answer of question.answers" (click)="clickAnswer(answer.id)" class="answer">
-            {{ answer.status }} {{ answer.content }}
+          <li *ngFor="let answer of question.answers" (click)="clickAnswer(answer.id)"
+            class="answer {{ answer.status ? 'ansswer-active' : '' }}">
+            <!-- {{ answer.status }}  -->
+            {{ answer.content }}
           </li>
         </ul>
 
@@ -48,11 +49,16 @@
     </ng-template>
   </ng-container>
   <ng-template #elseTemplate>
-    <h2>Trò chơi đã kết thúc
+    <h2 class="title">Trò chơi đã kết thúc
     </h2>
-    <h2>TOP USER</h2>
-    <br>
-    <ul class="list-users   align-items-center  ">
+    <div *ngIf="userRank" class="my-history">
+      <p>{{ userRank.user.name }}</p>
+      <p>Điểm : {{ userRank.scores}}</p>
+      <p>Số câu trả lời đúng : {{ userRank.true_answer}}</p>
+      <p>Số câu trả lời sai : {{ userRank.false_answer}}</p>
+      <p>Số câu không trả lời : {{ userRank.donot_answer }}</p>
+    </div>
+    <ul class="list-users top-user  align-items-center  ">
       <li *ngFor="let usersRank of usersRanks, let key = index" class="list-users__item">Top {{ key + 1 }} : {{
         usersRank.user.name }} {{
         usersRank.true_answer }}</li>
@@ -63,8 +69,8 @@
   <!-- màn làm bài -->
 
 
-  <!-- <footer class="capacity__footer d-flex align-items-center">
-    <span class="user-name">Tuân</span>
-    <span class="user-point">0</span>
-  </footer> -->
+  <footer class="capacity__footer d-flex align-items-center">
+    <span class="user-name"></span>
+    <span class="user-point">Top {{ rank }}</span>
+  </footer>
 </div>

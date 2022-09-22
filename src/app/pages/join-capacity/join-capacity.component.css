@@ -3,20 +3,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("https://www.bergerpaints.com/colour-magazine/Upload/Quiz/Banner/quiz-bnr-nov19.jpg");
+  background-image: url("../../../assets/img/background-capacity-join.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  position: relative;
+}
+
+.capacity__container-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .capacity__container-form {
   width: 400px;
   max-width: 100%;
   font-size: 30px;
-  background: rgb(255 113 11 / 60%);
+  background-color: #fff;
   padding: 20px;
   border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
 input {
   border-radius: 10px;
   font-size: 16px;
@@ -24,21 +39,22 @@ input {
   color: white;
   background: none;
 }
-::placeholder {
-  color: white;
-  opacity: 1; /* Firefox */
-}
+
 .btn-enter {
-  background: rgb(255, 113, 11, 0.5);
-  padding: 20px;
+  background-color: var(--primary);
+  padding: 15px 20px;
   color: white;
   font-size: 20px;
   width: 100%;
-  border-radius: 20px;
+  border-radius: 10px;
+  transition: all 0.25s linear;
 }
+
 .btn-enter:hover {
-  background: #ff710b;
+  opacity: 0.75;
 }
-img {
+
+.capacity__container-logo {
   margin: 0 auto;
+  display: block;
 }

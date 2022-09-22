@@ -1,5 +1,6 @@
 <nz-spin [nzSpinning]="isCheckCode">
   <div class="capacity__container">
+    <div class="capacity__container-overlay"></div>
     <form
       action=""
       method="post"
@@ -7,16 +8,15 @@
       (ngSubmit)="handleCheckCode()"
       [formGroup]="formCheckCode"
     >
-      <img _ngcontent-blc-c163="" src="./../../../assets/img/logo.png" alt="" />
+      <img class="capacity__container-logo" src="./../../../assets/img/logo.png" alt="" />
       <input
         type="text"
         class="form-control"
         formControlName="code"
-        id=""
         aria-describedby="helpId"
-        placeholder="Code trò chơi "
+        placeholder="Code trò chơi"
       />
-      <button class="mt-1 btn-enter">Vào chơi</button>
+      <button class="mt-2 btn-enter">Vào chơi</button>
     </form>
   </div>
 </nz-spin>

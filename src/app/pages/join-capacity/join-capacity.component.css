@@ -5,6 +5,8 @@
   justify-content: center;
   background-image: url("https://www.bergerpaints.com/colour-magazine/Upload/Quiz/Banner/quiz-bnr-nov19.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .capacity__container-form {
@@ -15,9 +17,9 @@
   padding: 20px;
   border-radius: 20px;
 }
-input{
+input {
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 16px;
   border: 1px solid #ff7100;
   color: white;
   background: none;
@@ -27,16 +29,16 @@ input{
   opacity: 1; /* Firefox */
 }
 .btn-enter {
-  background: rgb(255, 113, 11,.5);
-    padding: 20px;
-    color: white;
-    font-size: 25px;
-    width: 100%;
-    border-radius: 20px;
+  background: rgb(255, 113, 11, 0.5);
+  padding: 20px;
+  color: white;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 20px;
 }
 .btn-enter:hover {
   background: #ff710b;
 }
-img{
+img {
   margin: 0 auto;
 }

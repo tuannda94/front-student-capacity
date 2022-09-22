@@ -78,6 +78,37 @@
             </ul>
           </div>
         </li>
+
+        <li class="nav-item active">
+          <div
+            class="position-relative fw-bold nav-link-item text-uppercase text-decoration-none d-flex align-items-center"
+          >
+            <span>Thử thách</span>
+            <div class="nav-item__icon">
+              <i class="fa-solid fa-caret-down"></i>
+            </div>
+
+            <ul class="sub-menu position-absolute">
+              <li class="sub-menu__item">
+                <a
+                  class="sub-menu__link fw-bold nav-link-item text-uppercase text-decoration-none"
+                  [routerLink]="['/capacity-join']"
+                >
+                  Trò chơi trực tiếp
+                </a>
+              </li>
+              <li class="sub-menu__item">
+                <a
+                  class="sub-menu__link fw-bold nav-link-item text-uppercase text-decoration-none"
+                  routerLink="/challenge"
+                >
+                  Thử thách mã
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
         <li class="nav-item active">
           <a class="fw-bold nav-link-item text-uppercase text-decoration-none" routerLink="/bai-viet"> Bài viết </a>
         </li>

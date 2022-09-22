@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     this.ngOnInit();
     this.userService.logout();
-    window.location.reload();
+    // window.location.reload();
   }
 
   // Save url login

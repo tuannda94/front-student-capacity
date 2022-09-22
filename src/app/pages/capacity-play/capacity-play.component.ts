@@ -21,6 +21,7 @@ export class CapacityPlayComponent implements OnInit {
   usersRanks: any = [];
   userRank: any = [];
   rank: any = 0;
+  audio: any;
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const { code } = params;
@@ -33,11 +34,6 @@ export class CapacityPlayComponent implements OnInit {
           if (res.payload.exam.status == 2) that.flagEnd = true;
           that.channel(code, that);
           if (res.payload.status == false) return;
-          // that.usersRanks.map(function (data: any) {
-          //   if (data.id == ) {
-
-          //   }
-          // });
           that.answers = [];
           that.question = res.payload.question;
           that.flagStart = true;
@@ -63,6 +59,7 @@ export class CapacityPlayComponent implements OnInit {
     (window as any).Echo.join('room.' + code)
       .here((users: any) => {
         this.users = users;
+
         console.log('User online ', users); //
       })
       .joining((user: any) => {

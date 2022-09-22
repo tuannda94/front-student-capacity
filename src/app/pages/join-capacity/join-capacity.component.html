@@ -1,19 +1,9 @@
-<div class="container capacity__container">
-  <form
-    action=""
-    method="post"
-    class="capacity__container-form"
-    (ngSubmit)="handleCheckCode()"
-    [formGroup]="formCheckCode"
-  >
-    <input
-      type="text"
-      class="form-control"
-      formControlName="code"
-      id=""
-      aria-describedby="helpId"
-      placeholder="Game PIN"
-    />
-    <button class="btn btn-primary mt-1 btn-enter">Enter</button>
+<div class="  capacity__container">
+  <form action="" method="post" class="capacity__container-form" (ngSubmit)="handleCheckCode()"
+    [formGroup]="formCheckCode">
+    <img _ngcontent-blc-c163="" src="./../../../assets/img/logo.png" alt="">
+    <input type="text" class="form-control" formControlName="code" id="" aria-describedby="helpId"
+      placeholder="Code trò chơi " />
+    <button class="  mt-1 btn-enter">Vào chơi </button>
   </form>
 </div>

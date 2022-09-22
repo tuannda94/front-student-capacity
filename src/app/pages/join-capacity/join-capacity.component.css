@@ -1,15 +1,42 @@
 .capacity__container {
-  min-height: 500px;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url("https://www.bergerpaints.com/colour-magazine/Upload/Quiz/Banner/quiz-bnr-nov19.jpg");
+  background-size: cover;
 }
 
 .capacity__container-form {
-  width: 300px;
+  width: 400px;
   max-width: 100%;
+  font-size: 30px;
+  background: rgb(255 113 11 / 60%);
+  padding: 20px;
+  border-radius: 20px;
 }
-
+input{
+  border-radius: 10px;
+  font-size: 20px;
+  border: 1px solid #ff7100;
+  color: white;
+  background: none;
+}
+::placeholder {
+  color: white;
+  opacity: 1; /* Firefox */
+}
 .btn-enter {
-  width: 100%;
+  background: rgb(255, 113, 11,.5);
+    padding: 20px;
+    color: white;
+    font-size: 25px;
+    width: 100%;
+    border-radius: 20px;
+}
+.btn-enter:hover {
+  background: #ff710b;
+}
+img{
+  margin: 0 auto;
 }

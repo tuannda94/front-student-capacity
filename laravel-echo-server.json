@@ -3,8 +3,8 @@
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 		{
-			"appId": "856778168e4c265b",
-			"key": "b4d6aad94fe633d41855c0ffa4e08659"
+			"appId": "59e3080cc0d8ef14",
+			"key": "b98e1cdfc184cee5f59eaad03d506528"
 		}
 	],
 	"database": "redis",
@@ -29,9 +29,9 @@
 		"redis": true
 	},
 	"apiOriginAllow": {
-		"allowCors": false,
-		"allowOrigin": "",
-		"allowMethods": "",
-		"allowHeaders": ""
+		"allowCors": true,
+		"allowOrigin": "http://127.0.0.1:8000",
+		"allowMethods": "GET, POST",
+		"allowHeaders": "Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization, X-CSRF-TOKEN, X-Socket-Id"
 	}
 }

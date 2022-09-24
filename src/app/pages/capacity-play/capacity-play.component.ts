@@ -114,6 +114,7 @@ export class CapacityPlayComponent implements OnInit {
         })
         .subscribe(
           (res: any) => {
+            that.answers = [];
             that.loadingSubmit = false;
             that.usersRanks = res.payload.ranks;
             that.question = res.payload.question;

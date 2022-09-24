@@ -21,6 +21,8 @@ export class CapacityPlayComponent implements OnInit {
   rank: any = 0;
   audio: any;
   userLogged: User;
+  exam: any;
+  loadingSubmit: any = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,12 +53,25 @@ export class CapacityPlayComponent implements OnInit {
           that.renderRankUser();
 
           if (res.payload.exam.status == 2) that.flagEnd = true;
-          that.channel(code, that);
+          if (res.payload.status == 'Done') that.flagEnd = true;
+          that.exam = res.payload.exam;
 
-          if (res.payload.status == false) return;
-          that.answers = [];
-          that.question = res.payload.question;
-          that.flagStart = true;
+          //  code online
+          if (that.exam.type == 0) {
+            that.channel(code, that);
+            if (!that.exam.room_token) return;
+
+            if (res.payload.status == false) return;
+            that.answers = [];
+            that.question = res.payload.question;
+            that.flagStart = true;
+          } else {
+            that.channel(code, that, true);
+            if (!that.exam.room_token) return;
+            that.answers = [];
+            that.question = res.payload.question;
+            that.flagStart = true;
+          }
         },
         (err) => {
           this.toastService.warning({ summary: 'Đã có lỗi xảy ra' });
@@ -82,15 +97,47 @@ export class CapacityPlayComponent implements OnInit {
     }
   }
 
-  channel(code: any, that: any) {
-    (window as any).Echo.join('room.' + code)
+  submitQuestion() {
+    var that = this;
+    that.loadingSubmit = true;
+    this.route.params.subscribe((params) => {
+      const { code } = params;
+      this.capacityService
+        .nextSubmitCode(code, {
+          question_id: that.question.id,
+          answers: that.answers,
+        })
+        .subscribe(
+          (res: any) => {
+            that.loadingSubmit = false;
+            that.usersRanks = res.payload.ranks;
+            that.question = res.payload.question;
+            that.userRank = res.payload.rank;
+            if (res.payload.status == 'Done') {
+              that.flagEnd = true;
+              return;
+            }
+
+            that.flagStart = true;
+            that.renderRankUser();
+          },
+          (err: any) => {
+            that.loadingSubmit = false;
+            alert('Đã xảy ra lỗi !');
+            that.router.navigate(['/capacity-join']);
+          }
+        );
+    });
+  }
+
+  channel(code: any, that: any, type: any = false) {
+    const echoChannel = (window as any).Echo.join('room.' + code)
       .here((users: any) => {
         this.users = users;
-        console.log('User online ', users); //
+        console.log('Here');
       })
       .joining((user: any) => {
         this.users.push(user);
-        console.log('User joining', user); //
       })
       .leaving((user: any) => {
         var us = this.users.filter(function (data: any) {
@@ -98,35 +145,21 @@ export class CapacityPlayComponent implements OnInit {
         });
         this.users = us;
       })
+      .listen('UpdateGameEvent', function (data: any) {
+        that.usersRanks = data.ranks;
+        that.renderRankUser();
+      })
       .listen('PlayGameEvent', function (data: any) {
         that.flagStart = true;
         that.usersRanks = data.ranks;
         that.renderRankUser();
         that.question = data.question;
-        console.log('Start', data); //
-      })
-      .listen('NextGameEvent', function (data: any) {
-        that.capacityService
-          .submitCode(code, {
-            question_id: that.question.id,
-            answers: that.answers,
-          })
-          .subscribe(
-            (res: any) => {
-              that.usersRanks = res.payload.ranks;
-              that.renderRankUser();
-            },
-            (err: any) => {
-              alert('Đã xảy ra lỗi !');
-              that.router.navigate(['/capacity-join']);
-            }
-          );
-        that.answers = [];
-        that.question = data.question;
-        that.flagStart = true;
-        console.log('Next', data); //
       })
       .listen('EndGameEvent', function (data: any) {
+        if (that.exam.type == 1) {
+          that.flagEnd = true;
+          return;
+        }
         that.capacityService
           .submitCode(code, {
             question_id: that.question.id,
@@ -145,12 +178,30 @@ export class CapacityPlayComponent implements OnInit {
               that.router.navigate(['/capacity-join', code]);
             }
           );
-      })
-      .listen('UpdateGameEvent', function (data: any) {
-        console.log(data);
-        that.usersRanks = data.ranks;
-        that.renderRankUser();
       });
+    if (type == false) {
+      echoChannel.listen('NextGameEvent', function (data: any) {
+        that.capacityService
+          .submitCode(code, {
+            question_id: that.question.id,
+            answers: that.answers,
+          })
+          .subscribe(
+            (res: any) => {
+              that.usersRanks = res.payload.ranks;
+              that.renderRankUser();
+            },
+            (err: any) => {
+              alert('Đã xảy ra lỗi !');
+              that.router.navigate(['/capacity-join']);
+            }
+          );
+        that.answers = [];
+        that.question = data.question;
+        that.flagStart = true;
+      });
+    } else {
+    }
   }
 
   clickAnswer(id: any) {

@@ -32,31 +32,34 @@
 
     <!-- play game -->
     <ng-template #elseFlag>
-      <main class="capacity__play">
-        <div class="p-2 top-user">
-          <!-- rank -->
-          <ul class="list-users align-items-center m-0">
-            <li *ngFor="let usersRank of usersRanks; let key = index" class="list-users__item">
-              Top {{ key + 1 }} : {{ usersRank.user.name }} {{ usersRank.true_answer }}
-            </li>
-          </ul>
-        </div>
-
-        <div class="answers row g-4 row-cols-1 row-cols-md-2">
-          <div *ngFor="let answer of question.answers">
-            <div (click)="clickAnswer(answer.id)" class="answer {{ answer.status ? 'active' : '' }}">
-              {{ answer.content }}
-            </div>
+      <div class="p-2 top-user">
+        <!-- rank -->
+        <ul class="list-users align-items-center m-0">
+          <li *ngFor="let usersRank of usersRanks; let key = index" class="list-users__item">
+            Top {{ key + 1 }} : {{ usersRank.user.name }} {{ usersRank.true_answer }}
+          </li>
+        </ul>
+      </div>
+      <div class="answers row g-4 row-cols-1 row-cols-md-2">
+        <div *ngFor="let answer of question.answers">
+          <div (click)="clickAnswer(answer.id)" class="answer {{ answer.status ? 'active' : '' }}">
+            {{ answer.content }}
           </div>
         </div>
-      </main>
+      </div>
+      <button style="float:right" (click)="submitQuestion()" class="mt-2 btn button-fpt"
+        *ngIf="exam.type == 1 && !loadingSubmit">Câu
+        tiếp theo</button>
+      <button style="float:right" (click)="submitQuestion()" class="mt-2 btn button-fpt"
+        *ngIf="exam.type == 1 && loadingSubmit">Đang chuyển câu </button>
+
+
     </ng-template>
   </ng-container>
-
   <ng-template #elseTemplate>
-    <h2 class="title">Trò chơi đã kết thúc</h2>
+    <h2 class=" title">Trò chơi đã kết thúc</h2>
     <div *ngIf="userRank" class="my-history">
-      <p>{{ userRank.user.name }}</p>
+      <!-- <p>{{ userRank.user.name }}</p> -->
       <p>Điểm : {{ userRank.scores }}</p>
       <p>Số câu trả lời đúng : {{ userRank.true_answer }}</p>
       <p>Số câu trả lời sai : {{ userRank.false_answer }}</p>

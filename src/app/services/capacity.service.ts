@@ -53,4 +53,11 @@ export class CapacityService {
       data
     );
   }
+
+  nextSubmitCode(code: string, data: any): Observable<ResponsePayload> {
+    return this.http.post<ResponsePayload>(
+      `${jwtApiUrl}/next-sumit-room/${code}`,
+      data
+    );
+  }
 }

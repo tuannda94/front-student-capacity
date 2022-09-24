@@ -52,8 +52,11 @@ export class CapacityPlayComponent implements OnInit {
           that.usersRanks = res.payload.ranks;
           that.renderRankUser();
 
-          if (res.payload.exam.status == 2) that.flagEnd = true;
-          if (res.payload.status == 'Done') that.flagEnd = true;
+          if (res.payload.exam.status == 2 || res.payload.status == 'Done') {
+            that.flagEnd = true;
+            return;
+          }
+
           that.exam = res.payload.exam;
 
           //  code online
@@ -74,7 +77,9 @@ export class CapacityPlayComponent implements OnInit {
           }
         },
         (err) => {
-          this.toastService.warning({ summary: 'Đã có lỗi xảy ra' });
+          this.toastService.warning({
+            summary: 'Đã có lỗi xảy ra ! Không thể tiếp tục tham gia trò chơi ',
+          });
           that.router.navigate(['/capacity-join']);
         }
       );
@@ -123,7 +128,10 @@ export class CapacityPlayComponent implements OnInit {
           },
           (err: any) => {
             that.loadingSubmit = false;
-            alert('Đã xảy ra lỗi !');
+            that.toastService.warning({
+              summary:
+                'Đã có lỗi xảy ra ! Không thể tiếp tục tham gia trò chơi ',
+            });
             that.router.navigate(['/capacity-join']);
           }
         );
@@ -174,8 +182,11 @@ export class CapacityPlayComponent implements OnInit {
               that.renderRankUser();
             },
             (err: any) => {
-              alert('Đã xảy ra lỗi !');
-              that.router.navigate(['/capacity-join', code]);
+              that.toastService.warning({
+                summary:
+                  'Đã có lỗi xảy ra ! Không thể tiếp tục tham gia trò chơi ',
+              });
+              that.router.navigate(['/capacity-join']);
             }
           );
       });
@@ -192,7 +203,10 @@ export class CapacityPlayComponent implements OnInit {
               that.renderRankUser();
             },
             (err: any) => {
-              alert('Đã xảy ra lỗi !');
+              that.toastService.warning({
+                summary:
+                  'Đã có lỗi xảy ra ! Không thể tiếp tục tham gia trò chơi ',
+              });
               that.router.navigate(['/capacity-join']);
             }
           );

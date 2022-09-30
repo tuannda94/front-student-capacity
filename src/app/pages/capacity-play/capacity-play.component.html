@@ -6,7 +6,7 @@
     Thoát
   </a>
 
-  <header class="capacity__header" *ngIf="!flagEnd && flagStart">
+  <header class="capacity__header" *ngIf="!flagEnd && flagStart && !flagLoadingNextQuestion">
     <div class="capacity__header-top">{{ question.type === 1 ? "Nhiều đáp án đúng" : "Một đáp án đúng" }}</div>
 
     <div class="capacity__header-bottom" [innerHTML]="question.content">.</div>
@@ -32,26 +32,46 @@
 
     <!-- play game -->
     <ng-template #elseFlag>
+
+
+
       <div class="p-2 top-user">
-        <!-- rank -->
+        <!-- Rank -->
         <ul class="list-users align-items-center m-0">
           <li *ngFor="let usersRank of usersRanks; let key = index" class="list-users__item">
             Top {{ key + 1 }} : {{ usersRank.user.name }} {{ usersRank.true_answer }}
           </li>
         </ul>
       </div>
-      <div class="answers row g-4 row-cols-1 row-cols-md-2">
-        <div *ngFor="let answer of question.answers">
-          <div (click)="clickAnswer(answer.id)" class="answer {{ answer.status ? 'active' : '' }}">
-            {{ answer.content }}
+
+      <ng-container *ngIf="flagLoadingNextQuestion; else elseFlagLoadingNextQuestion">
+        <div   class="my-history text-center">
+          <h2 style="color:white">Cố gắng cho câu hỏi tiếp theo nhé 🤩 <img style="width: 400px;" src="https://quizizz.com/media/resource/gs/quizizz-media/quizzes/d7c360d0-40e5-4d54-b9c4-ac3c6998d26c" alt=""></h2>
+          <br>
+
+        </div>
+
+      </ng-container>
+
+      <ng-template #elseFlagLoadingNextQuestion>
+         <!-- Question take -->
+        <div class="answers row g-4 row-cols-1 row-cols-md-2">
+          <div *ngFor="let answer of question.answers">
+            <div (click)="clickAnswer(answer.id)" class="answer {{ answer.status ? 'active' : '' }}">
+              {{ answer.content }}
+            </div>
           </div>
         </div>
-      </div>
-      <button style="float:right" (click)="submitQuestion()" class="mt-2 btn button-fpt"
-        *ngIf="exam.type == 1 && !loadingSubmit">Câu
-        tiếp theo</button>
-      <button style="float:right" (click)="submitQuestion()" class="mt-2 btn button-fpt"
-        *ngIf="exam.type == 1 && loadingSubmit">Đang chuyển câu </button>
+        <!-- Submit -->
+        <button style="float:right" (click)="submitQuestion()" class="mt-2 btn button-fpt"
+          *ngIf="exam.type == 1 && !loadingSubmit">Câu
+          tiếp theo</button>
+        <button style="float:right" (click)="submitQuestion()" class="mt-2 btn button-fpt"
+          *ngIf="exam.type == 1 && loadingSubmit">Đang chuyển câu </button>
+      </ng-template>
+
+
+
 
 
     </ng-template>

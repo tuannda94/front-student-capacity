@@ -23,6 +23,7 @@ export class CapacityPlayComponent implements OnInit {
   userLogged: User;
   exam: any;
   loadingSubmit: any = false;
+  flagLoadingNextQuestion: any = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -75,6 +76,7 @@ export class CapacityPlayComponent implements OnInit {
             that.question = res.payload.question;
             that.flagStart = true;
           }
+
         },
         (err) => {
           this.toastService.warning({
@@ -123,7 +125,7 @@ export class CapacityPlayComponent implements OnInit {
               that.flagEnd = true;
               return;
             }
-
+            that.flagLoadingNextQuestion = false;
             that.flagStart = true;
             that.renderRankUser();
           },
@@ -160,6 +162,7 @@ export class CapacityPlayComponent implements OnInit {
       })
       .listen('PlayGameEvent', function (data: any) {
         that.flagStart = true;
+        that.flagLoadingNextQuestion = false;
         that.usersRanks = data.ranks;
         that.renderRankUser();
         that.question = data.question;
@@ -190,6 +193,11 @@ export class CapacityPlayComponent implements OnInit {
               that.router.navigate(['/capacity-join']);
             }
           );
+      })
+      .listen('BeforNextGame', function (data: any) {
+        console.log('BeforNextGame');
+
+        that.flagLoadingNextQuestion = true;
       });
     if (type == false) {
       echoChannel.listen('NextGameEvent', function (data: any) {
@@ -200,6 +208,7 @@ export class CapacityPlayComponent implements OnInit {
           })
           .subscribe(
             (res: any) => {
+              that.flagLoadingNextQuestion = false;
               that.usersRanks = res.payload.ranks;
               that.renderRankUser();
             },
@@ -211,6 +220,7 @@ export class CapacityPlayComponent implements OnInit {
               that.router.navigate(['/capacity-join']);
             }
           );
+        // that.flagLoadingNextQuestion = false;
         that.answers = [];
         that.question = data.question;
         that.flagStart = true;

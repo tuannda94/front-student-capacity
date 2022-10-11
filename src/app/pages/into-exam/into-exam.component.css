@@ -28,7 +28,7 @@ h3 ,p{
 .team-detail-box {
   background-color: #ffff;
   border-radius: 6px;
-  box-shadow: 0px 0px 6px #ccc;
+  box-shadow: 0px 0px 3px var(--gray-200);
 }
 
 .warper-info-contest::-webkit-scrollbar {
@@ -55,7 +55,7 @@ h3 ,p{
 
 /* Ô nộp bài làm */
 .warper-submit-assignment {
-  box-shadow: 0px 0px 10px #ccc;
+  box-shadow: 0px 0px 3px var(--gray-200);
   height: 270px;
   background-color: #ffff;
   border-radius: 10px;
@@ -94,7 +94,7 @@ h3 ,p{
 }
 
 .node-submit-assignment {
-  box-shadow: 0px 0px 4px #ccc;
+  box-shadow: 0px 0px 3px var(--gray-200);
   border-radius: 5px;
 }
 
@@ -144,6 +144,7 @@ h3 ,p{
 .submit-assignment-box {
   height: 200px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -160,7 +161,7 @@ h3 ,p{
   box-shadow: 0px 8px 15px rgba(14, 13, 13, 0.1);
   font-size: 25px;
   transition: all 0.3s ease 0s;
-  cursor: pointer;
+  cursor: poiter;
   outline: none;
 }
 

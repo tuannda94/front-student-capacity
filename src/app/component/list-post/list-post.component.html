@@ -1,7 +1,7 @@
 <div *ngIf="listPost" class="row mt-3">
-    <div *ngFor="let item of listPost" [ngClass]="countColumn == 3 ? 'col-4' : 'col-3'" class="col-3 bg-white">
+    <div *ngFor="let item of listPost"  routerLink="/bai-viet/{{item.slug}}" [ngClass]="countColumn == 3 ? 'col-4' : 'col-3'">
          <div class="post-item p-3">
-            <img class="post-item-imgae" [src]="item.thumbnail_url" alt="">
+            <img class="post-item-image" [src]="item.thumbnail_url" alt="">
             <h4 class="fw-bold post-new-name text-collapse my-2">{{item.title}}</h4>
             <p class="mb-2 color-text"><i class="fa-solid fa-user-pen"></i>&nbsp;{{item.user.name}}</p>
             <p class="color-text mb-2"><i class="fa-solid fa-clock"></i>&nbsp; {{item.published_at | formatDate}}</p>

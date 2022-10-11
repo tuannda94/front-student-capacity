@@ -53,8 +53,6 @@ export class RoundDetailComponent implements OnInit {
     } else {
       this.roundService.getInfoTeamFromContestId(round_id)
         .subscribe(res => {
-          console.log(res.payload);
-
           if (res.payload.length == 0) {
             this.toast.warning({ summary: 'Bạn chưa tham gia cuộc thi này !', duration: 5000 });
           } else {

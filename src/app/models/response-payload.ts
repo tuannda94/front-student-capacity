@@ -7,6 +7,9 @@ export class ResponsePayload {
   // }
   id_team! : number;
   status!: boolean;
+  user_id: [
+    number
+  ];
   payload!: any;
   dataContest: any;
   user_pass: Array<User>;

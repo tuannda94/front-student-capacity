@@ -16,16 +16,16 @@
         </div>
         <ul class="menu-res mt-5 border-top">
           <li (click)="closeMenuRes(inputChecked)" class="menu-res-item">
-            <a routerLink="/" class="menu-res-link text-decoration-none text-uppercase fw-bold"> Trang chủ </a>
+            <a routerLink="/" class="menu-res-link text-decoration-none"> Trang chủ </a>
           </li>
           <li class="menu-res-item">
-            <a routerLink="/cuoc-thi" class="menu-res-link text-decoration-none text-uppercase fw-bold"> Cuộc thi </a>
+            <a routerLink="/cuoc-thi" class="menu-res-link text-decoration-none"> Cuộc thi </a>
           </li>
           <li class="menu-res-item">
-            <a href="" class="menu-res-link text-decoration-none text-uppercase fw-bold"> Test năng lực </a>
+            <a href="" class="menu-res-link text-decoration-none"> Test năng lực </a>
           </li>
           <li class="menu-res-item">
-            <a href="" class="menu-res-link text-decoration-none text-uppercase fw-bold"> Tuyển dụng </a>
+            <a href="" class="menu-res-link text-decoration-none"> Tuyển dụng </a>
           </li>
         </ul>
 
@@ -40,19 +40,15 @@
     </a>
     <div class="d-flex" id="menu_login-box">
       <ul class="nav menu_login-box d-flex align-items-center mr-auto home-nav pr-2">
-        <li class="nav-item active">
-          <a class="fw-bold text-decoration-none text-uppercase nav-link-item" routerLink="/">Trang Chủ</a>
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="text-decoration-none nav-link-item" routerLink="/">Trang chủ</a>
         </li>
-        <li class="nav-item active">
-          <a class="fw-bold nav-link-item text-uppercase text-decoration-none" [routerLink]="['/cuoc-thi']">
-            Cuộc thi
-          </a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link-item text-decoration-none" [routerLink]="['/cuoc-thi']"> Cuộc thi </a>
         </li>
 
-        <li class="nav-item active">
-          <div
-            class="position-relative fw-bold nav-link-item text-uppercase text-decoration-none d-flex align-items-center"
-          >
+        <li class="nav-item" routerLinkActive="active">
+          <div class="position-relative nav-link-item text-decoration-none d-flex align-items-center">
             <span [routerLink]="['/tuyen-dung']">Tuyển dụng</span>
             <div class="nav-item__icon">
               <i class="fa-solid fa-caret-down"></i>
@@ -60,18 +56,12 @@
 
             <ul class="sub-menu position-absolute">
               <li class="sub-menu__item">
-                <a
-                  class="sub-menu__link fw-bold nav-link-item text-uppercase text-decoration-none"
-                  [routerLink]="['/tuyen-dung']"
-                >
+                <a class="sub-menu__link nav-link-item text-decoration-none" [routerLink]="['/tuyen-dung']">
                   Tin tuyển dụng
                 </a>
               </li>
               <li class="sub-menu__item">
-                <a
-                  class="sub-menu__link fw-bold nav-link-item text-uppercase text-decoration-none"
-                  routerLink="/test-nang-luc"
-                >
+                <a class="sub-menu__link nav-link-item text-decoration-none" routerLink="/test-nang-luc">
                   Test năng lực
                 </a>
               </li>
@@ -79,10 +69,8 @@
           </div>
         </li>
 
-        <li class="nav-item active">
-          <div
-            class="position-relative fw-bold nav-link-item text-uppercase text-decoration-none d-flex align-items-center"
-          >
+        <li class="nav-item" routerLinkActive="active">
+          <div class="position-relative nav-link-item text-decoration-none d-flex align-items-center">
             <span>Thử thách</span>
             <div class="nav-item__icon">
               <i class="fa-solid fa-caret-down"></i>
@@ -90,27 +78,19 @@
 
             <ul class="sub-menu position-absolute">
               <li class="sub-menu__item">
-                <a
-                  class="sub-menu__link fw-bold nav-link-item text-uppercase text-decoration-none"
-                  [routerLink]="['/capacity-join']"
-                >
+                <a class="sub-menu__link nav-link-item text-decoration-none" [routerLink]="['/capacity-join']">
                   Trò chơi trực tiếp
                 </a>
               </li>
               <li class="sub-menu__item">
-                <a
-                  class="sub-menu__link fw-bold nav-link-item text-uppercase text-decoration-none"
-                  routerLink="/challenge"
-                >
-                  Thử thách mã
-                </a>
+                <a class="sub-menu__link nav-link-item text-decoration-none" routerLink="/challenge">Thử thách mã</a>
               </li>
             </ul>
           </div>
         </li>
 
-        <li class="nav-item active">
-          <a class="fw-bold nav-link-item text-uppercase text-decoration-none" routerLink="/bai-viet"> Bài viết </a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link-item text-decoration-none" routerLink="/bai-viet">Bài viết</a>
         </li>
 
         <li *ngIf="user">
@@ -122,7 +102,9 @@
           ></i>
         </li>
         <li *ngIf="!user">
-          <a (click)="saveUrlCurrent()" routerLink="/login" class="text-decoration-none mb-2 btn-main"> Đăng nhập </a>
+          <a (click)="saveUrlCurrent()" routerLink="/login" class="">
+            <button class="my-btn-primary my-btn-s">Đăng nhập</button>
+          </a>
         </li>
         <li *ngIf="user">
           <img

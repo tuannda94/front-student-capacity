@@ -17,4 +17,6 @@ export class Recruitments {
     contest: Array<Capacity>;
     enterprise: Array<Enterprise>;
     short_description: string;
+    count_user: number;
+    contest_count: number;
 }

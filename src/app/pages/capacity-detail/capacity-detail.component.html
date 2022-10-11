@@ -113,7 +113,6 @@
 
         <!-- tab -->
         <ul class="capacity__tab" *ngIf="!isFetchingCapacity">
-          <li class="capacity__tab-item" [ngClass]="{ active: tabActive === 'rank' }">Xếp hạng</li>
           <li
             class="capacity__tab-item"
             [ngClass]="{ active: tabActive === 'testList' }"
@@ -127,27 +126,20 @@
             (click)="scrollToElement(testRelated, 'testRelated')"
           >
             Bài test liên quan
+          </li>
+          <li
+            class="capacity__tab-item"
+            [ngClass]="{ active: tabActive === 'postRelated' }"
+            (click)="scrollToElement(postRelated, 'postRelated')"
+          >
+            Bài viết liên quan
           </li>
         </ul>
         <!-- end tab -->
         <!-- skeleton -->
-        <ul class="capacity__tab" *ngIf="isFetchingCapacity">
-          <li class="capacity__tab-item" [ngClass]="{ active: tabActive === 'rank' }">Xếp hạng</li>
-          <li
-            class="capacity__tab-item"
-            [ngClass]="{ active: tabActive === 'testList' }"
-            (click)="scrollToElement(testList, 'testList')"
-          >
-            Danh sách bài thi
-          </li>
-          <li
-            class="capacity__tab-item"
-            [ngClass]="{ active: tabActive === 'testRelated' }"
-            (click)="scrollToElement(testRelated, 'testRelated')"
-          >
-            Bài test liên quan
-          </li>
-        </ul>
+        <div class="capacity__tab-skeleton" *ngIf="isFetchingCapacity">
+          <ngx-skeleton-loader [theme]="{ height: '100%' }"></ngx-skeleton-loader>
+        </div>
         <!-- skeleton -->
 
         <div class="capacity__test" #testList>
@@ -183,6 +175,12 @@
                 </div>
 
                 <h2 class="capacity__test-name">{{ i + 1 }}. {{ round.name }}</h2>
+
+                <span
+                  class="capacity__test-list-item-stt"
+                  [ngClass]="{ 'capacity__test-list-item-stt--end': round.status === 2 }"
+                  >{{ round.statusText }}</span
+                >
               </div>
 
               <div class="collapse multi-collapse capacity__test-detail" [id]="'collapse-' + i">
@@ -200,11 +198,14 @@
                   <div [innerHTML]="round.description"></div>
                 </div>
 
-                <a
-                  [routerLink]="['/test-nang-luc/vao-thi', capacity.id, 'bai-thi', round.id]"
-                  class="btn btn-main capacity__test-detail-btn"
-                  >Vào thi</a
-                >
+                <div *ngIf="getStatusButtonJoinExam(round.status, round.user_status_join).isShowBtn">
+                  <a
+                    [routerLink]="['/test-nang-luc/vao-thi', capacity.id, 'bai-thi', round.id]"
+                    class="btn btn-main capacity__test-detail-btn"
+                  >
+                    {{ getStatusButtonJoinExam(round.status, round.user_status_join).buttonText }}
+                  </a>
+                </div>
               </div>
             </li>
 
@@ -242,9 +243,6 @@
                 <ngx-skeleton-loader [theme]="{ margin: '0 0 4px' }"></ngx-skeleton-loader>
 
                 <ngx-skeleton-loader
-                  [theme]="{ margin: '0 0 4px', width: '30%', display: 'block' }"
-                ></ngx-skeleton-loader>
-                <ngx-skeleton-loader
                   [theme]="{ margin: '0 0 4px', width: '50%', display: 'block' }"
                 ></ngx-skeleton-loader>
                 <ngx-skeleton-loader
@@ -257,11 +255,44 @@
           </ul>
           <!-- skeleton -->
         </div>
+
+        <!-- bài viết liên quan -->
+        <div class="capacity__post" #postRelated>
+          <h2 class="capacity__test-title capacity__related-title fw-bold fs-5 color-blue">Bài viết liên quan</h2>
+
+          <ul class="capacity__related-list row" *ngIf="!isFetchingPost" [ngClass]="{ 'm-0': !posts.length }">
+            <div class="col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let post of posts">
+              <app-post-item [postItem]="post"></app-post-item>
+            </div>
+          </ul>
+
+          <p *ngIf="!isFetchingPost && !posts.length">Không có bài viết liên quan nào!</p>
+
+          <!-- skeleton -->
+          <ul class="capacity__related-list row" *ngIf="isFetchingPost">
+            <div class="col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let _ of [].constructor(3)">
+              <div class="capacity__related-item">
+                <ngx-skeleton-loader [theme]="{ height: '150px' }"></ngx-skeleton-loader>
+
+                <ngx-skeleton-loader [theme]="{ margin: '0 0 4px' }"></ngx-skeleton-loader>
+
+                <ngx-skeleton-loader
+                  [theme]="{ margin: '0 0 4px', width: '50%', display: 'block' }"
+                ></ngx-skeleton-loader>
+                <ngx-skeleton-loader
+                  [theme]="{ margin: '0 0 10px', width: '70%', display: 'block' }"
+                ></ngx-skeleton-loader>
+
+                <ngx-skeleton-loader count="3" [theme]="{ margin: 0 }"></ngx-skeleton-loader>
+              </div>
+            </div>
+          </ul>
+        </div>
       </div>
 
       <!-- sidebar -->
       <div class="col col-lg-3 col-md-12 col-sm-12 col-12">
-        <div class="sidebar" *ngIf="!isFetchingCapacity">
+        <div class="sidebar" *ngIf="!isFetchingCapacity && !isFetchingNextRound">
           <div class="sidebar__image" [ngStyle]="{ 'background-image': 'url(' + capacity.img + ')' }"></div>
 
           <ul class="sidebar__countdown" *ngIf="statusExam.status === 0">
@@ -303,17 +334,22 @@
           </ul>
 
           <button
+            *ngIf="!isDoneExam"
             class="btn btn-main sidebar__content-btn"
             [ngClass]="{ 'btn-base-type-bg': statusExam.status === 1 }"
-            (click)="handleGoToFirstTest()"
+            (click)="handleGoToNextRound()"
             [disabled]="statusExam.status === 0 || statusExam.status === 2"
           >
             {{ statusExam.status === 1 ? "Tham gia ngay" : statusExam.statustext }}
           </button>
+
+          <button *ngIf="isDoneExam" class="btn sidebar__content-btn sidebar__content-btn--disable">
+            Đã hoàn thành
+          </button>
         </div>
 
         <!-- skeleton -->
-        <div class="sidebar" *ngIf="isFetchingCapacity">
+        <div class="sidebar" *ngIf="isFetchingCapacity || isFetchingNextRound">
           <ngx-skeleton-loader [theme]="{ height: '150px' }"></ngx-skeleton-loader>
 
           <ngx-skeleton-loader count="3" [theme]="{ margin: '0 0 4px' }"></ngx-skeleton-loader>

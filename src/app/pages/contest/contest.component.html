@@ -1,97 +1,133 @@
-<div class="container my-4">
-    <div class="header row">
-        <div class="col-3">
-            <h3 class="fw-bold fs-4 color-blue mt-2">Chuyên ngành <button class="btn-refesh" routerLink="/cuoc-thi"><i class="fa-solid fa-arrows-rotate"></i></button></h3>
-        </div>
-        <div class="col-9">
-            <div class="row">
-                <div class="col-lg-3 contest-select-status col-xl-3 col-md-3 col-sm-12">
-                    <select class="w-100 form-select " (change)="statusMajorContest($event)"
-                        aria-label="Default select example">
-                        <option selected hidden value="0">Trạng thái</option>
-                        <option value="0">
-                            Sắp diễn ra
-                        </option>
-                        <option value="1">Đang diễn ra </option>
-                        <option value="2">Đã kết thúc</option>
-                        <option value="4">Tăng dần</option>
-                        <option value="5">Giảm dần</option>
-                    </select>
-                </div>
-                <div class="col-lg-9 contest-search  col-xl-9 col-md-3 col-sm-12">
-                    <form class="input-group mb-3" (submit)="searchContest()">
-                        <input type="text" class="form-control" (keyup)="setValueSearch($event)" type="text"
-                            placeholder="Tìm kiếm cuộc thi">
-                        <button class="input-group-text" id="basic-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="wraper">
+  <!-- Content -->
+  <div id="#contest__nav" class="my-2 contest__nav">
+    <div class="container d-flex justify-content-between algin-items-center">
+      <ul class="contest__nav-list">
+        <li
+          (click)="updateStatusContest($event, 0)"
+          [ngClass]="statusCurrContest == 0 ? 'active' : ''"
+          class="contest__nav-item"
+        >
+          <a class="contest__nav-link">Đang diễn ra</a>
+        </li>
+        <li
+          (click)="updateStatusContest($event, 1)"
+          [ngClass]="statusCurrContest == 1 ? 'active' : ''"
+          class="contest__nav-item"
+        >
+          <a class="contest__nav-link">Sắp diễn ra</a>
+        </li>
+        <li
+          (click)="updateStatusContest($event, 2)"
+          [ngClass]="statusCurrContest == 2 ? 'active' : ''"
+          class="contest__nav-item"
+        >
+          <a class="contest__nav-link">Đã kết thúc</a>
+        </li>
+      </ul>
+      <div class="btn__search-contest">
+        <form
+          class="input-group flex-nowrap"
+          [formGroup]="formSearchContest"
+          (submit)="searchContest()"
+        >
+          <input
+            formControlName="keywordContest"
+            type="text"
+            class="form-control input-search"
+            placeholder="Tìm kiếm cuộc thi ..."
+            aria-label="Username"
+            aria-describedby="addon-wrapping"
+          />
+          <button class="input-group-text primary-color bg-white border-none">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-3 slider-bar">
-            <div class="list-major-box" *ngIf="statusMajor == 'done'">
-                <ul class="list-major-contest" (scroll)="statusScrollMajor()" >
-                    <li *ngFor="let m of majors" class=" major-contest-item mb-3"><a
-                            [routerLink]="['/cuoc-thi/chuyen-nganh/' , m.slug]" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{exact: true}"
-                            class="major-contest-link text-decoration-none fw-bold fs-6 rounded ">{{m.name}}</a>
-                    </li>
-                </ul>
-                <div class="status-scroll-major d-flex algin-items-center justify-content-center"><i class="fa-solid fa-caret-down"></i></div>
+  </div>
+
+  <div class="container">
+    <div class="row contest__content py-3">
+      <div class="col-3">
+        <div class="contest__content-aside--inner">
+          <div class="contest__content-aside--header">
+            <div class="">
+              <i class="fa-sharp fa-solid fa-filter"></i>
+              Lọc chuyên ngành
             </div>
-            <div *ngIf=" statusMajor=='pending'" class="mt-2" style="">
-                <ngx-skeleton-loader [theme]="{ 
-                    'height.px': 40,
-                    'margin-bottom' : '15px'
-                  }" count="8" animation="pulse"></ngx-skeleton-loader>
+            <div class="btn-major-back" (click)="resetMajor()" placement="top" ngbTooltip="Reset">
+              <i class="fa-solid fa-rotate-left"></i>
             </div>
+          </div>
+          <form
+            class="input-group contest__content-form--search"
+            [formGroup]="formSearchMajor"
+            (submit)="searchMajor()"
+          >
+            <input
+              type="text"
+              placeholder="Tìm kiếm chuyên ngành..."
+              class="input-search form-control"
+              formControlName="keywordMajor"
+            />
+            <button class="input-group-text btn__search-major">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <div class="contest__content-aside-major" *ngIf="statusMajor">
+            <div *ngFor="let item of majors" class=" ">
+              <div
+                class="contest__content-aside-major--item text-collapse"
+                (click)="getWhereMajor($event, item)"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                {{ item.name }}
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!statusMajor">
+            <ngx-skeleton-loader
+              count="7"
+              [theme]="{ 'height.px': 35, 'margin-bottom': '10px' }"
+              appearance="line"
+            >
+            </ngx-skeleton-loader>
+          </div>
         </div>
-        <div class="col-lg-9 col-xl-9 col-md-12 list-contest">
-            <div class="row" *ngIf="statusContest == 'done' &&  contests.length > 0">
-                <app-contest-item *ngFor="let item of contests" class="col-md-6 col-lg-4 col-xl-4 col-sm-12 mb-3"
-                    [item]="item" [major_slug]="major_slug">
-                </app-contest-item>
-            </div>
+      </div>
 
-
-            <div *ngIf="statusContest == 'pending'" class="mt-2 row">
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-                <app-contest-load-item class="col-lg-4 col-mx-4 col-md-6"></app-contest-load-item>
-            </div>
-
-            <div class="w-100 d-flex justify-content-center mt-4"
-                *ngIf="contests.length == 0 && statusContest == 'done'">
-                <div class="w-50">
-                    <img src="
-                    https://img.freepik.com/free-vector/no-data-concept-illustration_203587-28.jpg?w=2000" alt=""
-                        class="d-block w-100">
-                    <h2 class="text-center">Không tìm thấy kết quả !!!</h2>
-                </div>
-            </div>
-            <div *ngIf="contests.length > 8" class="paying-contest d-flex justify-content-end">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li *ngFor="let link of array_page_link" class="page-item ">
-                            <button *ngIf="link.label === 'pagination.previous'" class="page-link text-dark ccc"
-                                (click)="getContestWherePage(link.url)"><i class="fa-solid fa-left-long"></i></button>
-                            <button *ngIf="link.label !== 'pagination.previous' && link.label !== 'pagination.next'"
-                                class="page-link {{link.active ? 'active' : 'text-dark'}}"
-                                (click)="getContestWherePage(link.url)">{{link.label}}</button>
-                            <button *ngIf="link.label === 'pagination.next'" class="page-link text-dark csccsc"
-                                (click)="getContestWherePage(link.url)"><i class="fa-solid fa-right-long"></i></button>
-                        </li>
-
-                    </ul>
-                </nav>
-            </div>
+      <!-- ---Main -->
+      <div
+        *ngIf="statusContest && contests.length > 0"
+        class="contest__list col-9"
+      >
+        <div *ngFor="let item of contests">
+          <app-contest-item class="mb-3" [item]="item"></app-contest-item>
         </div>
+      </div>
+
+      <div *ngIf="statusContest" class="col-9">
+        <div *ngIf="contests.length == 0" class="d-flex justify-content-center">
+          <img
+            class="d-flex justify-content-center mt-5"
+            src="https://homebond.ae/assets/images/no-result.png"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div *ngIf="!statusContest" class="col-9">
+        <ngx-skeleton-loader
+          [theme]="{
+            'height.px': '200',
+            'margin-bottom': '20'
+          }"
+          count="6"
+          animation="pulse"
+        ></ngx-skeleton-loader>
+      </div>
     </div>
+  </div>
 </div>

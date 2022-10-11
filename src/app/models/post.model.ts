@@ -1,6 +1,7 @@
 import { User } from "./user";
 
 export class Post {
+    id?: any;
     thumbnail_url: string
     slug?: string
     title: string;
@@ -9,4 +10,5 @@ export class Post {
     description: string;
     content: string;
     postable_type: string;
+    postable?: any
 }

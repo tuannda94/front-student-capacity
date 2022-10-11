@@ -1,0 +1,69 @@
+<div class="contest__item">
+  <img class="contest__image" [src]="contestItem.img" alt="" />
+  <div class="contest__item--content">
+    <div class="row">
+      <div class="col-9">
+        <h3 class="contest__item--name">
+          {{ contestItem.name }}pcon
+        </h3>
+        <div class="d-flex">
+          <p
+            style="cursor: pointer"
+            class="fw-bold cursor-pointer"
+            placement="top"
+            ngbTooltip="Số vòng thi"
+          >
+            <i class="fa-solid fa-list"></i>: {{ contestItem.rounds_count }}
+          </p>
+          <p
+            style="cursor: pointer"
+            class="fw-bold mx-3 cursor-pointer"
+            placement="top"
+            ngbTooltip="Số đội tham gia"
+          >
+            <i class="fa-solid fa-people-group"></i> :
+            {{ contestItem.teams_count }}
+          </p>
+        </div>
+        <div
+          class="contest__item--description"
+          [innerHTML]="contestItem.description"
+        ></div>
+      </div>
+      <div class="col-3">
+        <div class="my-3 text-center" *ngIf="!statusCountDown">
+           <p class="text-center contest-regiter-end">{{checkDateContest(contestItem)}}</p>
+        </div>
+        <div style="margin-right:15px" *ngIf="statusCountDown"
+          class="text-Secondary d-flex justify-content-center pb-2 font-size-sml fs-text-contest"
+        >
+          <div class="text-center contest__time-item">
+            <span class="fw-bold contest__time">{{ days }}</span>
+            <span class="fs-name-time"> Ngày </span>
+          </div>
+
+          <div class="text-center contest__time-item">
+            <span class="fw-bold contest__time">{{ hours }}</span>
+            <span class="fs-name-time"> Giờ</span>
+          </div>
+          <div class="text-center contest__time-item">
+            <span class="contest__time fw-bold">{{ minutes }}</span>
+            <span class="fs-name-time"> Phút</span>
+          </div>
+          <div class="text-center contest__time-item">
+            <span class="contest__time fw-bold">{{ seconds }}</span>
+            <span class="fs-name-time">Giây</span>
+          </div>
+        </div>
+        <a
+          [routerLink]="['/cuoc-thi/', contestItem.id]"
+          [state]="{ registerNow: contestItem.status_user_has_join_contest }"
+          href=""
+          class="text-center btn d-block w-100"
+          [ngClass]="classNameWhereStatus(contestItem)"
+          >{{ checkStatusContest(contestItem) }}</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

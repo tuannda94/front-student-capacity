@@ -33,9 +33,13 @@
 .post-detail__head-info-item-text+.post-detail__head-info-item-text {
     margin-left: 8px;
 }
-
+.post-detail__router-category {
+    cursor: pointer;
+    color: var(--my-secondary)
+}
 .post-detail__short-desc {
     text-align: justify;
+    margin: 8px 0;
 }
 
 .post-detail__img-section {

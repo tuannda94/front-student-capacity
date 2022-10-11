@@ -1,141 +1,147 @@
-h1,h2,h3,h4,h5,h6{
-  margin-bottom: 0;
+p,
+h3,
+h4,
+h6,
+h1,
+h2,
+h5 {
+  margin-bottom: 0px;
 }
 
-/* IMAGE CONTEST
-   */
-
-.contest-img img {
-  object-fit: cover;
-  height: 170px;
+.wraper {
+  background-color: var(--bg-content);
 }
 
-.status-scroll-major{
-  height: 15px;
-  background-color: var(--primary);
-  color: var(--white);
-  line-height: 15px;
-  opacity: 0.5;
-}
-
-.list-major-box .active{
-  opacity: 1;
-}
-
-.btn-refesh{
-  background-color: var(--white);
-  border: none;
-  border: 1px solid var(--gray);
-  font-size: 15px;
-  border-radius: 50%;
-  padding: 5px 11px;
-  margin-left: 20px;
-}
-
-
-/* CONTEST-ITEM */
-
-.fs-name-time {
-  font-size: 12px;
-}
-
-/* 
-* SLIDER BAR
- */
-.list-contest {
-  min-height: 700px;
-}
-
-.list-major-contest {
-  max-height: 500px;
-  overflow-y: auto;
-  padding: 0px 4px;
-}
-
-.list-major-contest::-webkit-scrollbar {
-  width: 2px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #777575;
-}
-
-.major-contest-link {
-  padding: 10px 15px;
-  box-shadow: 0px 0px 3px #ccc;
-  color: #2c3e50;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
+.fixed-nav {
+  position: fixed;
+  top: 68px;
   width: 100%;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  z-index: 10;
 }
 
-.select-major-responsive {
-  display: none;
+.banner {
+  height: 350px;
 }
 
-.form-input-search {
-  width: 65%;
+.contest__nav {
+  background-color: var(--primary);
+  height: 45px;
+  line-height: 45px;
 }
 
-.major-contest-link:first-child {
-  margin-top: 5px;
+.contest__nav-list {
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
-.major-contest-item .major-contest-link:hover,
-.active {
+.contest__nav-item {
+  padding: 0px 25px;
+  position: relative;
+}
+
+.btn__search-contest {
+  margin-top: 3px;
+}
+
+.contest__nav-item:first-child {
+  padding-left: 0;
+}
+
+.contest__nav-link {
+  color: var(--white);
+  font-size: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.contest__nav-list .active::after {
+  content: "";
+  position: absolute;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 10px solid var(--bg-content);
+  top: 80%;
+  transform: translateX(-60px);
+}
+
+.contest__list {
+  min-height: 500px;
+}
+
+.contest__content-aside--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-major-back {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.contest__content-aside--inner {
+  position: static;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 150px;
+  background-color: var(--white);
+  box-shadow: 0px 0px 10px var(--gray-200);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.contest__content-form--search {
+  margin: 10px 0px;
+  font-size: 15px;
+}
+
+.input-search::placeholder {
+  font-size: 14px;
+}
+
+.btn__search-major {
   background-color: var(--primary);
   color: var(--white);
-  cursor: pointer;
-  transition: 0.2s;
+  border: none;
 }
 
-/* Phan trang cuoc thi */
-.paying-contest .page-link {
-  color: #ffff;
-}
-
-.paying-contest .page-link:hover{
-
-}
-
-.paying-contest .page-link {
-  cursor: pointer;
-  margin-right: 10px;
+.contest__content-aside-major--item {
+  height: 40px;
+  line-height: 40px;
+  background-color: var(--gray-200);
+  margin-bottom: 10px;
   border-radius: 4px;
+  color: var(--gray-600);
+  cursor: pointer;
+  padding-left: 10px;
 }
 
-@media (max-width:568px) {
-  .select-major-responsive {
-    margin-bottom: 20px;
-  }
-
-  .contest-select-status {
-    margin-bottom: 20px;
-  }
+.contest__content-aside-major .active {
+  background-color: var(--primary);
+  color: var(--white);
 }
 
+.contest__content-aside-major {
+  overflow-y: auto;
+  max-height: 400px;
+  padding-right: 5px;
+}
 
-@media (max-width:987px) {
-  .select-major-responsive {
-    display: block;
-  }
+.contest__content-aside-major::-webkit-scrollbar {
+  width: 3px;
+  background-color: rgb(235, 232, 232);
+}
 
-  .select-major-responsive {
-    margin-bottom: 20px;
-  }
+.input-search-contest::placeholder {
+  font-size: 15px;
+}
 
-  .slider-bar {
-    display: none;
-  }
-
-  .title-sub-list-contest {
-    display: none;
-  }
-
-  .contest-select-status {
-    margin-bottom: 20px;
-  }
+.contest__content-aside-major::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
 }

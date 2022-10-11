@@ -12,16 +12,20 @@ import { ListPostService } from 'src/app/services/list-post.service';
 export class AsidePostComponent implements OnInit {
   validateForm!: FormGroup;
   inputKeyword: string;
+  listHotPost: Post[];
+  statusPost: boolean = false;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private postService: ListPostService
   ) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       keyword: [null, [Validators.required]],
     });
+    this.hotPosts()
   }
 
   // tìm kiếm
@@ -38,4 +42,13 @@ export class AsidePostComponent implements OnInit {
     }
   }
 
+  // hot post
+  hotPosts() {
+    this.postService.getHotPost().subscribe(res => {
+      if (res.status) {
+        this.listHotPost = res.payload.data;
+        this.statusPost = true
+      }
+    })
+  }
 }

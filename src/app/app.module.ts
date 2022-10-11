@@ -88,6 +88,13 @@ import { PostResultSearchComponent } from "./pages/post-result-search/post-resul
 import { TestCapacityComponent } from "./pages/test-capacity/test-capacity.component";
 import { JoinCapacityComponent } from "./pages/join-capacity/join-capacity.component";
 import { CapacityPlayComponent } from "./pages/capacity-play/capacity-play.component";
+import { FormatDatePostPipe } from "./helper/pipe/format-date-post.pipe";
+import { ContestItemSubComponent } from "./component/contest-item-sub/contest-item-sub.component";
+import { PostItemComponent } from "./component/post-item/post-item.component";
+import { RecruitmentPositionComponent } from "./component/home/recruitment-position/recruitment-position.component";
+import { OutstandingAdvantagesComponent } from "./component/home/outstanding-advantages/outstanding-advantages.component";
+import { RankCapacityComponent } from "./pages/rank-capacity/rank-capacity.component";
+import { PostLoadItemComponent } from "./loading/post-load-item/post-load-item.component";
 
 @NgModule({
   declarations: [
@@ -148,6 +155,13 @@ import { CapacityPlayComponent } from "./pages/capacity-play/capacity-play.compo
     TestCapacityComponent,
     JoinCapacityComponent,
     CapacityPlayComponent,
+    FormatDatePostPipe,
+    ContestItemSubComponent,
+    PostItemComponent,
+    RecruitmentPositionComponent,
+    OutstandingAdvantagesComponent,
+    RankCapacityComponent,
+    PostLoadItemComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,10 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   margin-bottom: 0;
 }
 
+.contest-detail-box{
+  background-color: var(--bg-content);
+}
+
 .contest-detail-right-in {
   position: sticky;
   top: 100px;
@@ -61,7 +65,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 .contest-detail-section,
 .content-round-page {
   border-radius: 8px;
-  box-shadow: 0px 0px 7px var(--gray);
+  box-shadow: 0px 0px 3px var(--gray-200);
   background-color: #ffff;
 }
 
@@ -201,7 +205,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 
 .student-rank-footer {
   height: 40px;
-  box-shadow: 0 2px 2px #ccc;
+  box-shadow: 0px 0px 3px var(--gray-200);
 }
 
 .student-rank-more {

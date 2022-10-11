@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Capacity } from "src/app/models/capacity";
 import { UserService } from "src/app/services/user.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-my-capacity-test",
@@ -20,9 +21,11 @@ export class MyCapacityTestComponent implements OnInit {
   listCapacity: Capacity[];
   totalCapacity: number;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private titleService: Title) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Danh sách bài test năng lực đã làm");
+
     this.formSearch = new FormGroup({
       name: new FormControl("", Validators.required),
     });

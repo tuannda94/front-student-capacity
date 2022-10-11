@@ -1,37 +1,27 @@
 <div class="page-post-box  py-3">
     <div class="container ">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
-                <li class="breadcrumb-item"><a routerLink="/bai-viet">Danh Mục Bài viết</a></li>
-            </ol>
-        </nav>
         <div class="header-post-category">
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button (click)="onChangeDataPost('post-contest')" class="nav-link active" id="nav-home-tab"
-                        data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab"
-                        aria-controls="nav-home" aria-selected="true">Cuộc Thi</button>
-                    <button (click)="onChangeDataPost('post-capacity')" class="nav-link" id="nav-profile-tab"
-                        data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab"
-                        aria-controls="nav-profile" aria-selected="false">Test Năng
-                        Lực</button>
-                    <button (click)="onChangeDataPost('post-recruitment')" class="nav-link" id="nav-contact-tab"
-                        data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab"
-                        aria-controls="nav-contact" aria-selected="false">Tuyển Dụng</button>
-                </div>
-            </nav>
+            <ul class="post__nav-list">
+                <li (click)="onChangeDataPost($event,'post-contest')" class="post__nav-item contest active">
+                  <a class="post__nav-link">Cuộc Thi</a>
+                </li>
+                <li (click)="onChangeDataPost($event, 'post-capacity')" class="post__nav-item capacity ">
+                  <a class="post__nav-link">Test Năng Lực</a>
+                </li>
+                <li (click)="onChangeDataPost($event, 'post-recruitment')" class="post__nav-item recruitment">
+                  <a class="post__nav-link">Tuyển Dụng</a>
+                </li>
+              </ul>
         </div>
         <div class="post-main">
             <div class="post-main-content">
                 <div class="post-main-content-section">
-                    <div class="" *ngIf="!ListPost">
-                        <app-contest-load-item></app-contest-load-item>
-                        <app-contest-load-item></app-contest-load-item>
-                        <app-contest-load-item></app-contest-load-item>
-                        <app-contest-load-item></app-contest-load-item>
-                        <app-contest-load-item></app-contest-load-item>
-                        <app-contest-load-item></app-contest-load-item>
+                    <div class="main-section" *ngIf="!ListPost">
+                      <app-post-load-item></app-post-load-item>
+                      <app-post-load-item></app-post-load-item>
+                      <app-post-load-item></app-post-load-item>
+                      <app-post-load-item></app-post-load-item>
+                      <app-post-load-item></app-post-load-item>
                     </div>
                     <div class="main-section">
                         <div class="post-item" *ngFor="let post of ListPost">
@@ -40,36 +30,7 @@
                     </div>
                 </div>
             </div>
-            <aside>
-                <form action="" class="form-search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" class="form__input" placeholder="Tìm kiếm tag, tên bài viết ...">
-                </form>
-                <div class="post-hot">
-                    <div class="header-section">
-                        <h2 class="header-section__title">Bài viết nổi bật</h2>
-                    </div>
-                    <div class="post-hot-list">
-                        <div class="post-hot-item">
-                            <div class="post-hot-item__img-section">
-                                <img src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                                    alt="" class="post-hot-item__img">
-                            </div>
-                            <div class="post-hot-item-content">
-                                <h3 class="post-hot-item-content__title">Art is the way to express it to</h3>
-                                <div class="post-hot-item-content__info">
-                                    <div class="post-hot-item-content__info-item">
-                                        <i class="fa-solid fa-clock"></i>&ensp;April 19, 2018
-                                    </div>
-                                    <div class="post-hot-item-content__info-item">
-                                        <i class="fa-solid fa-clock"></i>&ensp;April 19, 2018
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+           <app-aside-post></app-aside-post>
         </div>
     </div>
 </div>

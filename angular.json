@@ -36,7 +36,6 @@
               }
             ],
             "styles": [
-              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
@@ -48,6 +47,7 @@
                 "src/assets/css/base-color.css",
                 "src/assets/css/base-text.css",
                 "src/assets/css/base-btn.css",
+                "src/assets/css/base-typography.css",
                 "src/assets/css/config-bootstrap.css"
             ],
             "scripts": [
@@ -120,7 +120,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],

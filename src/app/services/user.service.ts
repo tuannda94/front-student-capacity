@@ -76,7 +76,10 @@ export class UserService {
 
   // Lộc cuộc thi đã tham gia theo trạng thái
   getContestByUserStatus(key_word: string, status: any): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.userListUrl}/contest-joined?type=0&status=${status}&q=${key_word}`);
+    const params = new HttpParams()
+    .set('status', status)
+    .set('q', key_word)
+    return this.http.get<ResponsePayload>(`${environment.userListUrl}/contest-joined?${params}`);
   }
 
   // Chỉnh sửa thông tin user
@@ -111,9 +114,12 @@ export class UserService {
     return this.http.get<ResponsePayload>(`${url}?sort=desc`);
   }
 
-  filterContestHasLogin(keyword: string, major_id: any, status: any): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(
-      `${environment.userListUrl}/contest-joined-and-not-joined?status=${status}&major_id=${major_id}&q=${keyword}`,
-    );
+  filterContestHasLogin(keyword: string = "", major_id: number, status: number): Observable<ResponsePayload> {
+    let majorValue;
+    let statusValue;
+    majorValue = major_id == undefined ? "" : major_id;
+    statusValue = status == 0 ? 1 : status;
+    const params = new HttpParams().set("q", keyword).set("status", statusValue).set("major_id", majorValue);
+    return this.http.get<ResponsePayload>(`${environment.userListUrl}/contest-joined-and-not-joined?${params}`);
   }
 }

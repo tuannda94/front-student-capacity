@@ -21,3 +21,10 @@ label{
 ::placeholder{
     font-size: 0.9rem;
 }
+.btn-submit {
+    color: white;
+    background: #ff6638
+}
+.btn-disabled {
+    opacity: 0.6;
+}

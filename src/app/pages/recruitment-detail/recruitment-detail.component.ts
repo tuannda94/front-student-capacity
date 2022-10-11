@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs';
-import { ModalUploadCvComponent } from 'src/app/modal/modal-upload-cv/modal-upload-cv.component';
 import { Capacity } from 'src/app/models/capacity';
-import { Contest } from 'src/app/models/contest';
 import { Post } from 'src/app/models/post.model';
 import { Recruitments } from 'src/app/models/recruitments.models';
 import { TransmitToPost } from 'src/app/models/transmit-to-post.models';
@@ -22,7 +20,7 @@ export class RecruitmentDetailComponent implements OnInit {
   recruitmentCapacity : Array<Capacity>;
   cinfigData: TransmitToPost;
   listPostResult : Array<Post>;
-  
+  statusPage: boolean = true;
 
   constructor(private route: ActivatedRoute ,
     public postService:  ListPostService,
@@ -39,6 +37,7 @@ export class RecruitmentDetailComponent implements OnInit {
         this.recruitmentCapacity = res.payload.contest;
         this.recruitmentCapacity ? this.statusListCapacity = true : this.statusListCapacity;
         this.recruitmentDetail = res.payload;
+        if( this.recruitmentDetail) this.statusPage = false;        
       }
     })
 
@@ -49,20 +48,10 @@ export class RecruitmentDetailComponent implements OnInit {
   getListPost() {
     this.postService.getPostWhereCate('post-recruitment').subscribe(res => {
      if(res.status){
-       this.listPostResult = res.payload.data;
+       this.listPostResult = res.payload.data.filter((item : Post , index: number) => {
+        return index < 4;
+        });
      }
    })
-  }
-
-  // Open-model-dang-nhap
-  openModalLogin(){
-    const dialogRef = this.dialog.open(ModalUploadCvComponent, {
-      width: '700px',
-      data:{
-        recruitment: this.recruitmentDetail
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

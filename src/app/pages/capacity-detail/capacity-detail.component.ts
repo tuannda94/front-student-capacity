@@ -6,6 +6,11 @@ import { Capacity } from "src/app/models/capacity";
 import { Round } from "src/app/models/round.model";
 import { NgToastService } from "ng-angular-popup";
 import { Enterprise } from "src/app/models/enterprise.model";
+import { UserService } from "src/app/services/user.service";
+import { RoundService } from "src/app/services/round.service";
+import { Post } from "src/app/models/post.model";
+import { ListPostService } from "src/app/services/list-post.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-capacity-detail",
@@ -17,8 +22,13 @@ export class CapacityDetailComponent implements OnInit {
   capacity!: Capacity;
   // bài test liên quan
   capacityRelated!: Capacity[];
+  posts!: Post[];
   isFetchingCapacity = false;
   isFetchingCapacityRelated = false;
+  isFetchingNextRound = false;
+  isFetchingPost = false;
+  isLogged = false;
+  isDoneExam = false; // trạng thái hoàn thành bài test
   rounds!: Round[];
   countDown: {
     days: number;
@@ -36,6 +46,7 @@ export class CapacityDetailComponent implements OnInit {
     statustext: string;
   };
   enterprises!: { id: number; name: string; logo: string }[];
+  nextRoundId: number;
 
   constructor(
     private modalService: NgbModal,
@@ -43,21 +54,50 @@ export class CapacityDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toast: NgToastService,
+    private userService: UserService,
+    private roundService: RoundService,
+    private postService: ListPostService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
+      // initital title
+      this.titleService.setTitle("Test năng lực");
+
       this.scrollToTop();
       this.isFetchingCapacity = true;
       this.isFetchingCapacityRelated = true;
+      this.isFetchingPost = true;
 
       const { capacity_id } = params;
 
       this.capacityService.getWhereId(capacity_id).subscribe((res) => {
         if (res.status) {
+          // update title
+          this.titleService.setTitle(res.payload.name);
+
           this.isFetchingCapacity = false;
           this.capacity = res.payload;
-          this.rounds = res.payload.rounds;
+          this.rounds = res.payload.rounds.map((round: Round) => {
+            // get trạng thái vòng thi
+            const today = new Date().getTime();
+            const timeDateStart = new Date(round.start_time).getTime();
+            const timeDateEnd = new Date(round.end_time).getTime();
+
+            if (today < timeDateStart) {
+              round["status"] = 0;
+              round["statusText"] = "Sắp diễn ra";
+            } else if (today >= timeDateStart && today <= timeDateEnd) {
+              round["status"] = 1;
+              round["statusText"] = "Đang diễn ra";
+            } else if (today > timeDateEnd) {
+              round["status"] = 2;
+              round["statusText"] = "Đã kết thúc";
+            }
+
+            return round;
+          });
 
           // get ds doanh nghiệp, xóa DN trùng lặp
           this.enterprises = res.payload.recruitment_enterprise.reduce((result: Enterprise[], item: Enterprise) => {
@@ -68,13 +108,28 @@ export class CapacityDetailComponent implements OnInit {
           }, []);
 
           // bài test liên quan
-          this.capacityService.getRelated(this.capacity.id).subscribe((response) => {
+          this.capacityService.getRelated({ capacity_id: this.capacity.id, limit: 3 }).subscribe((response) => {
             this.isFetchingCapacityRelated = false;
 
             if (response.status) {
-              this.capacityRelated = response.payload.slice(0, 3);
+              this.capacityRelated = response.payload.data;
             }
           });
+
+          // bài viết liên quan
+          this.postService
+            .getPostsByParam({
+              capacity_id,
+              post: "post_capacity",
+              limit: 3,
+            })
+            .subscribe(
+              (res) => {
+                this.isFetchingPost = false;
+                this.posts = res.payload.data;
+              },
+              () => (this.isFetchingPost = false),
+            );
 
           // đếm ngược thời gian khi bài test sắp diễn ra
           const status = new Date().getTime() < new Date(this.capacity.date_start).getTime();
@@ -84,6 +139,25 @@ export class CapacityDetailComponent implements OnInit {
           this.getStatusCapacity();
         }
       });
+
+      // get vòng thi tiếp theo khi click btn tham gia ngay nếu đã đăng nhập
+      this.isLogged = !!(this.userService.getJwtToken() && this.userService.getUserValue());
+      if (this.isLogged) {
+        this.isFetchingNextRound = true;
+        this.roundService.getNextRound(capacity_id).subscribe(
+          ({ status, payload }) => {
+            this.isFetchingNextRound = false;
+
+            if (status) {
+              this.nextRoundId = payload.id;
+            }
+          },
+          () => {
+            this.isFetchingNextRound = false;
+            this.isDoneExam = true;
+          },
+        );
+      }
     });
   }
 
@@ -94,14 +168,9 @@ export class CapacityDetailComponent implements OnInit {
   scrollToElement(el: HTMLElement, activeItem: string) {
     this.tabActive = activeItem;
 
-    let offsetTop = el.offsetTop;
-    if (activeItem === "testRelated") {
-      offsetTop -= 150;
-    }
-
-    window.scrollTo({
-      top: offsetTop,
+    el.scrollIntoView({
       behavior: "smooth",
+      block: "center",
     });
   }
 
@@ -158,10 +227,15 @@ export class CapacityDetailComponent implements OnInit {
   }
 
   // vào bài thi đầu tiên
-  handleGoToFirstTest() {
+  handleGoToNextRound() {
     if (this.statusExam.status === 1) {
       if (!this.rounds.length) {
         this.toast.warning({ summary: "Chưa có bài thi nào", duration: 3000 });
+        return;
+      }
+
+      if (this.isLogged && !this.isDoneExam) {
+        this.router.navigate(["/test-nang-luc/vao-thi", this.capacity.id, "bai-thi", this.nextRoundId]);
         return;
       }
 
@@ -175,5 +249,68 @@ export class CapacityDetailComponent implements OnInit {
       top: 0,
       behavior: "smooth",
     });
+  }
+
+  // get trạng thái vòng thi => ẩn hoặc hiện button vào thi
+  getStatusButtonJoinExam(statusRound?: number, statusUser?: any): any {
+    // statusRound (0 - sắp diễn ra, 1 - đang diễn ra, 2 - đã kết thúc)
+    // statusUser (1 - đã nộp bài, 0 - chưa nộp bài, false - chưa làm bài)
+    // nếu chưa đăng nhập và vòng thi đã kết thúc || đã đăng nhập và vòng thi đã kết thúc và chưa làm bài => ẩn button vào thi
+    if ((!this.isLogged && statusRound === 2) || (this.isLogged && statusRound === 2 && statusUser === false)) {
+      return {
+        isShowBtn: false,
+      };
+    }
+
+    // nếu chưa đăng nhập và vòng thi chưa kết thúc
+    if (!this.isLogged && statusRound !== 2) {
+      return {
+        isShowBtn: true,
+        buttonText: "Vào thi",
+      };
+    }
+
+    if (!this.isLogged) {
+      return {
+        isShowBtn: false,
+      };
+    }
+
+    let isShowBtn = true;
+    // nếu đã nộp bài
+    if (statusUser === 1) {
+      return {
+        isShowBtn,
+        buttonText: "Kết quả bài làm",
+      };
+    }
+
+    // chưa nộp bài và vòng thi đã kết thúc
+    if (statusUser === 0 && statusRound === 2) {
+      return {
+        isShowBtn,
+        buttonText: "Nộp bài",
+      };
+    }
+
+    // chưa nộp bài và vòng thi chưa kết thúc
+    if (statusUser === 0 && statusRound === 1) {
+      return {
+        isShowBtn,
+        buttonText: "Tiếp tục làm bài",
+      };
+    }
+
+    // chưa làm bài và vòng thi chưa kết thúc
+    if (statusUser === false && statusRound !== 2) {
+      return {
+        isShowBtn,
+        buttonText: "Vào thi",
+      };
+    }
+
+    return {
+      isShowBtn: false,
+    };
   }
 }

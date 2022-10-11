@@ -8,12 +8,10 @@ import { RoundService } from 'src/app/services/round.service';
 @Component({
   selector: 'app-list-result-round',
   templateUrl: './list-result-round.component.html',
-  styleUrls: ['./list-result-round.component.css']
+  styleUrls: ['./list-result-round.component.css'],
 })
-
 export class ListResultRoundComponent implements OnInit {
   @Input() roundResult: Array<ResultRound>;
-  
 
   dataResultRound: Array<ResultRound>;
   statusResultRound: boolean = false;
@@ -21,28 +19,24 @@ export class ListResultRoundComponent implements OnInit {
   pages: number = 1;
   checkTeamPoint: boolean = false;
   resPayLoad: any;
-  titleResult: string = "Kết quả chung cuộc";
-  constructor(private roundService: RoundService,
+  titleResult: string = 'Kết quả chung cuộc';
+  constructor(
+    private roundService: RoundService,
     private configFunctionService: ConfigFunctionService,
-    private contestService: ContestService) { }
+    private contestService: ContestService
+  ) {}
 
   ngOnInit(): void {
-    // this.roundService.getResultRound(this.round_id).subscribe(res => {
-    //   this.resPayLoad = res.payload;
-    //   if (res.payload.data.length > 0) {
-    //     this.dataResultRound = res.payload.data;
-    //     this.payingLinks = this.editLink(res.payload.links);
-    //     this.dataResultRound ? this.statusResultRound = true : this.statusResultRound;
-    //     this.checkPointTeamNotNull(this.dataResultRound);
-    //   } else {
-    //     this.statusResultRound = true;
-    //   };
-    // })
+    console.log(this.roundResult);
   }
 
-
   sortRankTeam(result_id: number): number {
-    return this.configFunctionService.indexTable(result_id, this.dataResultRound, this.pages, 10);
+    return this.configFunctionService.indexTable(
+      result_id,
+      this.dataResultRound,
+      this.pages,
+      10
+    );
   }
 
   displayedColumns: string[] = ['rank', 'avatar', 'name', 'total-point'];
@@ -52,11 +46,13 @@ export class ListResultRoundComponent implements OnInit {
     this.statusResultRound = false;
     this.pages = pages;
 
-    this.contestService.getContestWherePage(link).subscribe(res => {
+    this.contestService.getContestWherePage(link).subscribe((res) => {
       if (res.status) {
         this.dataResultRound = res.payload.data;
         this.payingLinks = this.editLink(res.payload.links);
-        this.dataResultRound ? this.statusResultRound = true : this.statusResultRound;
+        this.dataResultRound
+          ? (this.statusResultRound = true)
+          : this.statusResultRound;
       }
     });
   }
@@ -70,8 +66,10 @@ export class ListResultRoundComponent implements OnInit {
 
   // Kiểm tra xem đã có kế quả cho tường đọi chưa
   checkPointTeamNotNull(data: Array<ResultRound>) {
-    data.forEach(item => {
-      item.result.point != null ? this.checkTeamPoint = true : this.checkTeamPoint;
-    })
+    data.forEach((item) => {
+      item.result.point != null
+        ? (this.checkTeamPoint = true)
+        : this.checkTeamPoint;
+    });
   }
 }

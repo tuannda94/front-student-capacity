@@ -3,7 +3,7 @@ const baseApiUrl = "https://admin.svpoly.breezecandles.vn/api";
 const authApi = `${baseApiUrl}/auth`;
 
 export const jwtApiUrl = `${baseApiUrl}/v1`;
-const publicApiUrl = `${baseApiUrl}/public`;
+export const publicApiUrl = `${baseApiUrl}/public`;
 export const environment = {
   production: true,
   GG_CLIENT_ID: "437095088104-c58gonumb2mu71c1d21ofn6ita2uvqr5.apps.googleusercontent.com",
@@ -22,7 +22,7 @@ export const environment = {
   capacityListUrl: `${publicApiUrl}/capacity`,
   postListUrl: `${publicApiUrl}/posts`,
   skillListUrl: `${publicApiUrl}/skill`,
-  
+
   // Router API V1
   userListUrl: `${jwtApiUrl}/users`,
   roundV1Url: `${jwtApiUrl}/round`,

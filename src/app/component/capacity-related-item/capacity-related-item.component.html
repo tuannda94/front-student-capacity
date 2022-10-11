@@ -1,70 +1,69 @@
-<div class="capacity__related-item">
-  <a
-    [routerLink]="['/test-nang-luc', capacityItem.id]"
-    class="capacity__related-item-image"
-    [ngStyle]="{ 'background-image': 'url(' + capacityItem.img + ')' }"
-  ></a>
+<div class="capacity__related-item my-shadow-3-hover">
+  <a [routerLink]="['/test-nang-luc', capacityItem.id]" class="capacity__related-item-image"
+    [ngStyle]="{ 'background-image': 'url(' + capacityItem.img + ')' }"></a>
 
   <div class="capacity__related-content">
-    <p class="capacity__related-content-time">
-      {{ capacityItem.date_start | formatDate }} - {{ capacityItem.register_deadline | formatDate }}
+    <p class="capacity__related-content-time my-xs">
+      {{ capacityItem.date_start | formatDatePost }} - {{ capacityItem.register_deadline | formatDatePost }}
     </p>
     <a [routerLink]="['/test-nang-luc', capacityItem.id]" class="capacity__related-content-title-link">
-      <h2 class="capacity__related-content-title">{{ capacityItem.name }}</h2>
+      <h3 class="capacity__related-content-title my-h5">{{ capacityItem.name }}</h3>
     </a>
 
-    <ul class="capacity__related-content-list">
-      <li class="capacity__related-content-list-item">
+    <ul class="capacity__related-content-list ">
+      <!-- <li class="capacity__related-content-list-item">
         <div class="capacity__related-content-list-item-icon">
           <i class="fa-solid fa-file-pen"></i>
         </div>
-
-        {{ capacityItem.rounds.length }} bài thi
-      </li>
-      <li class="capacity__related-content-list-item">
+        <span class="capacity__related-content-list-item-icon-text">
+          <b>{{ capacityItem.rounds_count }}</b> &ensp;
+          <span>bài thi</span>
+        </span>
+      </li> -->
+      <li class="capacity__related-content-list-item ">
         <div class="capacity__related-content-list-item-icon">
           <i class="fa-solid fa-user-group"></i>
         </div>
-
-        {{ capacityItem.user_capacity_done.length }} lượt làm bài
+        <span class="capacity__related-content-list-item-icon-text">
+          <b>{{ capacityItem.user_capacity_done_count }}</b> &ensp;
+          <span>lượt làm bài</span>
+        </span>
       </li>
 
       <li class="capacity__related-content-list-item">
         <div class="capacity__related-content-list-item-icon">
           <i class="fa-solid fa-gear"></i>
         </div>
-
-        <div class="capacity__related-content-list-item-skill">
-          <span>Skill:</span>
+        <div class="capacity__related-content-list-item-skill capacity__related-content-list-item-icon-text">
+          <span>Kỹ năng:</span>
           <strong class="capacity__related-content-list-item-skill-name">{{ this.skillsName }}</strong>
         </div>
       </li>
     </ul>
+    <div class="capacity-countdown">
+      <ul class="my-countdown">
+        <li class="my-countdown-item text-center">
+          <div class="my-countdown-item-box my-body-2"> {{countDown.days}}</div>
+          <span class="my-countdown-item-text my-xs">Ngày</span>
+        </li>
+        <li class="my-countdown-item text-center">
+          <div class="my-countdown-item-box my-body-2"> {{countDown.hours}}</div>
+          <span class="my-countdown-item-text my-xs">Giờ</span>
+        </li>
+        <li class="my-countdown-item text-center">
+          <div class="my-countdown-item-box my-body-2"> {{countDown.minutes}}</div>
+          <span class="my-countdown-item-text my-xs">Phút</span>
+        </li>
+        <li class="my-countdown-item text-center">
+          <div class="my-countdown-item-box my-body-2"> {{countDown.seconds}}</div>
+          <span class="my-countdown-item-text my-xs">Giây</span>
+        </li>
+      </ul>
+    </div>
 
-    <ul class="capacity__related-countdown">
-      <li class="capacity__related-countdown-item text-center">
-        <div class="capacity__related-countdown-item-box">{{ countDown.days }}</div>
-        <span class="capacity__related-countdown-item-text">Ngày</span>
-      </li>
-      <li class="capacity__related-countdown-item text-center">
-        <div class="capacity__related-countdown-item-box">{{ countDown.hours }}</div>
-        <span class="capacity__related-countdown-item-text">Giờ</span>
-      </li>
-      <li class="capacity__related-countdown-item text-center">
-        <div class="capacity__related-countdown-item-box">{{ countDown.minutes }}</div>
-        <span class="capacity__related-countdown-item-text">Phút</span>
-      </li>
-      <li class="capacity__related-countdown-item text-center">
-        <div class="capacity__related-countdown-item-box">{{ countDown.seconds }}</div>
-        <span class="capacity__related-countdown-item-text">Giây</span>
-      </li>
-    </ul>
-
-    <button
-      class="btn btn-main capacity__related-content-btn"
-      (click)="handleGoToExam(capacityItem.id)"
-      [disabled]="statusExam.status === 0 || statusExam.status === 2"
-    >
+    <button class="w-100 my-btn-s" (click)="handleGoToExam(capacityItem.id)"
+      [ngClass]="statusExam.status === 0 || statusExam.status === 2 ? 'my-btn-disabled' : 'my-btn-primary'"
+      [disabled]="statusExam.status === 0 || statusExam.status === 2">
       {{ statusExam.status === 1 ? "Tham gia ngay" : statusExam.statustext }}
     </button>
   </div>

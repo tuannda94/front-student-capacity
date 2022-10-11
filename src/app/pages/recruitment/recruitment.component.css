@@ -47,6 +47,19 @@ p , ul{
 
 .recruitment-list-hot-box {
   border-radius: 10px;
+  height: 600px;
+  overflow-y: auto;
+}
+
+.input__search-keyword--sugg{
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.recruitment-list-hot-box::-webkit-scrollbar,
+.input__search-keyword--sugg::-webkit-scrollbar{
+  width: 3px;
+  background-color: rgb(235, 232, 232);
 }
 
 .recruitment-list-hot-item-box:first-child {
@@ -72,7 +85,8 @@ p , ul{
   transition: all ease-in-out 0.3s;
 }
 
-.recruitment-image-box{
+
+.recruitment-image-box {
   position: relative;
 }
 
@@ -119,7 +133,7 @@ p , ul{
 }
 
 .recruitment-list-hot-item-text {
-  font-style: normal;
+font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 1.6;
@@ -297,4 +311,53 @@ p , ul{
     height: 200px;
     border-radius: 10px;
   }
+}
+
+.post-item__title {
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.post-item__info {
+  margin: 10px 0;
+  display: flex;
+  justify-content: start;
+}
+
+.post-item__info-item:first-child {
+  display: -webkit-box;
+  display: inline-block;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 160px;
+  width: 100%;
+}
+
+.post-item__info-item+.post-item__info-item {
+  margin-left: 10px;
+}
+
+.post-item__info,
+.post-item-bottom {
+  color: #8E8E95
+}
+
+.btn-detail {
+  background-color: white;
+  border: solid 1px #8E8E95
+}
+
+.btn-detail:hover {
+  background-color: #0E0759;
+  color: white
+}
+
+
+.post-item-bottom .btn {
+  font-size: 12px;
+  padding: 4px 10px;
+  margin-top: 5px;
 }

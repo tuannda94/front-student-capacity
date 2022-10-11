@@ -1,13 +1,13 @@
 @import '~normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
 :root {
   --primary: #ff6638;
-  --bg-content : #F8F8F8;
+  --bg-content: #F8F8F8;
   --black: #000;
   --white: #ffff;
   --gray: #ccc;
-  --blue :#081327;
+  --blue: #081327;
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
   --gray-300: #d1d5db;
@@ -17,56 +17,94 @@
   --gray-700: #374151;
   --gray-800: #1f2937;
   --gray-900: #111827;
-  --black-100 : #f5f5f4;
-  --black-200 : #e7e5e4;
-  --black-300 : #d6d3d1;
-  --black-400 : #a8a29e;
-  --black-500 : #78716c;
-  --black-600 : #57534e;
-  --black-700 : #44403c;
-  --black-800 : #292524;
-  --black-900 : #000;
-  --orange-100 : #fff7ed;
-  --orange-200 : #fed7aa;
-  --orange-300 : #fdba74;
-  --orange-400 : #fb923c;
-  --orange-500 : #f97316;
-  --orange-600 : #ea580c;
-  --orange-700 : #c2410c;
-  --orange-800 : #9a3412;
-  --orange-900 : #7c2d12;
-  --blue-100 :#dbeafe;
-  --blue-200 :#bfdbfe;
-  --blue-300 :#93c5fd;
-  --blue-400 :#60a5fa;
-  --blue-500 :#3b82f6;
-  --blue-600 :#2563eb;
-  --blue-700 :#1d4ed8;
-  --blue-800 :#1e40af;
-  --blue-900 :#1e3a8a;
-  --yellow-100 : #fef9c3;
-  --yellow-200 : #fef08a;
-  --yellow-300 : #fde047;
-  --yellow-400 : #eab308;
-  --yellow-500 : #eab308;
-  --yellow-600 : #ca8a04;
-  --yellow-700 : #a16207;
-  --yellow-800 : #854d0e;
-  --yellow-900 : #713f12;
-  --red-100 : #fee2e2;
-  --red-200 : #fecaca;
-  --red-300 : #fca5a5;
-  --red-400 : #f87171;
-  --red-500 : #ef4444;
-  --red-600 : #dc2626;
-  --red-700 : #b91c1c;
-  --red-800 : #991b1b;
-  --red-900 : #7f1d1d;
-}
+  --black-100: #f5f5f4;
+  --black-200: #e7e5e4;
+  --black-300: #d6d3d1;
+  --black-400: #a8a29e;
+  --black-500: #78716c;
+  --black-600: #57534e;
+  --black-700: #44403c;
+  --black-800: #292524;
+  --black-900: #000;
+  --orange-100: #fff7ed;
+  --orange-200: #fed7aa;
+  --orange-300: #fdba74;
+  --orange-400: #fb923c;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+  --orange-700: #c2410c;
+  --orange-800: #9a3412;
+  --orange-900: #7c2d12;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+  --yellow-100: #fef9c3;
+  --yellow-200: #fef08a;
+  --yellow-300: #fde047;
+  --yellow-400: #eab308;
+  --yellow-500: #eab308;
+  --yellow-600: #ca8a04;
+  --yellow-700: #a16207;
+  --yellow-800: #854d0e;
+  --yellow-900: #713f12;
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-300: #fca5a5;
+  --red-400: #f87171;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-800: #991b1b;
+  --red-900: #7f1d1d;
 
-ul{
-  list-style-type: none;
-  padding: 0;
+
+  /* Root v2 */
+  --my-primary: #FF6638;
+  /* opacity 30% 20% 10% 5% primary*/
+  --my-primary-300: #FDDFBC;
+  --my-primary-200: #FDEAD2;
+  --my-primary-100: #FFF5E9;
+  --my-primary-50: #FFF7F5;
+  --my-secondary: #0E0759;
+  --my-white: #fff;
+  --my-black: #212121;
+  --my-gray: #F4F4F4;
+  --my-light-gray: #F9F9F9;
+  --my-dark-gray: #EEEEEE;
+  --my-darkest-gray: #8A8894;
+  --my-disabled: #F4F3FE;
+
+  /* background */
+  --my-bg-color: #F4F3FE;
+  --my-bg-white: #FFF;
+  --my-bg-light: #FAFAFA;
+  --my-bg-gray: #f0f0f0;
+
+  /* text */
+  --my-text-gray: #8A8894;
+  --my-text-disabled: #C5C0DB;
+
+  --success: #28A745;
+  --success-2: #23883A;
+  --error: #DC3545;
+  --error-2: #BF2635;
+  --warning: #FFC107;
+  --warning-2: #EFB60A;
+
+  /* text */
+  --my-rounded: 4px;
+  --my-rounded-2: 8px;
+
+  /* text body */
+  --fw: 400;
+  --fs: 16px;
+  --lh: 140%;
 }
 
 * {
@@ -75,12 +113,34 @@ ul{
   box-sizing: border-box;
 }
 
-body {
-  font-size: 62%;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+span,
+strong {
+  font-family: 'Nunito Sans', sans-serif !important;
+ 
 }
 
+body {
+  font-family: 'Nunito Sans', sans-serif !important;
+  /* font-family: 'Vollkorn', serif; */
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  color: var(--my-black);
+  font-weight: var(--fw);
+  font-size: var(--fs);
+  line-height: var(--lh);
+}
+.mat-typography p {
+  margin: 0;
+}
 ::-webkit-scrollbar {
   width: 10px;
   background-color: rgb(235, 232, 232);
@@ -91,16 +151,141 @@ body {
   border-radius: 6px;
 }
 
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+.my-error {
+  color: var(--error) !important;
+}
+/* ------------------- field form ------------ */
+.my-box-filter {
+  background: var(--my-primary-50);
+  padding: 16px;
+  border-radius: var(--my-rounded);
+}
+
+.my-box-filter-3 {
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 16px;
+}
+
+.my-form-search {
+  background: var(--white);
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid var(--my-gray);
+  border-radius: var(--my-rounded);
+  overflow: hidden;
+}
+
+.my-form-search:focus-within {
+  box-shadow: 0 0 0 2px rgba(255, 103, 56, .3)
+}
+
+.my-input-search {
+  padding: 12px 16px;
+  outline: none;
+  width: 100%;
+  border: none;
+}
+.my-input {
+  padding: 12px 16px;
+  outline: none;
+  border: 1px solid var(--my-gray);
+  border-radius: var(--my-rounded);
+  width: 100%;
+}
+
+.my-input:focus {
+  box-shadow: 0 0 0 2px rgba(255, 103, 56, .3)
+}
+
+.my-btn-search-inside {
+  background: var(--my-primary);
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 30px;
+  color: white;
+  margin: 4px;
+  border: none;
+  border-radius: var(--my-rounded);
+}
+
+/* ------------------- box shadow ------------ */
+.my-shadow-1 {
+  /* Elevation 1 */
+  box-shadow: 0px 4px 4px rgba(142, 141, 208, 0.16);
+}
+
+.my-shadow-2 {
+  /* Elevation 2 */
+  box-shadow: 0px 4px 8px rgba(142, 141, 208, 0.16);
+}
+
+.my-shadow-3 {
+  /* Elevation 3 */
+  box-shadow: 0px 4px 16px rgba(142, 141, 208, 0.16);
+}
+
+.my-shadow-4 {
+  /* Elevation 4 */
+  box-shadow: 0px 16px 24px rgba(142, 141, 208, 0.12);
+}
+
+.my-shadow-1-hover,
+.my-shadow-2-hover,
+.my-shadow-3-hover,
+.my-shadow-4-hover {
+  transition-duration: .3s;
+}
+
+.my-shadow-1-hover:hover {
+  box-shadow: 0px 16px 24px rgba(142, 141, 208, 0.12);
+  border: 1px solid transparent !important;
+  transform: translateY(-8px)
+}
+
+.my-shadow-2-hover:hover {
+  box-shadow: 0px 4px 8px rgba(142, 141, 208, 0.16);
+  border: 1px solid transparent !important;
+  transform: translateY(-8px)
+}
+
+.my-shadow-3-hover:hover {
+  box-shadow: 0px 4px 16px rgba(142, 141, 208, 0.16);
+  border: 1px solid transparent !important;
+  transform: translateY(-8px)
+}
+
+.my-shadow-4-hover:hover {
+  box-shadow: 0px 16px 24px rgba(142, 141, 208, 0.12);
+  border: 1px solid transparent !important;
+  transform: translateY(-8px)
+}
+
 .fs-text {
   font-size: 16px;
   text-align: justify;
   line-height: 1.5;
 }
-
-a {
-  text-decoration: none;
-}
-
 
 /* SLICK SLIDER */
 .slick-arrow {
@@ -114,4 +299,82 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+.input-required {
+  color: red
+}
+
+/* ------------------- button favorite ------------ */
+.my-add-favorite__btn {
+  /* vi base btn import config sau base css */
+  padding: 4px 8px !important;
+  background: var(--my-gray);
+  opacity: .6;
+  transition-duration: .3s;
+  width: fit-content;
+}
+
+.my-add-favorite__btn:hover {
+  opacity: 1;
+}
+
+.my-add-favorite__btn.added,
+.my-add-favorite__btn.added .my-add-favorite__icon {
+  color: var(--my-primary);
+  opacity: 1;
+
+}
+
+.my-add-favorite__icon {
+  color: var(--my-darkest-gray);
+}
+
+/* -------------- countdown ---------- */
+.my-countdown {
+  display: inline-flex;
+  /* flex-grow important */
+  flex-grow: 1;
+  justify-content: flex-end;
+  margin-bottom: 0;
+  /* width: 100%; */
+  width: fit-content
+}
+
+.my-countdown-item {
+  color: var(--my-darkest-gray);
+}
+
+.my-countdown-item+.my-countdown-item {
+  padding-left: 4px;
+}
+
+.my-countdown-item-box {
+  background-color: transparent;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  margin-bottom: 0;
+}
+
+.my-countdown-item-text {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+
+.contest-item {
+  margin-bottom: 20px;
+}
+
+.my-countdown {
+  margin-top: 0;
+}
+
+/* ------------------- post item ------------ */
+.post-item {
+  height: 400px;
 }

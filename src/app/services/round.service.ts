@@ -2,7 +2,7 @@ import { DataExam, ResponseCheckSttExam } from './../models/capacity';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment, jwtApiUrl } from 'src/environments/environment';
 import { ResponseSubmitExam } from '../models/capacity';
 import { ResponsePayload } from '../models/response-payload';
 
@@ -53,5 +53,12 @@ export class RoundService {
   // Trả kết quả của vòng thi
   getResultRound(round_id: number) {
     return this.http.get<ResponsePayload>(`${environment.publicApiUrl}/contest/round/${round_id}/result`)
+  }
+
+  // thông tin vòng thi capacity tiếp theo
+  getNextRound(capacity_id: number): Observable<ResponsePayload> {
+    return this.http.post<ResponsePayload>(`${jwtApiUrl}/get-next-round-capacity`, {
+      contest_id: capacity_id
+    })
   }
 }

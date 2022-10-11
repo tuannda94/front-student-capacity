@@ -14,16 +14,16 @@ p,h3{
   background-color: var(--primary);
 }
 
-.header-team-user-edit-box {
+.header-team-user-box {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
+
 }
 
 .header-team-user-edit {
   width: 250px;
+  cursor: pointer;
 }
 
 .body-team-user-box {
@@ -71,6 +71,16 @@ th {
 }
 
 .table-team-info {
-  max-height: 200px;
+  max-height: 250px;
   overflow-y: auto;
+}
+
+.table-team-info::-webkit-scrollbar{
+  width: 3px;
+  background-color: rgb(235, 232, 232);
+}
+
+.table-team-info::-webkit-scrollbar-thumb{
+  background-color: var(--primary);
+  border-radius: 6px;
 }

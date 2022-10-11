@@ -1,178 +1,334 @@
+<!-- <app-loading-page [status]="statusPage">
+</app-loading-page> -->
 <div class="container-fuild recruitment-banner-box">
-    <ngb-carousel>
-        <ng-template ngbSlide>
-            <div class="picsum-img-wrapper">
-                <img class="w-100"
-                    src="https://fptjobs.com/Media/Images/BannerImages/3142022120000AM10231180banner%20web%20phu.png"
-                    alt="Random first slide">
-            </div>
-
-        </ng-template>
-        <ng-template ngbSlide>
-            <div class="picsum-img-wrapper">
-                <img class="w-100"
-                    src="https://fptjobs.com/Media/Images/BannerImages/9162021120000AM143756994web-phu.png"
-                    alt="Random second slide">
-            </div>
-
-        </ng-template>
-        <ng-template ngbSlide>
-            <div class="picsum-img-wrapper">
-                <img class="w-100"
-                    src="https://fptjobs.com/Media/Images/BannerImages/1122021120000AM10491896bn-web-phufull.png"
-                    alt="Random third slide">
-            </div>
-
-        </ng-template>
-    </ngb-carousel>
+  <ngb-carousel>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img
+          class="w-100"
+          src="https://fptjobs.com/Media/Images/BannerImages/3142022120000AM10231180banner%20web%20phu.png"
+          alt="Random first slide"
+        />
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img
+          class="w-100"
+          src="https://fptjobs.com/Media/Images/BannerImages/9162021120000AM143756994web-phu.png"
+          alt="Random second slide"
+        />
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img
+          class="w-100"
+          src="https://fptjobs.com/Media/Images/BannerImages/1122021120000AM10491896bn-web-phufull.png"
+          alt="Random third slide"
+        />
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>
 <div class="recruitment-content">
-    <div class="container py-4">
-        <form class="recruitment-filter-box py-3 rounded row" [formGroup]="formFilter" (submit)="filterRecruitments()">
-            <div class="col-4">
-                <input type="text" class="form-control" (keyup)="setValueKeyword($event)" placeholder="Tìm kiếm ..."
-                    id="exampleInputEmail1" aria-describedby="emailHelp">
+  <div class="container py-4">
+    <form
+      class="recruitment-filter-box py-3 rounded row"
+      autocomplete="off"
+      [formGroup]="formFilter"
+      (submit)="filterRecruitments()"
+    >
+      <div class="col-4">  
+        <div ngbDropdown class="d-inline-block w-100">
+            <input
+            type="text"
+            class="form-control"
+            formControlName="filterName"
+            placeholder="Tìm kiếm ..."
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            (keyup)="filterSelect(keywords, $any($event.target).value, 'keyword')"
+            ngbDropdownToggle
+          />
+            <div
+              ngbDropdownMenu
+              class="w-100 input__search-keyword--sugg"
+              aria-labelledby="dropdownBasic1"
+            >
+             <span class="input__search-keyword-alert"></span>
+              <div *ngIf="!keywords" class="d-flex justify-content-center">
+                <app-loading-item class="py-2"></app-loading-item>
+              </div>
+              <a
+                *ngFor="let item of keywords"
+                (click)="setValueKeyword(item.keyword)"
+                class="text-collapse"
+                ngbDropdownItem
+                >{{ item.keyword }}</a
+              >
             </div>
-            <div class="col-3">
-                <div ngbDropdown class="d-inline-block w-100">
-                    <input type="text" (keyup)="filterSelect(majors ,$any($event.target).value ,'major')"
-                        formControlName="filterMajor" class="form-control w-100" placeholder="Chuyên ngành"
-                        id="dropdownBasic1" ngbDropdownToggle>
-                    <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
-                        <div *ngIf="!majors" class="d-flex justify-content-center">
-                            <app-loading-item class="py-2"></app-loading-item>
-                        </div>
-                        <a *ngFor="let item of majors" (click)="setValueFilterMajor(item)" class="text-collapse"
-                            ngbDropdownItem>{{item.name}}</a>
-                    </div>
-                </div>
+          </div>
+      </div>
+      <div class="col-3">
+        <div ngbDropdown class="d-inline-block w-100">
+          <input
+            type="text"
+            (keyup)="filterSelect(majors, $any($event.target).value, 'major')"
+            formControlName="filterMajor"
+            class="form-control w-100"
+            placeholder="Chuyên ngành"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          />
+          <div
+            ngbDropdownMenu
+            class="w-100 input__search-keyword--sugg"
+            aria-labelledby="dropdownBasic1"
+          >
+          <span class="input__search-major-alert"></span>
+            <div *ngIf="!majors" class="d-flex justify-content-center">
+              <app-loading-item class="py-2"></app-loading-item>
             </div>
-            <div class="col-3">
-                <div ngbDropdown class="d-inline-block w-100">
-                    <input type="text" formControlName="filterStatus" class="form-control" placeholder="Trạng thái"
-                        id="dropdownBasic1" ngbDropdownToggle>
-                    <div class="w-100" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <a ngbDropdownItem *ngFor="let item of statusFilter"
-                            (click)="setValueStatus(item.name)">{{item.name}}</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <button class="btn-search-recruitment w-100 h-100">Tìm kiếm</button>
-            </div>
-        </form>
-        <ul *ngIf="skills" class="d-flex  flex-wrap filter-skill-box ">
-            <li class="filter-skill-item active mt-4" (click)="filterSkill($event , 0)">Tất cả</li>
-            <li *ngFor="let item of skills" class="filter-skill-item mt-4" (click)="filterSkill($event ,item.id)">
-                {{item.short_name}}</li>
-        </ul>
-        <div *ngIf="!skills" class="d-flex  flex-wrap">
-            <ngx-skeleton-loader [theme]="{ 
-                'height.px': '30',
-                'width.px': '150',
-                'margin-top.px' : '20',
-                'margin-right.px' : '30'
-              }" count="10" animation="pulse"></ngx-skeleton-loader>
+            <a
+              *ngFor="let item of majors"
+              (click)="setValueFilterMajor(item)"
+              class="text-collapse"
+              ngbDropdownItem
+              >{{ item.name }}</a
+            >
+          </div>
         </div>
-        <div #result class=" recruitment-list-box row  mt-4">
-            <div class="col-lg-4 col-xl-4 col-md-12 col-sm-12">
-                <div class="recruitment-left">
-                    <h2 class="fw-bold"><img class="image-title" src="./../../../assets/img/9c13a4ff5c359f6bc624.jpg"
-                            alt="">
-                        Bài viết tuyển dụng</h2>
-                    <div *ngIf="listPostResult" class="bg-white w-100 recruitment-list-hot-box">
-                        <div class="p-3 recruitment-list-hot-reponsive">
-                            <div *ngFor="let item of listPostResult" class="recruitment-list-hot-item-box">
-                                <div class="w-100">
-                                    <img [src]="item.thumbnail_url" alt="" class="recruitment-list-hot-item-box-img">
-                                </div>
-                            </div>
-                        </div>
+      </div>
+      <div class="col-3">
+        <div ngbDropdown class="d-inline-block w-100">
+          <input
+            type="text"
+            formControlName="filterStatus"
+            class="form-control"
+            placeholder="Trạng thái"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          />
+          <div
+            class="w-100 input__search-keyword--sugg"
+            ngbDropdownMenu
+            aria-labelledby="dropdownBasic1"
+          >
+            <a
+              ngbDropdownItem
+              *ngFor="let item of statusFilter"
+              (click)="setValueStatus(item.name)"
+              >{{ item.name }}</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <button [disabled]="!statusSubmit" [ngClass]="statusSubmit ? '' : 'opacity-75'" class="btn-search-recruitment w-100 h-100">Tìm kiếm &nbsp; <i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </form>
+    <ul *ngIf="skills" class="d-flex flex-wrap filter-skill-box">
+      <li
+        class="filter-skill-item  mt-4"
+        [ngClass]="!skill_id ? 'active' :  ''"
+        (click)="filterSkill($event, 0)"
+      >
+        Tất cả
+      </li>
+      <li
+        *ngFor="let item of skills"
+        class="filter-skill-item mt-4"
+        [ngClass]="skill_id == item.id ?  'active' :  ''"
+        (click)="filterSkill($event, item.id)"
+      >
+        {{ item.short_name }}
+      </li>
+    </ul>
+    <div *ngIf="!skills" class="d-flex flex-wrap">
+      <ngx-skeleton-loader
+        [theme]="{
+          'height.px': '30',
+          'width.px': '150',
+          'margin-top.px': '20',
+          'margin-right.px': '30'
+        }"
+        count="10"
+        animation="pulse"
+      ></ngx-skeleton-loader>
+    </div>
+    <div #result class="recruitment-list-box row mt-4">
+      <div class="col-lg-4 col-xl-4 col-md-12 col-sm-12">
+        <div class="recruitment-left">
+          <h2 class="fw-bold">
+            <img
+              class="image-title"
+              src="./../../../assets/img/9c13a4ff5c359f6bc624.jpg"
+              alt=""
+            />
+            Bài viết tuyển dụng
+          </h2>
+          <span  *ngIf="statusPost" style="cursor: pointer;" (click)="getAllPost()"  class="d-block text-decoration-underline mb-2 pe-auto primary-color" >Xem tất cả</span>
+          <div
+            *ngIf="statusPost"
+            class="bg-white w-100 recruitment-list-hot-box"
+          >
+            <div class="p-3 recruitment-list-hot-reponsive">
+           
+              <div
+                *ngFor="let item of listPostResult"
+                class="recruitment-list-hot-item-box"
+              >
+                <div class="w-100">
+                  <img 
+                     routerLink="/bai-viet/{{item.slug}}"
+                    [src]="item.thumbnail_url"
+                    alt=""
+                    class="recruitment-list-hot-item-box-img"
+                  />
+                </div>
+                <h3 class="post-item__title mt-2"><a routerLink="/bai-viet/{{item.slug}}">{{item.title}}</a>
+                </h3>
+                <div class="post-item__info">
+                    <div class="post-item__info-item" data-toggle="tooltip" data-placement="bottom"
+                        title={{item.user.name}}>
+                        <i class="fa-solid fa-user"></i>&ensp; {{item.user.name}}
                     </div>
-                    <div *ngIf="!listPostResult" class="recruitment-list-hot-box-loading">
-                        <ngx-skeleton-loader [theme]="{ 
-            'height.px': '230',
-            'margin-bottom' : '20'
-          }" count="4" animation="pulse"></ngx-skeleton-loader>
+                    <div class="post-item__info-item">
+                        <i class="fa-solid fa-clock"></i>&ensp;{{item.published_at |
+                            formatDatePost }}
                     </div>
                 </div>
+                <div class="post-item-bottom">
+                    <p class="short-desc" *ngIf="item.description " [innerHTML]="item.description"></p>
+                    <a class="btn btn-detail" routerLink="/bai-viet/{{item.slug}}">Chi tiết</a>
+                </div>
+              </div>
             </div>
-            <div class="recruitment-list-right col-lg-8 col-xl-8 col-md-12  col-sm-12">
-                <h2 class="fw-bold title-list-recruitment"><img class="image-title"
-                        src="./../../../assets/img/z3532098139922_ca96b677055ce79f9827060b8a92d962.jpg" alt="">Danh
-                    sách
-                    đợi tuyển dụng
-                </h2>
-                <div *ngIf="statusRecruitments">
-                    <div [routerLink]="['/tuyen-dung/chi-tiet/', item.id ]" *ngFor="let item of recruitments"
-                        class="bg-white recruitment-list-item-box" style="border-radius: 10px;">
-                        <div class="px-3 pt-3 recruitment-list-item">
-                            <div class="recruitment-image-box text-center">
-                                <img class="recruitment-image" [src]="item.image" alt="">
-                                <div class="recruitment-outs-commom" [ngClass]=" item.hot == 1 ? 'recruitment-isHot' : 'recruitment-isNew'">
-                                    <span class="d-inline fw-bold">{{item.hot == 1 ? 'HOT' : 'NEW'}}</span>
-                                </div>
-                            </div>
-                            <div class="recruitment-list-item-info">
-                                <div
-                                    class="recruitment-list-item-info-header d-flex justify-content-between align-items-center">
-                                    <p style="width: 90%;"
-                                        class="text-collapse recruitment-list-item-name color-blue recruitment-list-hot-item-name  fw-bold">
-                                        {{item.name}}</p>
-                                    <p class="color-blue fw-bold recruitment-list-hot-item-members"><i
-                                            class="fas fa-user-friends"> &nbsp;</i>{{item.user.length}}
-                                    </p>
-                                </div>
-                                <ul class="recruitment-list-skill mt-2 d-flex">
-                                    <li *ngFor="let skill of getLimitSkill(item.skill)" class="recruitment-item-skill">
-                                        {{skill.short_name}}</li>
-                                </ul>
-                                <ul class=" mt-2 ">
-                                    <li>+ Trợ cấp đến 6M/ tháng</li>
-                                    <li>+ Môi trường trẻ trung, năng động</li>
-                                    <li>+ Môi trường trẻ trung, năng động</li>
-                                    <li>+ Môi trường trẻ trung, năng động</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="px-3 pb-3 recruitment-list-item align-items-center">
-                            <p class="recruitment-list-hot-item-text text-center color-text mt-2">{{item.end_time |
-                                formatDate}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex  justify-content-start align-items-center">
-                                    <p class="fw-bold color-blue">Doanh nghiệp :</p>
-                                    <ul class="list-company-support d-flex align-items-center">
-                                        <li *ngFor="let enterpriseItem  of item.enterprise;let i = index"><img
-                                                *ngIf="i < 5" [src]="enterpriseItem.logo" alt=""
-                                                [ngbTooltip]="enterpriseItem.name">
-                                        </li>
-                                    </ul>
-                                </div>
-                                <p class="color-text number-test">Số bài test : {{item.contest.length > 0 ?
-                                    item.contest.length
-                                    : '0'}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center" style="margin-top: 100px;">
-                        <img *ngIf="recruitments.length == 0" src="https://homebond.ae/assets/images/no-result.png"
-                            alt="">
-                    </div>
+          </div>
+          <div *ngIf="!statusPost" class="recruitment-list-hot-box-loading">
+            <ngx-skeleton-loader
+              [theme]="{
+                'height.px': '230',
+                'margin-bottom': '20'
+              }"
+              count="4"
+              animation="pulse"
+            ></ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+      <div class="recruitment-list-right col-lg-8 col-xl-8 col-md-12 col-sm-12">
+        <h2 class="fw-bold title-list-recruitment">
+          <img
+            class="image-title"
+            src="./../../../assets/img/z3532098139922_ca96b677055ce79f9827060b8a92d962.jpg"
+            alt=""
+          />Danh sách đợt tuyển dụng
+        </h2>
+        <div *ngIf="statusRecruitments">
+          <div
+            [routerLink]="['/tuyen-dung/chi-tiet/', item.id]"
+            *ngFor="let item of recruitments"
+            class="bg-white recruitment-list-item-box"
+            style="border-radius: 10px"
+          >
+            <div class="px-3 pt-3 recruitment-list-item">
+              <div class="recruitment-image-box text-center">
+                <img class="recruitment-image" [src]="item.image" alt="" />
+                <div
+                  class="recruitment-outs-commom"
+                  [ngClass]="
+                    item.hot == 1 ? 'recruitment-isHot' : 'recruitment-isNew'
+                  "
+                >
+                  <span class="d-inline fw-bold">{{
+                    item.hot == 1 ? "HOT" : "NEW"
+                  }}</span>
                 </div>
+              </div>
+              <div class="recruitment-list-item-info">
+                <div
+                  class="recruitment-list-item-info-header d-flex justify-content-between align-items-center"
+                >
+                  <p
+                    style="width: 90%"
+                    class="text-collapse recruitment-list-item-name color-blue recruitment-list-hot-item-name fw-bold"
+                  >
+                    {{ item.name }}
+                  </p>
+                  <p
+                    class="color-blue fw-bold recruitment-list-hot-item-members"
+                  >
+                    <i class="fas fa-user-friends"> &nbsp;</i
+                    >{{ item.count_user }}
+                  </p>
+                </div>
+                <ul class="recruitment-list-skill mt-2 d-flex">
+                  <li
+                    *ngFor="let skill of getLimitSkill(item.skill)"
+                    class="recruitment-item-skill"
+                  >
+                    {{ skill.short_name }}
+                  </li>
+                </ul>
+                <div class="mt-2" [innerHTML]="item.short_description">
+                   
+                </div>
+              </div>
+            </div>
+            <div class="px-3 pb-3 recruitment-list-item align-items-center">
+              <p
+                class="recruitment-list-hot-item-text text-center color-text mt-2"
+              >
+                {{ item.end_time | formatDate }}
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-start align-items-center">
+                  <p class="fw-bold color-blue">Doanh nghiệp :</p>
+                  <ul class="list-company-support d-flex align-items-center">
+                    <li
+                      *ngFor="
+                        let enterpriseItem of item.enterprise;
+                        let i = index
+                      "
+                    >
+                      <img
+                        *ngIf="i < 5"
+                        [src]="enterpriseItem.logo"
+                        alt=""
+                        [ngbTooltip]="enterpriseItem.name"
+                      />
+                    </li>
+                  </ul>
+                </div>
+                <p class="color-text number-test">
+                  Số bài test :
+                  {{ item.contest_count }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center" style="margin-top: 100px">
+            <img
+              *ngIf="recruitments.length == 0"
+              src="https://homebond.ae/assets/images/no-result.png"
+              alt=""
+            />
+          </div>
+        </div>
 
-                <div *ngIf="!statusRecruitments" class="recruitment-loading">
-                    <ngx-skeleton-loader [theme]="{ 
-                    'height.px': '270',
-                    'margin-bottom' : '20'
-                  }" count="6" animation="pulse"></ngx-skeleton-loader>
-                </div>
-            </div>
+        <div *ngIf="!statusRecruitments" class="recruitment-loading">
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': '270',
+              'margin-bottom': '20'
+            }"
+            count="6"
+            animation="pulse"
+          ></ngx-skeleton-loader>
         </div>
+      </div>
     </div>
-    <div *ngIf="listPostResult" class="container list-post-box pb-5" >
-        <h3 class="fw-bold title text-uppercase mb-2 text-left color-blue">Tìm hiểu doanh nghiệp</h3>
-        <div class="title-line">
-        </div>
-        <app-list-post [listPost]="listPostResult"></app-list-post>
-    </div>
+  </div>
 </div>

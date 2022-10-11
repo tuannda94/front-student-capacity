@@ -1,66 +1,73 @@
 <div class="p-2">
-    <div class="border-bottom">
-        <h3 class="fs-5 primary-color">Các cuộc thi đã tham gia</h3>
-        <p style="margin-top: -12px;" class="color-gray">Tổng hợp cuộc thi của bạn</p>
+  <div class="border-bottom">
+    <h3 class="fs-5 primary-color">Các cuộc thi đã tham gia</h3>
+    <p style="margin-top: -12px" class="color-gray">
+      Tổng hợp cuộc thi của bạn
+    </p>
+  </div>
+  <div style="box-shadow: 0 5px 6px -1px rgb(230, 229, 229)" class="row py-2">
+    <div class="col-3">
+      <select
+        class="form-select"
+        (change)="filterWhereStatus($event)"
+        aria-label="Default select example"
+      >
+        <option   hidden>Trạng thái</option>
+        <option value="1" selected [selected]="valueStatus ==  '1'" >Đang mở</option>
+        <option value="2"  [selected]="valueStatus ==  '2'">Đã kết thúc</option>
+      </select>
     </div>
-    <div style="box-shadow: 0 5px 6px -1px rgb(230, 229, 229);"
-        class="d-flex justify-content-between align-items-center p-3">
-        <form class="col-5 mx-1 d-flex justify-content-between align-items-center" (submit)="filterContestSearch()">
-            <div class="">
-                <input type="text" (keyup)="setValueSearch($event)" placeholder="Tìm kiếm cuộc thi"
-                    class="form-control">
-            </div>
-            <div class="">
-                <button type="button" (click)="filterContestSearch()" class="btn btn-main">Tìm
-                    kiếm</button>
-            </div>
-        </form>
-        <div class=" col-4">
-            <select class="form-select" (change)="filterWhereStatus($event)" aria-label="Default select example">
-                <option value="0">Tất cả</option>
-                <option value="3">Đã kết thúc</option>
-                <option value="2">Đang mở</option>
-                <option value="1">Sắp diễn ra</option>
-            </select>
+    <form class="col-9" (submit)="filterContestSearch()">
+        <div class="input-group">
+          <input
+            type="text"
+            [value]="keyword"
+            (keyup)="setValueSearch($event)"
+            placeholder="Tìm kiếm cuộc thi"
+            class="input-search form-control"
+          />
+  
+          <button
+            type="button"
+            (click)="filterContestSearch()"
+            class="input-group-text"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </div>
+      </form>
+  </div>
+  <div class="contest-user-body">
+    <div class="pb-3 px-2" *ngIf="statusListContests == true">
+      <app-contest-item
+        class="col-12 mt-3"
+        *ngFor="let item of listContestByUser"
+        [pageContestByUser]="true"
+        [item]="item"
+      >
+      </app-contest-item>
+      <div
+        class="d-flex justify-content-center"
+        *ngIf="listContestByUser.length == 0"
+      >
+        <div class="image-not-data mt-3">
+          <img
+            src="https://img.freepik.com/free-vector/no-data-concept-illustration_203587-28.jpg?w=2000"
+            alt=""
+            class="w-100"
+          />
+        </div>
+      </div>
     </div>
-    <div class="contest-user-body">
-        <div class="row pb-3" *ngIf="statusListContests ==  true">
-            <app-contest-item class="col-4 mt-3" *ngFor="let item of listContestByUser" [pageContestByUser]="true"
-                [item]="item">
-            </app-contest-item>
-            <div class="d-flex justify-content-center" *ngIf=" listContestByUser.length==0">
-                <div class="image-not-data mt-3">
-                    <img src="https://img.freepik.com/free-vector/no-data-concept-illustration_203587-28.jpg?w=2000"
-                        alt="" class="w-100">
-                </div>
-            </div>
-        </div>
-        <div class="row" *ngIf="statusListContests == false">
-            <div class="col-4 mt-3">
-                <app-contest-load-item>
-                </app-contest-load-item>
-            </div>
-            <div class="col-4 mt-3">
-                <app-contest-load-item>
-                </app-contest-load-item>
-            </div>
-            <div class="col-4 mt-3">
-                <app-contest-load-item>
-                </app-contest-load-item>
-            </div>
-            <div class="col-4 mt-3">
-                <app-contest-load-item>
-                </app-contest-load-item>
-            </div>
-            <div class="col-4 mt-3">
-                <app-contest-load-item>
-                </app-contest-load-item>
-            </div>
-            <div class="col-4 mt-3">
-                <app-contest-load-item>
-                </app-contest-load-item>
-            </div>
-        </div>
+    <div class="row" *ngIf="statusListContests == false">
+      <ngx-skeleton-loader
+      [theme]="{
+        'height.px': '150',
+        'margin-bottom': '20'
+      }"
+      count="3"
+      animation="pulse"
+    ></ngx-skeleton-loader>
     </div>
+  </div>
 </div>

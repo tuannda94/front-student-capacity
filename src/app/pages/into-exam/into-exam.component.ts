@@ -10,7 +10,7 @@ import { param } from 'jquery';
 import { TeamService } from 'src/app/services/team.service';
 import { Team } from 'src/app/models/team';
 import { RoundService } from 'src/app/services/round.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TakeExam } from 'src/app/models/take-exam.model';
 import { NgToastService } from 'ng-angular-popup';
 import { Round } from 'src/app/models/round.model';
@@ -44,6 +44,8 @@ export class IntoExamComponent implements OnInit {
   statusPage: boolean = false;
   assignment: Object;
 
+  validFileExtensions: string[] = ['zip', 'rar'];
+
   statusClickSubmit: boolean = false;
   assignmentFiles: boolean = false;
   assignmentLinks: boolean = false;
@@ -60,11 +62,21 @@ export class IntoExamComponent implements OnInit {
     private getUserLocal: GetValueLocalService
   ) {}
 
+  submitAss = new FormGroup({
+    controlLink : new FormControl(
+      [
+        Validators.pattern(
+          '/^(http[s]?://){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/'
+        )
+      ]
+    )
+  })
+
   ngOnInit(): void {
-     if(!this.getUserLocal.getValueLocalUser('user')){
+    if (!this.getUserLocal.getValueLocalUser('user')) {
       this.router.navigate(['./login']);
-     }
-    
+    }
+
     // Chi tiết cuộc thi
     this.route.paramMap
       .pipe(
@@ -128,15 +140,13 @@ export class IntoExamComponent implements OnInit {
   downloadExam() {
     this.statusPage = true;
     if (this.infoExam.exam) {
-      this.roundDetail.exams.forEach((item) => {
-        window.location.href = this.infoExam.exam.external_url;
-      });
-    }else{
+      window.location.href = this.infoExam.exam.external_url;
+    } else {
       this.statusClickSubmit = false;
-          this.toast.error({
-            summary: 'Chưa cập nhật đề bài !!!',
-            duration: 5000,
-          });
+      this.toast.error({
+        summary: 'Chưa cập nhật đề bài !!!',
+        duration: 5000,
+      });
     }
   }
 
@@ -160,56 +170,73 @@ export class IntoExamComponent implements OnInit {
   getInfoExam(round: object) {
     this.roundService.getInfoExamRound(round).subscribe((res) => {
       if (res.status) this.infoExam = res.payload;
-      if(this.infoExam) this.checkStatusExam(this.infoExam.status);
-      // if(!this.infoExam.exam.external_url) 
+      if (this.infoExam) this.checkStatusExam(this.infoExam.status);
+      // if(!this.infoExam.exam.external_url)
     });
   }
 
   // Nộp bài bằng file
   submitExamByFile(files: any) {
-    this.statusSubmitExam = false;
-    var resultExam = new FormData();
-    resultExam.append('file_url', files[0]);
-    resultExam.append('id', this.infoExam.id);
-    setTimeout(() => {
-      if (files[0]) {
-        this.statusSubmitExam = true;
-        this.assignmentFiles = true;
+    let countTrue: number = 0;
+    this.validFileExtensions.forEach((ext) => {
+      if (files[0].name.endsWith(ext)) {
+        countTrue++;
       }
-    }, 2000);
-    this.assignment = resultExam;
+    });
+
+    if (countTrue == 0) {
+      this.toast.warning({
+        summary: 'Sai định dạng file !!!',
+        duration: 5000,
+      });
+    } else {
+      this.statusSubmitExam = false;
+      var resultExam = new FormData();
+      resultExam.append('file_url', files[0]);
+      resultExam.append('id', this.infoExam.id);
+      setTimeout(() => {
+        if (files[0]) {
+          this.statusSubmitExam = true;
+          this.assignmentFiles = true;
+        }
+      }, 2000);
+      this.assignment = resultExam;
+    }
   }
 
   // Nộp bài bằng link
   submitExamByLink(link: any) {
-    this.statusSubmitExam = false;
-    let resultExam = {
-      result_url: link.target.value,
-      id: this.infoExam.id,
-    };
     setTimeout(() => {
-      if (resultExam.result_url != '') {
-        this.statusSubmitExam = true;
-        this.assignmentLinks = true;
-      }else{
-        this.assignmentLinks = false;
-        this.statusSubmitExam = true;
-      }
+      this.statusSubmitExam = false;
+      setTimeout(() => {
+        let resultExam = {
+          result_url: link.target.value,
+          id: this.infoExam.id,
+        };
+        if (resultExam.result_url != '') {
+          this.statusSubmitExam = true;
+          this.assignmentLinks = true;
+        } else {
+          this.assignmentLinks = false;
+          this.statusSubmitExam = true;
+        }
+        this.assignment = resultExam; 
+      },3000);
     }, 3000);
-    this.assignment = resultExam;
   }
 
   removeAssFile() {
     this.statusSubmitExam = false;
     setTimeout(() => {
-      this.resetAllStatus()
+      this.resetAllStatus();
     }, 3000);
   }
 
   removeAssLink() {
     this.statusSubmitExam = false;
+
     setTimeout(() => {
-        this.resetAllStatus()
+      this.resetAllStatus();
     }, 3000);
   }
 
@@ -236,18 +263,18 @@ export class IntoExamComponent implements OnInit {
     });
   }
 
-  cancelExam(){
+  cancelExam() {
     this.statusClickSubmit = true;
     const cancelObject = {
       id: this.infoExam.id,
     };
 
     this.roundService.submitExam(cancelObject).subscribe((res) => {
-      if(res.status){
+      if (res.status) {
         this.statusClickSubmit = false;
         this.checkStatusExam(1);
         this.resetAllStatus();
-      } 
+      }
     });
   }
 
@@ -268,15 +295,15 @@ export class IntoExamComponent implements OnInit {
     });
   }
 
-
   // Check team has  submit ass
-  checkStatusExam(status : number){
-    status == 1 ? this.statusTakeExam = false : this.statusTakeExam = true;
+  checkStatusExam(status: number) {
+    status == 1 ? (this.statusTakeExam = false) : (this.statusTakeExam = true);
   }
 
   // reset All Status
-  resetAllStatus(){
+  resetAllStatus() {
     this.assignment = {};
+    this.statusSubmitExam = true;
     this.assignmentLinks = false;
     this.assignmentFiles = false;
     this.statusSubmitExam = true;

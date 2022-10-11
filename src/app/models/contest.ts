@@ -14,6 +14,7 @@ export class Contest {
     start_register_time: Date;
     description: string;
     major_id: number;
+    rounds_count: number;
     status: number;
     teams: Array<Team>
     rounds: Array<Round>
@@ -22,4 +23,5 @@ export class Contest {
     status_user_has_join_contest: boolean;
     post_new: string;
     teams_count: number;
+    max_user:number;
 }

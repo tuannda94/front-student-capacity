@@ -1,3 +1,6 @@
+ .contest-aside-box{
+  box-shadow: 0px 0px 3px var(--gray-200);
+ }
 
   .contest-detail-right-name {
     display: -webkit-box;
@@ -27,7 +30,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
+  text-align: center;
   }
   
   .contest-detail-right-countdown-item {
@@ -43,5 +46,4 @@
   
   .contest-detail-right-countdown-box p {
     color: rgba(20, 20, 20, 0.333);
-    margin-left: 10px;
   }

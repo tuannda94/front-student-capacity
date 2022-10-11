@@ -1,11 +1,13 @@
 import { ExamCapacity } from "./exam.model";
 import { CapacityRound, Round } from "./round.model";
 import { Skill } from "./skill.models";
+import { User } from "./user";
 
 export class Capacity {
   id: number;
   name: string;
   img: string;
+  user_capacity_done: Array<User> = [];
   date_start: Date;
   register_deadline: Date;
   description: string;
@@ -14,8 +16,9 @@ export class Capacity {
   slug_name: string;
   start_register_time: Date;
   rounds: Round[];
-  user_capacity_done: []; // ds user làm bài
   skills: Skill[];
+  rounds_count: number;
+  user_capacity_done_count: number;
 }
 
 class ResultExam {

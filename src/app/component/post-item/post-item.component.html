@@ -1,0 +1,32 @@
+<div class="capacity__post-item">
+  <a
+    [routerLink]="['/bai-viet', postItem.slug]"
+    class="capacity__post-item-image"
+    [ngStyle]="{ 'background-image': 'url(' + postItem.thumbnail_url + ')' }"
+  ></a>
+
+  <div class="capacity__post-content">
+    <a [routerLink]="['/bai-viet', postItem.slug]" class="capacity__post-content-title-link">
+      <h2 class="capacity__post-content-title">{{ postItem.title }}</h2>
+    </a>
+
+    <ul class="capacity__post-content-list">
+      <li class="capacity__post-content-list-item">
+        <div class="capacity__post-content-list-item-icon">
+          <i class="fa-solid fa-user-pen"></i>
+        </div>
+
+        {{ postItem.user.name }}
+      </li>
+      <li class="capacity__post-content-list-item">
+        <div class="capacity__post-content-list-item-icon">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+
+        {{ postItem.published_at | formatDate }}
+      </li>
+    </ul>
+
+    <div class="capacity__post-content-desc" [innerHTML]="postItem.description"></div>
+  </div>
+</div>

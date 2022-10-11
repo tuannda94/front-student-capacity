@@ -1,3 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "~ng-zorro-antd/spin/style/index.min.css";
+@import "~ng-zorro-antd/pagination/style/index.min.css";

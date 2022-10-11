@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "src/app/models/user";
 import { UserService } from "src/app/services/user.service";
 import { NgToastService } from "ng-angular-popup";
+import { Title } from "@angular/platform-browser";
 @Component({
   selector: "app-profile-user",
   templateUrl: "./profile-user.component.html",
@@ -14,9 +15,12 @@ export class ProfileUserComponent implements OnInit {
   nameUser: string;
   imgURL: string | ArrayBuffer | null;
 
-  constructor(private userService: UserService, private toast: NgToastService) {}
+  constructor(private userService: UserService, 
+    private toast: NgToastService,
+    private title: Title) {}
 
   ngOnInit(): void {
+    this.title.setTitle('Thông tin tài khoản');
     this.userInfo = this.userService.getUserValue();
   }
 

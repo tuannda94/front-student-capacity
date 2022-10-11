@@ -1,10 +1,10 @@
-<div class=" rounded border">
-    <div class="p-2 text-center" *ngIf="contestDetail">
-        {{runCountDownTime()}}
+<div class=" rounded contest-aside-box">
+    <div class="p-2 text-center" *ngIf="statusContest">
+        {{ runTime()}}
         <div class="img-detail-box">
             <img [src]="contestDetail.img" class="w-100" alt="">
-            <p style="margin: 10px 0px;"
-                class="fw-bold fs-5 pt-2 contest-detail-right-name text-dark">
+            <p style="margin: 10px 0px;font-size:17px"
+                class="fw-bold  pt-2 contest-detail-right-name text-dark">
                 {{contestDetail.name}}</p>
             <ul *ngIf="!contestDetail.status_user_has_join_contest" class="contest-detail-right-countdown">
                 <div class="contest-detail-right-countdown-box">
@@ -36,14 +36,12 @@
                 style="background-color: #e67e22;margin: 10px 0px 20px 0px;" class="btn text-white"
                 (click)="openInfoTeam()"><i class="fas fa-user text-white"></i> Đội của bạn</a>
             <button (click)="openFormRegister()"
-                [disabled]="!statusCheckDate || contestDetail.status_user_has_join_contest"
-                [ngClass]="!statusCheckDate ? 'btn btn-register-disable w-100'
-                : contestDetail.status_user_has_join_contest ? 'btn btn-success w-100' : 'btn btn-main w-100' ">{{!statusCheckDate
-                ? 'Hết hạn đăng ký' :
-                 contestDetail.status_user_has_join_contest ? 'Đã tham gia' : 'Đăng ký'}}</button>
+            class="w-100"
+                [disabled]="!disabled || contestDetail.status_user_has_join_contest"
+                [ngClass]="classNameWhereStatus(contestDetail)">{{ checkStatusContest(contestDetail) }}</button>
         </div>
     </div>
-    <div class=" p-2" *ngIf="!contestDetail">
+    <div class=" p-2" *ngIf="!statusContest">
         <ngx-skeleton-loader
             [theme]="{ 'height.px' : 150, 'margin-bottom' : '7px' , 'border-radius': '3px' }"
             appearance="line">

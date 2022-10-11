@@ -22,6 +22,11 @@ export class MajorService {
     return this.http.get<ResponsePayload>(`${environment.majorListUrl}/${slug}`);
   }
 
+  // Tìm kiếm chuyên ngành
+  searchMajor(keyword: string): Observable<ResponsePayload> {
+    return this.http.get<ResponsePayload>(`${environment.majorListUrl}?q=${keyword}`);
+  }
+
   // Danh sách kết quả cuộc thi.
   getResultWhereMajor(slug: string): Observable<ResponsePayload> {
     return this.http.get<ResponsePayload>(`${environment.publicApiUrl}/rating/major-contest/${slug}`);

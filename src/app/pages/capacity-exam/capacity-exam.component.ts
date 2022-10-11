@@ -15,6 +15,7 @@ import { CapacityRound } from "src/app/models/round.model";
 import { ExamCapacity, ResultExam, TestResultStorage } from "src/app/models/exam.model";
 import { CapacityExamHistory } from "src/app/models/capacity";
 import { User } from "src/app/models/user";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-capacity-exam",
@@ -76,10 +77,14 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     private toast: NgToastService,
     private router: Router,
     private capacityService: CapacityService,
+    private titleService: Title,
     @Inject(DOCUMENT) private document: any,
   ) {}
 
   ngOnInit(): void {
+    // initial title
+    this.titleService.setTitle("Test năng lực");
+
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -104,6 +109,9 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
       )
       .subscribe((responseRound) => {
         if (responseRound.status) {
+          // update title
+          this.titleService.setTitle(`Phần thi: ${responseRound.payload.name} - ${responseRound.payload.contest.name}`);
+
           this.isFetchingRound = false;
           this.isFetchingSttExam = true;
           this.roundDetail = responseRound.payload;

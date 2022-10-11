@@ -23,6 +23,12 @@
 
 }
 
+.btn__search-major {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+}
+
 .item-member-img {
   height: 30px;
   object-fit: cover;

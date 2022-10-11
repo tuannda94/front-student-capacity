@@ -1,8 +1,8 @@
 <app-loading-page [status]="statusIntoExam">
 </app-loading-page>
 <div class=" contest-detail-box ">
-    <div class=" container py-4">
-        <nav aria-label="breadcrumb" *ngIf="roundDetail && contestDetail">
+    <div  class=" container py-4">
+        <nav  aria-label="breadcrumb" *ngIf="roundDetail && contestDetail">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item text-primary"><a routerLink="/">Trang chủ</a></li>
                 <li class="breadcrumb-item  text-primary"><a routerLink="/cuoc-thi/">Cuộc thi</a></li>
@@ -10,20 +10,24 @@
                 <li class="breadcrumb-item active" aria-current="page">{{ roundDetail.name }}</li>
             </ol>
         </nav>
+        <div *ngIf="!roundDetail">
+            <ngx-skeleton-loader [theme]="{ 'height.px': 20 , 'width.px': 400 }">
+            </ngx-skeleton-loader>
+          </div>
         <div class="contest-detail-header">
             <div class=" contest-detail-left">
                 <div class="contest-detail-left-header row">
                     <div class="col-5 contest-detail-left-img-box">
                         <img *ngIf="roundDetail" [src]="roundDetail.image" alt="" class="w-100 contest-detail-left-img">
                         <ngx-skeleton-loader *ngIf="!roundDetail"
-                            [theme]="{ 'height' : '270px' ,'margin-left' : '-15px' , 'width' : '100%' , 'margin-bottom' : '-5px' }"
+                            [theme]="{ 'height' : '290px' ,'margin-left' : '-15px' , 'width' : '100%' , 'margin-bottom' : '-5px' }"
                             appearance="line">
                         </ngx-skeleton-loader>
                     </div>
                     <div class="col-7" style="margin-left:-15px ;">
 
-                        <div class="py-3 round-info-box" *ngIf="statusContest == true">
-                            <p class="fw-bold fs-5 color-blue round-info-item">Vòng thi: {{roundDetail.name}}</p>
+                        <div class="py-3 round-info-box" *ngIf="roundDetail">
+                            <p class="fw-bold fs-5 color-blue round-info-item text-collapse">Vòng thi: {{roundDetail.name}}</p>
                             <p class="color-gray color-blue round-info-item fs-text fw-bold"><i
                                     class="fas -3 fa-clock contest-date-open-end"></i>
                                 <span class="fw-normal color-blue">{{roundDetail.start_time |
@@ -51,7 +55,7 @@
                                 <div class="modal-body" id="content-contest" [innerHTML]="roundDetail.description">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" mat-button (click)="modal.close('Close click')">Đóng</button>
+                                    <button type="button" mat-stroked-button (click)="modal.close('Close click')">Đóng</button>
                                 </div>
                             </ng-template>
                             <div class="d-flex mt-2 justify-content-between  align-items-end">
@@ -82,14 +86,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="" *ngIf="statusBtnTakeExam">
+                                <div class="btn-join-exam-box" *ngIf="statusBtnTakeExam">
                                     <a class="btn-join-exam"
                                         (click)="takeTheExam(roundDetail.id  )">Vào
                                         Thi</a>
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="statusContest == false" class="p-2 mt-3">
+                        <div *ngIf="!roundDetail" class="p-2 mt-3">
                             <ngx-skeleton-loader
                                 [theme]="{ 'height.px' : 20, 'margin-bottom' : '10px' , 'width' : '50%' }"
                                 appearance="line">
@@ -98,9 +102,6 @@
                                 appearance="line">
                             </ngx-skeleton-loader>
                             <ngx-skeleton-loader [theme]="{ 'height.px' : 10, 'margin-bottom' : '10px'  }"
-                                appearance="line">
-                            </ngx-skeleton-loader>
-                            <ngx-skeleton-loader [theme]="{ 'height.px' : 30, 'margin-bottom' : '10px'  }"
                                 appearance="line">
                             </ngx-skeleton-loader>
                             <div class="d-flex align-items-center">
@@ -130,27 +131,60 @@
                     </div>
                 </div>
 
-                <div class="mt-4 contest-detail-section">
+                <div class="mt-3 contest-detail-section" *ngIf="roundDetail">
                     <div class="example-button-row p-2">
-                        <button mat-button (click)="scrollWin('#round' , 100)" class="example-button-item fw-bold">Xếp
-                            hạng</button>
-                        <button (click)="scrollWin('#round' , 100)" mat-button class="example-button-item fw-bold">Các
-                            đội</button>
-                        <button *ngIf="statusContest == true && contestDetail.post_new != null"
-                            (click)="scrollWin('#new-page' , 200)" mat-button class="example-button-item fw-bold">Tin
-                            tức</button>
-                        <button (click)="scrollWin('#related-contest' , 200 )" mat-button
-                            class="example-button-item fw-bold">Cuộc thi
-                            liên
-                            quan</button>
+                      <button
+                        mat-button
+                        *ngIf="resultRank.length > 0"
+                        (click)="scrollWin('#round', 100)"
+                        class="example-button-item fw-bold"
+                      >
+                        Xếp hạng
+                      </button>
+                      <button
+                        (click)="scrollWin('#round', 150)"
+                        mat-button
+                        class="example-button-item fw-bold"
+                      >
+                        Vòng thi
+                      </button>
+                      <button
+                        *ngIf="listPostResult.length > 0"
+                        (click)="scrollWin('#more', 200)"
+                        mat-button
+                        class="example-button-item fw-bold"
+                      >
+                        Tin tức khác
+                      </button>
+                      <button
+                        *ngIf="contestRelated"
+                        (click)="scrollWin('#related-contest', 200)"
+                        mat-button
+                        class="example-button-item fw-bold"
+                      >
+                        Cuộc thi liên quan
+                      </button>
                     </div>
-                </div>
+                  </div>
+          
+                  <div class="mt-3" *ngIf="!roundDetail">
+                    <ngx-skeleton-loader [theme]="{ 'height.px': 40 }">
+                    </ngx-skeleton-loader>
+                  </div>
+
+                  <app-list-result-round
+                  id="contest-result"
+                  *ngIf="resultRank.length > 0"
+                  [roundResult]="resultRank"
+                  class="mt-3"
+                >
+                </app-list-result-round>
 
                 <div class="mt-3 content-round-page bg-white">
                     <app-round-detail id="round" [roundDetail]="roundDetail" [statusRoundDetail]="statusRoundDetail">
                     </app-round-detail>
                 </div>
-                <div *ngIf="listPostResult " class="mt-4">
+                <div   *ngIf="listPostResult.length > 0" class="mt-4">
                     <p class="fw-bold my-2 fs-5 color-blue">Bài viết liên quan</p>
                     <div class="title-line"></div>
                     <app-list-post [countColumn]="3" [listPost]="listPostResult"></app-list-post>
@@ -159,23 +193,21 @@
                     <p class="fw-bold fs-5 color-blue my-3">Cuộc thi liên quan</p>
                     <div class="title-line"></div>
                     <div class="related-contest-list row" *ngIf="statusContestRelated == true">
-                        <div *ngFor="let item of contestRelated" class="col-4">
+                        <div *ngFor="let item of contestRelated" class="col-12">
                             <app-contest-item [item]="item">
                             </app-contest-item>
                         </div>
                     </div>
                     <div class="related-contest-list row" *ngIf="!statusContestRelated">
-                        <div class="col-4">
-                            <app-contest-load-item>
-                            </app-contest-load-item>
-                        </div>
-                        <div class="col-4">
-                            <app-contest-load-item>
-                            </app-contest-load-item>
-                        </div>
-                        <div class="col-4">
-                            <app-contest-load-item>
-                            </app-contest-load-item>
+                        <div class="col-12">
+                            <ngx-skeleton-loader
+                            [theme]="{
+                              'height.px': '200',
+                              'margin-bottom': '20'
+                            }"
+                            count="6"
+                            animation="pulse"
+                          ></ngx-skeleton-loader>
                         </div>
                     </div>
                 </div>
@@ -183,7 +215,7 @@
 
             <div class="contest-detail-right">
                 <div class="contest-detail-right-in rounded border">
-                    <app-contest-aside class="contest-detail-right-in" [contestDetail]="contestDetail">
+                    <app-contest-aside class="contest-detail-right-in" [statusContest]="statusContest" [contestDetail]="contestDetail">
                     </app-contest-aside>
                 </div>
             </div>

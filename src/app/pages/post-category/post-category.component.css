@@ -9,7 +9,6 @@ h5 {
 
 .text-collapse-post {
     display: -webkit-box;
-
     -webkit-box-orient: vertical;
     overflow: hidden;
     width: 100%;
@@ -82,7 +81,6 @@ h5 {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-gap: 44px;
-    margin-top: 32px;
 }
 
 .post-main-content-section:first-child {
@@ -165,69 +163,36 @@ h5 {
     width: 100%;
 }
 
-/* ------------------- post item ------------ */
-.post-item {
-    height: 450px;
-}
-
-.post-item-img-section {
-    position: relative;
-}
-
-.post-item__img {
-    width: 100%;
-    border-radius: 10px;
-    height: 260px;
-}
-
-.post-item-content {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    background: white;
-    border-radius: 10px;
-    width: 320px;
-    padding: 20px;
-    box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.15);
-}
-
-.post-item-content--new-in-cate {
-    top: 90%;
-}
-
-.post-item__title {
-    line-height: 1.2;
-    font-weight: 500;
-}
-
-.post-item__info {
-    margin: 10px 0;
+.post__nav-list {
     display: flex;
     justify-content: start;
+    align-items: center;
 }
 
-.post-item__info-item:first-child {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 160px;
+.post__nav-item {
+    padding: 8px 25px;
+    position: relative;
+    border-bottom: 2px solid var(--my-bg-color);
+    cursor: pointer;
+    transition-duration: .3s;
 }
 
-.post-item__info-item+.post-item__info-item {
-    margin-left: 10px;
+.post__nav-item+.post__nav-item {
+    margin-left: 8px;
 }
 
-.post-item__info,
-.post-item-bottom {
-    color: #8E8E95
+.post__nav-item:hover {
+    color: var(--my-primary);
+    border-bottom-color: var(--my-primary);
 }
 
-.post-item-bottom .btn {
-    font-size: 12px;
-    padding: 4px 10px;
-    margin-top: 5px;
+.post__nav-item.active {
+    color: var(--my-primary);
+    border-bottom-color: var(--my-primary);
+}
+
+.post__nav-link {
+    color: inherit;
+    font-size: 16px;
+    margin-bottom: 10px;
 }

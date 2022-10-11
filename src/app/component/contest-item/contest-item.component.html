@@ -1,40 +1,67 @@
-<div class="slide p-3">
-    <a  [class.disabled]="!disabled" [routerLink]="['/cuoc-thi/' , item.id]"><img class="contest-item-img" [src]="item.img" alt=""></a>
-    <h3><a class="contest-name" [class.disabled]="!disabled"  [routerLink]="['/cuoc-thi/' , item.id]">{{item.name}}</a></h3>
-    <div class="text-Secondary d-flex justify-content-between time-contest-register font-size-sml fs-text-contest">
-        <p [class.disabled]="!disabled"  class="contest-register-dealine">
-            Thời gian :
-        </p>
-        <div class="text-center">
-            <span class="fw-bold primary-color">{{days}}</span>
-            <br>
-            <span class="fs-name-time"> Ngày </span>
-        </div>
-        <span class="fw-bold text-dark">:</span>
-        <div class="text-center">
-            <span class="fw-bold primary-color">{{hours}}</span>
-            <br>
-            <span class="fs-name-time"> Giờ</span>
-        </div>
-        <span class="fw-bold primary-color text-dark">:</span>
-        <div class="text-center">
-            <span class="fw-bold primary-color">{{minutes}}</span>
-            <br>
-            <span class="fs-name-time"> Phút</span>
-        </div>
-        <span class="fw-bold primary-color text-dark">:</span>
-        <div class="text-center">
-            <span class="fw-bold primary-color">{{seconds}}</span>
-            <br>
-            <span class="fs-name-time">Giây</span>
+<div class="contest-item">
+    <div class="contest-item__img-section">
+        <a   [routerLink]="['/cuoc-thi/' , item.id]" >
+            <img class="contest-item__img"[src]="item.img" alt="">
+        </a>
+        <div class="contest-item__btn-favorite">
+            <button class="my-btn my-add-favorite__btn">
+                <i class="my-add-favorite__icon fa-solid fa-bookmark"></i>
+            </button>
         </div>
     </div>
-    <p class="contest-count-team mt-2 fs-text-contest">Số đội tham gia : <span
-            class="count-team text-white">{{item.teams_count}}</span></p>
-  
-    <a [class.disabled]="!disabled"  [routerLink]="['/cuoc-thi/' , item.id]"
-        [state]="{registerNow : item.status_user_has_join_contest}"
-         href=""
-        class=" text-center btn  d-block w-100"
-        [ngClass]="item.status == 1 ||  item.status == 0 ? 'btn-main btn' : 'btn btn-danger border-2 border-danger text-white'">{{checkStatusContest(item)}}</a>
+    <div class="contest-item-content">
+        <div class="contest-item-content-row">
+            <h3 class="contest-item__title">
+                <a class="contest-item__title-link" [routerLink]="['/cuoc-thi/' , item.id]" data-toggle="tooltip"
+                    data-placement="top" title={{item.name}}>
+                    {{item.name}}  <span class="fw-normal" style="font-size: 15px;">({{item.status == 1 ? 'Thời gian bắt đầu : ' : 'Ngày kết thúc : '}}{{ checkDateContest(item) | formatDate}})</span>
+                </a>
+            </h3>
+            <ul class="my-countdown">
+                <li class="my-countdown-item text-center">
+                    <div class="my-countdown-item-box h4"> {{days}}</div>
+                    <span class="my-countdown-item-text">Ngày</span>
+                </li>
+                <li class="my-countdown-item text-center">
+                    <div class="my-countdown-item-box h4"> {{hours}}</div>
+                    <span class="my-countdown-item-text">Giờ</span>
+                </li>
+                <li class="my-countdown-item text-center">
+                    <div class="my-countdown-item-box h4"> {{minutes}}</div>
+                    <span class="my-countdown-item-text">Phút</span>
+                </li>
+                <li class="my-countdown-item text-center">
+                    <div class="my-countdown-item-box h4"> {{seconds}}</div>
+                    <span class="my-countdown-item-text">Giây</span>
+                </li>
+            </ul>
+        </div>
+        <div class="contest-item-content-row">
+            <div class="contest-item__info">
+                <div class="contest-item__info-item">
+                    <i class="fa-regular fa-user"></i>&ensp;
+                    <span class="info-item__number">
+                        {{item.teams_count}}
+                    </span>
+                    đội thi
+                </div>
+                <div class="contest-item__info-item">
+                    <i class="fa-solid fa-list-ul"></i>&ensp;
+                    <span class="info-item__number">
+                        10
+                    </span>
+                    vòng thi
+                </div>
+            </div>
+            <a [class.disabled]="!disabled" [routerLink]="['/cuoc-thi/' , item.id]"
+                [state]="{registerNow : item.status_user_has_join_contest}">
+                <button class="my-btn-primary my-btn-xs" [ngClass]=" item.status == 1 || item.status == 0
+              ? 'my-btn-primary'
+              : 'my-btn-disabled'
+          ">
+                    {{checkStatusContest(item)}}
+                </button>
+            </a>
+        </div>
+    </div>
 </div>

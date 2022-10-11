@@ -7,6 +7,15 @@ export class ConfigFunctionService {
 
   constructor() { }
 
+  runTop() {
+    $('html , body').animate(
+      {
+        scrollTop: 0,
+      },
+      1000
+    );
+  }
+
   // Chỉ ra index các cột
   indexTable(result_id: number, arr: Array<any>, page: number, countItem: number): number {
     let rank: number = 0;

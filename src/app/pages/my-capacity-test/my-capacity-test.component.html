@@ -14,7 +14,7 @@
       type="text"
       placeholder="Tên bài test năng lực"
     />
-    <button [attr.disabled]="isFetchingCapacity ? true : null" class="input-group-text">
+    <button [attr.disabled]="isFetchingCapacity ? true : null" class="capacity__search-btn input-group-text">
       <i class="fa-solid fa-magnifying-glass"></i>
     </button>
   </form>
@@ -73,7 +73,7 @@
   <div class="mt-3" *ngIf="!isFetchingCapacity && !totalCapacity">
     <img
       class="no-data-image"
-      src="https://img.freepik.com/free-vector/no-data-concept-illustration_203587-28.jpg"
+      src="https://homebond.ae/assets/images/no-result.png"
       alt="No data"
     />
   </div>

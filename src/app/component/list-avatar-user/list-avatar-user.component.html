@@ -1,37 +1,56 @@
-<ul class="d-flex">
-    <li *ngFor="let item of avatarTeam" class="avatar-item">
-        <img *ngIf="item.contest_id" class="avatar" [src]="item.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'"
-        [ngbTooltip]="item.name"  alt="">
-        <img *ngIf="item.email" class="avatar" [src]="item.avatar || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'"  [ngbTooltip]="item.name" alt="">
-    </li>
-    <li class="avatar-item" *ngIf="lengthTeam > 5">
-        <a (click)="openVerticallyCentered(content)">
-            <p class="icon-list-round"><i class="far fa-plus"></i>{{viewMore}}</p>
-        </a>
-    </li>
 
-    <ng-template #content let-modal>
-        <div class="modal-header">
-            <h3 class="modal-title fs-5 fw-bold">{{titleModelName}}</h3>
-            <button type=" button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            </button>
+
+<div style="margin-left: -10px;" class="avatar-group" *ngIf="avatarTeam.length <= 5">
+  <div class="avatar" *ngFor="let item of avatarTeam">
+    <span class="avatar-name">{{ item.name }}</span>
+    <img
+      *ngIf="item.contest_id"
+      [src]="
+        item.image ||
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+      "
+      alt="Image"
+    />
+    <img
+      *ngIf="item.email"
+      [src]="
+        item.avatar ||
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+      "
+      alt="Image"
+    />
+  </div>
+</div>
+
+<div style="margin-left: -10px;" class="avatar-group" *ngIf="avatarTeam.length > 5">
+    <div class="avatar avatar-hover" *ngFor="let item of avatarTeam; let i = index">
+      <div *ngIf="i < avatarTeam.length - 1; else elseBlock">
+        <span class="avatar-name">{{ item.name }}</span>
+        <img
+        *ngIf="item.contest_id"
+        [src]="
+          item.image ||
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+        "
+        alt="Image"
+      />
+      <img
+        *ngIf="item.email"
+        [src]="
+          item.avatar ||
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+        "
+        alt="Image"
+      />
+      </div>
+
+      <ng-template #elseBlock>
+        <div  *ngIf="item.email" class="avatar__last" [ngStyle]="{ 'background-image': 'url(' + item.avatar + ')' }">
+          <i class="fa-solid fa-ellipsis"></i>
         </div>
-        <div class="modal-body">
-            <div *ngFor="let item of listTeam" class="member-item d-flex justify-content-start  align-items-center">
-                <div class="img-avatar-round my-2">
-                    <img  *ngIf="item.image" [src]="item.image || ''" alt="" class="w-100 h-100">
-                    <img *ngIf="item.user.avatar" [src]="item.user.avatar" alt="" class="w-100 h-100">
-                </div>
-                &nbsp;
-                <p class="mt-2">{{item.name}}</p>
-            </div>
-            <div *ngIf="!avatarTeam.length" class="text-center">
-                <p> <i class="fas fa-user-lock block fs-5 color-blue"></i></p>
-                Chưa có thành viên nào!
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" mat-raised-button (click)="modal.close('Close click')">Close</button>
-        </div>
-    </ng-template>
-</ul>
+        <div  *ngIf="item.contest_id" class="avatar__last" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }">
+            <i class="fa-solid fa-ellipsis"></i>
+          </div>
+      </ng-template>
+    </div>
+</div>

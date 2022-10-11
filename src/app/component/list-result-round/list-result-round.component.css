@@ -1,19 +1,72 @@
-th {
-  font-size: 15px;
-  font-weight: 18px;
-  font-weight: 600;
+h1, h2 , h3 , h4 , h5 , h6 , p , ul{
+  margin-bottom: 0;
 }
 
-.page-link {
-  margin-left: 10px;
+thead tr{
+  border: none;
 }
 
-.active {
-  background-color: var(--primary-color);
+.payding-item{
+  margin: 0px  5px;
+  cursor: pointer;
+  padding: 7px 10px;
+  border-radius: 4px;
+}
+
+.payding-item.active{
+  background-color: var(--primary);
   color: var(--white);
 }
 
-.table-result-round {
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px #ccc;
+.payding-item:hover{
+  background-color: var(--gray-200);
+  transition: all ease-in-out 0.4s;
+}
+
+.table__result-wrapper{
+  background-color: var(--white);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.list-avatar-user{
+  padding-left: 10px;
+}
+
+.btn_sort{
+  border: 1px solid var(--blue-900);
+  padding: 7px;
+  color: var(--blue-900);
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.btn_sort:hover{
+  background-color: var(--blue-900);
+  color: var(--white);
+  transition: all ease-in-out 0.3s;
+}
+
+.table-row{
+  height: 40px;
+}
+
+.table-row td{
+  line-height: 40px;
+}
+
+.avatar{
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+}
+
+.name-team{
+  color: var(--blue-900);
+}
+
+.ponit{
+  font-weight: bold;
+  font-size: 15px;
+  color: var(--primary)
 }

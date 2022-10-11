@@ -1,273 +1,204 @@
 <app-banner></app-banner>
-<div class="container">
-    <div class="row intro-header my-1">
-        <div class="col-xl-6 col-md-12 col-sm-12">
-            <div class="intro-detail-box">
-                <h2 class="text-left fs-3 color-blue fw-bold fade-right mt-4">Ai có
-                    thể tham gia
-                    cuộc thi ?</h2>
-                <p class="pt-2  lh-base fs-6 description-software" style="text-align:justify ">Lorem Phát
-                    biểu với báo
-                    giới sau
-                    cuộc hòa đàm với
-                    Nga, nhà
-                    đàm phán Ukraine David Arakhamia nói: “Theo cơ chế đó, các nước đứng ra bảo đảm an ninh cho Ukraine
-                    sẽ hành động theo cách tương tự Điều 5 trong Hiến chương NATO và thậm chí còn chắc chắn hơn”.
-
-                    Ông Arakhamia cho biết, Ukraine muốn các quốc gia bảo đảm là Mỹ, Trung Quốc, Pháp và Anh - 4 trong
-                    số 5 thành viên thường trực Hội đồng Bảo an Liên hợp quốc - cùng với Canada, Đức, Israel, Italy, Ba
-                    Lan và Thổ Nhĩ Kỳ. Ngoại trừ Trung Quốc và Israel, những quốc gia vừa đề cập đều là thành viên NATO.
-                </p>
-            </div>
+<div class="section section-bg--1">
+  <div class="container">
+    <h2 class="section__title my-h3">
+      <i class="section__title-icon fa-solid fa-clock-rotate-left"></i>
+      Vị trí tuyển dụng gấp
+    </h2>
+    <div>
+      <div class="list-post-new-slick position-relative">
+        <button (click)="prevRecruitmentPosition()"
+          class="list-post-control post-control-prev position-absolute top-50 start-0 translate-middle">
+          <i class="fa-solid fa-angle-left"></i>
+        </button>
+        <div *ngIf="statusListPostRecruitment" class="recruitment-position-list">
+          <app-recruitment-position *ngFor="let item of listRecruitmentPosition" [item]="item">
+          </app-recruitment-position>
         </div>
-        <div class="col-xl-6 col-md-12 col-sm-12">
-            <span class="">
-                <img style="margin-top: 30px;" src="./../../../assets/img/image 407.svg" class="w-100 text-center"
-                    alt="">
-            </span>
+        <div *ngIf="!statusListPostRecruitment" class="row">
+          <div class="col-6">
+            <ngx-skeleton-loader [theme]="{
+                      'height.px': '130',
+                      'margin-bottom': '20'
+                    }" animation="pulse"></ngx-skeleton-loader>
+          </div>
+          <div class="col-6">
+            <ngx-skeleton-loader [theme]="{
+                      'height.px': '130',
+                      'margin-bottom': '20'
+                    }" animation="pulse"></ngx-skeleton-loader>
+          </div>
+          <div class="col-6">
+            <ngx-skeleton-loader [theme]="{
+                      'height.px': '130',
+                      'margin-bottom': '20'
+                    }" animation="pulse"></ngx-skeleton-loader>
+          </div>
+          <div class="col-6">
+            <ngx-skeleton-loader [theme]="{
+                      'height.px': '130',
+                      'margin-bottom': '20'
+                    }" animation="pulse"></ngx-skeleton-loader>
+          </div>
+          <div class="col-6">
+            <ngx-skeleton-loader [theme]="{
+                      'height.px': '130',
+                      'margin-bottom': '20'
+                    }" animation="pulse"></ngx-skeleton-loader>
+          </div>
+          <div class="col-6">
+            <ngx-skeleton-loader [theme]="{
+                      'height.px': '130',
+                      'margin-bottom': '20'
+                    }" animation="pulse"></ngx-skeleton-loader>
+          </div>
         </div>
+        <button (click)="nextRecruitmentPosition()"
+          class="list-post-control post-control-next position-absolute top-50 start-100 translate-middle">
+          <i class="fa-solid fa-angle-right"></i>
+        </button>
+      </div>
+      <div class="d-flex justify-content-center algin-items-center">
+        <ul class="post-link__list  mt-4 d-flex ">
+          <li *ngFor="let item of arrLinkPost; let i = index" (click)="payingRecruitmentPosition(i + 1)"
+            class="post-link__item" [ngClass]="item.active ? 'active' : ''"></li>
+        </ul>
+      </div>
     </div>
-    <hr>
-    <div class="mb-3">
-        <h3 class="fw-bold title text-uppercase text-center color-blue">Lợi ích khi tham gia</h3>
-        <div class="title-line mt-2 mx-auto">
-        </div>
+  </div>
+</div>
+<div class="section section-bg--2">
+  <div class="container">
+    <h2 class="section__title my-h3">
+      <i class="section__title-icon fa-solid fa-ranking-star"></i>
+      Các cuộc thi
+    </h2>
+    <div *ngIf="contests" class="section-content">
+      <div class="contest-list">
+        <app-contest-item *ngFor="let item of contests" [item]="item"></app-contest-item>
+      </div>
+      <div class="contest-view">
+        <a class="contest-view-link" routerLink="/cuoc-thi">
+          <button class="my-btn-secondary my-btn-m">
+            Xem tất cả <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </a>
+      </div>
     </div>
-    <div class="row benefit-join-box">
-        <div class="col-md-6 col-xl-4 col-sm-12 ">
-            <span>
-                <img src="./../../../assets/img/image 408.svg" alt="" class="w-100 text-center">
-                <p class="mt-2 text-justify">Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit.
-                    Molestias voluptatum,
-                    suscipit
-                    voluptate, similique quaerat earum libero delectus error sunt aliquam, doloribus porro perspiciatis
-                    beatae dolore asperiores corrupti laboriosam quis eum.</p>
-            </span>
-        </div>
-        <div class="col-md-6 col-xl-4 col-sm-12">
-            <span>
-                <div class="text-center">
-                    <img src="./../../../assets/img/image 409.svg" alt="" style="width: 65%;margin:0px auto;">
-                </div>
-                <p class="mt-2 text-justify">Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit.
-                    Molestias voluptatum,
-                    suscipit
-                    voluptate, similique quaerat earum libero delectus error sunt aliquam, doloribus porro perspiciatis
-                    beatae dolore asperiores corrupti laboriosam quis eum.</p>
-            </span>
-        </div>
-        <div class="col-md-6 col-xl-4 col-sm-12">
-            <span>
-                <img src="./../../../assets/img/image 410.svg" alt="" class="w-100 text-center">
-                <p class="mt-2 text-justify">Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit.
-                    Molestias voluptatum,
-                    suscipit
-                    voluptate, similique quaerat earum libero delectus error sunt aliquam, doloribus porro perspiciatis
-                    beatae dolore asperiores corrupti laboriosam quis eum.</p>
-            </span>
-        </div>
+    <div *ngIf="!contests" class="row">
+      <div class="col-6">
+        <ngx-skeleton-loader [theme]="{
+            'height.px': '150',
+            'margin-bottom': '20'
+          }" animation="pulse"></ngx-skeleton-loader>
+      </div>
+      <div class="col-6">
+        <ngx-skeleton-loader [theme]="{
+            'height.px': '150',
+            'margin-bottom': '20'
+          }" animation="pulse"></ngx-skeleton-loader>
+      </div>
+      <div class="col-6">
+        <ngx-skeleton-loader [theme]="{
+            'height.px': '150',
+            'margin-bottom': '20'
+          }" animation="pulse"></ngx-skeleton-loader>
+      </div>
+      <div class="col-6">
+        <ngx-skeleton-loader [theme]="{
+            'height.px': '150',
+            'margin-bottom': '20'
+          }" animation="pulse"></ngx-skeleton-loader>
+      </div>
     </div>
+  </div>
 </div>
 
-<div class="container-fluid section_plan text-center mt-4">
-    <h3 class="text-center py-4 title-student-point text-white">THÀNH TÍCH ĐẠT ĐƯỢC</h3>
-    <div class="container section_plan-box-in pb-4">
-        <div class="d-flex justify-content-center section_plan-box">
-            <div class="col-3 section_plan-item mb-4 show-on-scroll zoom">
-                <h3 class="section_plan-bag-number text-white section_plan-student">0</h3>
-                <span class="text-white section_plan-bag-text fw-bold ">
-                    Năm hoạt động
-                </span>
-            </div>
-            <div class="col-3 section_plan-item mb-4 show-on-scroll zoom">
-                <h3 class="section_plan-bag-number  text-white section_plan-year">0</h3>
-                <span class="text-white section_plan-bag-text fw-bold">
-                    Sinh viên
-                </span>
-            </div>
-            <div class="col-3 mb-4 section_plan-item show-on-scroll zoom">
-                <h3 class="section_plan-bag-number  text-white section_plan-pass">0</h3>
-                <span class="text-white section_plan-bag-text fw-bold">
-                    Được nhận
-                </span>
-            </div>
+<div class="section section-bg--3">
+  <div class="container">
+    <h2 class="section__title section__title--center my-h3">Tính năng vượt trội khác</h2>
+    <div class="section-content outstanding-advantages-section">
+      <div class="advantage-show-container">
+        <div class="advantage-show__header">
+          <ul class="advantage-show__dots">
+            <li class="advantage-show__dots-item "></li>
+            <li class="advantage-show__dots-item advantage-show__dots-yellow"></li>
+            <li class="advantage-show__dots-item advantage-show__dots-green"></li>
+          </ul>
         </div>
+        <div class="advantage-show__content">
+          <img
+            src="https://media.istockphoto.com/vectors/young-programmer-coding-a-new-project-vector-id513544018?k=20&m=513544018&s=612x612&w=0&h=RGmXN_WJhDvq6Hiui1ypnCggPAokE_dDhFX0bmC6PsA="
+            alt="" class="advantage-show__img fade" />
+          <img
+            src="https://media.istockphoto.com/vectors/programming-code-application-window-vector-id1124838925?k=20&m=1124838925&s=612x612&w=0&h=lKkgavYLrbDtSnQivxMm3_4ThyovkQEFvbOb2Dv3O6g="
+            alt="" class="advantage-show__img d-none fade" />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhLRc0tR6qEXBCJe9xW1qAZajwJrZzZy4ekXuLN3-5-pD3YucvDmF5OZkePFvQuBtjEF4&usqp=CAU"
+            alt="" class="advantage-show__img d-none fade" />
+          <img src="https://img.freepik.com/premium-vector/person-programmer-working-pc-laptop_165488-2761.jpg?w=2000"
+            alt="" class="advantage-show__img d-none  fade" />
+        </div>
+      </div>
+      <div class="advantage-show-text">
+        <div class="advantage-list">
+          <span class="advantage__tag advantage__tag--1">
+            <i class="fa-solid fa-code"></i>
+            Giải bài toán lập trình ngay trên code online abc def ghj klmn
+          </span>
+          <span class="advantage__tag advantage__tag--2">
+            <i class="fa-solid fa-code"></i>
+            Giải bài toán lập trình ngay trên code online abc def ghj klmn
+          </span>
+          <span class="advantage__tag advantage__tag--3">
+            <i class="fa-solid fa-code"></i>
+            Giải bài toán lập trình ngay trên code online abc def ghj klmn
+          </span>
+          <span class="advantage__tag advantage__tag--4">
+            <i class="fa-solid fa-code"></i>
+            Giải bài toán lập trình ngay trên code online abc def ghj klmn
+          </span>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+<div class="section section-bg--2">
+  <div class="container">
+    <h2 class="section__title section__title--center my-h3">
+      Tin tức - sự kiện
+    </h2>
+    <div class="section-content">
+      <div class="post-event-list grid gy-1" *ngIf="!listPostEvent">
+        <app-post-load-item *ngFor="let item of [].constructor(3); let i = index"></app-post-load-item>
 
-<div class="container py-4">
-    <!-- Cuộc thi -->
-    <div class="mb-4">
-        <h3 class="fw-bold title text-uppercase text-center color-blue">Các cuộc thi</h3>
-        <div class="title-line mt-2 mx-auto">
+      </div>
+      <div class="post-event-list">
+        <div class="post-item" *ngFor="let item of listPostEvent">
+          <app-post-related-item [postItem]="item"></app-post-related-item>
         </div>
+      </div>
+      <div class="contest-view">
+        <a class="contest-view-link" routerLink="/bai-viet">
+          <button class="my-btn-secondary my-btn-m">
+            Xem tất cả <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </a>
+      </div>
     </div>
-    <div *ngIf="contests" class="contest-list position-relative mb-4">
-        <div class="prev-arrow position-absolute top-50 start-0 translate-middle arrow-list-contest slick-arrow">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-        <ngx-slick-carousel class="carousel  row slick-list-contest" [config]="sliderContest">
-            <app-contest-item ngxSlickItem  *ngFor="let item of contests" class="col-3 py-2 contest-item" [item]="item">
-            </app-contest-item>
-        </ngx-slick-carousel>
-        <div class="next-arrow position-absolute top-50 start-100 translate-middle arrow-list-contest slick-arrow">
-            <i class="fas fa-chevron-right"></i>
-        </div>
-    </div>
-    <div *ngIf="!contests" class="d-flex justify-content-center mb-3">
-        <div class="contest-loading-desktop container">
-            <div class="row">
-                <app-contest-load-item class="col-3">
-                </app-contest-load-item>
-                <app-contest-load-item class="col-3">
-                </app-contest-load-item>
-                <app-contest-load-item class="col-3">
-                </app-contest-load-item>
-                <app-contest-load-item class="col-3">
-                </app-contest-load-item>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
-
-<div class="container-fluid list-student-point-box ">
-    <div class="container">
-        <h4 class="text-center py-4 title-student-point text-white">SINH VIÊN CÓ THÀNH TÍCH XUẤT SẮC</h4>
-        <div class="d-flex justify-content-center mb-4">
-            <div class="select-box">
-                <select name="" id="" class="select-major"  (change)="changMajor($event)" >
-                    <option *ngFor="let item  of majors" [selected]="item .id == majorIdSelect" [value]="item.slug">{{item.name}}</option>
-                </select>
-            </div>
+<div class="section section-bg--2">
+  <div class="container">
+    <h2 class="section__title section__title--center my-h3">
+      Kết nối với các doanh nghiệp lớn
+    </h2>
+    <div class="section-content">
+      <ngx-slick-carousel [config]="sliderCompany" class="recruitment-list">
+        <div ngxSlickItem class="recruitment-item mx-3" *ngFor="let item of companys">
+          <img class="recruitment-item__img" [src]="item.logo" alt="" />
         </div>
-        <div class="list-student-point-hight position-relative w-100 ">
-            <button class="slider-control position-absolute  top-50 start-0 translate-middle-y prev-student-arrow"><i
-                    class="rank fa-solid fa-chevron-left"></i></button>
-            <div
-                class="d-flex justify-content-center loading-student-rank-box align-items-center">
-                <div   *ngIf="statusResult" class="loading-student-rank"></div>
-                <div *ngIf="!statusResult && resultMajor.length == 0" class="alert-message">
-                    <h3 class="text-white fw-bold">Chưa cập nhật kết quả !!!</h3>
-                </div>
-            </div>
-            <ngx-slick-carousel class="slider-rank-student row " [config]="sliderStudentPointHight">
-                <div *ngFor="let item of resultMajor" ngxSlickItem class="student-point-item slide">
-                    <div class="student-point-item-in text-center">
-                        <!-- [src]="item.user.avatar" -->
-                        <img class="student-point-avatar text-center"
-                            [src]="item.avatar"
-                            alt="">
-                            <div *ngIf="item.rank < 4" class="d-flex justify-content-center align-items-center my-2">
-                                <img class="mt-3" [ngStyle]=" {'width' : '50px' , 'height' : '50px' , 'object-fit' : 'cover'
-                            , 'border-radius' : '50px' }" [src]="item.rank == 1 ? './../../../assets/img/4.png' : item.rank == 2 ?
-                            './../../../assets/img/5.png' : './../../../assets/img/6.png'" alt="">
-                            </div>
-                            <div *ngIf="item.rank > 4 || item.rank == 4" class="student-rank">{{item.rank}}</div>
-                            <p class="student-ponit-number fs-4 my-4"><i class="fas fa-star"></i> <span class="fs-5">
-                                    {{item.reward_point}}</span>
-                            </p>
-                  
-                        <h4 class="student-name text-collapse">
-                            <!-- {{item.user.name}} -->
-                            {{item.user_name}}
-                        </h4>
-
-                    </div>
-                </div>
-            </ngx-slick-carousel>
-            <button class="slider-control position-absolute top-50 end-0 translate-middle-y next-student-arrow"><i
-                    class="rank fa-solid fa-chevron-right"></i></button>
-        </div>
-        <div  class="d-flex justify-content-center my-4">
-            <a *ngIf="!statusResult && resultMajor.length > 0" (click)="openRankStudent()" class="btn-review-more text-center">Xem thêm
-            </a>
-        </div>
+      </ngx-slick-carousel>
     </div>
-</div>
-
-<div class="container my-4">
-    <h3 class="fw-bold title text-uppercase text-center color-blue">Đánh Giá Của Doanh Nghiệp</h3>
-    <div class="title-line mt-2 mx-auto mb-5">
-    </div>
-    <div class="d-flex align-items-center justify-content-between">
-        <div class="col-6 assess-company-box ">
-            <div class="d-flex justify-content-evenly">
-                <img  (click)="getTabsParner($event , 'one')" class="avatar-company rounded-circle display"
-                    src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBISEhUREhERERESEhISGBISERESEhERGBQZGRgYGBgcIS4lHB4rHxkYJjgmKy8xNjU1GiU7QDszPy40NTEBDAwMEA8QHhISGTQhISMxNDQ0NDQxNDQ9NDQ0NDQ0NDQ0NDQxNDE0NDQ2NDQ0MTQ0MTQ0NDQ0NDE0MTQ0NDQ0NP/AABEIARMAtwMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAACAwABBQYHBAj/xABGEAACAQIDBAcFBgIHBwUAAAABAgADEQQSIQUxQWEGBxMiUXGBQpGhscEjMmJygpJS4RQkNKKywtEzY5Oj0vDxFkNTc4P/xAAZAQEBAQEBAQAAAAAAAAAAAAAAAQIDBAX/xAAhEQEBAAICAwACAwAAAAAAAAAAAQIRAzESIUFRYRMiMv/aAAwDAQACEQMRAD8A3+XJLnVhUuSXAq0u0kK0AbS7S7SWgVaVaERMNtTpLg8MbVKy5v4EvUf1VbkeZgZa0q0wdHpdgnUt26pYXs+h9Bx8piMX1kYNGsqVagHFUy+7NaNjcrSiJhdjdKsHjCFp1QtQ7qVQdnUP5QdG/STM3AAiCRGEQSIAEQCIwiCRKFEQSIwiA0BbRbRrRbShTSSzJCM1LklgTKqhWlQhAq0u0u0sCANpLQ7SiIHPesnpI1FkwdM2Z0zuR/CxIROYOViRyW9wSDy7FVDnAJOupvYHd5CZrptWZ9p4i7XC1AotbRFRQAL7t3vvG9Huir4w9rUY06V7Diz28L8JzyymPuumGFyuo1kPuuTY7yDv1tDqMPZysPxIR8bzrD9CMKUVcrAr7Ybves8OP6I4bKUVShI++Cb38bbpy/mxdv4MnMkex3W4236zpXQ3pqFVaGLeowJASs9mFMbsrvvtxzG/Mzne2Nn1MPUNN9VuSrjQMOXh5Tz0HNwbX+s6y/Y4Wa9V9KD3iQiaN1abbNSmcLUZmNMXQtctk9pL8QOHK43ATejOkrBZEEiMIgEQFsIthHMIthKFNFtGsItoCmklsJJRmZYlgSCZFyxIJYgS0u0uXAq0hlyWgcC27hGO1MShGrYqpbkHa629GE6bhXpYZFpWayKo7iM/vtMN0r2S6bUp4gIxp1WptdQty6I2YC/HuKdfGZKq+KynskF8pb7RrDNwXujz1+c8vNrykr18EurYzNOulS2RjbwIIPqDumP21iqaL3iSTplUFj7hPFszEYoZc4Us4fNdSyIFW9w4A4kCx1Ou60xuztoVKrOFQdotQqWt3VXiwB368BbznLUejdjB7cppXUqUqADvDOhQg+IvNKxOEamddR4zfsSmLqP9sMp1vkYOtr/iWYPG4NjnRlY5bZXQZrnW4deemo3eBnXDLV1Hm5MdzdV0Ix7UsQgB3spF7g3B19MuYepndbTgnRvZhrYmgiAqe0p5jvsM2Ynw3Azvc9GLzUJEAxpi2mkLYQGEY0BhKEtFtGsItoCmkkaSUZkQhBEITIISxKEIQJLkkkEl2lyQMPt7Cl+xe5tSqliOBDIya/ukFNSNbAc5kMet6bcrH3EGYioARqe7bXynk55/bb3cF3jr8FYqogpu2ZQAul9NOU1PoxVQ1XplgM2Z1/FY6+u6ZrabYWop7RksVAYgkNkF9My6+OnOa/sDDYenVvTKtlBtY3IF5iT07W3bMbYqBFIBW/5dZ5djURWw7rkU1EZ2zcWGW4B+MXtxwx5SbBrKlKsWYqMjgsBfKCjC9uJmsPTnyTfpiOhBqVMbTamXClqlSoFJC5LG+YbjrYedp1qa50N2KuG7d0N6dSoAh1PcTNqDxBLGx4gCbLPTx42T39eXmylsk6gDAMYYBnRxLaA0YYDQFNFNGtFtKEvJI8kDMiEIIhCQWIQlCEIEhQZJAUkkkCmF9OB0mu4pMrmk246j8SGbHMTt6hmRXGjI1rjfY/zE5c2Pljv8O3Bl45a/LD4rZ2n2aJbiCunoJiKGDFF2qMEzG40A0E9mJ2nVp6FCw8VImp7W2rVqG1snznmmNse2567DtfaALkLMt0Zwn9JR6QuVCDMR7RZ1BH7c01A02Os6F0B7tKq6oWFOm7ta12KqSqgnjpOmE9yOGeVstbuFA0GgGgHgJDFYTEpVppUptmp1FDKfEGNM9bxhMEwjBMADAaGYDQFtFNGtFNKEvJI8kDMCEIAhCQGIQgiWJBcKDJAKDJMPtvpNhMGPtqoFS1xSTv1D+kbvM2EDMTwY/FUyww2cGvUVnSmNXIQZiSOAsCOZnONs9YlerdcMgwyH22yvVI/wp6XPOV1Y5qm0e2dmYinUuzEszM1gSSdSd3vi47mqsy1dtrxVMEaia5W2Xna9uM3za9Gma/Z02RnNi9MML0ybWJ4AG4036+B0yOB2MlLvGzP/ABEd1fyj6meScWW9PZeXHx254nRZiA1S6U99gL1H5KOHmfjEdIdpNgsE9GmFomv9koU98I2jG++9r3POb5tfGol1pjPUIN2J0UcSTOFdJ9pHE12cMXRe6hPtDiwHAH5WnqxwmM/byZZ3Ktz6J9LqeHYYeqT2JVbMNcj28PA+E6HgcfSrp2lGolRPFDe3IjeDyM+cVc7yd3wmR2dtKrRYVKVR6bb7qSOdpre2X0KYJmgbE6wwwCYimSd3aJYE+a7vcR5Td8HjadZA9N1dT4bxyI3gxoOMW0MmA0AGiWjWinlCXkkeSBlxCEEQgZAQhCCJYkBTTOmfTcYKoMPRRKmIsGcvfs6SncCAQSx32voCDxm2Y3FLSpvVc2SmjVD5KCZ88YrEvWqvVqHNUqMXY/iYkn01t5CWDObT6aY/EXVq5pofYojsx+4d74zXjckneSbkneT4nxlmRZRALC06h1UYO+epbUIfezf6IJzATr3VZQvh6l7i5Vbg2I7mtj6mBqm16jUquLdyxZ65ZWa9yrszA/iTwI1FuQnQOjW3Xx2DV9RUT7JxfXtAB3tP4lKt6zROsesGxWQCyo6oqruGRVXT8RYsLeAnR+j2Eo4PZ6MQKaCiK1Rha+Ypmc/P0AnTO/1jnhPdar1k7QXCYUYZD/WMWDnPFMMNG/ce75Z/CcjMy3SXbFTG4qpiXuM5sin/ANukuiL7tTzJPGeHDYlqZLKFJKle8ua1+I5zlbXXGTfv1HkCDef5CNAiUGY/hH94/wCkeBERJ68LtCpTYMGII3EEgjyInkMVUe0u9DqWwOndMgJiWudAKmmb9Q4+Y185u1OqrqHRgyMAwYG4IO4ifOSMp0buneri+h8GHhzGo5zq3VdtFqmHqUHN3oVAQDvCOPlmDH9Um9jdmimjGi2gJeSR5JRlhCBgCEJAQMK8ASq9ZaaNUdgqIrOzHcqgXJ90DR+tHbGSkmEQ9+qRUe3Ckp7oPmw/uGcrXe3n9BMrt/ajYzEviGuM7d1T7FMCyr7t/MmYlN7fm+glBSLJLEC1W5t46TtPRKumD2W+KcaE1KgHFtcqKPM2HrOLA/MfMTpfSHF/1TA4FDoyJUccMoGVA3InOf0jxEuOPllpMstY7YLHUHrVkepr3GquwNszOzVHt/CuurcffNm6xdrHDYDD4AN9rWpU89vZooACP1MLeStF4nCqe6bAFkVidAFuAS5HgLnKN1r8JoXSba7Y3F1cSbhXayKfYpLoi8tNTzJnXm16jlwzth7QH17o9T4Dwhu1hz3AeJlIth4k6k85wdkAtLvIYN5RbHhPM51jM1yeQ+cWwmaLoOFPeUMp3gi83rq6qCnjDTF8lag+XiO6VfKTxt3rcmmgzNdFdomni8OGOgr0wCfYzNkb0Ksw9YladzYxbGG0W0rJTySnklGWEIQBLEgMTUOsraYp4QUAftMQ1rDf2aEM5PK+Uepm3CcU6Y7UOKxlRwbpTvSTwyISCfVsx9REGCJiqB0b8x+QhtFUPa/N9BKHSSSGBZNtfAg+4ibZs/EGtUp1GJIApqvJUFly6b9Dbnc+yJqVT7reR+U2HYDWpI3EKeQtoDc+Vr24WUbzO3D25cv+WY6XY7LRCqQGqErofYt38vI6AnjeaORMp0hxXaViNbUwE135h9424a6W5TEVNTl9T5cBOfLlvJrjx1iBRc5vcPAS2MMjnFObePwmGwkxb1NJRMTVMlrR1E90nxMjDSVQ+56n5wjHwJEMnTMNCu+2+3Bhz/lAcSI9jffwI8RxkH0LhK3aU0qXv2lOm9/HMoP1hsZgeg+J7TZ2HJ3orUvRGZR8AJnGmmS3MuC0koywlgwLy7yDHdJcf/R8HXqg2ZaZCn/eP3E+LCcOU6TqHWZiguGp0r27SpmI8VRf+pl905YNDLAt6ljaVh3uW8/pFV3GYyYFtW9D85N+x7BJJJKJa4+EzGxq4TDq5Nsgcc7qTl+O71PATDKdbRtKtaiaY39q/otlPrc2/bzm8MvG2/pjPHykn7JepvY6m/qSZaJYa7zqfOLTvNf2V0HNuJ+nvjWa05xsLGeao8OpUnnJktaQtEOYwxTzNHpwv3fIw2EXgz94eRjWmp0EuIq0c8VM0dY6r8SHwTU+NKs48w4Dg/E+6be0551VVcrYmnwK0qg9Cyt81nQmM3OkpbSQWMkIy15GcAEk2ABJJ3ADeZU1XrF2lUoYPLT0Nep2JbwQoxYDzC28iYHPul/SJ8dXzLZKKZkpg/eZb6sRwLWB5ACa6KjD2wfdHolt+pO8mE6jda8Dw1QePH4wsC3fI8R9RKrUjvG7wF5luj+xXrUcTityYancfiqFlJHkFzH1Ez9X4TJKBlzaBMCubWC/ef4eJhuQL30tv5RNJr3c8fujwXhJVPFkUDdaed3uYTXY8peQCFKyxbCOcxDtM0A0UxhEwDJQ/BnvHynpIniwx749Z7jLj0lJaJMc8S0lVuHVnXK4wpwehUHqGRvoZ1RjOO9AmI2jQt7XbKfLsXPzAnYWM1EpbySnklRl5gOmuzjiMHUVRd6ZFZRxJS+YDmVLD1melGB8+NITpv0mw9MtgNg6xZR/V6jMyN/DxKHwIvp4j1mt3howKDwtMxsIYpy2Ewhc/wBJzI9JQpVwy2Ytcd2y+1pa0xE7L1SbDWnhmxjgdpiCVQkapQVrafmYE+QWEa1jOrN6SLmxidqwuaa0WZQeT5xpzIHlMpsnovRwoDqFqVRr2lQXsfwruX585seNxOd3e+hY2/KNB8LTz1HXJ3jbnunjz5MrdfHu4uLGSXW682JwFCuuWtQpv+ZVf3GaD0s2PgcKGYVXRyO5QCgqT43OtvKbvTSpratTK30BBBtw1BPynPesSlXz0qlQUzTGZFKMW7x17wIFt0cdu9bXmk8bbGvo1xccZTAyUzoINR57HzyXaJaMYxbTFaAYBhmCZAVD7w8572isBRDsdbBKdWp5lEZgB6gel4OYk6TWPSVGBimnoCHziGMVWc6Fvlx+GP8AvGX91N1+s7IxnDdgVCuLw5G8Yij8aig/OdxaXFKW0uCxlyoy8kqSB5toYCliKZpVqYdDwO8HgyngeYnF9t9H8Rg3y1UPZ5iEqrrTqDxvwNuB19NZ3GePa2zkxNF6FQkLUA1XepBBB9CBA4QWsCfAXn0H0GxKnAYULuFCmPUKAfjecL6TbHqYOo1GpZgQGSooIWpTJtpfiDoRrbnvPt6FdNauBK03GfDZ8zD20Btcr47r285NtN8wG0VrKAKgLKMrKpF1ddCD6iNxqqygOC2tgbBgPfOXU9uMru1CklN3qMxqkl2Kl82VVNgAeNwT5TL0ul75QtemHA4pbvDwKsfrPNlxXuPXhzY9VuaUKKr/AGmpfn2dh5CwnOemeMd6/YhxURLFSFsbkcdTM3jeleDakyLhQHykKVQ0zm8xNKo0yxzte5N5ePC79s83JNalPTRYqoY1zEOJ6K8gDAMNgYJEjQCILQzBaQezY6Z6q07gGpmpAncGqIUF+V2EJUIJUjKVJBB3hgbEHneeXDVCrqw3q6sPNWBHymX25i0rYmtVpqUSpULhTa4uBcm3Em59ZcUrw1XtPI0ewt5zztJSMv0TodpjcOtr/aq58ku5/wAM7UxnMurLBFsTUrezSp5P1OdP7qt7xOmNNTooGMqRpJUZiSVLgXJKkgYvpDskYqmqghKlOpTqo5F8ro4PuIBHu8JyjrB2f2ONdUpLSpVFR0VMoVgRZjYbu8G003TtU5R1jNnx9v8A46NNf8T/AOaNbGqIltISta+ga4IsefylyQAYX3/DcJUtjBMAWMSx19RGtPOxkrSSidZVzyla8pBCYJMsmCTIGYc6+QnqW082HHtWvwtDcOdNwmp0Kq1Lmwio0oFFzv8ACKUFiABdiQAPEnQCZo611f4Ps8ErkWaszVD5Xyr8FB9ZsrGJwOGFKlTpDdTpon7VA+ka03GQMZILSQMzLgyQCkvBkgXOQdNKl8fiD/Caaj/hJ/OdenHemf8AbsRzqKf+WksGEECowG+9ibab7cfhGKJ4tot91fMyXpY9LbzbQfSAxtBwzdweVvdKrCRAvUnnMaUlBJK0ACWRGZbRNR4AuYvfJvjygAC72J+MnYdQHdElRm4G0MLaLqOLc5fgSVO8mZjofhhUx2HUi6q+c/oUuL+oEwzPNz6ssMWxNSrbu06OX9TsLfBGknY6YYLSzAabZA0kEy4GaklSQLlSSQJOLdJ64qY3EMN3bOv7Dk/yztN5weu+eo7/AMTs37mJ+soGYvGtd7eAA+syZO+Yisbsx5mZy6WPTg20I8D849xPHhTY+c9d5J0UFpTECR2sJ5XYmLdKKpUitTGJSJ5CehEC6/8AkxrYCjSy94+kGlq9zwvJWq3mx9XuyaWMxTYesDkfD1SGVsro4K2ZT4jXQ3En3QwVV55yZsvSnonXwTk3Fajc2qILEcnX2Tz1Hymsky1IqdU6usD2eDNQixruX/QvcHxDH1nK78fDX1nc9i4fs8NQp8Uo01P5ggv8bxiV6zAaGYtppC2kkaSBmQ0u8Qrw1aA2SCDLvAGo1lY+Ck/CcIUaTu7C4IO4i3pOOdLdmpgsQKKF3Rqa1LsACuZ3GXn90a85djD13yqT/wB3mInoxNYvpawHD/WJAmMrtqG0E4z0kxdPdaXeILYwUQSmdfKIdhFo9L1VG7X5RLuTFZx4XgliZLTSzrPZs/FvQqJWpsVemwZWU2II+h1B5EzzIsjGB0Or0iOKADkKzAHwVwfkfETI/wDoXDVaQL5krN3i6Na19wKnQ/PnOb4etak/iLgfqB/n7p3PCf7NL6ns018e6Jcd3sy18cyxfV/iUqKKbU69IuoLXCOqFtSVY20HgTOnEQzAYzUmk2FopjDZoh2hFM0kQ7ySjLrGLJJIDEISSQLnLOsX+2//AI0/m8kkDSqw1MWsqSYqw6AfrJJKoGijJJMiCMQS5IVGgmSSVBJuPkflO+4L/Zp/9af4RKklxSnNFNKkmkKeIeSSB5qkkkko/9k="
-                    alt="">
-                <img (click)="getTabsParner($event , 'two')" class="avatar-company  rounded-circle"
-                    src="data:image/jpeg;base64,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"
-                    alt="">
-                <img  (click)="getTabsParner($event , 'three')" class="avatar-company  rounded-circle"
-                    src="data:image/jpeg;base64,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"
-                    alt="">
-            </div>
-            <div class="d-flex justify-content-center mt-3">
-                <img (click)="getTabsParner($event ,'four')" class="avatar-company mx-3  rounded-circle"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVc60rrSD8JaqQyVZVqlPj5Mc3qUja6K2sjA&usqp=CAU"
-                    alt="">
-                <img  (click)="getTabsParner($event ,'five')"  class="avatar-company  mx-3 rounded-circle"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe_2cZMKysro3YpIWasiWcKy8bk8bHLelR0g&usqp=CAU"
-                    alt="">
-            </div>
-        </div>
-        <div class="col-6 assess-company">
-            <div class="assess-content-wrapper active" id="one">
-                <div class="assess-content mb-3">
-                    Đó chính là chúng ta hiểu và nhận thức được tầm quan trọng của ý thức học tập đối với bản thân mình. Ý thức học tập là ý thức tự rèn luyện, trau dồi bản thân, thu nhận kiến thức và hình thành kỹ sống cho riêng mình. Tự học là một ý thức tự giác vô cùng tích cực mà mỗi người cần rèn luyện. 
-                </div>
-                <h3 class="m-0 fw-bold color-blue">Mrs.Nguyễn Bích Hằng</h3>
-                <p class="m-0  fw-bold color-blue">Giám đốc: FPT Software</p>
-            </div>
-            <div class="assess-content-wrapper" id="two">
-                <div class="assess-content mb-3">
-                    Học là việc học sinh tiếp thu kiến thức của nhân loại dưới sự hướng dẫn của thầy cô giáo… khi học chúng ta phải tìm tòi, suy nghĩ thêm để hiểu rõ và mở rộng các kiến thức đã thu thập được. Như thế lời dạy của Lê-nin có ý nghia là khuyên chúng ta phải luôn học hỏi không ngừng, học hỏi suốt đời chẳng những trong nhà trường và cả ngoài xã hội…
-                </div>
-                <h3 class="m-0 fw-bold color-blue">Mr.Nguyễn Bích Hoa</h3>
-                <p class="m-0  fw-bold color-blue">Giám đốc: VTI APP</p>
-            </div>
-            <div class="assess-content-wrapper" id="three">
-                <div class="assess-content mb-3">
-                    Bên cạnh những tấm gương tốt về tinh thần tự học, chúng ta cần phê phán những tư tưởng sai lệch. Đó là những người không thấy được tầm quan trọng của việc học dẫn đến không có tinh thần chủ động học tập. Luôn ỷ lại, lười nhác, không có ý chí, nghị lực, học tới đâu hay tới đó.
-                </div>
-                <h3 class="m-0 fw-bold color-blue">Mrs.Nguyễn Bích Hằng</h3>
-                <p class="m-0  fw-bold color-blue">Giám đốc: FPT Software</p>
-            </div>
-            <div class="assess-content-wrapper"  id="four">
-                <div class="assess-content mb-3">
-                    Ý thức học tập: là việc mỗi học sinh nhận thức được tầm quan trọng của việc học, từ đó có những phương pháp học tập hữu ích, cố gắng học hỏi, thực hành, trau dồi kiến thức để hoàn thiện bản thân.
-                </div>
-                <h3 class="m-0 fw-bold color-blue">Mrs.Nguyễn Bích Hằng</h3>
-                <p class="m-0  fw-bold color-blue">Giám đốc: FPT Software</p>
-            </div>
-            <div class="assess-content-wrapper"  id="five">
-                <div class="assess-content mb-3">
-                    Tuy nhiên vẫn còn có nhiều bạn chưa có nhận thức đúng đắn về trách nhiệm của mình đối với quê hương, đất nước, chỉ biết đến bản thân mình, coi việc chung là việc của người khác. Lại có những bạn học sinh lười học, chưa thực sự tập trung vào việc học của mình,… những người này đáng bị xã hội thẳng thắn lên án.
-                </div>
-                <h3 class="m-0 fw-bold color-blue">Mrs.Nguyễn Bích Hằng</h3>
-                <p class="m-0  fw-bold color-blue">Giám đốc: FPT Software</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container  my-5">
-    <h3 class="fw-bold title text-uppercase text-center color-blue">Đối tác</h3>
-    <div class="title-line mt-2 mx-auto mb-2">
-    </div>
-    <div class="position-relative">
-        <button class="slider-control prev-parner position-absolute top-100 start-0 translate-middle"><i
-                class="parner fa-solid fa-arrow-left-long"></i></button>
-        <ngx-slick-carousel class="row" [config]="sliderCompany">
-            <div ngxSlickItem *ngFor="let item of companys" class="col-2 company-item">
-                <img  class="company-img" [src]="item.logo"
-                    alt="">
-            </div>
-        </ngx-slick-carousel>
-        <button class="slider-control next-parner position-absolute top-100 start-100 translate-middle"><i
-                class="parner fa-solid fa-arrow-right"></i></button>
-    </div>
+  </div>
 </div>

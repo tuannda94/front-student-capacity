@@ -22,7 +22,7 @@
   <!-- ds test năng lực -->
   <div class="row mt-3" *ngIf="!isFetchingCapacity && totalCapacity >= 1">
     <div class="col-12 col-md-6 col-lg-4" *ngFor="let capacity of listCapacity; let i = index">
-      <div class="capacity__item">
+      <div class="capacity__item my-shadow-3-hover">
         <a
           [routerLink]="['/test-nang-luc', capacity.id]"
           class="capacity__item-image"
@@ -30,11 +30,11 @@
         ></a>
 
         <div class="capacity__content">
-          <p class="capacity__content-time">
-            {{ capacity.date_start | formatDate }} - {{ capacity.register_deadline | formatDate }}
+          <p class="capacity__content-time my-xs">
+            {{ capacity.date_start | formatDatePost }} - {{ capacity.register_deadline | formatDatePost }}
           </p>
           <a [routerLink]="['/test-nang-luc', capacity.id]" class="capacity__content-title-link">
-            <h2 class="capacity__content-title">{{ capacity.name }}</h2>
+            <h2 class="capacity__content-title my-h5">{{ capacity.name }}</h2>
           </a>
 
           <ul class="capacity__content-list">
@@ -43,14 +43,18 @@
                 <i class="fa-solid fa-file-pen"></i>
               </div>
 
-              {{ capacity.rounds.length }} bài thi
+              <b>{{ capacity.rounds.length }}</b> &ensp;
+              <span>bài thi</span>
             </li>
+
             <li class="capacity__content-list-item">
               <div class="capacity__content-list-item-icon">
                 <i class="fa-solid fa-user-group"></i>
               </div>
-
-              {{ capacity.user_capacity_done.length }} lượt làm bài
+              <span class="capacity__content-list-item-icon-text">
+                <b>{{ capacity.user_capacity_done.length }}</b> &ensp;
+                <span>lượt làm bài</span>
+              </span>
             </li>
 
             <li class="capacity__content-list-item">
@@ -71,11 +75,7 @@
 
   <!-- empty data -->
   <div class="mt-3" *ngIf="!isFetchingCapacity && !totalCapacity">
-    <img
-      class="no-data-image"
-      src="https://homebond.ae/assets/images/no-result.png"
-      alt="No data"
-    />
+    <img class="no-data-image" src="https://homebond.ae/assets/images/no-result.png" alt="No data" />
   </div>
 
   <!-- skeleton -->

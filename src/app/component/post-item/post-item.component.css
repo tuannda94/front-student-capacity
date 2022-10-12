@@ -8,10 +8,9 @@
 
 .capacity__post-item {
   background-color: #fff;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
-  margin-bottom: 12px;
+  padding: 16px;
+  border-radius: var(--my-rounded-2);
+  border: 1px solid var(--my-dark-gray);
 }
 
 .capacity__post-item-image {

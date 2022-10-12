@@ -98,6 +98,7 @@
 
 .capacity-countdown {
   text-align: center;
+  margin-bottom: 4px;
 }
 
 .capacity-countdown .my-countdown-item+.my-countdown-item {

@@ -71,7 +71,7 @@ export class MyCapacityTestComponent implements OnInit {
   getListSkillName(skills: Skill[]) {
     const listSkill = skills.map((skill) => skill.short_name);
     if (!listSkill.length) {
-      return "Không có kỹ năng nào!";
+      return "Không có!";
     }
 
     return listSkill.join(", ");

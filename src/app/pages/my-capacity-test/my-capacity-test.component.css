@@ -1,7 +1,3 @@
-.capacity__title {
-  margin-top: 12px;
-}
-
 .capacity__search-btn {
   color: white;
   background-color: var(--primary);
@@ -18,12 +14,15 @@
   background-color: #ccc;
 }
 
+.capacity__title {
+  margin-top: 12px;
+}
+
 .capacity__item {
   background-color: #fff;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
-  /* box-shadow: 0 5px 15px 0 #dedede; */
+  padding: 16px;
+  border-radius: var(--my-rounded-2);
+  border: 1px solid var(--my-dark-gray);
   margin-bottom: 24px;
 }
 
@@ -37,31 +36,24 @@
 }
 
 .capacity__content-time {
-  color: #898989;
+  color: var(--my-darkest-gray);
   margin-top: 6px;
   margin-bottom: 0;
-  font-size: 14px;
-}
-
-.capacity__content-title-link {
-  color: #444;
 }
 
 .capacity__content-title {
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.2;
+  color: var(--my-black);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  margin: 2px 0 8px;
+  margin: 4px 0;
   transition: all 0.25s linear;
 }
 
 .capacity__content-title:hover {
-  color: var(--primary);
+  color: var(--my-primary);
 }
 
 .capacity__content-btn {
@@ -89,6 +81,14 @@
   min-width: 24px;
 }
 
+.capacity__content-list-item-icon-text > * {
+  font-size: 14px;
+}
+
+.capacity__content-list-item b {
+  padding-right: 4px;
+}
+
 .sidebar__content-list-item-time {
   padding-left: 2px;
 }
@@ -98,61 +98,14 @@
 }
 
 .capacity__content-list-item-skill {
-  display: flex;
-}
-
-.capacity__content-list-item-skill-name {
-  text-transform: uppercase;
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+}
+
+.capacity__content-list-item-skill-name {
   padding-left: 4px;
-  color: #444;
-}
-
-.capacity__countdown-item-box {
-  background-color: transparent;
-  color: var(--primary);
-  padding: 4px 12px;
-  min-width: 30px;
-  font-size: 18px;
-}
-
-.capacity__countdown {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding-left: 0;
-}
-
-.capacity__countdown-item {
-  padding: 0px 4px;
-  color: rgba(20, 20, 20, 0.333);
-}
-
-.capacity__countdown-item-box {
-  background-color: var(--primary);
-  color: #fff;
-  padding: 12px;
-  min-width: 50px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-bottom: 2px;
-}
-
-.capacity__countdown-item-box {
-  background-color: transparent;
-  color: var(--primary);
-  padding: 4px 12px;
-  min-width: 30px;
-  font-size: 18px;
-}
-
-.capacity__countdown {
-  margin-top: 0;
 }
 
 /* pagination */

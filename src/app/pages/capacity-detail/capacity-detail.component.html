@@ -227,7 +227,7 @@
             *ngIf="!isFetchingCapacityRelated"
             [ngClass]="{ 'm-0': !capacityRelated.length }"
           >
-            <div class="col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let capacity of capacityRelated">
+            <div class="mb-4 mb-lg-0 col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let capacity of capacityRelated">
               <app-capacity-related-item [capacityItem]="capacity"></app-capacity-related-item>
             </div>
           </ul>
@@ -237,7 +237,7 @@
           <!-- skeleton -->
           <ul class="capacity__related-list row" *ngIf="isFetchingCapacityRelated">
             <div class="col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let _ of [].constructor(3)">
-              <div class="capacity__related-item">
+              <div class="mb-4 mb-lg-0 capacity__related-item">
                 <ngx-skeleton-loader [theme]="{ height: '150px' }"></ngx-skeleton-loader>
 
                 <ngx-skeleton-loader [theme]="{ margin: '0 0 4px' }"></ngx-skeleton-loader>
@@ -257,11 +257,11 @@
         </div>
 
         <!-- bài viết liên quan -->
-        <div class="capacity__post" #postRelated>
-          <h2 class="capacity__test-title capacity__related-title fw-bold fs-5 color-blue">Bài viết liên quan</h2>
+        <div class="capacity__post mb-4 mb-lg-0" #postRelated>
+          <h2 class="mt-0 mt-lg-4 capacity__test-title fw-bold fs-5 color-blue">Bài viết liên quan</h2>
 
           <ul class="capacity__related-list row" *ngIf="!isFetchingPost" [ngClass]="{ 'm-0': !posts.length }">
-            <div class="col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let post of posts">
+            <div class="mb-4 mb-lg-0 col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let post of posts">
               <app-post-item [postItem]="post"></app-post-item>
             </div>
           </ul>
@@ -271,7 +271,7 @@
           <!-- skeleton -->
           <ul class="capacity__related-list row" *ngIf="isFetchingPost">
             <div class="col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let _ of [].constructor(3)">
-              <div class="capacity__related-item">
+              <div class="mb-4 mb-lg-0 capacity__related-item">
                 <ngx-skeleton-loader [theme]="{ height: '150px' }"></ngx-skeleton-loader>
 
                 <ngx-skeleton-loader [theme]="{ margin: '0 0 4px' }"></ngx-skeleton-loader>
@@ -335,15 +335,14 @@
 
           <button
             *ngIf="!isDoneExam"
-            class="btn btn-main sidebar__content-btn"
-            [ngClass]="{ 'btn-base-type-bg': statusExam.status === 1 }"
+            class="my-btn my-btn-s my-btn-disabled sidebar__content-btn"
+            [ngClass]="{ 'my-btn-primary': statusExam.status === 1, 'my-btn-disabled': statusExam.status !== 1 }"
             (click)="handleGoToNextRound()"
-            [disabled]="statusExam.status === 0 || statusExam.status === 2"
           >
             {{ statusExam.status === 1 ? "Tham gia ngay" : statusExam.statustext }}
           </button>
 
-          <button *ngIf="isDoneExam" class="btn sidebar__content-btn sidebar__content-btn--disable">
+          <button *ngIf="isDoneExam" class="sidebar__content-btn my-btn my-btn-disabled my-btn-s">
             Đã hoàn thành
           </button>
         </div>

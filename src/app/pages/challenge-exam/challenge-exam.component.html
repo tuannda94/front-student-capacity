@@ -1,1 +1,848 @@
-<p>challenge-exam works!</p>
+<div class="container__challenge">
+  <header class="challenge__header d-flex align-items-center">
+    <a class="challenge__header-icon">
+      <i class="fa-solid fa-angle-left"></i>
+    </a>
+
+    <div class="challenge__header-right">
+      <p class="challenge__header-task-name">Thử thách số 1</p>
+
+      <ul class="challenge__header-tasks">
+        <li class="challenge__header-task active">1</li>
+        <li class="challenge__header-task">2</li>
+        <li class="challenge__header-task">3</li>
+        <li class="challenge__header-task">4</li>
+        <li class="challenge__header-task">5</li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="split-example" style="height: 100%">
+    <as-split direction="horizontal" [restrictMove]="true" [gutterSize]="1" [useTransition]="true">
+      <as-split-area [size]="40" [visible]="isFullScreen ? false : true" [order]="1">
+        <div style="display: flex; height: 100%">
+          <aside class="challenge__sidebar">
+            <ul class="challenge__sidebar-icon-list m-0 p-0">
+              <div class="challenge__sidebar-icon active" title="Vấn đề">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+
+              <div class="challenge__sidebar-icon" title="Bảng xếp hạng">
+                <i class="fa-solid fa-list"></i>
+              </div>
+
+              <div class="challenge__sidebar-icon" title="Lịch sử nộp">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+              </div>
+
+              <div class="challenge__sidebar-icon" title="Bình luận">
+                <i class="fa-regular fa-message"></i>
+              </div>
+
+              <div class="challenge__sidebar-icon" title="Câu hỏi">
+                <i class="fa-regular fa-circle-question"></i>
+              </div>
+            </ul>
+          </aside>
+          <div class="challenge__content">
+            <header class="challenge__content-header d-flex align-items-center mb-2 flex-wrap">
+              <div class="challenge__content-header-user d-flex align-items-center">
+                <img src="https://picsum.photos/200/300" alt="" class="challenge__content-header-user-avt" />
+                <span class="challenge__content-header-user-name">Tuân Okela</span>
+              </div>
+              <div class="challenge__content-header-tag">Đơn giản</div>
+              <div class="challenge__content-header-point d-flex align-items-center">
+                <div class="challenge__content-header-point-icon d-flex align-items-center justify-content-center">
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <span class="challenge__content-header-point-text">100 Điểm</span>
+              </div>
+            </header>
+
+            <!-- content question -->
+            <main class="challenge__content-main">
+              <div class="entry">
+                <p>
+                  Anna Bắc Giang là ai? Tính đến thời điểm hiện tại đã lừa đảo của bao nhiêu người với số tiền bao
+                  nhiêu? Hiện tại Anna Bắc Giang đã bị bắt chưa? Nếu bị bắt Anna Bắc Giang có thể bị xử lý như thế nào?
+                  Video clip bắt siêu lừa đảo Anna Bắc Giang full từ một nhóm người.
+                </p>
+                <div id="toc_container" class="no_bullets">
+                  <ul class="toc_list">
+                    <li><a href="#1-anna-bac-giang-la-ai">1. Anna Bắc Giang là ai?</a></li>
+                    <li>
+                      <a href="#2-anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san"
+                        >2. Anna Bắc Giang bị tố cáo lừa đảo chiếm đoạt tài sản</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#3-nhung-vu-lua-dao-cua-anna-bac-giang">3. Những vụ lừa đảo của Anna Bắc Giang</a>
+                      <ul>
+                        <li>
+                          <a href="#31-kalim-nguyen-bi-lua-ca-tinh-lan-tien"
+                            >3.1. Kalim Nguyen bị lừa cả tình lẫn tiền</a
+                          >
+                        </li>
+                        <li><a href="#32-anna-bac-giang-lua-dao-17-ty">3.2. Anna Bắc Giang lừa đảo 17 tỷ</a></li>
+                        <li><a href="#33-lua-dao-ca-nhan-vien-tiem-toc">3.3. Lừa đảo cả nhân viên tiệm tóc</a></li>
+                        <li>
+                          <a href="#34-lua-dao-voi-kich-ban-gia-co-thai">3.4. Lừa đảo với kịch bản giả có thai</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <h2><span id="1-anna-bac-giang-la-ai">1. Anna Bắc Giang là ai?</span></h2>
+                <p>
+                  Anna Bắc Giang
+                  <strong
+                    >tên thật là Ninh Thị Vân Anh (sinh năm 1995), quê quán tại tỉnh Bắc Giang. Anna Bắc Giang được biết
+                    đến với những vụ lừa đảo, chiếm đoạt số tiền lên tới hàng chục tỷ đồng, bằng cách tạo những kịch bản
+                    đánh vào tâm lý về danh vọng và vật chất của con người để vay mượn tiền, lừa đảo.</strong
+                  >
+                </p>
+                <p>
+                  Liên quan đến những drama ồn ào của Anna Bắc Giang lừa đảo, chiếm đoạt tài sản của nhiều người lên đến
+                  hàng tỷ đồng. Các góc khuất hiện đang được phanh phui, nhiều nạn nhân của cô cũng đã bày tỏ sự bức
+                  xúc, chính thức lên tiếng việc bản thân bị lừa tiền.
+                </p>
+                <p>
+                  Theo như các bài viết về Drama, bóc phốt trên mạng xã hội Facebook thì Anna Bắc Giang với những siêu
+                  phẩm lừa đảo bằng những kịch bản mà các đạo diễn phim bên Hollywood phải cắp sách sang Việt Nam để học
+                  hỏi, với bộ óc siêu phàm, khả năng dựng kịch bản gay cấn đỉnh cao, Anna đã thành công lừa rất nhiều
+                  người và chiếm đoạt hàng chục tỷ đồng.
+                </p>
+                <h2>
+                  <span id="2-anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san"
+                    >2. Anna Bắc Giang bị tố cáo lừa đảo chiếm đoạt tài sản</span
+                  >
+                </h2>
+                <p>
+                  Ngày 16/9, Công an tỉnh Bắc Giang cho biết, đã nhận được một đơn trình báo của anh N.H.N (SN 1984, trú
+                  tại TP Thủ Đức, TP HCM) tố cáo việc bị Anna Bắc Giang (tức Ninh Thị Vân Anh, 27 tuổi, quê huyện Lạng
+                  Giang, tỉnh Bắc Giang) lừa đảo chiếm đoạt tài sản.
+                </p>
+                <p>
+                  Theo anh N (nạn nhân của Ninh Thị Vân Anh) trình báo, V.A đã chủ động làm quen với anh, để tạo được
+                  lòng tin và tình cảm của mình, Anna đã tự xưng mình là người của một Cục thuộc Bộ Công an. Sau đó, V.A
+                  tạo ra nhiều câu chuyện không có thật để lấy lòng tin của anh N nhăm mục đích lừa tiền.
+                </p>
+                <p>
+                  Trong đơn tố cáo, anh N cho biết Ninh Thị Vân Anh sử dụng các thủ đoạn khác nhau để chiếm đoạt tài
+                  sản, cụ thể: Giả mạo tổ chức sự kiện; mượn tiền để xoay xở cho công ty đang kinh doanh; mượn tiền để
+                  khám chữa bệnh cho người nhà và mượn vốn để làm ăn, trả nợ. Trong vụ việc anh N tố cáo Ninh Thị Vân
+                  Anh đã lừa đảo chiếm đoạt tài sản của mình với số tiền lên đến 1,5 tỉ đồng.
+                </p>
+                <p>
+                  Về vụ việc này, Công an tỉnh Bắc Giang cho biết, sau khi tìm hiểu, xác định việc anh N. chuyển tiền
+                  cho Ninh Thị Vân Anh diễn ra tại TP Phan Thiết (tỉnh Bình Thuận) và Thành phố Hồ Chí Minh, không thuộc
+                  thẩm quyền giải quyết của Công an tỉnh Bắc Giang. Do vậy, Công an tỉnh Bắc Giang đã hướng dẫn anh N.
+                  gửi đơn đến Công an tỉnh Bình Thuận và Công an TP HCM để được thụ lý, hỗ trợ điều tra và giải quyết
+                  theo quy định pháp luật.
+                </p>
+                <p>
+                  Trước đó, trên mạng xã hội Facebook và Tiktok lan truyền nhiều thông tin liên quan vụ việc Anna Bắc
+                  Giang (tức) lừa đảo chiếm đoạt tài sản của nhiều người, với những phốt, drama kịch bản siêu kinh điển,
+                  những phi vụ lừa đảo tưởng chừng chỉ có trên phim điện ảnh Hollywood, nay lại được tái hiện một cách
+                  chân thực trong cuộc sống và trong chính câu truyện của nhiều bi hại.
+                </p>
+                <p>
+                  Trong đó, có trường hợp một tài khoản Facebook có tên “Kalim Nguyen” đăng đàn bóc phốt Anna Bắc Giang
+                  lừa đảo, bằng kịch bản gay cấn hơn cả phim hành động Mỹ: Anna tạo câu truyện bố mình là thành viên cấp
+                  cao của “Cơ quan Tình báo Trung ương Hoa Kỳ” (CIA) và bản thân cô cũng là át chủ bài trong chính
+                  trường Việt Nam, nắm trong tay vận mệnh quốc gia.
+                </p>
+                <p>
+                  Trong một lần sơ sảy, V.A đã bị một tổ chức bí ẩn bắt cóc trong lúc từ Úc trở về Việt Nam, và cô đang
+                  nắm giữ một chiếc USB cực kì quan trọng. Người bố điệp viên Mỹ đã nhắn tin trao đổi với vị thiếu gia
+                  trên, rằng ông đã chuộc con gái về bằng một khoản tiền vài chục tỷ.
+                </p>
+                <p>
+                  Hiện tại, trên mạng xã hội Facebook và Tiktok đang có rất nhiều bài đăng và video clip chia sẻ về
+                  những câu chuyện xoay quanh cái tên Anna Bắc Giang. Được biết, có một số nạn nhân sau khi phát hiện rõ
+                  sự thật đã ảnh hưởng đến sức khỏe tinh thần, có thanh niên đã kết liễu cuộc đời vì quá sốc.
+                </p>
+                <h2><span id="3-nhung-vu-lua-dao-cua-anna-bac-giang">3. Những vụ lừa đảo của Anna Bắc Giang</span></h2>
+                <h3>
+                  <span id="31-kalim-nguyen-bi-lua-ca-tinh-lan-tien">3.1. Kalim Nguyen bị lừa cả tình lẫn tiền</span>
+                </h3>
+                <p>
+                  Theo Facebook Kalim Nguyen đăng trên trang cá nhân của mình: Vừa qua em mới bị lừa đảo tình cảm, với
+                  tình tiết như trong phim, 1 tháng vừa qua đối với em như địa ngục, ăn không ngon, ngủ không yên. Tính
+                  ra em sẽ giữ im lặng, cho đến khi bạn lợi dụng người anh quen em, hẹn em xuống để bạn gặp và tiếp tục
+                  ăn vạ, uy hiếp, nên em phải thông báo để mọi người nắm bắt và không bị bạn đó lợi dụng niềm tin mà hẹn
+                  em cf cho bạn gặp.
+                </p>
+                <p>
+                  Chuyện là em có quen qua mạng 1 bạn xưng tên Tina Dương Thuý Nhàn (tới giờ em vẫn ko biết tên, địa chỉ
+                  thật), bạn này tiếp cận em và làm quen. Cũng đi cà phê gặp mặt ở Starbucks, sau 1 tháng thì bắt đầu
+                  tới kịch bản của bạn.
+                </p>
+                <p>
+                  Ngày 8/8/2022 gặp bạn đó cà phê, thì bạn đó nói Ba bạn đó từ Úc cuối tuần về Việt Nam, hẹn đi đánh
+                  gofl, nên cũng muốn giới thiệu em cho Ba bạn.
+                </p>
+                <p>
+                  Tới ngày 12/8/2022 bạn này đóng kịch gây chuyện để giận và ngày mai em không đi được như đã hẹn, (để
+                  theo đúng kịch bản của bạn, cái này đọc hết sẽ biết chiêu trò này!).
+                </p>
+                <p>
+                  Tiếp theo, ngày 13/8/2022 là có tài khoản zalo có tên “Marco” nhắn tin cho em xưng là Ba của Tina
+                  Dương Thuý Nhàn (thực ra sau này em phát hiện, mới biết là bạn tạo ra để tháo túng tâm lý), nói là sao
+                  hôm nay không đi chơi. Em cũng trả lời là do 2 đứa gây nhau, rồi người Ba (ảo) này đứng ra hàn gắn,
+                  phân tích này nọ, xong em cũng tin và nghe theo gọi điện xin lỗi.
+                </p>
+                <p>
+                  Sau đó cũng có nhiều lần hẹn qua ăn cơm với Ba, Bà Nội nhưng đều không được vì bạn dùng chiêu giận
+                  không gặp mặt (chiêu này cũng là chiêu tháo túng tâm lý).
+                </p>
+                <p>
+                  Khoảng hơn 1 tuần sau, bạn và Ba (ảo) đóng kịch bạn bị bắt cóc, trước đó là rủ em đi cà phê như mọi
+                  lần và nói Ba (ảo) bay ra Hà Nội chăm Bà Nội té cầu thang trong bệnh viện, mà trong này công việc có
+                  nhiều thứ sẽ copy vào USB (tài liệu mật, liên quan tới nhiều thứ), cũng có nhờ em lấy, xong đổi qua là
+                  kêu em về nhà có người ship qua.
+                </p>
+                <p>
+                  Nhưng đợi tới 23h 15/8/2022 thì Ba (ảo) nhắn tin bạn bị bắt cóc và usb khống chế, em cũng tin đi tìm
+                  bạn đó và day dứt vì mình đã nhận đi lấy usb hộ rồi, mà bạn đó lại lấy để xảy ra việc này.
+                </p>
+                <p>
+                  <img
+                    class="aligncenter wp-image-5788 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-1.jpg"
+                    alt="Kalim Nguyen bị Anna Bắc Giang lừa đảo cả tình lẫn tiền"
+                    width="400"
+                    height="865"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-1.jpg         400w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-1-139x300.jpg 139w
+                    "
+                    sizes="(max-width: 400px) 100vw, 400px"
+                  />
+                </p>
+                <p style="text-align: center">
+                  <em>Tin nhắn liên quan vụ Kalim Nguyen bị lừa đảo với kịch bản gay cấn hơn phim hành động Mỹ</em>
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5787 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-2.jpg"
+                    alt="Kalim Nguyen bị Anna Bắc Giang lừa đảo cả tình lẫn tiền"
+                    width="400"
+                    height="865"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-2.jpg         400w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-2-139x300.jpg 139w
+                    "
+                    sizes="(max-width: 400px) 100vw, 400px"
+                  />
+                </p>
+                <p style="text-align: center">
+                  <em>Tin nhắn liên quan vụ Kalim Nguyen bị lừa đảo với kịch bản gay cấn hơn phim hành động Mỹ</em>
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5786 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-3.jpg"
+                    alt="Kalim Nguyen bị Anna Bắc Giang lừa đảo cả tình lẫn tiền"
+                    width="400"
+                    height="865"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-3.jpg         400w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-3-139x300.jpg 139w
+                    "
+                    sizes="(max-width: 400px) 100vw, 400px"
+                  />
+                </p>
+                <p style="text-align: center">
+                  <em>Tin nhắn liên quan vụ Kalim Nguyen bị lừa đảo với kịch bản gay cấn hơn phim hành động Mỹ</em>
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5785 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-4.jpg"
+                    alt="Kalim Nguyen bị Anna Bắc Giang lừa đảo cả tình lẫn tiền"
+                    width="400"
+                    height="865"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-4.jpg         400w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/kalim-nguyen-bi-anna-bac-giang-lua-dao-4-139x300.jpg 139w
+                    "
+                    sizes="(max-width: 400px) 100vw, 400px"
+                  />
+                </p>
+                <p>
+                  Tới 2h sáng thì Ba(ảo) gửi hình vali tiền chuộc và kêu giải quyết xong rồi. Em về nhà, đi ngủ hôm sau
+                  người mệt mỏi, thì 10h 16/8 bạn đó gọi liên tục hẹn cà phê và nói tặng quà (quà tặng là 2 cái ví tiền
+                  em có up Facebook, sau em tìm hiểu nó cũng là đồ quà tặng từ hãng).
+                </p>
+                <p>
+                  Tới 16h chiều em mới chịu gặp bạn đó, rồi bạn đó khóc, kể là mình bị u não, còn sống không biết được
+                  bao lâu (sau em mới để ý là nói cái này để đánh vào lòng thương người của em). Rồi cũng lấy tài khoản
+                  zalo Ba (ảo) nhắn để xác nhận bạn bị u não thật và kêu là hay quên nữa.
+                </p>
+                <p>
+                  Cho tới ngày 18/8 em chở bạn đi cà phê, rồi lúc chở về bạn nói nhà bạn bên Landmark 81 đang cho Cô
+                  ruột ở, nên cô giúp việc của Cô không làm gì giúp mà còn hay nói, hay kiếm chuyện, thêm bạn bị uy hiếp
+                  tính mạng nữa. Nên đúng như kịch bản của bạn và đồng bọn, em đã hứa với Ba (ảo) đưa bạn về nhà để bảo
+                  vệ bạn.
+                </p>
+                <p>
+                  Qua ngày 19/8, mọi thứ bắt đầu trở nên áp lực đối với em, vì bị bạn tháo túng tâm lý bằng nhiều cách.
+                  Hết giận, ghen, rồi uy hiếp để em không con đủ tỉnh táo nhìn về sự việc nữa. Lúc qua nhà, bạn còn gửi
+                  1 đống đồ, trong đó có 1 lọ thuốc bạn nói là bổ não, ngày nào cũng thúc dục em nên uống thuốc này (em
+                  cũng không biết nó là gì, mở ra thì thấy lọ thuốc đã khui nên em không uống)
+                </p>
+                <p>
+                  May mắn ở nhà em cũng có 1 lọ, em lấy lọ cũ uống thì bạn nói uống lọ mới đi, lọ mới làm mới lại rồi,
+                  lọ kia loại viên cũ không tốt bằng. Mà mọi tình tiết, đều được lên kế hoạch nên Ba (ảo) nhắn tới những
+                  tình tiết nguy hiểm, đều nói em xoá hết đi, em không xoá và chỉ ẩn tin nhắn kèm mật khẩu (nên còn chụp
+                  được màn hình làm bằng chứng).
+                </p>
+                <p>
+                  Bạn thường xuyên thúc em ép up ảnh lên Facebook với bạn, bạn có rủ 1 bạn nữ qua nhà, luôn nhờ bạn này
+                  chụp ảnh tình cảm và 1 người bạn nói là bạn thân tên Thanh. Thúc em up Facebook, để mọi người thấy em
+                  hạnh phúc, thì khi đó sẽ bỏ lơ em và không quan tâm vì sợ phiền.
+                </p>
+                <p>
+                  Sau gần 1 tuần ở bên, em bắt đầu nghi ngờ, lục túi thì chỉ thấy 1 thẻ ngân hàng tên Ninh Thị Vân Anh,
+                  còn lại không có bất cứ thứ gì, em hỏi tới thì bạn đều nói passport Ba (ảo) của bạn giữ, tới khi em
+                  phát hiện hết mọi thứ em đuổi bạn đi ra nhà nhưng bất thành. Bạn ngồi lì, đóng hết vai này tới vai
+                  khác, rồi uy hiếp em bằng những câu “anh nghĩ chia tay tôi dễ ư? đừng nghĩ như vậy, không dễ đâu”.
+                </p>
+                <p>
+                  Cho đến khi, mấy người bạn em lên đuổi giúp, bấm đồng hồ 5p thì bạn đó rất nhanh chóng đi dọn đồ đạc,
+                  đi ra bình thản như chưa có chuyện gì xảy ra. Còn kèm theo câu “ảnh bị bệnh tâm lý đó, mấy anh chị
+                  thấy không?” (Tới đây, thì em thấy mình may mắn quá, vì chưa bị nó thao túng cả mọi người, nếu mà nó
+                  xây dựng đúng được kịch bản, thì em trở thành người thực vật cũng nên).
+                </p>
+                <p>
+                  Thời gian đầu bạn đó có dẫn em tới shop quần áo ở Quận 1 Thành phố Hồ chí Minh (tên shop em không tiện
+                  nói tên) để mua 2 cái đầm và nói không đủ tiền nên mượn thẻ VISA của em charge hết 32.140.000đ. Sau
+                  đó, bạn chuyển khoản lại 2 lần: 30.000.000đ và 20.000.000đ, rồi mấy ngày sau là lắt nhắt 3tr, 4tr,… 1
+                  ngày khoang 7-8tr, 3 ngày chuyển được 19tr.
+                </p>
+                <p>
+                  Sau đó thấy em tin tưởng, nên nói em chuyển cho tài khoản Ninh Thị Vân Anh tiền lấy hàng, thêm nữa là
+                  kêu mua 100kg sầu riêng cho Chị Ba ở Nhật, rồi không thấy tăm hơi sầu riêng đâu, rồi mua vali 4.2tr
+                  cũng vậy (khoản này hôm 6/9 em nói em báo công an rồi, thì bạn mới chuyển lại) chứng tỏ bạn biết rằng
+                  những khoản nào có thể tố cáo bạn vô tội lừa đảo, còn khoản bạn kêu muốn mua xe, mua máy ảnh, em tìm
+                  mua và bạn nói em chuyển khoản cọc 60tr sau đó bạn huỷ không lấy xe, còn máy ảnh 140tr thì em đang giữ
+                  máy ảnh nên không tính.
+                </p>
+                <p>
+                  Tổng tiền em mất 89 triệu khi trừ hết mấy tiền bạn rồi, là 60 triệu tiền cọc xe, 20 triệu hao hụt máy
+                  ảnh, 9 triệu mua đồ. Còn ăn uống, đi chơi em không tính tới.
+                </p>
+                <p>Trên đây là toàn bộ sự thật, nếu em gian dối hoàn toàn chịu mọi trách nhiệm trước pháp luật.</p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5797 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-1.jpg"
+                    alt="Kalim Nguyen tố cáo Anna Bắc Giang lừa đảo"
+                    width="700"
+                    height="660"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-1.jpg         700w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-1-300x283.jpg 300w
+                    "
+                    sizes="(max-width: 700px) 100vw, 700px"
+                  />
+                </p>
+                <p style="text-align: center">
+                  <em
+                    >Phiếu chuyển đơn của Công An Bình Thuận đến Công an Thành Phố Hồ Chí Minh liên quan vụ việc tố cáo
+                    Ninh Thị Vân Anh lừa đảo chiếm đoạt tài sản 1,5 tỷ đồng – Ảnh Facebook Kalim Nguyen</em
+                  >
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5796 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-2.jpg"
+                    alt="Kalim Nguyen tố cáo Anna Bắc Giang lừa đảo"
+                    width="720"
+                    height="636"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-2.jpg         720w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-2-300x265.jpg 300w
+                    "
+                    sizes="(max-width: 720px) 100vw, 720px"
+                  />
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5795 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-3.jpg"
+                    alt="Kalim Nguyen tố cáo Anna Bắc Giang lừa đảo"
+                    width="500"
+                    height="533"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-3.jpg         500w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-3-281x300.jpg 281w
+                    "
+                    sizes="(max-width: 500px) 100vw, 500px"
+                  />
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5794 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-4.jpg"
+                    alt="Kalim Nguyen tố cáo Anna Bắc Giang lừa đảo"
+                    width="600"
+                    height="723"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-4.jpg         600w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-4-249x300.jpg 249w
+                    "
+                    sizes="(max-width: 600px) 100vw, 600px"
+                  />
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5793 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-5.jpg"
+                    alt="Kalim Nguyen tố cáo Anna Bắc Giang lừa đảo"
+                    width="720"
+                    height="652"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-5.jpg         720w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/anna-bac-giang-bi-to-cao-lua-dao-chiem-doat-tai-san-5-300x272.jpg 300w
+                    "
+                    sizes="(max-width: 720px) 100vw, 720px"
+                  />
+                </p>
+                <p>Xem chi tiết vụ việc Kalim Nguyen bị Anna lừa đảo ỏ video clip bên dưới</p>
+                <div>
+                  <div class="fluid-width-video-wrapper" style="padding-top: 56.25%">
+                    <iframe
+                      loading="lazy"
+                      title="YouTube video player"
+                      src="https://www.youtube.com/embed/-S4HZYB9SF4"
+                      frameborder="0"
+                      allowfullscreen="allowfullscreen"
+                      name="fitvid0"
+                    ></iframe>
+                  </div>
+                </div>
+                <h3><span id="32-anna-bac-giang-lua-dao-17-ty">3.2. Anna Bắc Giang lừa đảo 17 tỷ</span></h3>
+                <p>
+                  Một tài khoản Facebook có tên “Nhã Le Analee” cũng đăng đàn “bóc phốt” bị Ninh Thị Vân Anh lừa 17 tỷ
+                  với nhiều chiêu trò tinh vi như: đóng giả con nhà giàu, bố làm doanh nhân, tình báo…Thường xuyên đi xe
+                  sang, ăn mặc sang chảnh, ở biệt thự. Đặc biệt, chị N.L còn tố cáo V.A lấy tên là An, lừa kết hôn với
+                  em chồng chị, tổ chức đám cưới tại khách sạn 5 sao ở Hà Nội, tặng nhà, tặng xe ô tô sang cho em chồng
+                  chị. V.A còn thuê 1 diễn viên đóng giả bố, thuê 200-300 người đi ăn cưới…
+                </p>
+                <p>Cụ thể, người “bóc phốt” Anna bắc Giang là chị dâu của bị hại:</p>
+                <p>
+                  Một ngày nọ chồng tôi bảo tôi: Em ơi, đưa anh 10 tỷ anh đầu tư bất động sản (tiền tới chục tỷ là ổng
+                  phải kêu tôi gom rồi), tôi hỏi kĩ cho an tâm thì biết ông ấy bảo Bố An cho An suất 3 toà Vinshome city
+                  quận 9 để bán, An chiết khấu cho a 20% để a bán! Chắc a hốt nhiều nhiều vì chỉ cần a chiết khấu lại 5%
+                  thôi là a bán sạch trong nốt nhạc!
+                </p>
+                <p>
+                  Tôi thấy phi lý và nói khoan để em tìm hiểu đã chứ không thể đưa tiền ngay cho anh ấy như vậy được,
+                  sau đó con siêu lừa này nó chốt hạ thêm 1 chiêu khiến cho tôi không đưa tiền cho chồng cũng không
+                  được: Nó kết hôn luôn với thằng em họ của chồng tôi, đám cưới được tổ chức tại JW Marriott Hotel Hà
+                  Nội.
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5720 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/vu-sieu-lua-dao-bac-giang-2.jpg"
+                    sizes="(max-width: 550px) 100vw, 550px"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/vu-sieu-lua-dao-bac-giang-2.jpg         550w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/vu-sieu-lua-dao-bac-giang-2-300x218.jpg 300w
+                    "
+                    alt="Thông tin vụ siêu lừa đảo Bắc Giang"
+                    width="550"
+                    height="400"
+                  />
+                </p>
+                <p style="text-align: center">
+                  <em
+                    >Đám cưới của siêu lừa đảo Anna Bắc Giang với tiêu chuẩn 5 sao, trang trí 100% hoa tươi tại Marriot,
+                    nó thuê 300 người giả làm khách khứa bên nhà gái đi đến dự, mỗi người đi ăn cưới còn được cầm mang
+                    về 300-500k. Bảo sao chồng tôi thắc mắc bên họ gái đi ăn cưới toàn trẻ con với ông bà già :)))) Ảnh
+                    Nhã Lê Analee&nbsp;<span id="easy-footnote-7-5706" class="easy-footnote-margin-adjust"></span
+                    ><span class="easy-footnote"
+                      ><a
+                        title=""
+                        href="https://dieutravien.vn/vu-sieu-lua-dao-bac-giang/#easy-footnote-bottom-7-5706"
+                        data-hasqtip="6"
+                        aria-describedby="qtip-6"
+                        ><sup>7</sup></a
+                      ></span
+                    ></em
+                  >
+                </p>
+                <p>
+                  Tôi không đi dự dưới được vì mới sinh con xong chồng tôi bay ra Hà Nội dự đám cưới và không quên kể
+                  bảo quà cưới hồi môn cho cái An là con xe Rollroyse 80 tỷ em ạ, sau đó chụp ảnh tại chỗ cưới cho tôi
+                  xem chiếc xe đó!
+                </p>
+                <p>
+                  <img
+                    loading="lazy"
+                    class="aligncenter wp-image-5721 size-full tie-appear"
+                    src="https://dieutravien.vn/wp-content/uploads/2022/09/vu-sieu-lua-dao-bac-giang-1.jpg"
+                    sizes="(max-width: 525px) 100vw, 525px"
+                    srcset="
+                      https://dieutravien.vn/wp-content/uploads/2022/09/vu-sieu-lua-dao-bac-giang-1.jpg         525w,
+                      https://dieutravien.vn/wp-content/uploads/2022/09/vu-sieu-lua-dao-bac-giang-1-300x229.jpg 300w
+                    "
+                    alt="Thông tin vụ siêu lừa đảo Bắc Giang"
+                    width="525"
+                    height="400"
+                  />
+                </p>
+                <p style="text-align: center">
+                  <em
+                    >Quả chồng tui đi ăn cưới nó chụp với con RR 80 tỷ nó đi thuê rồi giả vờ quà cưới hồi môn của ba nó
+                    nè! Tội cha chồng tui thấy cưng hông :)) Mấy ông bà đừng thắc mắc xe cũ mới năm 2018 con này được
+                    mua mới trước đó rồi nó mới nói bố nó tặng nó luôn! – Ảnh Nhã Lê Analee&nbsp;<span
+                      id="easy-footnote-8-5706"
+                      class="easy-footnote-margin-adjust"
+                    ></span
+                    ><span class="easy-footnote"
+                      ><a
+                        title=""
+                        href="https://dieutravien.vn/vu-sieu-lua-dao-bac-giang/#easy-footnote-bottom-8-5706"
+                        data-hasqtip="7"
+                        aria-describedby="qtip-7"
+                        ><sup>8</sup></a
+                      ></span
+                    ></em
+                  >
+                </p>
+                <p>
+                  Thực sự tôi không phải vì chiếc xe mà đặt niềm tin mà tôi nghĩ rằng, nó đã là em dâu em họ của chồng
+                  mình chẳng ai lấy hôn nhân ra làm trò đùa cả và tôi nghĩ đã là người nhà trong gia đình rồi thì phải
+                  tin tưởng thôi! Vậy là tôi chuyển khoản tiền&nbsp;<img
+                    class="emoji tie-appear"
+                    role="img"
+                    draggable="false"
+                    src="https://s.w.org/images/core/emoji/14.0.0/svg/1f910.svg"
+                    alt="🤐"
+                  />
+                </p>
+                <p>
+                  Sau khoảng thời gian đó tầm nửa tháng, tôi thấy chồng tôi cứ lấy tiền lắt nhắt mãi để chuyển khoản
+                  thêm mà không thấy đồng nào quay về, tôi hỏi thì chồng tôi bảo là An nó nói trục trặc này trục trặc
+                  kia, tôi bắt đầu khó chịu và nghi ngờ muốn tìm hiểu sâu.
+                </p>
+                <p>
+                  Cho đến một ngày, tôi nghe được câu chuyện của 1 cậu em họ khác của chồng tôi tên H: Cậu ấy và bố mẹ
+                  đang chạy tiền 1 tỷ rưỡi để đưa An bán rẻ cho cái nhà bên Park 5 đáng giá hơn 5 tỷ, mà vừa bán vừa cho
+                  cậu ấy có 2 tỷ 5 ( cậu H đã cho An mượn 1 tỷ rồi ), vì không lo đủ tiền nên cô M (mẹ H) có gọi mượn
+                  tôi để xoay cho đủ.
+                </p>
+                <p>
+                  Khi tôi biết việc này tôi đã trực tiếp ra mặt hỏi cặn kẽ công chứng như thế nào? làm việc ở đâu? Sáng
+                  hôm đó tôi lại thấy một điều bất bình thường khác tự dưng con bé nhân viên lễ tân của tôi nó khoe:
+                  “Chị ơi, ba An nhắn tin cho em để cám ơn em hôm qua đã giúp đỡ An lúc chú bị cấp cứu này nọ, ổng coi
+                  vậy chứ tình cảm và thân thiện ghê …
+                </p>
+                <p>
+                  Tôi hỏi ủa em giúp gì? Bạn ấy nói em cho mượn 100 triệu để lo tiền viện phí trong bệnh viện đỡ, vì
+                  tiền và thẻ ba An để trong két ở nhà gấp quá không lấy được.
+                </p>
+                <p>
+                  Tôi bắt đầu nhắn với chồng tôi: Một đại gia tầm cỡ top Việt Nam mà đi nhắn tin nói chuyện với nhân
+                  viên của em à? Mượn 100 triệu để cấp cứu? Vấn đề rõ nha anh, anh gọi điện ngay với T chồng nó đi xem
+                  thế nào nha, chứ em thấy cái mùi lừa đảo rồi đó . Chồng tôi cũng trầm mặc rồi đi ra ngoài gọi điện sao
+                  đó, tôi bắt đầu vào cuộc điều tra tài khoản ngân hàng của nó và ôi thôi nhìn vào bảng sao kê của nó
+                  tôi đã hiểu tất cả… Tất cả đều là đồ đi thuê.
+                </p>
+                <h3><span id="33-lua-dao-ca-nhan-vien-tiem-toc">3.3. Lừa đảo cả nhân viên tiệm tóc</span></h3>
+                <p>
+                  Kịch bản của Anna Bắc Giang trong vụ này cũng tương tự như những phi vụ khác: Vật chất quyết định ý
+                  thức, đứng trước tiền bạc con người thường bị lu mờ lý trí và dễ bị sa lầy.
+                </p>
+                <p>
+                  Câu cửa miệng của Anna luôn luôn là <em>”Vật chất đối với chị chỉ là phù phiếm e ạ”</em>. Được biết,
+                  ngoài giới thiệu mình làm thiết kế cho váy cưới Calla Bridal thì hôm nào Anna Bắc Giang qua quán luôn
+                  dát trên người toàn Hơi mệt, Eo Vì, Gúc Chì, Chà Leo,… Bên cạnh luôn là chìa khóa ô tô của các hãng
+                  siêu sang, hôm thì Mẹc hôm thì BMW.
+                </p>
+                <p>
+                  Ngoài ra, chị luôn biết quan tâm tới các em trai trẻ là nhân viên trong quán, hôm nào làm qua giờ cơm
+                  chị đều order pizza, cà phê rồi hoa quả mời các em.
+                </p>
+                <p>
+                  Và như 1 lẽ tất yếu, Anna Bắc Giang sau đó cua được một em trai trẻ người non dạ, nhưng được cái đẹp
+                  zai<br />
+                  (là nhân viên của cửa hàng), Anna dụ bạn ý nghỉ làm ở salon để Anna về mở cửa hàng riêng cho. Nhưng
+                  trước hết là bảo bạn xin bố mẹ 250 triệu làm vốn trước đã.
+                </p>
+                <p>
+                  Sau vài ngày bạn ý về sống chung với Anna thì bạn này phát hiện ra căn nhà đó thực chất là Anna đi
+                  thuê, cả ngày chỉ ăn với chén, không cho cầm điện thoại, làm gì Anna cũng lồng lộn lên. Tất nhiên thì
+                  sau đó Anna biến mất như tất cả các tập phim khác…
+                </p>
+                <h3><span id="34-lua-dao-voi-kich-ban-gia-co-thai">3.4. Lừa đảo với kịch bản giả có thai</span></h3>
+                <p>
+                  Thật sự tới giờ phút này, tôi không thể biết được Anna Bắc Giang đã làm tổng cộng bao nhiêu cái đám
+                  cưới với biết bao nhiêu người bị hại, bao nhiêu hoàn cảnh bị đát có thể xảy ra với những đám cưới
+                  trong mơ nhưng thực tế cũng giống như tỉnh mộng.
+                </p>
+                <p>
+                  Trong vụ Anna đám cưới lần 4 này, hai khách mời được tham dự lễ dưới đã kể lại rằng, ngày 16/03/2021
+                  có được mời đi dự một đám cưới siêu ấm cúng, siêu lãng mạn, siêu tình cảm tại Đà Lạt. Họ được mời tham
+                  dự với tư cách là bạn của chú rể.
+                </p>
+                <p>
+                  Hai vợ chồng đi dự đám cưới mà không khỏi trầm trồ cho tới ngưỡng mộ, ngay sau đó rồi lại khóc lóc các
+                  kiểu. Các bạn lăn xả quay phim, về xem lại cảm xúc tràn trề mà kịch bản của Anna đã dựng nên. Nhưng,
+                  mấy tháng sau thì nghe tin sét đánh ngang tai khi tin Anna Bắc Giang lừa đảo rất nhiều người.
+                </p>
+                <p>
+                  Cụ thể, Anna đã dàn cảnh để cô và người đó gặp nhau, tán tỉnh, rồi yêu đương, và rồi tình yêu chín thì
+                  kết hôn. Anna lần này không khoác lên mình vẻ bí ẩn như vụ điệp viên ở phần 1,2 nữa, mà lần này Anna
+                  tạo ra một hoàn cảnh khác, cũng đáng ngưỡng mộ không kém
+                </p>
+                <p>
+                  Anna đã tự tạo ra câu chuyện rằng mình thuộc gia đình gia giáo, cả dòng họ ăn chay trường. Vì yêu chú
+                  rể mà bị gia đình ghét bỏ cấm cản chuyện hôn nhân, do vậy cả 2 người bỏ trốn gia đình, âm thầm tự tổ
+                  chức đám cưới dưới sự chứng kiến của bạn bè.
+                </p>
+                <p>
+                  Hai người quyết định tự tổ chức lễ cưới như mơ với tình yêu ngọt ngào, khung cảnh lãng mạn ngay trên
+                  rừng thông Đà Lạt, dưới sự chứng kiến của bạn bè và gia đình chú rễ, ai cũng thán phục tình yêu của
+                  đôi bạn trẻ.
+                </p>
+                <p>
+                  Rồi đột nhiên “mẹ” của cô dâu xuất hiện, phát biểu đầy cảm xúc? Cô dâu với mẹ đứng khóc không hề giả
+                  trân, làm cho tất cả những ai ở đám cưới cũng xúc động.
+                </p>
+                <p>
+                  Ghê gớm hơn là sau khi cưới nhau được vài tuần, Anna làm giấy tờ có thai giả để chú rể giao hết tiền
+                  bạc cho, sau khi nhận tiền xong thì ôm tiền bỏ trốn.
+                </p>
+
+                <div
+                  class="kk-star-ratings kksr-auto kksr-align-left kksr-valign-bottom"
+                  data-payload='{"align":"left","id":"5780","slug":"default","valign":"bottom","ignore":"","reference":"auto","class":"","count":"4","readonly":"","score":"5","best":"5","gap":"4","greet":"\u0110\u00e1nh gi\u00e1","legend":"5\/5 - (4 b\u00ecnh ch\u1ecdn)","size":"24","width":"138","_legend":"{score}\/{best} - ({count} {votes})","font_factor":"1.25"}'
+                >
+                  <div class="kksr-stars">
+                    <div class="kksr-stars-inactive">
+                      <div class="kksr-star" data-star="1" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                      <div class="kksr-star" data-star="2" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                      <div class="kksr-star" data-star="3" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                      <div class="kksr-star" data-star="4" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                      <div class="kksr-star" data-star="5" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                    </div>
+
+                    <div class="kksr-stars-active" style="width: 138px">
+                      <div class="kksr-star" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                      <div class="kksr-star" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                      <div class="kksr-star" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                      <div class="kksr-star" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                      <div class="kksr-star" style="padding-right: 4px">
+                        <div class="kksr-icon" style="width: 24px; height: 24px"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="kksr-legend" style="font-size: 19.2px">5/5 - (4 bình chọn)</div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </as-split-area>
+
+      <as-split-area [size]="60" [order]="2">
+        <as-split direction="vertical" [gutterSize]="1" [restrictMove]="true">
+          <as-split-area [size]="65" style="overflow: hidden">
+            <div style="height: 100%">
+              <header class="editor-header d-flex align-items-center justify-content-between">
+                <ul class="editor-header__actions">
+                  <li class="editor-header__action" (click)="toggleFullScreen()">
+                    <div class="editor-header__action-icon">
+                      <i class="fa-solid fa-expand" *ngIf="!isFullScreen"></i>
+                      <i class="fa-solid fa-compress" *ngIf="isFullScreen"></i>
+                    </div>
+                  </li>
+
+                  <li>
+                    <select name="" id="" class="editor-header__action-lang">
+                      <option value="">C#</option>
+                      <option value="">JavaScript</option>
+                      <option value="">PHP</option>
+                    </select>
+                  </li>
+                </ul>
+
+                <ul class="editor-header__actions">
+                  <li class="editor-header__action">
+                    <div class="editor-header__action-icon">
+                      <i class="fa-solid fa-arrows-rotate"></i>
+                    </div>
+                    <span class="editor-header__action-text">Làm mới</span>
+                  </li>
+                </ul>
+              </header>
+              <ngx-monaco-editor
+                style="height: 102%; width: 100%"
+                [options]="editorOptions"
+                [(ngModel)]="code"
+              ></ngx-monaco-editor>
+            </div>
+          </as-split-area>
+          <as-split-area [size]="29.5" class="test-case__wrap">
+            <header class="test-case__wrap-header text-uppercase">Test case</header>
+
+            <main class="test-case__content d-flex">
+              <ul class="test-cases">
+                <li class="test-case active d-flex justify-content-between align-items-center">
+                  <span>Kiểm thử 1</span>
+                  <div class="test-case-icon test-case-icon--success">
+                    <i class="fa-regular fa-circle-check"></i>
+                  </div>
+                </li>
+                <li class="test-case d-flex justify-content-between align-items-center">
+                  <span>Kiểm thử 2</span>
+                  <div class="test-case-icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                  </div>
+                </li>
+                <li class="test-case d-flex justify-content-between align-items-center">
+                  <span>Kiểm thử 3</span>
+                  <div class="test-case-icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                  </div>
+                </li>
+                <li class="test-case d-flex justify-content-between align-items-center">
+                  <span>Kiểm thử 4</span>
+                  <div class="test-case-icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                  </div>
+                </li>
+
+                <li class="test-case d-flex justify-content-between align-items-center">
+                  <span>Kiểm thử 5</span>
+                  <div class="test-case-icon test-case-icon--error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </div>
+                </li>
+
+                <li class="test-case d-flex justify-content-between align-items-center">
+                  <span>Kiểm thử 6</span>
+                  <div class="test-case-icon">
+                    <i class="fa-solid fa-lock"></i>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="test-case__panel-wrap">
+                <div class="test-case__panel">
+                  <div class="row mb-2">
+                    <div class="col col-4">
+                      <label for="" class="test-case__panel-label">Đầu vào:</label>
+                    </div>
+
+                    <div class="col col-8">8</div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="col col-4">
+                      <label for="" class="test-case__panel-label">Đầu ra thực tế:</label>
+                    </div>
+
+                    <div class="col col-8"></div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="col col-4">
+                      <label for="" class="test-case__panel-label">Đầu ra mong muốn:</label>
+                    </div>
+
+                    <div class="col col-8">8</div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="col col-4">
+                      <label for="" class="test-case__panel-label">Giới hạn thời gian:</label>
+                    </div>
+
+                    <div class="col col-8">4000 ms</div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="col col-4">
+                      <label for="" class="test-case__panel-label">Thời gian thực hiện:</label>
+                    </div>
+
+                    <div class="col col-8"></div>
+                  </div>
+
+                  <div class="row mb-2">
+                    <div class="col col-4">
+                      <label for="" class="test-case__panel-label">Tin nhắn:</label>
+                    </div>
+
+                    <div class="col col-8"></div>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </as-split-area>
+
+          <as-split-area [size]="5.5" [lockSize]="true">
+            <footer class="test-case__footer d-flex align-items-center justify-content-end">
+              <button
+                class="test-case__footer-btn test-case__footer-btn--play d-flex align-items-center justify-content-center"
+              >
+                <div class="test-case__footer-btn-icon">
+                  <i class="fa-solid fa-play"></i>
+                </div>
+
+                <span class="test-case__footer-btn-text">Chạy thử</span>
+              </button>
+
+              <button
+                disabled
+                class="test-case__footer-btn test-case__footer-btn--submit d-flex align-items-center justify-content-center"
+              >
+                <div class="test-case__footer-btn-icon">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                </div>
+
+                <span class="test-case__footer-btn-text">Nộp bài</span>
+              </button>
+            </footer>
+          </as-split-area>
+        </as-split>
+      </as-split-area>
+    </as-split>
+  </div>
+</div>

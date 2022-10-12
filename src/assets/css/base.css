@@ -1,9 +1,9 @@
-@import '~normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import "~normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 
 :root {
   --primary: #ff6638;
-  --bg-content: #F8F8F8;
+  --bg-content: #f8f8f8;
   --black: #000;
   --white: #ffff;
   --gray: #ccc;
@@ -11,7 +11,7 @@
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
   --gray-300: #d1d5db;
-  --gray-400: #73777B;
+  --gray-400: #73777b;
   --gray-500: #6b7280;
   --gray-600: #4b5563;
   --gray-700: #374151;
@@ -63,39 +63,38 @@
   --red-800: #991b1b;
   --red-900: #7f1d1d;
 
-
   /* Root v2 */
-  --my-primary: #FF6638;
+  --my-primary: #ff6638;
   /* opacity 30% 20% 10% 5% primary*/
-  --my-primary-300: #FDDFBC;
-  --my-primary-200: #FDEAD2;
-  --my-primary-100: #FFF5E9;
-  --my-primary-50: #FFF7F5;
-  --my-secondary: #0E0759;
+  --my-primary-300: #fddfbc;
+  --my-primary-200: #fdead2;
+  --my-primary-100: #fff5e9;
+  --my-primary-50: #fff7f5;
+  --my-secondary: #0e0759;
   --my-white: #fff;
   --my-black: #212121;
-  --my-gray: #F4F4F4;
-  --my-light-gray: #F9F9F9;
-  --my-dark-gray: #EEEEEE;
-  --my-darkest-gray: #8A8894;
-  --my-disabled: #F4F3FE;
+  --my-gray: #f4f4f4;
+  --my-light-gray: #f9f9f9;
+  --my-dark-gray: #eeeeee;
+  --my-darkest-gray: #8a8894;
+  --my-disabled: #f4f3fe;
 
   /* background */
-  --my-bg-color: #F4F3FE;
-  --my-bg-white: #FFF;
-  --my-bg-light: #FAFAFA;
+  --my-bg-color: #f4f3fe;
+  --my-bg-white: #fff;
+  --my-bg-light: #fafafa;
   --my-bg-gray: #f0f0f0;
 
   /* text */
-  --my-text-gray: #8A8894;
-  --my-text-disabled: #C5C0DB;
+  --my-text-gray: #8a8894;
+  --my-text-disabled: #c5c0db;
 
-  --success: #28A745;
-  --success-2: #23883A;
-  --error: #DC3545;
-  --error-2: #BF2635;
-  --warning: #FFC107;
-  --warning-2: #EFB60A;
+  --success: #28a745;
+  --success-2: #23883a;
+  --error: #dc3545;
+  --error-2: #bf2635;
+  --warning: #ffc107;
+  --warning-2: #efb60a;
 
   /* text */
   --my-rounded: 4px;
@@ -124,12 +123,11 @@ ul,
 li,
 span,
 strong {
-  font-family: 'Nunito Sans', sans-serif !important;
- 
+  font-family: "Nunito Sans", sans-serif !important;
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif !important;
+  font-family: "Nunito Sans", sans-serif !important;
   /* font-family: 'Vollkorn', serif; */
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -138,6 +136,12 @@ body {
   font-size: var(--fs);
   line-height: var(--lh);
 }
+
+.monaco-editor .overflow-guard span,
+.monaco-editor .overflow-guard div {
+  font-family: Consolas, "Courier New", monospace !important;
+}
+
 .mat-typography p {
   margin: 0;
 }
@@ -194,7 +198,7 @@ img {
 }
 
 .my-form-search:focus-within {
-  box-shadow: 0 0 0 2px rgba(255, 103, 56, .3)
+  box-shadow: 0 0 0 2px rgba(255, 103, 56, 0.3);
 }
 
 .my-input-search {
@@ -212,7 +216,7 @@ img {
 }
 
 .my-input:focus {
-  box-shadow: 0 0 0 2px rgba(255, 103, 56, .3)
+  box-shadow: 0 0 0 2px rgba(255, 103, 56, 0.3);
 }
 
 .my-btn-search-inside {
@@ -254,31 +258,31 @@ img {
 .my-shadow-2-hover,
 .my-shadow-3-hover,
 .my-shadow-4-hover {
-  transition-duration: .3s;
+  transition-duration: 0.3s;
 }
 
 .my-shadow-1-hover:hover {
   box-shadow: 0px 16px 24px rgba(142, 141, 208, 0.12);
   border: 1px solid transparent !important;
-  transform: translateY(-8px)
+  transform: translateY(-8px);
 }
 
 .my-shadow-2-hover:hover {
   box-shadow: 0px 4px 8px rgba(142, 141, 208, 0.16);
   border: 1px solid transparent !important;
-  transform: translateY(-8px)
+  transform: translateY(-8px);
 }
 
 .my-shadow-3-hover:hover {
   box-shadow: 0px 4px 16px rgba(142, 141, 208, 0.16);
   border: 1px solid transparent !important;
-  transform: translateY(-8px)
+  transform: translateY(-8px);
 }
 
 .my-shadow-4-hover:hover {
   box-shadow: 0px 16px 24px rgba(142, 141, 208, 0.12);
   border: 1px solid transparent !important;
-  transform: translateY(-8px)
+  transform: translateY(-8px);
 }
 
 .fs-text {
@@ -301,9 +305,8 @@ img {
   align-items: center;
 }
 
-
 .input-required {
-  color: red
+  color: red;
 }
 
 /* ------------------- button favorite ------------ */
@@ -311,8 +314,8 @@ img {
   /* vi base btn import config sau base css */
   padding: 4px 8px !important;
   background: var(--my-gray);
-  opacity: .6;
-  transition-duration: .3s;
+  opacity: 0.6;
+  transition-duration: 0.3s;
   width: fit-content;
 }
 
@@ -324,7 +327,6 @@ img {
 .my-add-favorite__btn.added .my-add-favorite__icon {
   color: var(--my-primary);
   opacity: 1;
-
 }
 
 .my-add-favorite__icon {
@@ -339,14 +341,14 @@ img {
   justify-content: flex-end;
   margin-bottom: 0;
   /* width: 100%; */
-  width: fit-content
+  width: fit-content;
 }
 
 .my-countdown-item {
   color: var(--my-darkest-gray);
 }
 
-.my-countdown-item+.my-countdown-item {
+.my-countdown-item + .my-countdown-item {
   padding-left: 4px;
 }
 
@@ -364,7 +366,6 @@ img {
   font-size: 12px;
   line-height: 14px;
 }
-
 
 .contest-item {
   margin-bottom: 20px;

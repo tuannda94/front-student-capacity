@@ -162,7 +162,7 @@
     "symbol-observable" "4.0.0"
     "uuid" "8.3.2"
 
-"@angular/common@ ^13.0.0-rc.0 || ^13.0.0", "@angular/common@^12.0.0", "@angular/common@^13.0.0", "@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@^13.0.1", "@angular/common@^13.1.0", "@angular/common@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/common@>=8.0.0", "@angular/common@13.2.0":
+"@angular/common@ ^13.0.0-rc.0 || ^13.0.0", "@angular/common@^12.0.0", "@angular/common@^13.0.0", "@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@^13.0.1", "@angular/common@^13.1.0", "@angular/common@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/common@>=8.0.0", "@angular/common@>=9.0.0", "@angular/common@13.2.0":
   "integrity" "sha512-zyq3kscl5BoY+xxl4YOfbKP72xwzx/vKLE+2ougjPu2spm5KIllIAo/VrxVqIBrsGWT/4gs9pvIOqOdOfufxUA=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-13.2.0.tgz"
   "version" "13.2.0"
@@ -193,7 +193,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^12.0.0", "@angular/core@^13.0.0", "@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@^13.0.0-rc.0 || ^13.0.0", "@angular/core@^13.0.1", "@angular/core@^13.1.0", "@angular/core@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/core@>=8.0.0", "@angular/core@13.2.0":
+"@angular/core@^12.0.0", "@angular/core@^13.0.0", "@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@^13.0.0-rc.0 || ^13.0.0", "@angular/core@^13.0.1", "@angular/core@^13.1.0", "@angular/core@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/core@>=8.0.0", "@angular/core@>=9.0.0", "@angular/core@13.2.0":
   "integrity" "sha512-mWRWbbZ6k00AicA/GrxmWKaw8upo77sRQz4tSYKpwVKt2TtCeoW8OkdYUpnmuVjxpF0bD6PtVc0e1fD6es/ElA=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-13.2.0.tgz"
   "version" "13.2.0"
@@ -1809,6 +1809,13 @@
     "json-schema-traverse" "^1.0.0"
     "require-from-string" "^2.0.2"
     "uri-js" "^4.2.2"
+
+"angular-split@^13.2.0":
+  "integrity" "sha512-WXVzgBnt6hPipE+z0D8zaCn08kwD0515zpv3siIjlJGgSFDpsIiklyWpTslk89lcUb14ik/dgqsm3F8GEnt8Xw=="
+  "resolved" "https://registry.npmjs.org/angular-split/-/angular-split-13.2.0.tgz"
+  "version" "13.2.0"
+  dependencies:
+    "tslib" "^2.0.0"
 
 "angularx-social-login@4.0.1":
   "integrity" "sha512-dL65y0HXlKd8hhuH70/FFTxWsndEBU5DX2I1x7AcJ1ZAYpU6LPtQMbnzy10eSOcWZNeZX8XzaRaIbc4P+GjmvA=="
@@ -4323,6 +4330,11 @@
   "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
   "version" "2.29.1"
 
+"monaco-editor@^0.24.0":
+  "integrity" "sha512-o1f0Lz6ABFNTtnEqqqvlY9qzNx24rQZx1RgYNQ8SkWkE+Ka63keHH/RqxQ4QhN4fs/UYOnvAtEUZsPrzccH++A=="
+  "resolved" "https://registry.npmjs.org/monaco-editor/-/monaco-editor-0.24.0.tgz"
+  "version" "0.24.0"
+
 "ms@^2.0.0", "ms@^2.1.1", "ms@2.1.2":
   "integrity" "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w=="
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
@@ -4396,6 +4408,13 @@
     "@ant-design/icons-angular" "^13.0.1"
     "date-fns" "^2.16.1"
     "tslib" "^2.3.0"
+
+"ngx-monaco-editor@^12.0.0":
+  "integrity" "sha512-/HXTILVwWvrk4OkT1p88nb+PGEqlecQot2VMTdSLbVW7A24fNZpDAF6tNR4Bp3V/abZjShDK8LfsqLePA0tPmw=="
+  "resolved" "https://registry.npmjs.org/ngx-monaco-editor/-/ngx-monaco-editor-12.0.0.tgz"
+  "version" "12.0.0"
+  dependencies:
+    "tslib" "^2.1.0"
 
 "ngx-owl-carousel-o@7.0.1":
   "integrity" "sha512-pUVk6mb0OlwD4OMGLiTTJdhNR08LpXdBFO5rGU8b8qNvP61kljfqDFAfv/R7GP+70boBu8TyzFk6jTBGgnVEPw=="
@@ -5399,7 +5418,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"rxjs@^6.0.0 || ^7.0.0", "rxjs@^6.0.1 || ^7.0.0", "rxjs@^6.4.0 || ^7.4.0", "rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.2.0", "rxjs@7.5.0":
+"rxjs@^6.0.0 || ^7.0.0", "rxjs@^6.0.1 || ^7.0.0", "rxjs@^6.4.0 || ^7.4.0", "rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.2.0", "rxjs@>=6.0.0", "rxjs@7.5.0":
   "integrity" "sha512-fuCKAfFawVYX0pyFlETtYnXI+5iiY9Dftgk+VdgeOq+Qyi9ZDWckHZRDaXRt5WCNbbLkmAheoSGDiceyCIKNZA=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-7.5.0.tgz"
   "version" "7.5.0"

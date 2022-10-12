@@ -95,6 +95,9 @@ import { RecruitmentPositionComponent } from "./component/home/recruitment-posit
 import { OutstandingAdvantagesComponent } from "./component/home/outstanding-advantages/outstanding-advantages.component";
 import { RankCapacityComponent } from "./pages/rank-capacity/rank-capacity.component";
 import { PostLoadItemComponent } from "./loading/post-load-item/post-load-item.component";
+import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
+import { AngularSplitModule } from "angular-split";
+import { MonacoEditorModule } from "ngx-monaco-editor";
 
 @NgModule({
   declarations: [
@@ -162,6 +165,7 @@ import { PostLoadItemComponent } from "./loading/post-load-item/post-load-item.c
     OutstandingAdvantagesComponent,
     RankCapacityComponent,
     PostLoadItemComponent,
+    ChallengeExamComponent,
   ],
   imports: [
     BrowserModule,
@@ -182,6 +186,8 @@ import { PostLoadItemComponent } from "./loading/post-load-item/post-load-item.c
     NzSpinModule,
     NzPaginationModule,
     NzToolTipModule,
+    AngularSplitModule,
+    MonacoEditorModule.forRoot(),
   ],
   providers: [
     {

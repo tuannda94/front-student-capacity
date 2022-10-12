@@ -24,6 +24,7 @@ import { PostCategoryComponent } from "./pages/post-category/post-category.compo
 import { JoinCapacityComponent } from "./pages/join-capacity/join-capacity.component";
 import { CapacityPlayComponent } from "./pages/capacity-play/capacity-play.component";
 import { RankCapacityComponent } from "./pages/rank-capacity/rank-capacity.component";
+import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
 
 const routes: Routes = [
   {
@@ -130,6 +131,10 @@ const routes: Routes = [
       {
         path: "test-nang-luc/:slug_major/rankings",
         component: RankCapacityComponent,
+      },
+      {
+        path: "challenge/:id/lam-bai",
+        component: ChallengeExamComponent,
       },
     ],
   },

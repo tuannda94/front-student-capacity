@@ -25,12 +25,13 @@ export const environment = {
   keywordListUrl: `${publicApiUrl}/keywords`,
   keywordTrendingUrl: `${publicApiUrl}/keywords`,
   RankCapacityUrl: `${publicApiUrl}/rating/major-capacity`,
+
   // Router API V1;
   userListUrl: `${jwtApiUrl}/users`,
   roundV1Url: `${jwtApiUrl}/round`,
   contestV1Url: `${jwtApiUrl}/contest`,
   teamListUrl: `${jwtApiUrl}/teams`,
   takeExamUrl: `${jwtApiUrl}/take-exam`,
-  userV1Url: `${jwtApiUrl}/user`
+  userV1Url: `${jwtApiUrl}/user`,
+  challengeV1Url: `${jwtApiUrl}/challenge`,
 };
-

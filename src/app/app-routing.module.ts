@@ -1,3 +1,4 @@
+import { ChallengeComponent } from "./pages/challenge/challenge.component";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./auth/login/login.component";
@@ -131,6 +132,10 @@ const routes: Routes = [
       {
         path: "test-nang-luc/:slug_major/rankings",
         component: RankCapacityComponent,
+      },
+      {
+        path: "challenge",
+        component: ChallengeComponent,
       },
       {
         path: "challenge/:id/lam-bai",

@@ -98,6 +98,7 @@ import { PostLoadItemComponent } from "./loading/post-load-item/post-load-item.c
 import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
 import { AngularSplitModule } from "angular-split";
 import { MonacoEditorModule } from "ngx-monaco-editor";
+import { ChallengeComponent } from './pages/challenge/challenge.component';
 
 @NgModule({
   declarations: [
@@ -166,6 +167,7 @@ import { MonacoEditorModule } from "ngx-monaco-editor";
     RankCapacityComponent,
     PostLoadItemComponent,
     ChallengeExamComponent,
+    ChallengeComponent,
   ],
   imports: [
     BrowserModule,

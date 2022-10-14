@@ -1,23 +1,132 @@
 <div class="container">
-  <h1 class="my-h4 my-3">Danh sách thử thách</h1>
+  <!-- banner -->
+  <div class="challenge__banner"></div>
 
-  <ul class="challenge__list">
-    <li
+  <!-- filter -->
+  <form class="my-box-filter my-box-filter-3 mt-3">
+    <input type="text" class="my-input" placeholder="Tên thử thách..." formControlName="filterName" />
+
+    <div ngbDropdown class="d-inline-block w-100">
+      <input
+        type="text"
+        formControlName="filterMajor"
+        class="my-input"
+        placeholder="Độ khó"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      />
+      <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
+        <div *ngIf="false" class="d-flex justify-content-center">
+          <app-loading-item class="py-2"></app-loading-item>
+        </div>
+        <a class="capacity-text-majors" ngbDropdownItem>Hehe</a>
+      </div>
+    </div>
+
+    <div ngbDropdown class="d-inline-block w-100">
+      <input
+        type="text"
+        formControlName="filterSkill"
+        class="my-input w-100"
+        placeholder="Ngôn ngữ"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      />
+      <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
+        <div *ngIf="false" class="d-flex justify-content-center">
+          <app-loading-item class="py-2"></app-loading-item>
+        </div>
+        <a class="capacity-text-majors" ngbDropdownItem>Hehe</a>
+      </div>
+    </div>
+
+    <div class="btn-wrapper">
+      <button type="button" class="my-btn-secondary my-btn-s btn-reset">
+        <i class="fa-sharp fa-solid fa-rotate-right"></i>
+        <span>Khôi phục</span>
+      </button>
+      <button class="my-btn-primary my-btn-s">
+        Tìm kiếm
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+  </form>
+
+  <!-- danh sách thử thách -->
+  <div class="challenge__list mt-4">
+    <div
       *ngFor="let challenge of challenges"
-      class="challenge__list-item d-flex align-items-center justify-content-between border p-2 rounded-2 mb-3"
+      class="challenge__list-item d-flex align-items-center justify-content-between p-3 my-shadow-2-hover mb-3"
     >
-      <h2 class="challenge__list-item-name m-0 my-h5">{{ challenge.name }}</h2>
+      <div class="challenge__list-item-left">
+        <div class="mb-2">
+          <span
+            class="challenge__type"
+            [ngClass]="{
+              'challenge__type--normal': challenge.type === 0,
+              'challenge__type--medium': challenge.type === 1,
+              'challenge__type--max': challenge.type === 2
+            }"
+            >{{ getTypeChallenge(challenge.type) }}</span
+          >
+        </div>
+
+        <a [routerLink]="['/challenge', challenge.id]" class="challenge__list-item-link d-inline-block">
+          <h2 class="challenge__list-item-name m-0 my-h5">
+            {{ challenge.name }}
+          </h2>
+        </a>
+
+        <ul class="challenge__langs d-flex align-items-center m-0" *ngIf="challenge.codeLangs.length <= limitLangs">
+          <li class="mt-2 challenge__lang text-uppercase" *ngFor="let code of challenge.codeLangs">{{ code.ex }}</li>
+        </ul>
+
+        <ul class="challenge__langs d-flex align-items-center m-0" *ngIf="challenge.codeLangs.length > limitLangs">
+          <li class="mt-2 challenge__lang text-uppercase" *ngFor="let code of challenge.codeLangs.slice(0, limitLangs)">
+            {{ code.ex }}
+          </li>
+          <li class="mt-2 challenge__lang text-uppercase" ngbTooltip="{{ challenge.tooltipLang }}">
+            +{{ challenge.codeLangs.length - limitLangs }}
+          </li>
+        </ul>
+      </div>
 
       <div class="d-flex align-items-center">
-        <div class="challenge__submission text-center mx-4">
-          <span>Bài đã nộp bài</span>
-          <div>{{ challenge.successRef }}%</div>
+        <div class="mx-3 challenge__submission">
+          <div class="d-flex align-items-center justify-content-between">
+            <span>Hoàn thành</span>
+
+            <!-- <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center mx-4">
+                <div class="challenge__submission-icon">
+                  <i class="fa-regular fa-user"></i>
+                </div>
+                <span>10</span>
+              </div>
+
+              <div class="d-flex align-items-center">
+                <div class="challenge__submission-icon">
+                  <i class="fa-regular fa-file"></i>
+                </div>
+                <span>0</span>
+              </div>
+            </div> -->
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-bar__inner" [ngStyle]="{ width: challenge.successRef + '%' }"></div>
+          </div>
         </div>
 
         <a [routerLink]="['/challenge', challenge.id]">
-          <button class="my-btn my-btn-primary my-btn-s">Code ngay</button>
+          <button class="my-btn my-btn-primary my-btn-xs">Code ngay</button>
         </a>
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
+
+  <!-- pagination -->
+  <div class="pagination d-flex justify-content-end mb-3">
+    <nz-pagination [nzPageIndex]="1" [nzTotal]="10" [nzPageSize]="3"></nz-pagination>
+  </div>
 </div>

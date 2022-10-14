@@ -1,0 +1,122 @@
+.challenge__banner {
+  background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/79731568097599.5b50bca477735.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-top: 25%;
+  border-radius: var(--my-rounded-2);
+  margin-top: 12px;
+}
+
+.btn-reset {
+  margin-right: 8px;
+}
+
+.challenge__list-item {
+  border: 1px solid var(--my-gray);
+  border-radius: var(--my-rounded);
+}
+
+.challenge__list-item-left {
+  flex: 1;
+  padding-right: 12px;
+}
+
+.challenge__list-item-link {
+  color: var(--my-black);
+  transition: all 0.25s linear;
+}
+
+.challenge__list-item-link:hover {
+  color: var(--my-primary);
+}
+
+.challenge__lang {
+  margin-right: 4px;
+  background-color: var(--gray-200);
+  border-radius: var(--my-rounded);
+  padding: 4px 6px;
+  font-size: 11px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.challenge__lang:hover {
+  background-color: #d4d4d4;
+}
+
+.challenge__submission {
+  min-width: 280px;
+  max-width: 100%;
+}
+
+.challenge__submission-icon {
+  width: 16px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: #ebebeb;
+  border-radius: 16px;
+  position: relative;
+  margin-top: 4px;
+}
+
+.progress-bar__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 16px;
+  background-color: #5cc900;
+}
+
+.challenge__type {
+  padding: 2px 6px;
+  border-radius: var(--my-rounded);
+  font-size: 13px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s linear;
+}
+
+.challenge__type:hover {
+  opacity: 0.75;
+}
+
+.challenge__type--normal {
+  background-color: #19be6b;
+}
+
+.challenge__type--medium {
+  background-color: #2d8cf0;
+}
+
+.challenge__type--max {
+  background-color: #f90;
+}
+
+/* pagination */
+::ng-deep .ant-pagination-item-active a,
+::ng-deep .ant-pagination-item:hover a,
+::ng-deep .ant-pagination-item-active:hover a,
+::ng-deep .ant-pagination-prev:not([ng-reflect-disabled="true"]):hover .ant-pagination-item-link,
+::ng-deep .ant-pagination-next:not([ng-reflect-disabled="true"]):hover .ant-pagination-item-link,
+::ng-deep .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon,
+::ng-deep .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon {
+  color: var(--primary);
+}
+
+::ng-deep .ant-pagination-item-active:hover,
+::ng-deep .ant-pagination-item:hover,
+::ng-deep .ant-pagination-prev:not([ng-reflect-disabled="true"]):hover .ant-pagination-item-link,
+::ng-deep .ant-pagination-next:not([ng-reflect-disabled="true"]):hover .ant-pagination-item-link,
+::ng-deep .ant-pagination-item-active {
+  border-color: var(--primary);
+}
+
+::ng-deep button.ant-pagination-item-link.ng-star-inserted {
+  line-height: normal;
+}

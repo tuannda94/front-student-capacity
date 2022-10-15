@@ -137,8 +137,17 @@ body {
   line-height: var(--lh);
 }
 
-.monaco-editor .overflow-guard span,
-.monaco-editor .overflow-guard div {
+.editor-container h1,
+.editor-container h2,
+.editor-container h3,
+.editor-container h4,
+.editor-container h5,
+.editor-container h6,
+.editor-container p,
+.editor-container ul,
+.editor-container li,
+.editor-container span,
+.editor-container strong {
   font-family: Consolas, "Courier New", monospace !important;
 }
 

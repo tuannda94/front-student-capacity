@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
+import { ResponseTestCase } from "../models/challenge.model";
 
 @Injectable({
   providedIn: "root",
@@ -12,5 +13,24 @@ export class ChallengeService {
 
   getChallenges(): Observable<ResponsePayload> {
     return this.http.get<ResponsePayload>(`${environment.challengeV1Url}`);
+  }
+
+  getChallenge(challenge_id: number): Observable<ResponsePayload> {
+    return this.http.get<ResponsePayload>(`${environment.challengeV1Url}/${challenge_id}`);
+  }
+
+  runTestCase({
+    type_id,
+    content,
+    challengeId,
+  }: {
+    type_id: number;
+    content: string;
+    challengeId: number;
+  }): Observable<ResponseTestCase[]> {
+    return this.http.post<ResponseTestCase[]>(`${environment.challengeV1Url}/run-code/${challengeId}`, {
+      type_id,
+      content,
+    });
   }
 }

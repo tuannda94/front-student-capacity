@@ -5,7 +5,7 @@
   bottom: 40px;
   left: 0;
   background-color: #fff;
-  z-index: 9999;
+  z-index: 999;
 }
 
 ::ng-deep .as-split-gutter {
@@ -269,17 +269,20 @@
 }
 
 /* scrollbar */
-.test-cases::-webkit-scrollbar {
+.test-cases::-webkit-scrollbar,
+.test-case__content::-webkit-scrollbar {
   height: 10px;
   width: 8px;
 }
 
-.test-cases::-webkit-scrollbar-thumb {
+.test-cases::-webkit-scrollbar-thumb,
+.test-case__content::-webkit-scrollbar-thumb {
   background-color: #6e6e6e;
   outline: #333 solid 1px;
   border-radius: unset;
 }
-.test-cases::-webkit-scrollbar-track {
+.test-cases::-webkit-scrollbar-track,
+.test-case__content::-webkit-scrollbar-track {
   box-shadow: rgb(0 0 0 / 30%) 0 0 6px inset;
   background-color: #1e1f26;
 }
@@ -327,6 +330,11 @@
   padding: 10px;
   color: #999;
   height: calc(100% - 34px);
+  overflow-y: auto;
+}
+
+.test-case__content-inner {
+  height: 100%;
 }
 
 .test-case__panel-wrap {
@@ -375,14 +383,26 @@
   font-size: 18px;
 }
 
-.test-case-icon--error {
+.test-case-icon--error,
+.test-case__message-wrap--error {
   color: #ff6545;
 }
 
-.test-case-icon--success {
+.test-case-icon--success,
+.test-case__message-wrap--success {
   color: #6accb6;
 }
 
 .test-case__panel-label {
   color: #3498db;
+}
+
+.test-case__message-wrap {
+  padding: 0 10px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.test-case__message-icon {
+  margin-right: 8px;
 }

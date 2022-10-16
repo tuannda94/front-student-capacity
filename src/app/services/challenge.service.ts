@@ -12,11 +12,11 @@ export class ChallengeService {
   constructor(private http: HttpClient) {}
 
   getChallenges(): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.challengeV1Url}`);
+    return this.http.get<ResponsePayload>(`${environment.challengeListUrl}`);
   }
 
   getChallenge(challenge_id: number): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.challengeV1Url}/${challenge_id}`);
+    return this.http.get<ResponsePayload>(`${environment.challengeListUrl}/${challenge_id}`);
   }
 
   // test case

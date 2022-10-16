@@ -25,6 +25,7 @@ export const environment = {
   keywordListUrl: `${publicApiUrl}/keywords`,
   keywordTrendingUrl: `${publicApiUrl}/keywords`,
   RankCapacityUrl: `${publicApiUrl}/rating/major-capacity`,
+  challengeListUrl: `${publicApiUrl}/challenge`,
 
   // Router API V1;
   userListUrl: `${jwtApiUrl}/users`,

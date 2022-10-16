@@ -99,6 +99,7 @@ import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.co
 import { AngularSplitModule } from "angular-split";
 import { MonacoEditorModule } from "ngx-monaco-editor";
 import { ChallengeComponent } from './pages/challenge/challenge.component';
+import { ModalSubmitChallengeSuccessComponent } from './modal/modal-submit-challenge-success/modal-submit-challenge-success.component';
 
 @NgModule({
   declarations: [
@@ -168,6 +169,7 @@ import { ChallengeComponent } from './pages/challenge/challenge.component';
     PostLoadItemComponent,
     ChallengeExamComponent,
     ChallengeComponent,
+    ModalSubmitChallengeSuccessComponent,
   ],
   imports: [
     BrowserModule,

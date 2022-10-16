@@ -1,12 +1,13 @@
 import { NgToastService } from "ng-angular-popup";
 import { User } from "./../../models/user";
 import { UserService } from "./../../services/user.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ChallengeService } from "src/app/services/challenge.service";
 import { Challenge, CurrentTestCase, SampleCode, TestCase } from "src/app/models/challenge.model";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogConfirmComponent } from "src/app/modal/dialog-confirm/dialog-confirm.component";
+import { ModalSubmitChallengeSuccessComponent } from "src/app/modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
 
 @Component({
   selector: "app-challenge-exam",
@@ -47,12 +48,43 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
   // kích hoạt button nộp bài
   isActiveSubmitCode = false;
 
+  tabActive = "issue";
+
+  sidebarList = [
+    {
+      name: "issue",
+      title: "Vấn đề",
+      icon: "fa-solid fa-book-open",
+    },
+    {
+      name: "rank",
+      title: "Bảng xếp hạng",
+      icon: "fa-solid fa-list",
+    },
+    {
+      name: "history",
+      title: "Lịch sử nộp",
+      icon: "fa-solid fa-clock-rotate-left",
+    },
+    {
+      name: "comment",
+      title: "Bình luận",
+      icon: "fa-regular fa-message",
+    },
+    {
+      name: "question",
+      title: "Câu hỏi",
+      icon: "fa-regular fa-circle-question",
+    },
+  ];
+
   constructor(
     private challengeService: ChallengeService,
     private route: ActivatedRoute,
     private userService: UserService,
     public dialog: MatDialog,
     private toastService: NgToastService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -259,6 +291,20 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
             status: isPassAll,
             message: messageTestCase,
           };
+
+          // modal thông báo hoàn thành bài thi
+          const modalRef = this.dialog.open(ModalSubmitChallengeSuccessComponent, {
+            width: "600px",
+            data: {
+              name: this.userLogged.name,
+            },
+          });
+          modalRef.afterClosed().subscribe((res) => {
+            console.log(res);
+            if (res === "true") {
+              this.router.navigate(["/challenge"]);
+            }
+          });
         },
         () => {
           this.toastService.info({ detail: "Đã có lỗi xảy ra", summary: "Vui lòng thử lại!" });
@@ -303,5 +349,11 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
         this.code = sampleCodeExits?.code_run!;
       }
     });
+  }
+
+  // xử lý click tab sidebar
+  handleChangeTab(tabName: string) {
+    this.tabActive = tabName;
+    console.log(tabName);
   }
 }

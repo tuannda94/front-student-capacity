@@ -23,47 +23,44 @@
         <div style="display: flex; height: 100%">
           <aside class="challenge__sidebar">
             <ul class="challenge__sidebar-icon-list m-0 p-0">
-              <div class="challenge__sidebar-icon active" title="Vấn đề">
-                <i class="fa-solid fa-book-open"></i>
-              </div>
-
-              <div class="challenge__sidebar-icon" title="Bảng xếp hạng">
-                <i class="fa-solid fa-list"></i>
-              </div>
-
-              <div class="challenge__sidebar-icon" title="Lịch sử nộp">
-                <i class="fa-solid fa-clock-rotate-left"></i>
-              </div>
-
-              <div class="challenge__sidebar-icon" title="Bình luận">
-                <i class="fa-regular fa-message"></i>
-              </div>
-
-              <div class="challenge__sidebar-icon" title="Câu hỏi">
-                <i class="fa-regular fa-circle-question"></i>
+              <div
+                *ngFor="let sidebar of sidebarList"
+                class="challenge__sidebar-icon"
+                [ngClass]="{ active: tabActive === sidebar.name }"
+                title="{{ sidebar.title }}"
+                (click)="handleChangeTab(sidebar.name)"
+              >
+                <i class="{{ sidebar.icon }}"></i>
               </div>
             </ul>
           </aside>
+
           <div class="challenge__content">
-            <header class="challenge__content-header d-flex align-items-center flex-wrap">
-              <div class="challenge__content-header-user d-flex align-items-center mb-2">
-                <img src="{{ userLogged.avatar }}" alt="" class="challenge__content-header-user-avt" />
-                <a routerLink="/tai-khoan" class="challenge__content-header-user-name">{{ userLogged.name }}</a>
-              </div>
-
-              <div class="challenge__content-header-tag mb-2">{{ getTypeChallenge(challenge.type) }}</div>
-
-              <!-- <div class="challenge__content-header-point d-flex align-items-center mb-2">
-                <div class="challenge__content-header-point-icon d-flex align-items-center justify-content-center">
-                  <i class="fa-solid fa-heart"></i>
+            <!-- tab đề bài -->
+            <div class="challenge__content-question" *ngIf="tabActive === 'issue'">
+              <header class="challenge__content-header d-flex align-items-center flex-wrap">
+                <div class="challenge__content-header-user d-flex align-items-center mb-2">
+                  <img src="{{ userLogged.avatar }}" alt="" class="challenge__content-header-user-avt" />
+                  <a routerLink="/tai-khoan" class="challenge__content-header-user-name">{{ userLogged.name }}</a>
                 </div>
 
-                <span class="challenge__content-header-point-text">100 Điểm</span>
-              </div> -->
-            </header>
+                <div class="challenge__content-header-tag mb-2">{{ getTypeChallenge(challenge.type) }}</div>
 
-            <!-- content question -->
-            <main class="challenge__content-main" [innerHTML]="challenge.content"></main>
+                <!-- <div class="challenge__content-header-point d-flex align-items-center mb-2">
+                  <div class="challenge__content-header-point-icon d-flex align-items-center justify-content-center">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+  
+                  <span class="challenge__content-header-point-text">100 Điểm</span>
+                </div> -->
+              </header>
+
+              <!-- content question -->
+              <main class="challenge__content-main" [innerHTML]="challenge.content"></main>
+            </div>
+
+            <!-- tab rank -->
+            <div class="challenge__content-rank" *ngIf="tabActive === 'rank'">Hehe</div>
           </div>
         </div>
       </as-split-area>

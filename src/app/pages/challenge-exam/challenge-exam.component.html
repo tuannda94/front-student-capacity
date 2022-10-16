@@ -60,7 +60,116 @@
             </div>
 
             <!-- tab rank -->
-            <div class="challenge__content-rank" *ngIf="tabActive === 'rank'">Hehe</div>
+            <div class="challenge__content-rank" *ngIf="tabActive === 'rank'">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" class="align-middle">STT</th>
+                    <th scope="col" class="align-middle">Tên</th>
+                    <th scope="col" class="align-middle">Ngôn ngữ</th>
+                    <th scope="col" class="align-middle">Điểm</th>
+                    <th scope="col" class="align-middle">Thời gian chạy (s)</th>
+                    <th scope="col" class="align-middle">Thời gian nộp</th>
+                  </tr>
+                </thead>
+                <tbody class="challenge__content-rank-taboe-body">
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">1</th>
+                    <td class="text-primary py-4 align-middle">Tuân</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">2</th>
+                    <td class="text-primary py-4 align-middle">Lê Văn Tuân</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">3</th>
+                    <td class="text-primary py-4 align-middle">Lê Duy Tuân</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">4</th>
+                    <td class="text-primary py-4 align-middle">Lê Anh Tuân</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">5</th>
+                    <td class="text-primary py-4 align-middle">Lê Ngọc Tuân</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">6</th>
+                    <td class="text-primary py-4 align-middle">Lê Hoàng Tuân</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">7</th>
+                    <td class="text-primary py-4 align-middle">Lê Quốc Tuân</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">8</th>
+                    <td class="text-primary py-4 align-middle">Tuân 4</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">9</th>
+                    <td class="text-primary py-4 align-middle">Tuân 4</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row" class="py-4 align-middle">10</th>
+                    <td class="text-primary py-4 align-middle">Tuân 4</td>
+                    <td class="py-4 align-middle">JavaScript</td>
+                    <td class="py-4 align-middle">10</td>
+                    <td class="py-4 align-middle">0.25</td>
+                    <td class="py-4 align-middle">15:20 03/05/2002</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- pagination -->
+              <div class="pagination d-flex justify-content-center mb-3">
+                <nz-pagination [nzPageIndex]="1" [nzTotal]="10" [nzPageSize]="3"></nz-pagination>
+              </div>
+            </div>
           </div>
         </div>
       </as-split-area>

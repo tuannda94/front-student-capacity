@@ -52,5 +52,11 @@ export class ResponseTestCase {
   id: number;
   result: string;
   flag: boolean;
-  time: string; // thời gian chạy
+  time: string; // thời gian chạy;
+  status: number; // trạng thái test case ẩn
+}
+
+export class ResponseSubmitCode {
+  status: boolean;
+  data: ResponseTestCase[];
 }

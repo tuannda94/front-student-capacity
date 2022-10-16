@@ -130,10 +130,8 @@
               <div
                 class="test-case__message-wrap test-case__message-wrap--success"
                 *ngIf="statusRunTestCase && statusRunTestCase.status"
-              >
-                <b>Vượt qua kiểm thử mẫu</b>
-                <p>Ấn Nộp bài để chạy toàn bộ test case và lưu kết quả của bạn.</p>
-              </div>
+                [innerHTML]="statusRunTestCase.message"
+              ></div>
 
               <main class="d-flex test-case__content-inner">
                 <ul class="test-cases">
@@ -148,11 +146,17 @@
                       <i class="fa-solid fa-lock"></i>
                     </div>
                     <!-- chưa pass test case -->
-                    <div class="test-case-icon test-case-icon--error" *ngIf="test.statusRunCode && !test.passed">
+                    <div
+                      class="test-case-icon test-case-icon--error"
+                      *ngIf="test.statusRunCode && !test.passed && test.status === 1"
+                    >
                       <i class="fa-solid fa-triangle-exclamation"></i>
                     </div>
                     <!-- pass test case -->
-                    <div class="test-case-icon test-case-icon--success" *ngIf="test.statusRunCode && test.passed">
+                    <div
+                      class="test-case-icon test-case-icon--success"
+                      *ngIf="test.statusRunCode && test.passed && test.status === 1"
+                    >
                       <i class="fa-regular fa-circle-check"></i>
                     </div>
                   </li>
@@ -235,7 +239,8 @@
               </button>
 
               <button
-                disabled
+                [attr.disabled]="!isActiveSubmitCode ? true : null"
+                (click)="handleSubmitCode()"
                 class="test-case__footer-btn test-case__footer-btn--submit d-flex align-items-center justify-content-center"
               >
                 <div class="test-case__footer-btn-icon">

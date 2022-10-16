@@ -1,3 +1,4 @@
+import { NgToastService } from "ng-angular-popup";
 import { User } from "./../../models/user";
 import { UserService } from "./../../services/user.service";
 import { ActivatedRoute } from "@angular/router";
@@ -43,11 +44,15 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
     message: string;
   };
 
+  // kích hoạt button nộp bài
+  isActiveSubmitCode = false;
+
   constructor(
     private challengeService: ChallengeService,
     private route: ActivatedRoute,
     private userService: UserService,
     public dialog: MatDialog,
+    private toastService: NgToastService,
   ) {}
 
   ngOnInit(): void {
@@ -179,14 +184,86 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
         const testCasePassed = res.filter((item) => item.flag).length;
         const isPassAll = totalTestCasePublic === testCasePassed;
 
+        const messageTestCase = !isPassAll
+          ? `${testCasePassed}/${totalTestCasePublic} test case đúng.`
+          : "<b>Vượt qua kiểm thử mẫu</b><p>Ấn Nộp bài để chạy toàn bộ test case và lưu kết quả của bạn.</p>";
+
         this.statusRunTestCase = {
           status: isPassAll,
-          message: `${testCasePassed}/${totalTestCasePublic} test case đúng.`,
+          message: messageTestCase,
         };
+
+        // nếu vượt qua tất cả test case => nộp bài
+        this.isActiveSubmitCode = isPassAll;
+        console.log(isPassAll);
 
         console.log(this.testCases);
       });
     console.log(this.code, this.codeLangId);
+  }
+
+  // nộp bài
+  handleSubmitCode() {
+    if (!this.isActiveSubmitCode) return;
+
+    this.challengeService
+      .submitCode({
+        type_id: this.codeLangId,
+        content: this.code,
+        challengeId: this.challengeId,
+      })
+      .subscribe(
+        ({ status, data }) => {
+          this.testCases = this.testCases.map((testCase) => {
+            const testCaseExits = data.find((item) => item.id === testCase.id);
+
+            // đổ dữ liệu test case đang active
+            if (testCaseExits?.id === this.currentTestCase.id) {
+              this.currentTestCase = {
+                ...this.currentTestCase,
+                panel: {
+                  ...this.currentTestCase.panel,
+                  result: testCaseExits.result,
+                  time: testCaseExits.time,
+                },
+              };
+            }
+
+            if (testCaseExits) {
+              return {
+                ...testCase,
+                passed: testCaseExits?.flag!,
+                result: testCaseExits?.result!,
+                statusRunCode: true,
+                time: testCaseExits?.time!,
+              };
+            }
+
+            return {
+              ...testCase,
+              statusRunCode: false,
+            };
+          });
+
+          // message chạy test case
+          const totalTestCase = this.testCases.length;
+          const testCasePassed = data.filter((item) => item.flag).length;
+          const totalTestCasePrivate = data.filter((item) => !item.flag && item.status === 0).length;
+          const isPassAll = totalTestCase === testCasePassed;
+
+          const messageTestCase = !isPassAll
+            ? `${testCasePassed}/${totalTestCase} test case đúng. (${totalTestCasePrivate} test case ẩn).`
+            : "Bạn đã vượt qua tất cả các test case.";
+
+          this.statusRunTestCase = {
+            status: isPassAll,
+            message: messageTestCase,
+          };
+        },
+        () => {
+          this.toastService.info({ detail: "Đã có lỗi xảy ra", summary: "Vui lòng thử lại!" });
+        },
+      );
   }
 
   // xử lý click tab test case

@@ -22,6 +22,10 @@
   padding-right: 12px;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
 .challenge__list-item-link {
   color: var(--my-black);
   transition: all 0.25s linear;
@@ -96,6 +100,12 @@
 
 .challenge__type--max {
   background-color: #f90;
+}
+
+.challenge__list-empty-img {
+  width: 500px;
+  margin: 0 auto;
+  display: block;
 }
 
 /* pagination */

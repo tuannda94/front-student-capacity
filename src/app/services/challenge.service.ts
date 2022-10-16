@@ -1,6 +1,6 @@
 import { ResponsePayload } from "./../models/response-payload";
 import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { ResponseSubmitCode, ResponseTestCase } from "../models/challenge.model";
@@ -11,8 +11,17 @@ import { ResponseSubmitCode, ResponseTestCase } from "../models/challenge.model"
 export class ChallengeService {
   constructor(private http: HttpClient) {}
 
-  getChallenges(): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.challengeListUrl}`);
+  getChallenges(paramsArgs?: {}): Observable<ResponsePayload> {
+    const params = new HttpParams({
+      fromObject: {
+        status: 1,
+        ...paramsArgs,
+      },
+    });
+
+    return this.http.get<ResponsePayload>(`${environment.challengeListUrl}`, {
+      params,
+    });
   }
 
   getChallenge(challenge_id: number): Observable<ResponsePayload> {

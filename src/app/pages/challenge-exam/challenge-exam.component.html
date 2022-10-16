@@ -1,4 +1,4 @@
-<div class="container__challenge" *ngIf="challenge">
+<div class="container__challenge" *ngIf="!isFetchingChallenge">
   <header class="challenge__header d-flex align-items-center">
     <a routerLink="/challenge" class="challenge__header-icon">
       <i class="fa-solid fa-angle-left"></i>
@@ -17,7 +17,7 @@
     </div>
   </header>
 
-  <div class="split-example" style="height: 100%">
+  <div style="height: 100%">
     <as-split direction="horizontal" [restrictMove]="true" [gutterSize]="1" [useTransition]="true">
       <as-split-area [size]="40" [visible]="isFullScreen ? false : true" [order]="1">
         <div style="display: flex; height: 100%">
@@ -66,190 +66,216 @@
       </as-split-area>
 
       <as-split-area [size]="60" [order]="2">
-        <as-split direction="vertical" [gutterSize]="1" [restrictMove]="true">
-          <as-split-area [size]="65" style="overflow: hidden">
-            <div style="height: 100%">
-              <header class="editor-header d-flex align-items-center justify-content-between">
-                <ul class="editor-header__actions">
-                  <li class="editor-header__action" (click)="toggleFullScreen()">
-                    <div class="editor-header__action-icon">
-                      <i class="fa-solid fa-expand" *ngIf="!isFullScreen"></i>
-                      <i class="fa-solid fa-compress" *ngIf="isFullScreen"></i>
-                    </div>
-                  </li>
-
-                  <li>
-                    <select
-                      name=""
-                      id=""
-                      class="editor-header__action-lang text-uppercase"
-                      (change)="handleChangeLanguage($event)"
-                    >
-                      <option value="{{ sample.id }}" class="text-uppercase" *ngFor="let sample of samplesCode">
-                        {{ sample.code_language.type }}
-                      </option>
-                    </select>
-                  </li>
-                </ul>
-
-                <ul class="editor-header__actions">
-                  <li class="editor-header__action" (click)="handleResetCode()">
-                    <div class="editor-header__action-icon">
-                      <i class="fa-solid fa-arrows-rotate"></i>
-                    </div>
-                    <span class="editor-header__action-text">Làm mới</span>
-                  </li>
-                </ul>
-              </header>
-              <ngx-monaco-editor
-                style="height: 102%; width: 100%"
-                [options]="editorOptions"
-                [(ngModel)]="code"
-              ></ngx-monaco-editor>
-            </div>
-          </as-split-area>
-          <as-split-area [size]="29.5" class="test-case__wrap">
-            <header class="test-case__wrap-header text-uppercase">Test case</header>
-
-            <div class="test-case__content">
-              <!-- message test case -->
-              <div
-                class="test-case__message-wrap test-case__message-wrap--error d-flex align-items-center"
-                *ngIf="statusRunTestCase && !statusRunTestCase.status"
-              >
-                <div class="test-case__message-icon">
-                  <i class="fa-solid fa-triangle-exclamation"></i>
-                </div>
-
-                <p>{{ statusRunTestCase.message }}</p>
+        <div class="challenge__split-right">
+          <as-split direction="vertical" [gutterSize]="1" [restrictMove]="true">
+            <as-split-area [size]="65" style="overflow: hidden">
+              <div style="height: 100%">
+                <header class="editor-header d-flex align-items-center justify-content-between">
+                  <ul class="editor-header__actions">
+                    <li class="editor-header__action" (click)="toggleFullScreen()">
+                      <div class="editor-header__action-icon">
+                        <i class="fa-solid fa-expand" *ngIf="!isFullScreen"></i>
+                        <i class="fa-solid fa-compress" *ngIf="isFullScreen"></i>
+                      </div>
+                    </li>
+                    <li>
+                      <select
+                        name=""
+                        id=""
+                        class="editor-header__action-lang text-uppercase"
+                        (change)="handleChangeLanguage($event)"
+                      >
+                        <option value="{{ sample.id }}" class="text-uppercase" *ngFor="let sample of samplesCode">
+                          {{ sample.code_language.type }}
+                        </option>
+                      </select>
+                    </li>
+                  </ul>
+                  <ul class="editor-header__actions">
+                    <li class="editor-header__action" (click)="handleResetCode()">
+                      <div class="editor-header__action-icon">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                      </div>
+                      <span class="editor-header__action-text">Làm mới</span>
+                    </li>
+                  </ul>
+                </header>
+                <ngx-monaco-editor
+                  style="height: 102%; width: 100%"
+                  [options]="editorOptions"
+                  [(ngModel)]="code"
+                ></ngx-monaco-editor>
               </div>
-
-              <div
-                class="test-case__message-wrap test-case__message-wrap--success"
-                *ngIf="statusRunTestCase && statusRunTestCase.status"
-                [innerHTML]="statusRunTestCase.message"
-              ></div>
-
-              <main class="d-flex test-case__content-inner">
-                <ul class="test-cases">
-                  <li
-                    *ngFor="let test of testCases; let i = index"
-                    class="test-case d-flex justify-content-between align-items-center"
-                    [ngClass]="{ active: currentTestCase.id === test.id }"
-                    (click)="handleChangeTestCase(test.id)"
-                  >
-                    <span>Kiểm thử {{ i + 1 }}</span>
-                    <div class="test-case-icon" *ngIf="test.status === 0">
-                      <i class="fa-solid fa-lock"></i>
-                    </div>
-                    <!-- chưa pass test case -->
-                    <div
-                      class="test-case-icon test-case-icon--error"
-                      *ngIf="test.statusRunCode && !test.passed && test.status === 1"
-                    >
-                      <i class="fa-solid fa-triangle-exclamation"></i>
-                    </div>
-                    <!-- pass test case -->
-                    <div
-                      class="test-case-icon test-case-icon--success"
-                      *ngIf="test.statusRunCode && test.passed && test.status === 1"
-                    >
-                      <i class="fa-regular fa-circle-check"></i>
-                    </div>
-                  </li>
-                  <!-- <li class="test-case d-flex justify-content-between align-items-center">
-                    <span>Kiểm thử 5</span>
-                    <div class="test-case-icon test-case-icon--error">
-                      <i class="fa-solid fa-triangle-exclamation"></i>
-                    </div>
-                  </li>
-                  <li class="test-case d-flex justify-content-between align-items-center">
-                    <span>Kiểm thử 6</span>
-                    <div class="test-case-icon">
-                      <i class="fa-solid fa-lock"></i>
-                    </div>
-                  </li> -->
-                </ul>
-                <div class="test-case__panel-wrap">
-                  <div class="test-case__panel" *ngIf="!currentTestCase.isPrivate">
-                    <div class="row mb-2">
-                      <div class="col col-4">
-                        <label for="" class="test-case__panel-label">Đầu vào:</label>
-                      </div>
-                      <div class="col col-8">{{ currentTestCase.panel.input }}</div>
-                    </div>
-                    <div class="row mb-2">
-                      <div class="col col-4">
-                        <label for="" class="test-case__panel-label">Đầu ra thực tế:</label>
-                      </div>
-                      <div class="col col-8">{{ currentTestCase.panel.result }}</div>
-                    </div>
-                    <div class="row mb-2">
-                      <div class="col col-4">
-                        <label for="" class="test-case__panel-label">Đầu ra mong muốn:</label>
-                      </div>
-                      <div class="col col-8">{{ currentTestCase.panel.output }}</div>
-                    </div>
-                    <!-- <div class="row mb-2">
-                      <div class="col col-4">
-                        <label for="" class="test-case__panel-label">Giới hạn thời gian:</label>
-                      </div>
-                      <div class="col col-8">0</div>
-                    </div> -->
-                    <div class="row mb-2">
-                      <div class="col col-4">
-                        <label for="" class="test-case__panel-label">Thời gian thực hiện:</label>
-                      </div>
-                      <div class="col col-8">{{ currentTestCase.panel.time }} s</div>
-                    </div>
-                    <!-- <div class="row mb-2">
-                      <div class="col col-4">
-                        <label for="" class="test-case__panel-label">Tin nhắn:</label>
-                      </div>
-                      <div class="col col-8">{{ currentTestCase.panel.message }}</div>
-                    </div> -->
+            </as-split-area>
+            <as-split-area [size]="29.5" class="test-case__wrap">
+              <header class="test-case__wrap-header text-uppercase">Test case</header>
+              <div class="test-case__content">
+                <!-- message test case -->
+                <div
+                  class="test-case__message-wrap test-case__message-wrap--error d-flex align-items-center"
+                  *ngIf="statusRunTestCase && !statusRunTestCase.status"
+                >
+                  <div class="test-case__message-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
                   </div>
-                  <!-- test case ẩn -->
-                  <div class="test-case__panel" *ngIf="currentTestCase.isPrivate">
-                    <div class="row mb-2">
-                      <div class="col col-4">
-                        <label for="" class="test-case__panel-label">Test case ẩn</label>
-                      </div>
-                    </div>
-                  </div>
+                  <p>{{ statusRunTestCase.message }}</p>
                 </div>
-              </main>
+                <div
+                  class="test-case__message-wrap test-case__message-wrap--success"
+                  *ngIf="statusRunTestCase && statusRunTestCase.status"
+                  [innerHTML]="statusRunTestCase.message"
+                ></div>
+                <main class="d-flex test-case__content-inner">
+                  <ul class="test-cases">
+                    <li
+                      *ngFor="let test of testCases; let i = index"
+                      class="test-case d-flex justify-content-between align-items-center"
+                      [ngClass]="{ active: currentTestCase.id === test.id }"
+                      (click)="handleChangeTestCase(test.id)"
+                    >
+                      <span>Kiểm thử {{ i + 1 }}</span>
+                      <div class="test-case-icon" *ngIf="test.status === 0">
+                        <i class="fa-solid fa-lock"></i>
+                      </div>
+                      <!-- chưa pass test case -->
+                      <div
+                        class="test-case-icon test-case-icon--error"
+                        *ngIf="test.statusRunCode && !test.passed && test.status === 1"
+                      >
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                      </div>
+                      <!-- pass test case -->
+                      <div
+                        class="test-case-icon test-case-icon--success"
+                        *ngIf="test.statusRunCode && test.passed && test.status === 1"
+                      >
+                        <i class="fa-regular fa-circle-check"></i>
+                      </div>
+                    </li>
+                    <!-- <li class="test-case d-flex justify-content-between align-items-center">
+                      <span>Kiểm thử 5</span>
+                      <div class="test-case-icon test-case-icon--error">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                      </div>
+                    </li>
+                    <li class="test-case d-flex justify-content-between align-items-center">
+                      <span>Kiểm thử 6</span>
+                      <div class="test-case-icon">
+                        <i class="fa-solid fa-lock"></i>
+                      </div>
+                    </li> -->
+                  </ul>
+                  <div class="test-case__panel-wrap">
+                    <div class="test-case__panel" *ngIf="!currentTestCase.isPrivate">
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Đầu vào:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.input }}</div>
+                      </div>
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Đầu ra thực tế:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.result }}</div>
+                      </div>
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Đầu ra mong muốn:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.output }}</div>
+                      </div>
+                      <!-- <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Giới hạn thời gian:</label>
+                        </div>
+                        <div class="col col-8">0</div>
+                      </div> -->
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Thời gian thực hiện:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.time }} s</div>
+                      </div>
+                      <!-- <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Tin nhắn:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.message }}</div>
+                      </div> -->
+                    </div>
+                    <!-- test case ẩn -->
+                    <div class="test-case__panel" *ngIf="currentTestCase.isPrivate">
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Test case ẩn</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </main>
+              </div>
+            </as-split-area>
+            <as-split-area [size]="5.5" [lockSize]="true">
+              <footer class="test-case__footer d-flex align-items-center justify-content-end">
+                <button
+                  (click)="handleRunCode()"
+                  class="test-case__footer-btn test-case__footer-btn--play d-flex align-items-center justify-content-center"
+                >
+                  <div class="test-case__footer-btn-icon">
+                    <i class="fa-solid fa-play"></i>
+                  </div>
+                  <span class="test-case__footer-btn-text">Chạy thử</span>
+                </button>
+                <button
+                  [attr.disabled]="!isActiveSubmitCode ? true : null"
+                  (click)="handleSubmitCode()"
+                  class="test-case__footer-btn test-case__footer-btn--submit d-flex align-items-center justify-content-center"
+                >
+                  <div class="test-case__footer-btn-icon">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                  </div>
+                  <span class="test-case__footer-btn-text">Nộp bài</span>
+                </button>
+              </footer>
+            </as-split-area>
+          </as-split>
+
+          <div>
+            <!-- overlay -->
+            <div class="challenge__split-right-overlay" [ngClass]="{ active: isRunningCode || !isLogged }"></div>
+
+            <!-- check login -->
+            <div
+              *ngIf="!isLogged"
+              class="challenge__split-right-actions d-flex align-items-center justify-content-center"
+            >
+              <span>Vui lòng</span>
+              <a routerLink="/login" class="d-block">
+                <button class="my-btn my-btn-s my-btn-primary mx-2">đăng nhập</button>
+              </a>
+              <span>để tiếp tục!</span>
             </div>
-          </as-split-area>
 
-          <as-split-area [size]="5.5" [lockSize]="true">
-            <footer class="test-case__footer d-flex align-items-center justify-content-end">
-              <button
-                (click)="handleRunCode()"
-                class="test-case__footer-btn test-case__footer-btn--play d-flex align-items-center justify-content-center"
-              >
-                <div class="test-case__footer-btn-icon">
-                  <i class="fa-solid fa-play"></i>
-                </div>
-
-                <span class="test-case__footer-btn-text">Chạy thử</span>
-              </button>
-
-              <button
-                [attr.disabled]="!isActiveSubmitCode ? true : null"
-                (click)="handleSubmitCode()"
-                class="test-case__footer-btn test-case__footer-btn--submit d-flex align-items-center justify-content-center"
-              >
-                <div class="test-case__footer-btn-icon">
-                  <i class="fa-solid fa-floppy-disk"></i>
-                </div>
-
-                <span class="test-case__footer-btn-text">Nộp bài</span>
-              </button>
-            </footer>
-          </as-split-area>
-        </as-split>
+            <!-- spinner -->
+            <div class="challenge__split-right-spinner" [ngClass]="{ active: isRunningCode }">
+              <app-loading-item></app-loading-item>
+            </div>
+          </div>
+        </div>
       </as-split-area>
     </as-split>
+  </div>
+</div>
+
+<div
+  class="container__challenge container__challenge-wrap d-flex align-items-center justify-content-center"
+  *ngIf="isFetchingChallenge"
+>
+  <div class="container__challenge-overlay"></div>
+
+  <div class="d-flex flex-column align-items-center container__challenge-spinner">
+    <app-loading-item></app-loading-item>
+    <p class="container__challenge-spinner-text mt-2">Đang lấy dữ liệu...</p>
   </div>
 </div>

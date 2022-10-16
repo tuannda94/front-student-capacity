@@ -8,6 +8,7 @@ import { Challenge, CurrentTestCase, SampleCode, TestCase } from "src/app/models
 import { MatDialog } from "@angular/material/dialog";
 import { DialogConfirmComponent } from "src/app/modal/dialog-confirm/dialog-confirm.component";
 import { ModalSubmitChallengeSuccessComponent } from "src/app/modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-challenge-exam",
@@ -19,6 +20,8 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
   isLogged = false;
   userLogged!: User;
   isFullScreen = false;
+  isFetchingChallenge = false;
+  isRunningCode!: boolean;
 
   // ds code mẫu
   samplesCode!: SampleCode[];
@@ -85,9 +88,13 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private toastService: NgToastService,
     private router: Router,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
+    // initital title
+    this.titleService.setTitle("THỬ THÁCH");
+
     document.body.style.overflow = "hidden";
     this.checkUserLogged();
     this.getChallenge();
@@ -101,9 +108,15 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       const { id } = params;
       this.challengeId = id;
+      this.isFetchingChallenge = true;
 
       this.challengeService.getChallenge(id).subscribe(({ status, payload }) => {
+        this.isFetchingChallenge = false;
+
         if (status) {
+          // update title
+          this.titleService.setTitle(`THỬ THÁCH #${payload.id}: ${payload.name}`);
+
           this.challenge = payload;
           this.samplesCode = payload.sample_code;
           this.testCases = payload.test_case;
@@ -173,70 +186,83 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
 
   // chạy thử
   handleRunCode() {
+    if (this.isRunningCode) return;
+
+    // show loading
+    this.isRunningCode = true;
     this.challengeService
       .runTestCase({
         type_id: this.codeLangId,
         content: this.code,
         challengeId: this.challengeId,
       })
-      .subscribe((res) => {
-        this.testCases = this.testCases.map((testCase) => {
-          const testCaseExits = res.find((item) => item.id === testCase.id);
+      .subscribe(
+        (res) => {
+          // hide loading
+          this.isRunningCode = false;
 
-          // đổ dữ liệu test case đang active
-          if (testCaseExits?.id === this.currentTestCase.id) {
-            this.currentTestCase = {
-              ...this.currentTestCase,
-              panel: {
-                ...this.currentTestCase.panel,
-                result: testCaseExits.result,
-                time: testCaseExits.time,
-              },
-            };
-          }
+          this.testCases = this.testCases.map((testCase) => {
+            const testCaseExits = res.find((item) => item.id === testCase.id);
 
-          if (testCaseExits) {
+            // đổ dữ liệu test case đang active
+            if (testCaseExits?.id === this.currentTestCase.id) {
+              this.currentTestCase = {
+                ...this.currentTestCase,
+                panel: {
+                  ...this.currentTestCase.panel,
+                  result: testCaseExits.result,
+                  time: testCaseExits.time,
+                },
+              };
+            }
+
+            if (testCaseExits) {
+              return {
+                ...testCase,
+                passed: testCaseExits?.flag!,
+                result: testCaseExits?.result!,
+                statusRunCode: true,
+                time: testCaseExits?.time!,
+              };
+            }
+
             return {
               ...testCase,
-              passed: testCaseExits?.flag!,
-              result: testCaseExits?.result!,
-              statusRunCode: true,
-              time: testCaseExits?.time!,
+              statusRunCode: false,
             };
-          }
+          });
 
-          return {
-            ...testCase,
-            statusRunCode: false,
+          // message chạy test case
+          const totalTestCasePublic = this.testCases.filter((item) => item.status).length;
+          const testCasePassed = res.filter((item) => item.flag).length;
+          const isPassAll = totalTestCasePublic === testCasePassed;
+
+          const messageTestCase = !isPassAll
+            ? `${testCasePassed}/${totalTestCasePublic} test case đúng.`
+            : "<b>Vượt qua kiểm thử mẫu</b><p>Ấn Nộp bài để chạy toàn bộ test case và lưu kết quả của bạn.</p>";
+
+          this.statusRunTestCase = {
+            status: isPassAll,
+            message: messageTestCase,
           };
-        });
 
-        // message chạy test case
-        const totalTestCasePublic = this.testCases.filter((item) => item.status).length;
-        const testCasePassed = res.filter((item) => item.flag).length;
-        const isPassAll = totalTestCasePublic === testCasePassed;
+          // nếu vượt qua tất cả test case => nộp bài
+          this.isActiveSubmitCode = isPassAll;
+          console.log(isPassAll);
 
-        const messageTestCase = !isPassAll
-          ? `${testCasePassed}/${totalTestCasePublic} test case đúng.`
-          : "<b>Vượt qua kiểm thử mẫu</b><p>Ấn Nộp bài để chạy toàn bộ test case và lưu kết quả của bạn.</p>";
-
-        this.statusRunTestCase = {
-          status: isPassAll,
-          message: messageTestCase,
-        };
-
-        // nếu vượt qua tất cả test case => nộp bài
-        this.isActiveSubmitCode = isPassAll;
-        console.log(isPassAll);
-
-        console.log(this.testCases);
-      });
+          console.log(this.testCases);
+        },
+        () => {
+          this.isRunningCode = false;
+        },
+      );
     console.log(this.code, this.codeLangId);
   }
 
   // nộp bài
   handleSubmitCode() {
-    if (!this.isActiveSubmitCode) return;
+    if (!this.isActiveSubmitCode || this.isRunningCode) return;
+    this.isRunningCode = true;
 
     this.challengeService
       .submitCode({
@@ -246,6 +272,7 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
       })
       .subscribe(
         ({ status, data }) => {
+          this.isRunningCode = false;
           this.testCases = this.testCases.map((testCase) => {
             const testCaseExits = data.find((item) => item.id === testCase.id);
 
@@ -284,7 +311,7 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
           const isPassAll = totalTestCase === testCasePassed;
 
           const messageTestCase = !isPassAll
-            ? `${testCasePassed}/${totalTestCase} test case đúng. (${totalTestCasePrivate} test case ẩn).`
+            ? `${testCasePassed}/${totalTestCase} test case đúng. (${totalTestCasePrivate} test case ẩn sai).`
             : "Bạn đã vượt qua tất cả các test case.";
 
           this.statusRunTestCase = {
@@ -293,20 +320,23 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
           };
 
           // modal thông báo hoàn thành bài thi
-          const modalRef = this.dialog.open(ModalSubmitChallengeSuccessComponent, {
-            width: "600px",
-            data: {
-              name: this.userLogged.name,
-            },
-          });
-          modalRef.afterClosed().subscribe((res) => {
-            console.log(res);
-            if (res === "true") {
-              this.router.navigate(["/challenge"]);
-            }
-          });
+          if (isPassAll) {
+            const modalRef = this.dialog.open(ModalSubmitChallengeSuccessComponent, {
+              width: "600px",
+              data: {
+                name: this.userLogged.name,
+              },
+            });
+            modalRef.afterClosed().subscribe((res) => {
+              console.log(res);
+              if (res === "true") {
+                this.router.navigate(["/challenge"]);
+              }
+            });
+          }
         },
         () => {
+          this.isRunningCode = false;
           this.toastService.info({ detail: "Đã có lỗi xảy ra", summary: "Vui lòng thử lại!" });
         },
       );

@@ -3,49 +3,81 @@
   <div class="challenge__banner"></div>
 
   <!-- filter -->
-  <form class="my-box-filter my-box-filter-3 mt-3">
-    <input type="text" class="my-input" placeholder="Tên thử thách..." formControlName="filterName" />
+  <form
+    class="my-box-filter my-box-filter-3 mt-3 challenge__filter"
+    [formGroup]="formSearch"
+    (ngSubmit)="handleSearch()"
+  >
+    <input
+      type="text"
+      class="my-input"
+      [attr.disabled]="isFetchingChallenge ? true : null"
+      placeholder="Tên thử thách..."
+      formControlName="keyword"
+    />
 
     <div ngbDropdown class="d-inline-block w-100">
       <input
         type="text"
-        formControlName="filterMajor"
+        readonly
         class="my-input"
+        [attr.disabled]="isFetchingChallenge ? true : null"
         placeholder="Độ khó"
         id="dropdownBasic1"
+        formControlName="typeName"
         ngbDropdownToggle
       />
+
       <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
-        <div *ngIf="false" class="d-flex justify-content-center">
-          <app-loading-item class="py-2"></app-loading-item>
-        </div>
-        <a class="capacity-text-majors" ngbDropdownItem>Hehe</a>
+        <span
+          (click)="handleSetFieldValue('typeName', item.type !== undefined ? item.name : '', item.type)"
+          *ngFor="let item of challengeType"
+          class="challenge__filter-text"
+          ngbDropdownItem
+          >{{ item.name }}</span
+        >
       </div>
     </div>
 
     <div ngbDropdown class="d-inline-block w-100">
       <input
         type="text"
-        formControlName="filterSkill"
+        readonly
         class="my-input w-100"
+        [attr.disabled]="isFetchingChallenge ? true : null"
         placeholder="Ngôn ngữ"
-        id="dropdownBasic1"
+        id="dropdownBasic2"
+        formControlName="languageName"
         ngbDropdownToggle
       />
-      <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
+
+      <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic2">
         <div *ngIf="false" class="d-flex justify-content-center">
           <app-loading-item class="py-2"></app-loading-item>
         </div>
-        <a class="capacity-text-majors" ngbDropdownItem>Hehe</a>
+
+        <span
+          (click)="handleSetFieldValue('languageName', language.id === 0 ? '' : language.name, language.id)"
+          *ngFor="let language of challengeLangs"
+          class="challenge__filter-text"
+          ngbDropdownItem
+          >{{ language.name }}</span
+        >
       </div>
     </div>
 
     <div class="btn-wrapper">
-      <button type="button" class="my-btn-secondary my-btn-s btn-reset">
+      <button
+        (click)="handleResetFormSearch()"
+        type="button"
+        class="my-btn-secondary my-btn-s btn-reset"
+        [ngClass]="{ 'challenge__filter-btn--disabled': isFetchingChallenge }"
+      >
         <i class="fa-sharp fa-solid fa-rotate-right"></i>
         <span>Khôi phục</span>
       </button>
-      <button class="my-btn-primary my-btn-s">
+
+      <button class="my-btn-primary my-btn-s" [ngClass]="{ 'challenge__filter-btn--disabled': isFetchingChallenge }">
         Tìm kiếm
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
@@ -68,6 +100,7 @@
                 'challenge__type--medium': challenge.type === 1,
                 'challenge__type--max': challenge.type === 2
               }"
+              (click)="handleSearchByField('type', challenge.type)"
               >{{ getTypeChallenge(challenge.type) }}</span
             >
           </div>
@@ -79,13 +112,20 @@
           </a>
 
           <ul class="challenge__langs d-flex align-items-center m-0" *ngIf="challenge.codeLangs.length <= limitLangs">
-            <li class="mt-2 challenge__lang text-uppercase" *ngFor="let code of challenge.codeLangs">{{ code.ex }}</li>
+            <li
+              class="mt-2 challenge__lang text-uppercase"
+              *ngFor="let code of challenge.codeLangs"
+              (click)="handleSearchByField('language', code.id)"
+            >
+              {{ code.ex }}
+            </li>
           </ul>
 
           <ul class="challenge__langs d-flex align-items-center m-0" *ngIf="challenge.codeLangs.length > limitLangs">
             <li
               class="mt-2 challenge__lang text-uppercase"
               *ngFor="let code of challenge.codeLangs.slice(0, limitLangs)"
+              (click)="handleSearchByField('language', code.id)"
             >
               {{ code.ex }}
             </li>

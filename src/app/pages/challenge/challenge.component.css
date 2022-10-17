@@ -130,3 +130,16 @@
 ::ng-deep button.ant-pagination-item-link.ng-star-inserted {
   line-height: normal;
 }
+
+/* filter */
+.challenge__filter-text:active {
+  background-color: #e9ecef;
+  color: #1e2125;
+}
+
+.challenge__filter-btn--disabled {
+  border: 1px solid var(--my-disabled);
+  cursor: no-drop !important;
+  background-color: var(--my-disabled);
+  color: var(--my-text-disabled);
+}

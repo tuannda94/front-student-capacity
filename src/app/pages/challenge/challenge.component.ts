@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Challenge } from "src/app/models/challenge.model";
 import { ChallengeService } from "src/app/services/challenge.service";
 
@@ -13,17 +14,71 @@ export class ChallengeComponent implements OnInit {
   challenges!: Challenge[];
   totalChallenge!: number;
   limitLangs = 4;
+  // limit challenge
+  limit = 10;
   isFetchingChallenge!: boolean;
-  params: { page: number; limit: number } = {
+  params: { page: number; limit: number; q?: string; type?: number; language_id?: number } = {
     page: 1,
-    limit: 10,
+    limit: this.limit,
   };
 
-  constructor(private challengeService: ChallengeService, private titleService: Title) {}
+  queryParams!: { page: number; limit?: number; q?: string; type?: number; language_id?: number };
+
+  formSearch!: FormGroup;
+
+  challengeType = [
+    {
+      type: undefined,
+      name: "Tất cả",
+    },
+    {
+      type: 0,
+      name: "Dễ",
+    },
+    {
+      type: 1,
+      name: "Trung bình",
+    },
+    {
+      type: 2,
+      name: "Khó",
+    },
+  ];
+
+  challengeLangs = [
+    {
+      id: 0,
+      name: "Tất cả",
+    },
+    {
+      id: 1,
+      name: "PHP",
+    },
+    {
+      id: 2,
+      name: "C",
+    },
+    {
+      id: 4,
+      name: "JS",
+    },
+    {
+      id: 5,
+      name: "PY",
+    },
+  ];
+
+  constructor(
+    private challengeService: ChallengeService,
+    private titleService: Title,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.titleService.setTitle("Thử thách");
 
+    this.createFormSearch();
     this.handleScrollTop();
     this.getChallenges();
   }
@@ -59,6 +114,55 @@ export class ChallengeComponent implements OnInit {
     });
   }
 
+  createFormSearch() {
+    this.formSearch = new FormGroup({
+      keyword: new FormControl(""),
+      typeName: new FormControl(""),
+      languageName: new FormControl(""),
+      type: new FormControl(),
+      language: new FormControl(),
+    });
+    this.queryParams = this.params;
+
+    // set query str from url to params varible
+    const queryParams = this.route.snapshot.queryParamMap;
+    const keyword = queryParams.get("keyword");
+    const type = queryParams.get("type");
+    const language = queryParams.get("language_id");
+    const page = queryParams.get("page");
+
+    if (keyword && keyword.trim()) {
+      this.formSearch.patchValue({
+        keyword,
+      });
+
+      this.params.q = keyword.trim();
+    }
+    if ((type || +type! === 0) && type !== null) {
+      const typeExits = this.challengeType.find((item) => item.type === +type);
+
+      this.formSearch.patchValue({
+        type,
+        typeName: typeExits?.name,
+      });
+
+      this.params.type = +type!;
+    }
+
+    if (+language!) {
+      const languageExits = this.challengeLangs.find((item) => item.id === +language!);
+
+      this.formSearch.patchValue({
+        language,
+        languageName: languageExits?.name,
+      });
+
+      this.params.language_id = +language!;
+    }
+
+    if (+page!) this.params.page = +page!;
+  }
+
   // get mức độ thử thách
   getTypeChallenge(type: number): string {
     switch (type) {
@@ -78,6 +182,13 @@ export class ChallengeComponent implements OnInit {
     this.handleScrollTop();
     this.params.page = page;
     this.getChallenges();
+
+    // add query to url
+    const { limit, ...queryParams } = this.params;
+    this.router.navigate([], {
+      queryParams,
+      queryParamsHandling: "merge",
+    });
   }
 
   // scroll to top
@@ -86,5 +197,106 @@ export class ChallengeComponent implements OnInit {
       top: 0,
       behavior: "smooth",
     });
+  }
+
+  // set value to form search
+  handleSetFieldValue(formControlName: string, value: string, id?: number) {
+    const formSearch = this.formSearch;
+
+    formSearch.patchValue({
+      [formControlName]: value,
+      [formControlName.slice(0, -4)]: id,
+    });
+  }
+
+  // search
+  handleSearch() {
+    if (this.isFetchingChallenge) return;
+
+    this.params.page = 1;
+    let { limit, ...queryParams } = { ...this.params };
+    this.queryParams = queryParams;
+
+    const formSearch = this.formSearch;
+    const keyword = formSearch.get("keyword")?.value;
+    const type = formSearch.get("type")?.value;
+    const language = formSearch.get("language")?.value;
+
+    if (keyword && keyword.trim()) {
+      this.params.q = keyword.trim();
+      this.queryParams.q = keyword.trim();
+    } else {
+      delete this.params.q;
+      this.queryParams.q = null!;
+    }
+    if (type || type === 0) {
+      this.params.type = type;
+      this.queryParams.type = type;
+    } else {
+      delete this.params.type;
+      this.queryParams.type = null!;
+    }
+    if (language) {
+      this.params.language_id = language;
+      this.queryParams.language_id = language;
+    } else {
+      delete this.params.language_id;
+      this.queryParams.language_id = null!;
+    }
+
+    this.getChallenges();
+
+    // add param to url
+    this.router.navigate([], {
+      queryParams,
+      queryParamsHandling: "merge",
+    });
+  }
+
+  // reset form search
+  handleResetFormSearch() {
+    this.formSearch.reset();
+
+    // remove query str
+    for (let key in this.queryParams) {
+      this.queryParams = {
+        ...this.queryParams,
+        [key]: null,
+      };
+    }
+    this.router.navigate([], {
+      queryParams: this.queryParams,
+      queryParamsHandling: "merge",
+    });
+
+    this.params = {
+      page: 1,
+      limit: this.limit,
+    };
+    this.getChallenges();
+  }
+
+  // handle click to language and type for search
+  handleSearchByField(field: string, value: number) {
+    this.params.page = 1;
+
+    // search by language
+    if (field === "language") {
+      const language = this.challengeLangs.find((item) => item.id === value);
+      this.formSearch.patchValue({
+        languageName: language?.name,
+        language: value,
+      });
+    }
+
+    if (field === "type") {
+      const type = this.challengeType.find((item) => item.type === value);
+      this.formSearch.patchValue({
+        typeName: type?.name,
+        type: value,
+      });
+    }
+
+    this.handleSearch();
   }
 }

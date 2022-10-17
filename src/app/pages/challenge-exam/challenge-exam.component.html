@@ -39,7 +39,7 @@
             <!-- tab đề bài -->
             <div class="challenge__content-question" *ngIf="tabActive === 'issue'">
               <header class="challenge__content-header d-flex align-items-center flex-wrap">
-                <div class="challenge__content-header-user d-flex align-items-center mb-2">
+                <div class="challenge__content-header-user d-flex align-items-center mb-2" *ngIf="isLogged">
                   <img src="{{ userLogged.avatar }}" alt="" class="challenge__content-header-user-avt" />
                   <a routerLink="/tai-khoan" class="challenge__content-header-user-name">{{ userLogged.name }}</a>
                 </div>

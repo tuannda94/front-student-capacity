@@ -200,6 +200,11 @@
   overflow-y: auto;
 }
 
+.challenge__content-header-user,
+.challenge__content-header-tag {
+  margin-right: 12px;
+}
+
 .challenge__content-header-user-avt {
   width: 32px;
   height: 32px;
@@ -219,7 +224,6 @@
   color: #fff;
   padding: 1px 7px;
   background-color: #7bc043;
-  margin: 0 12px;
 }
 
 .challenge__content-header-point-icon {

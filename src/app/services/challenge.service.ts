@@ -59,4 +59,9 @@ export class ChallengeService {
       content,
     });
   }
+
+  // ds ngôn ngữ code
+  getCodeLanguage(): Observable<ResponsePayload> {
+    return this.http.get<ResponsePayload>(`${environment.codeLanguageListUrl}`);
+  }
 }

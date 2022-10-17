@@ -44,7 +44,7 @@
         type="text"
         readonly
         class="my-input w-100"
-        [attr.disabled]="isFetchingChallenge ? true : null"
+        [attr.disabled]="isFetchingChallenge || isFetchingCodeLang ? true : null"
         placeholder="Ngôn ngữ"
         id="dropdownBasic2"
         formControlName="languageName"
@@ -52,9 +52,9 @@
       />
 
       <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic2">
-        <div *ngIf="false" class="d-flex justify-content-center">
+        <!-- <div *ngIf="isFetchingCodeLang" class="d-flex justify-content-center">
           <app-loading-item class="py-2"></app-loading-item>
-        </div>
+        </div> -->
 
         <span
           (click)="handleSetFieldValue('languageName', language.id === 0 ? '' : language.name, language.id)"
@@ -199,14 +199,14 @@
         </div>
       </div>
 
-      <div class="d-flex align-items-center flex-1 mx-3">
+      <div class="d-flex align-items-center mx-3">
         <div class="mx-3 challenge__submission">
           <ngx-skeleton-loader [theme]="{ margin: 0, height: '16px', width: '35%' }"></ngx-skeleton-loader>
           <ngx-skeleton-loader [theme]="{ margin: 0, height: '12px' }"></ngx-skeleton-loader>
         </div>
 
         <div class="flex-1">
-          <ngx-skeleton-loader [theme]="{ height: '35px', margin: 0 }"></ngx-skeleton-loader>
+          <ngx-skeleton-loader [theme]="{ height: '35px', margin: 0, width: '120px' }"></ngx-skeleton-loader>
         </div>
       </div>
     </div>

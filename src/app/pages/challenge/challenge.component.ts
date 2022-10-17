@@ -21,6 +21,7 @@ export class ChallengeComponent implements OnInit {
     page: 1,
     limit: this.limit,
   };
+  isFetchingCodeLang!: boolean;
 
   queryParams!: { page: number; limit?: number; q?: string; type?: number; language_id?: number };
 
@@ -45,26 +46,10 @@ export class ChallengeComponent implements OnInit {
     },
   ];
 
-  challengeLangs = [
+  challengeLangs: { id: number; name: string }[] = [
     {
       id: 0,
       name: "Tất cả",
-    },
-    {
-      id: 1,
-      name: "PHP",
-    },
-    {
-      id: 2,
-      name: "C",
-    },
-    {
-      id: 4,
-      name: "JS",
-    },
-    {
-      id: 5,
-      name: "PY",
     },
   ];
 
@@ -76,15 +61,38 @@ export class ChallengeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.titleService.setTitle("Thử thách");
+    this.formSearch = new FormGroup({
+      keyword: new FormControl(""),
+      typeName: new FormControl(""),
+      languageName: new FormControl(""),
+      type: new FormControl(),
+      language: new FormControl(),
+    });
 
-    this.createFormSearch();
+    this.titleService.setTitle("Thử thách");
     this.handleScrollTop();
-    this.getChallenges();
+
+    // get ds ngôn ngữ code
+    this.isFetchingCodeLang = true;
+    this.isFetchingChallenge = true;
+    this.challengeService.getCodeLanguage().subscribe(
+      ({ status, payload }) => {
+        this.isFetchingCodeLang = false;
+
+        if (status) {
+          this.challengeLangs = [...this.challengeLangs, ...payload];
+          this.setDefaultValueFormSearch();
+          this.getChallenges();
+        }
+      },
+      () => {
+        this.isFetchingCodeLang = false;
+      },
+    );
   }
 
   getChallenges() {
-    this.isFetchingChallenge = true;
+    !this.isFetchingChallenge && (this.isFetchingChallenge = true);
 
     this.challengeService.getChallenges(this.params).subscribe((res) => {
       this.isFetchingChallenge = false;
@@ -114,14 +122,7 @@ export class ChallengeComponent implements OnInit {
     });
   }
 
-  createFormSearch() {
-    this.formSearch = new FormGroup({
-      keyword: new FormControl(""),
-      typeName: new FormControl(""),
-      languageName: new FormControl(""),
-      type: new FormControl(),
-      language: new FormControl(),
-    });
+  setDefaultValueFormSearch() {
     this.queryParams = this.params;
 
     // set query str from url to params varible
@@ -212,6 +213,7 @@ export class ChallengeComponent implements OnInit {
   // search
   handleSearch() {
     if (this.isFetchingChallenge) return;
+    this.handleScrollTop();
 
     this.params.page = 1;
     let { limit, ...queryParams } = { ...this.params };
@@ -256,6 +258,7 @@ export class ChallengeComponent implements OnInit {
   // reset form search
   handleResetFormSearch() {
     this.formSearch.reset();
+    this.handleScrollTop();
 
     // remove query str
     for (let key in this.queryParams) {

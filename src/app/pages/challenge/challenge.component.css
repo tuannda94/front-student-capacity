@@ -102,9 +102,13 @@
   background-color: #f90;
 }
 
+.challenge__list-empty {
+  font-size: 16px;
+}
+
 .challenge__list-empty-img {
-  width: 500px;
-  margin: 0 auto;
+  width: 600px;
+  margin: 32px auto;
   display: block;
 }
 

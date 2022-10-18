@@ -16,6 +16,8 @@ export class CodeLang {
   id: number;
   ex: string;
   type: string;
+  language: string;
+  name: string;
 }
 
 export class SampleCode {
@@ -59,4 +61,16 @@ export class ResponseTestCase {
 export class ResponseSubmitCode {
   status: boolean;
   data: ResponseTestCase[];
+  data_result: ResultChallenge;
+}
+
+export class ResultChallenge {
+  challenge_id: number;
+  user_id: number;
+  code_language_id: number;
+  point: number;
+  flag_run_code: number; // số lần chạy code
+  code_result: string;
+  code_language: CodeLang;
+  updated_at: string;
 }

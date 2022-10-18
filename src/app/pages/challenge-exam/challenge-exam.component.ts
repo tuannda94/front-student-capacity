@@ -4,7 +4,7 @@ import { UserService } from "./../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ChallengeService } from "src/app/services/challenge.service";
-import { Challenge, CurrentTestCase, SampleCode, TestCase } from "src/app/models/challenge.model";
+import { Challenge, CurrentTestCase, ResultChallenge, SampleCode, TestCase } from "src/app/models/challenge.model";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogConfirmComponent } from "src/app/modal/dialog-confirm/dialog-confirm.component";
 import { ModalSubmitChallengeSuccessComponent } from "src/app/modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
@@ -47,6 +47,12 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
     status: boolean;
     message: string;
   };
+
+  // trạng thái làm thử thách
+  statusTakeChallenge!: number; // 0 - chưa làm, 1 - đã làm
+
+  // kết quả nộp bài
+  resultChallenge!: ResultChallenge;
 
   // kích hoạt button nộp bài
   isActiveSubmitCode = false;
@@ -123,9 +129,11 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
           console.log(this.testCases);
 
           // code mẫu mặc định
-          this.code = this.samplesCode[0].code_run;
-          this.editorOptions.language = this.samplesCode[0].code_language.ex;
-          this.codeLangId = this.samplesCode[0].code_language.id;
+          this.handleSetDataEditor(
+            this.samplesCode[0].code_run,
+            this.samplesCode[0].code_language.language,
+            this.samplesCode[0].code_language.id,
+          );
 
           // test case mặc định
           this.currentTestCase = {
@@ -138,6 +146,28 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
             },
             isPrivate: !this.testCases[0].status,
           };
+
+          if (this.isLogged) {
+            // kiểm tra trạng thái làm thử thách
+            const result = payload.result.find((item: ResultChallenge) => item.user_id === this.userLogged.id);
+            if (result) {
+              this.statusTakeChallenge = 1;
+              this.resultChallenge = result;
+              this.code = result.code_result;
+
+              // data code lang
+              const codeLang = this.samplesCode.find((item) => item.code_language_id === result.code_language_id);
+              this.editorOptions = {
+                ...this.editorOptions,
+                language: codeLang?.code_language.language!,
+              };
+              this.codeLangId = codeLang?.code_language.id!;
+
+              console.log("Lịch sử nộp bài", this.resultChallenge);
+            } else {
+              this.statusTakeChallenge = 0;
+            }
+          }
         }
       });
     });
@@ -173,15 +203,23 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
 
   // bắt sự kiện thay đổi ngôn ngữ
   handleChangeLanguage(event: Event) {
+    this.isActiveSubmitCode = false;
+
     const sampleCodeId = (event.target as HTMLInputElement).value;
     const sampleCodeExits = this.samplesCode.find((item) => item.id === +sampleCodeId);
 
-    this.code = sampleCodeExits?.code_run!;
     this.editorOptions = {
       ...this.editorOptions,
-      language: sampleCodeExits?.code_language.type!,
+      language: sampleCodeExits?.code_language.language!,
     };
     this.codeLangId = sampleCodeExits?.code_language.id!;
+
+    // nếu chọn ngôn ngữ đã nộp trước đó => hiển thị code đã nộp trước đó
+    if (this.statusTakeChallenge === 1 && sampleCodeExits?.code_language_id === this.resultChallenge.code_language_id) {
+      this.code = this.resultChallenge.code_result;
+    } else {
+      this.code = sampleCodeExits?.code_run!;
+    }
   }
 
   // chạy thử
@@ -271,7 +309,7 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
         challengeId: this.challengeId,
       })
       .subscribe(
-        ({ status, data }) => {
+        ({ status, data, data_result }) => {
           this.isRunningCode = false;
           this.testCases = this.testCases.map((testCase) => {
             const testCaseExits = data.find((item) => item.id === testCase.id);
@@ -334,6 +372,9 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
               }
             });
           }
+
+          // update lịch sử nộp bài
+          this.resultChallenge = data_result;
         },
         () => {
           this.isRunningCode = false;
@@ -385,5 +426,15 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
   handleChangeTab(tabName: string) {
     this.tabActive = tabName;
     console.log(tabName);
+  }
+
+  // set code, code language to editor
+  handleSetDataEditor(code: string, language: string, codeLangId: number) {
+    this.code = code;
+    this.editorOptions = {
+      ...this.editorOptions,
+      language,
+    };
+    this.codeLangId = codeLangId;
   }
 }

@@ -170,6 +170,40 @@
                 <nz-pagination [nzPageIndex]="1" [nzTotal]="10" [nzPageSize]="3"></nz-pagination>
               </div>
             </div>
+
+            <!-- tab lịch sử nộp bài -->
+            <div class="challenge__content-history" *ngIf="tabActive === 'history'">
+              <table class="table" *ngIf="isLogged && statusTakeChallenge === 1">
+                <thead>
+                  <tr>
+                    <th scope="col" class="align-middle">Thời gian nộp</th>
+                    <th scope="col" class="align-middle">Ngôn ngữ</th>
+                    <th scope="col" class="align-middle">Điểm</th>
+                    <th scope="col" class="align-middle">Số lần chạy</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    role="button"
+                    (click)="
+                      handleSetDataEditor(
+                        resultChallenge.code_result,
+                        resultChallenge.code_language.language,
+                        resultChallenge.code_language_id
+                      )
+                    "
+                  >
+                    <td class="py-4 align-middle text-primary">{{ resultChallenge.updated_at | formatDate }}</td>
+                    <td class="py-4 align-middle">{{ resultChallenge.code_language.name }}</td>
+                    <td class="py-4 align-middle">{{ resultChallenge.point }}</td>
+                    <td class="py-4 align-middle">{{ resultChallenge.flag_run_code }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p *ngIf="!isLogged">Vui lòng đăng nhập để xem lịch sử nộp bài!</p>
+              <p *ngIf="isLogged && statusTakeChallenge === 0">Không có lịch sử nộp bài!</p>
+            </div>
           </div>
         </div>
       </as-split-area>
@@ -194,8 +228,13 @@
                         class="editor-header__action-lang text-uppercase"
                         (change)="handleChangeLanguage($event)"
                       >
-                        <option value="{{ sample.id }}" class="text-uppercase" *ngFor="let sample of samplesCode">
-                          {{ sample.code_language.type }}
+                        <option
+                          value="{{ sample.id }}"
+                          [selected]="sample.code_language_id === codeLangId"
+                          class="text-uppercase"
+                          *ngFor="let sample of samplesCode"
+                        >
+                          {{ sample.code_language.language }}
                         </option>
                       </select>
                     </li>

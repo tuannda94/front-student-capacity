@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Challenge {
   id: number;
   name: string;
@@ -73,4 +75,12 @@ export class ResultChallenge {
   code_result: string;
   code_language: CodeLang;
   updated_at: string;
+}
+
+export class RankChallenge {
+  user: User;
+  point: number;
+  flag_run_code: number;
+  updated_at: string;
+  code_language: CodeLang;
 }

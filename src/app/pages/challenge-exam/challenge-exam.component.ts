@@ -4,7 +4,14 @@ import { UserService } from "./../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ChallengeService } from "src/app/services/challenge.service";
-import { Challenge, CurrentTestCase, ResultChallenge, SampleCode, TestCase } from "src/app/models/challenge.model";
+import {
+  Challenge,
+  CurrentTestCase,
+  RankChallenge,
+  ResultChallenge,
+  SampleCode,
+  TestCase,
+} from "src/app/models/challenge.model";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogConfirmComponent } from "src/app/modal/dialog-confirm/dialog-confirm.component";
 import { ModalSubmitChallengeSuccessComponent } from "src/app/modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
@@ -22,6 +29,7 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
   isFullScreen = false;
   isFetchingChallenge = false;
   isRunningCode!: boolean;
+  isActiveOverlayLeft!: boolean;
 
   // ds code mẫu
   samplesCode!: SampleCode[];
@@ -86,6 +94,17 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
       icon: "fa-regular fa-circle-question",
     },
   ];
+
+  ranks!: RankChallenge[];
+
+  paginateRank = {
+    page: 1,
+    limit: 10,
+    total: 0,
+  };
+
+  isFetchingRank!: boolean;
+  codeLanguageIdRank!: number;
 
   constructor(
     private challengeService: ChallengeService,
@@ -162,6 +181,7 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
                 language: codeLang?.code_language.language!,
               };
               this.codeLangId = codeLang?.code_language.id!;
+              this.codeLanguageIdRank = codeLang?.code_language.id!;
 
               console.log("Lịch sử nộp bài", this.resultChallenge);
             } else {
@@ -425,7 +445,43 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
   // xử lý click tab sidebar
   handleChangeTab(tabName: string) {
     this.tabActive = tabName;
-    console.log(tabName);
+
+    if (tabName === "rank") {
+      const { total, page, ...rest } = this.paginateRank;
+      this.getRank({
+        challengeId: this.challengeId,
+        languageId: this.codeLanguageIdRank,
+        ...rest,
+      });
+    }
+  }
+
+  // xếp hạng
+  getRank({ challengeId, languageId, ...rest }: any) {
+    if (this.isFetchingRank) return;
+    this.isActiveOverlayLeft = true;
+    this.isFetchingRank = true;
+
+    this.challengeService.getRankChallenge({ challengeId, languageId, ...rest }).subscribe(
+      ({ status, payload }) => {
+        if (status) {
+          this.isActiveOverlayLeft = false;
+          this.isFetchingRank = false;
+          this.paginateRank = {
+            ...this.paginateRank,
+            total: payload.total,
+            page: payload.current_page,
+          };
+          this.ranks = payload.data;
+
+          console.log(payload);
+        }
+      },
+      () => {
+        this.isFetchingRank = false;
+        this.toastService.warning({ summary: "Có lỗi xảy ra, vui lòng thử lại", detail: "Thông báo" });
+      },
+    );
   }
 
   // set code, code language to editor
@@ -436,5 +492,33 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
       language,
     };
     this.codeLangId = codeLangId;
+  }
+
+  // xử lý chuyển trang
+  handleChangePageNum(page: number) {
+    this.paginateRank = {
+      ...this.paginateRank,
+      page,
+    };
+
+    const { total, ...rest } = this.paginateRank;
+    this.getRank({
+      challengeId: this.challengeId,
+      languageId: this.codeLanguageIdRank,
+      ...rest,
+    });
+  }
+
+  // xử lý change code languge rank
+  handleChangeCodeLanguageRank(e: Event) {
+    const codeLangId = (e.target as HTMLInputElement).value;
+    this.codeLanguageIdRank = +codeLangId;
+    const { page, total, ...rest } = this.paginateRank;
+
+    this.getRank({
+      challengeId: this.challengeId,
+      languageId: this.codeLanguageIdRank,
+      ...rest,
+    });
   }
 }

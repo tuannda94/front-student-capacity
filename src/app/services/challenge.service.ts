@@ -64,4 +64,15 @@ export class ChallengeService {
   getCodeLanguage(): Observable<ResponsePayload> {
     return this.http.get<ResponsePayload>(`${environment.codeLanguageListUrl}`);
   }
+
+  // xếp hạng
+  getRankChallenge({ challengeId, languageId, ...rest }: any): Observable<ResponsePayload> {
+    const params = new HttpParams({
+      fromObject: rest,
+    });
+
+    return this.http.get<ResponsePayload>(`${environment.challengeListUrl}/rating/${challengeId}/${languageId}`, {
+      params,
+    });
+  }
 }

@@ -104,6 +104,9 @@
   --fw: 400;
   --fs: 16px;
   --lh: 140%;
+
+  /* ohter */
+  --width-sidebar-challenge: 60px;
 }
 
 * {

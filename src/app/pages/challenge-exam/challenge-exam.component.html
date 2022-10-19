@@ -20,189 +20,148 @@
   <div style="height: 100%">
     <as-split direction="horizontal" [restrictMove]="true" [gutterSize]="1" [useTransition]="true">
       <as-split-area [size]="40" [visible]="isFullScreen ? false : true" [order]="1">
-        <div style="display: flex; height: 100%">
-          <aside class="challenge__sidebar">
-            <ul class="challenge__sidebar-icon-list m-0 p-0">
-              <div
-                *ngFor="let sidebar of sidebarList"
-                class="challenge__sidebar-icon"
-                [ngClass]="{ active: tabActive === sidebar.name }"
-                title="{{ sidebar.title }}"
-                (click)="handleChangeTab(sidebar.name)"
-              >
-                <i class="{{ sidebar.icon }}"></i>
-              </div>
-            </ul>
-          </aside>
-
-          <div class="challenge__content">
-            <!-- tab đề bài -->
-            <div class="challenge__content-question" *ngIf="tabActive === 'issue'">
-              <header class="challenge__content-header d-flex align-items-center flex-wrap">
-                <div class="challenge__content-header-user d-flex align-items-center mb-2" *ngIf="isLogged">
-                  <img src="{{ userLogged.avatar }}" alt="" class="challenge__content-header-user-avt" />
-                  <a routerLink="/tai-khoan" class="challenge__content-header-user-name">{{ userLogged.name }}</a>
+        <div class="challenge__split-left">
+          <div style="display: flex; height: 100%">
+            <aside class="challenge__sidebar">
+              <ul class="challenge__sidebar-icon-list m-0 p-0">
+                <div
+                  *ngFor="let sidebar of sidebarList"
+                  class="challenge__sidebar-icon"
+                  [ngClass]="{ active: tabActive === sidebar.name }"
+                  title="{{ sidebar.title }}"
+                  (click)="handleChangeTab(sidebar.name)"
+                >
+                  <i class="{{ sidebar.icon }}"></i>
                 </div>
+              </ul>
+            </aside>
 
-                <div class="challenge__content-header-tag mb-2">{{ getTypeChallenge(challenge.type) }}</div>
-
-                <!-- <div class="challenge__content-header-point d-flex align-items-center mb-2">
-                  <div class="challenge__content-header-point-icon d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-heart"></i>
+            <div class="challenge__content">
+              <!-- tab đề bài -->
+              <div class="challenge__content-question" *ngIf="tabActive === 'issue'">
+                <header class="challenge__content-header d-flex align-items-center flex-wrap">
+                  <div class="challenge__content-header-user d-flex align-items-center mb-2" *ngIf="isLogged">
+                    <img src="{{ userLogged.avatar }}" alt="" class="challenge__content-header-user-avt" />
+                    <a routerLink="/tai-khoan" class="challenge__content-header-user-name">{{ userLogged.name }}</a>
                   </div>
-  
-                  <span class="challenge__content-header-point-text">100 Điểm</span>
-                </div> -->
-              </header>
 
-              <!-- content question -->
-              <main class="challenge__content-main" [innerHTML]="challenge.content"></main>
-            </div>
+                  <div class="challenge__content-header-tag mb-2">{{ getTypeChallenge(challenge.type) }}</div>
 
-            <!-- tab rank -->
-            <div class="challenge__content-rank" *ngIf="tabActive === 'rank'">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col" class="align-middle">STT</th>
-                    <th scope="col" class="align-middle">Tên</th>
-                    <th scope="col" class="align-middle">Ngôn ngữ</th>
-                    <th scope="col" class="align-middle">Điểm</th>
-                    <th scope="col" class="align-middle">Thời gian chạy (s)</th>
-                    <th scope="col" class="align-middle">Thời gian nộp</th>
-                  </tr>
-                </thead>
-                <tbody class="challenge__content-rank-taboe-body">
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">1</th>
-                    <td class="text-primary py-4 align-middle">Tuân</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
+                  <!-- <div class="challenge__content-header-point d-flex align-items-center mb-2">
+                    <div class="challenge__content-header-point-icon d-flex align-items-center justify-content-center">
+                      <i class="fa-solid fa-heart"></i>
+                    </div>
+    
+                    <span class="challenge__content-header-point-text">100 Điểm</span>
+                  </div> -->
+                </header>
 
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">2</th>
-                    <td class="text-primary py-4 align-middle">Lê Văn Tuân</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
+                <!-- content question -->
+                <main class="challenge__content-main" [innerHTML]="challenge.content"></main>
+              </div>
 
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">3</th>
-                    <td class="text-primary py-4 align-middle">Lê Duy Tuân</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
+              <!-- tab rank -->
+              <div class="challenge__content-rank" *ngIf="tabActive === 'rank'">
+                <div *ngIf="ranks && !isFetchingRank">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <h2 class="my-h5 m-0 mb-4">Bảng xếp hạng</h2>
+                    <select name="" id="" class="mb-4 text" (change)="handleChangeCodeLanguageRank($event)">
+                      <option
+                        value="{{ sample.code_language.id }}"
+                        [selected]="sample.code_language.id === codeLanguageIdRank"
+                        *ngFor="let sample of samplesCode"
+                      >
+                        {{ sample.code_language.name }}
+                      </option>
+                    </select>
+                  </div>
 
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">4</th>
-                    <td class="text-primary py-4 align-middle">Lê Anh Tuân</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
+                  <table class="table" *ngIf="ranks.length">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="align-middle">STT</th>
+                        <th scope="col" class="align-middle">Tên</th>
+                        <th scope="col" class="align-middle">Ngôn ngữ</th>
+                        <th scope="col" class="align-middle">Điểm</th>
+                        <th scope="col" class="align-middle">Thời gian nộp</th>
+                      </tr>
+                    </thead>
+                    <tbody class="challenge__content-rank-taboe-body">
+                      <tr *ngFor="let rank of ranks; let i = index" [attr.data-page]="paginateRank.page">
+                        <th scope="row" class="py-4 align-middle">
+                          {{ (paginateRank.page - 1) * paginateRank.limit + 1 + i }}
+                        </th>
+                        <td class="text-primary py-4 align-middle">{{ rank.user.name }}</td>
+                        <td class="py-4 align-middle">{{ rank.code_language.name }}</td>
+                        <td class="py-4 align-middle">{{ rank.point }}</td>
+                        <td class="py-4 align-middle">{{ rank.updated_at | formatDate }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">5</th>
-                    <td class="text-primary py-4 align-middle">Lê Ngọc Tuân</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
+                  <p *ngIf="!ranks.length">Không có dữ liệu!</p>
+                  <!-- pagination -->
+                  <div
+                    class="pagination d-flex justify-content-center mb-3"
+                    *ngIf="ranks.length && paginateRank.total > paginateRank.limit"
+                  >
+                    <nz-pagination
+                      [nzPageIndex]="paginateRank.page"
+                      [nzTotal]="paginateRank.total"
+                      [nzPageSize]="paginateRank.limit"
+                      (nzPageIndexChange)="handleChangePageNum($event)"
+                    ></nz-pagination>
+                  </div>
+                </div>
+              </div>
 
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">6</th>
-                    <td class="text-primary py-4 align-middle">Lê Hoàng Tuân</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
+              <!-- tab lịch sử nộp bài -->
+              <div class="challenge__content-history" *ngIf="tabActive === 'history'">
+                <table class="table" *ngIf="isLogged && statusTakeChallenge === 1">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="align-middle">Thời gian nộp</th>
+                      <th scope="col" class="align-middle">Ngôn ngữ</th>
+                      <th scope="col" class="align-middle">Điểm</th>
+                      <th scope="col" class="align-middle">Số lần chạy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      role="button"
+                      (click)="
+                        handleSetDataEditor(
+                          resultChallenge.code_result,
+                          resultChallenge.code_language.language,
+                          resultChallenge.code_language_id
+                        )
+                      "
+                    >
+                      <td class="py-4 align-middle text-primary">{{ resultChallenge.updated_at | formatDate }}</td>
+                      <td class="py-4 align-middle">{{ resultChallenge.code_language.name }}</td>
+                      <td class="py-4 align-middle">{{ resultChallenge.point }}</td>
+                      <td class="py-4 align-middle">{{ resultChallenge.flag_run_code }}</td>
+                    </tr>
+                  </tbody>
+                </table>
 
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">7</th>
-                    <td class="text-primary py-4 align-middle">Lê Quốc Tuân</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">8</th>
-                    <td class="text-primary py-4 align-middle">Tuân 4</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">9</th>
-                    <td class="text-primary py-4 align-middle">Tuân 4</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row" class="py-4 align-middle">10</th>
-                    <td class="text-primary py-4 align-middle">Tuân 4</td>
-                    <td class="py-4 align-middle">JavaScript</td>
-                    <td class="py-4 align-middle">10</td>
-                    <td class="py-4 align-middle">0.25</td>
-                    <td class="py-4 align-middle">15:20 03/05/2002</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <!-- pagination -->
-              <div class="pagination d-flex justify-content-center mb-3">
-                <nz-pagination [nzPageIndex]="1" [nzTotal]="10" [nzPageSize]="3"></nz-pagination>
+                <p *ngIf="!isLogged">Vui lòng đăng nhập để xem lịch sử nộp bài!</p>
+                <p *ngIf="isLogged && statusTakeChallenge === 0">Không có lịch sử nộp bài!</p>
               </div>
             </div>
+          </div>
 
-            <!-- tab lịch sử nộp bài -->
-            <div class="challenge__content-history" *ngIf="tabActive === 'history'">
-              <table class="table" *ngIf="isLogged && statusTakeChallenge === 1">
-                <thead>
-                  <tr>
-                    <th scope="col" class="align-middle">Thời gian nộp</th>
-                    <th scope="col" class="align-middle">Ngôn ngữ</th>
-                    <th scope="col" class="align-middle">Điểm</th>
-                    <th scope="col" class="align-middle">Số lần chạy</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    role="button"
-                    (click)="
-                      handleSetDataEditor(
-                        resultChallenge.code_result,
-                        resultChallenge.code_language.language,
-                        resultChallenge.code_language_id
-                      )
-                    "
-                  >
-                    <td class="py-4 align-middle text-primary">{{ resultChallenge.updated_at | formatDate }}</td>
-                    <td class="py-4 align-middle">{{ resultChallenge.code_language.name }}</td>
-                    <td class="py-4 align-middle">{{ resultChallenge.point }}</td>
-                    <td class="py-4 align-middle">{{ resultChallenge.flag_run_code }}</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div>
+            <!-- overlay -->
+            <div class="challenge__split-right-overlay" [ngClass]="{ active: isActiveOverlayLeft }"></div>
 
-              <p *ngIf="!isLogged">Vui lòng đăng nhập để xem lịch sử nộp bài!</p>
-              <p *ngIf="isLogged && statusTakeChallenge === 0">Không có lịch sử nộp bài!</p>
+            <!-- spinner -->
+            <div
+              class="challenge__split-right-spinner d-flex flex-column align-items-center"
+              [ngClass]="{ active: isActiveOverlayLeft }"
+            >
+              <app-loading-item></app-loading-item>
+              <p class="container__challenge-spinner-text mt-2 text-white">Đang lấy dữ liệu...</p>
             </div>
           </div>
         </div>

@@ -105,10 +105,12 @@
             >
           </div>
 
-          <a [routerLink]="['/challenge', challenge.id]" class="challenge__list-item-link d-inline-block">
-            <h2 class="challenge__list-item-name m-0 my-h5">
-              {{ challenge.name }}
-            </h2>
+          <a
+            [routerLink]="['/challenge', challenge.id]"
+            title="THỬ THÁCH #{{ challenge.id }}: {{ challenge.name }}"
+            class="challenge__list-item-link d-inline-block"
+          >
+            <h2 class="challenge__list-item-name m-0 my-h5">THỬ THÁCH #{{ challenge.id }}: {{ challenge.name }}</h2>
           </a>
 
           <ul class="challenge__langs d-flex align-items-center m-0" *ngIf="challenge.codeLangs.length <= limitLangs">

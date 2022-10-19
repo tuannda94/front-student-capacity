@@ -145,7 +145,6 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
           this.challenge = payload;
           this.samplesCode = payload.sample_code;
           this.testCases = payload.test_case;
-          console.log(this.testCases);
 
           // code mẫu mặc định
           this.handleSetDataEditor(
@@ -182,8 +181,6 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
               };
               this.codeLangId = codeLang?.code_language.id!;
               this.codeLanguageIdRank = codeLang?.code_language.id!;
-
-              console.log("Lịch sử nộp bài", this.resultChallenge);
             } else {
               this.statusTakeChallenge = 0;
             }
@@ -306,15 +303,11 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
 
           // nếu vượt qua tất cả test case => nộp bài
           this.isActiveSubmitCode = isPassAll;
-          console.log(isPassAll);
-
-          console.log(this.testCases);
         },
         () => {
           this.isRunningCode = false;
         },
       );
-    console.log(this.code, this.codeLangId);
   }
 
   // nộp bài
@@ -386,15 +379,22 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
               },
             });
             modalRef.afterClosed().subscribe((res) => {
-              console.log(res);
               if (res === "true") {
                 this.router.navigate(["/challenge"]);
               }
             });
           }
 
-          // update lịch sử nộp bài
-          this.resultChallenge = data_result;
+          // show lịch sử nộp bài
+          this.statusTakeChallenge = 0;
+          this.isActiveOverlayLeft = true;
+          this.tabActive = "history";
+          setTimeout(() => {
+            // update lịch sử nộp bài
+            this.resultChallenge = data_result;
+            this.statusTakeChallenge = 1;
+            this.isActiveOverlayLeft = false;
+          }, 2000);
         },
         () => {
           this.isRunningCode = false;
@@ -417,8 +417,6 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
       },
       isPrivate: !testCaseExits?.status,
     };
-
-    console.log(this.currentTestCase);
   }
 
   // xử lý reset code
@@ -473,8 +471,6 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
             page: payload.current_page,
           };
           this.ranks = payload.data;
-
-          console.log(payload);
         }
       },
       () => {

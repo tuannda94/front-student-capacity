@@ -451,13 +451,16 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
         languageId: this.codeLanguageIdRank,
         ...rest,
       });
+    } else {
+      this.isActiveOverlayLeft = false;
     }
   }
 
   // xếp hạng
   getRank({ challengeId, languageId, ...rest }: any) {
-    if (this.isFetchingRank) return;
     this.isActiveOverlayLeft = true;
+
+    if (this.isFetchingRank) return;
     this.isFetchingRank = true;
 
     this.challengeService.getRankChallenge({ challengeId, languageId, ...rest }).subscribe(

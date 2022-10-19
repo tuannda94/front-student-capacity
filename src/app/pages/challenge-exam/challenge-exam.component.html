@@ -211,6 +211,7 @@
                   style="height: 102%; width: 100%"
                   [options]="editorOptions"
                   [(ngModel)]="code"
+                  (ngModelChange)="handleChangeCode()"
                 ></ngx-monaco-editor>
               </div>
             </as-split-area>
@@ -302,7 +303,7 @@
                         <div class="col col-4">
                           <label for="" class="test-case__panel-label">Thời gian thực hiện:</label>
                         </div>
-                        <div class="col col-8">{{ currentTestCase.panel.time }} s</div>
+                        <div class="col col-8">{{ +currentTestCase.panel.time }} s</div>
                       </div>
                       <!-- <div class="row mb-2">
                         <div class="col col-4">

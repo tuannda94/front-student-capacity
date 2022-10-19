@@ -521,4 +521,9 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
       ...rest,
     });
   }
+
+  // lắng nghe code thay đổi
+  handleChangeCode() {
+    if (this.isActiveSubmitCode) this.isActiveSubmitCode = false;
+  }
 }

@@ -58,6 +58,10 @@
   width: 16px;
 }
 
+.challenge__submission-right:hover > span {
+  color: var(--my-primary);
+}
+
 .progress-bar {
   width: 100%;
   height: 4px;

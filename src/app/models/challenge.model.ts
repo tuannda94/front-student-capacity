@@ -12,6 +12,8 @@ export class Challenge {
   }[];
   codeLangs: CodeLang[];
   tooltipLang: string;
+  result: ResultChallenge[];
+  userPassed: number; // số user vượt qua bài test
 }
 
 export class CodeLang {
@@ -75,6 +77,7 @@ export class ResultChallenge {
   code_result: string;
   code_language: CodeLang;
   updated_at: string;
+  status: number;
 }
 
 export class RankChallenge {

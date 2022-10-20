@@ -142,21 +142,29 @@
             <div class="d-flex align-items-center justify-content-between">
               <span>Hoàn thành</span>
 
-              <!-- <div class="d-flex align-items-center">
-              <div class="d-flex align-items-center mx-4">
-                <div class="challenge__submission-icon">
-                  <i class="fa-regular fa-user"></i>
-                </div>
-                <span>10</span>
-              </div>
-
               <div class="d-flex align-items-center">
-                <div class="challenge__submission-icon">
-                  <i class="fa-regular fa-file"></i>
+                <div
+                  class="challenge__submission-right d-flex align-items-center mx-4"
+                  role="button"
+                  ngbTooltip="Số SV tham gia"
+                >
+                  <div class="challenge__submission-icon">
+                    <i class="fa-regular fa-user"></i>
+                  </div>
+                  <span>{{ challenge.result.length }}</span>
                 </div>
-                <span>0</span>
+
+                <div
+                  class="challenge__submission-right d-flex align-items-center"
+                  role="button"
+                  ngbTooltip="Số SV vượt qua thử thách"
+                >
+                  <div class="challenge__submission-icon">
+                    <i class="fa-regular fa-file"></i>
+                  </div>
+                  <span>{{ challenge.userPassed }}</span>
+                </div>
               </div>
-            </div> -->
             </div>
 
             <div class="progress-bar">

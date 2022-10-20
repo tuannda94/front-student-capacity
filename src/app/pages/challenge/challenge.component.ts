@@ -103,6 +103,9 @@ export class ChallengeComponent implements OnInit {
           // ds ngôn ngữ code
           const codeLangs = item.sample_code.map((sampleItem) => sampleItem.code_language);
 
+          // số user vượt qua thử thách
+          const userPass = item.result.filter((resultItem) => resultItem.status === 1);
+
           // tooltip khi vượt quá limit
           let tooltipLang = "";
           if (codeLangs.length > this.limitLangs) {
@@ -116,6 +119,7 @@ export class ChallengeComponent implements OnInit {
             ...item,
             tooltipLang,
             codeLangs,
+            userPassed: userPass.length,
           };
         });
       }

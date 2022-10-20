@@ -120,7 +120,7 @@
 ::ng-deep .ant-pagination-next:not([ng-reflect-disabled="true"]):hover .ant-pagination-item-link,
 ::ng-deep .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon,
 ::ng-deep .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon {
-  color: var(--primary);
+  color: var(--primary) !important;
 }
 
 ::ng-deep .ant-pagination-item-active:hover,
@@ -128,11 +128,11 @@
 ::ng-deep .ant-pagination-prev:not([ng-reflect-disabled="true"]):hover .ant-pagination-item-link,
 ::ng-deep .ant-pagination-next:not([ng-reflect-disabled="true"]):hover .ant-pagination-item-link,
 ::ng-deep .ant-pagination-item-active {
-  border-color: var(--primary);
+  border-color: var(--primary) !important;
 }
 
 ::ng-deep button.ant-pagination-item-link.ng-star-inserted {
-  line-height: normal;
+  line-height: normal !important;
 }
 
 /* filter */

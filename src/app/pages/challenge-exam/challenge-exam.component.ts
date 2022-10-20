@@ -364,7 +364,7 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
           const isPassAll = totalTestCase === testCasePassed;
 
           const messageTestCase = !isPassAll
-            ? `${testCasePassed}/${totalTestCase} test case đúng. (${totalTestCasePrivate} test case ẩn sai).`
+            ? `${testCasePassed}/${totalTestCase} test case đúng (${totalTestCasePrivate} test case ẩn sai).`
             : "Bạn đã vượt qua tất cả các test case.";
 
           this.statusRunTestCase = {
@@ -385,18 +385,18 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
                 this.router.navigate(["/challenge"]);
               }
             });
-          }
 
-          // show lịch sử nộp bài
-          this.statusTakeChallenge = 0;
-          this.isActiveOverlayLeft = true;
-          this.tabActive = "history";
-          setTimeout(() => {
-            // update lịch sử nộp bài
-            this.resultChallenge = data_result;
-            this.statusTakeChallenge = 1;
-            this.isActiveOverlayLeft = false;
-          }, 2000);
+            // show lịch sử nộp bài
+            this.statusTakeChallenge = 0;
+            this.isActiveOverlayLeft = true;
+            this.tabActive = "history";
+            setTimeout(() => {
+              // update lịch sử nộp bài
+              this.resultChallenge = data_result;
+              this.statusTakeChallenge = 1;
+              this.isActiveOverlayLeft = false;
+            }, 2000);
+          }
         },
         () => {
           this.isRunningCode = false;

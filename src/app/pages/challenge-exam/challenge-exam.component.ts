@@ -153,6 +153,9 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
             this.samplesCode[0].code_language.id,
           );
 
+          // set initial id language rank
+          this.codeLanguageIdRank = this.samplesCode[0].code_language_id;
+
           // test case mặc định
           this.currentTestCase = {
             id: this.testCases[0].id,
@@ -180,7 +183,6 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
                 language: codeLang?.code_language.language!,
               };
               this.codeLangId = codeLang?.code_language.id!;
-              this.codeLanguageIdRank = codeLang?.code_language.id!;
             } else {
               this.statusTakeChallenge = 0;
             }

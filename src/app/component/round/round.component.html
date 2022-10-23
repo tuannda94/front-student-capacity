@@ -11,17 +11,17 @@
     >
       <mat-expansion-panel-header class="test">
         <mat-panel-title class="row">
-          <div class="d-flex justify-content-start align-items-center col-10">
+          <div class="d-flex justify-content-start align-items-center col-8">
             <div class="img-avatar-round my-2">
-              <img [src]="item.image" class="w-100 h-100" />
+              <img [src]="item.image" class="" />
             </div>
             &nbsp;
-            <p style="margin-left: 15px;" class="text-collapse color-blue">{{ item.name }}</p>
+            <p class="text-collapse color-blue">{{ item.name }}</p>
           </div>
           <p hidden>
             {{ checkStatusRound(item.start_time, item.end_time, item.id) }}
           </p>
-          <div class="col-2 text-center">
+          <div class="col-4 text-center">
             <h3
               [ngStyle]="{ color: statusRound == 1 ? '#c0392b' : '#27ae60' }"
               class="mr-2 "

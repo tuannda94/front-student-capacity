@@ -1,56 +1,37 @@
-
 <div class="container py-4">
   <div class="ranking-capacity">
     <div class="">
       <div class="">
-        <img
-          class="banner"
+        <img class="banner"
           src="https://images.unsplash.com/photo-1649859398731-d3c4ebca53fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-          alt=""
-        />
+          alt="" />
       </div>
     </div>
-      <form [formGroup]="formFilter"  class="rankingCapacity-filter-box py-4 rounded row">
-        <div class="col-3 rank_title" >Xếp Hạng</div>
-        <div class="col-6"></div>
-        <div class="col-3">
-          <div ngbDropdown class="d-inline-block w-100">
-            <input
-              type="text"
-              (keyup)="
+    <form [formGroup]="formFilter" class="rankingCapacity-filter-box py-4 rounded row">
+      <div class="col-3 my-h3">Xếp Hạng</div>
+      <div class="col-6"></div>
+      <div class="col-3">
+        <div ngbDropdown class="d-inline-block w-100">
+          <input type="text" (keyup)="
                 filterSelect(majors, $any($event.target).value, 'major')
-              "
-              formControlName="filterMajor"
-              class="my-input-search my-input"
-              placeholder="Chuyên ngành"
-              id="dropdownBasic1"
-              ngbDropdownToggle
-            />
-            <div
-              ngbDropdownMenu
-              class="w-100"
-              aria-labelledby="dropdownBasic1"
-            >
-              <div *ngIf="!majors" class="d-flex justify-content-center">
-                <app-loading-item class="py-2"></app-loading-item>
-              </div>
-              <a
-                *ngFor="let item of majors"
-                (click)="setValueFilterMajor(item)"
-                class="text-collapse"
-                ngbDropdownItem
-                >{{ item.name }}</a
-              >
+              " formControlName="filterMajor" class="my-input-search my-input" placeholder="Chuyên ngành"
+            id="dropdownBasic1" ngbDropdownToggle />
+          <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
+            <div *ngIf="!majors" class="d-flex justify-content-center">
+              <app-loading-item class="py-2"></app-loading-item>
             </div>
+            <a *ngFor="let item of majors" (click)="setValueFilterMajor(item)" class="text-collapse" ngbDropdownItem>{{
+              item.name }}</a>
           </div>
         </div>
+      </div>
     </form>
-    <div class="no-results" *ngIf="statusNotResultReturn " >
+    <div class="no-results" *ngIf="statusNotResultReturn ">
       Không tìm thấy kết quả nào cho chuyên ngành này
     </div>
-   
+
     <div class="" *ngIf="!statusNotResultReturn ">
-      <table class="rank-table" >
+      <table class="rank-table">
         <thead class=rank-thead-table>
           <tr class="rank_head-table">
             <th class="rank_title-table" scope="col">#</th>
@@ -63,38 +44,47 @@
         </thead>
         <tbody class="tbody" *ngIf="!statusRanking">
           <!-- Skeleton-Loadingg -->
-          <tr  class="rank_item-list " *ngFor="let _ of [].constructor(5)">
-            <td class="rank_item" scope="row"><ngx-skeleton-loader  
-              [theme]="{  width: '100%', display: 'inline-block', height: '50px', margin: '5px 0px 0px 0px' }"
-            ></ngx-skeleton-loader></td>
+          <tr class="rank_item-list " *ngFor="let _ of [].constructor(5)">
+            <td class="rank_item" scope="row">
+              <ngx-skeleton-loader
+                [theme]="{  width: '100%', display: 'inline-block', height: '50px', margin: '5px 0px 0px 0px' }">
+              </ngx-skeleton-loader>
+            </td>
             <td class="rank_item-name ">
-              <div class="row">
-                  <ngx-skeleton-loader  class="col-3"
-                  [theme]="{ margin: '2px 0px 0px 0px' ,width: '70px', display: 'inline-block', height: '70px', 'border-radius': '100px' }"
-                ></ngx-skeleton-loader>
-                  <ngx-skeleton-loader  class="col-9"
-                  [theme]="{  width: '100%', display: 'inline-block', height: '25px', margin: '20px 0px 0px 2px', 'border-radius': '8px' }"
-                ></ngx-skeleton-loader>
+              <div class="row g-2">
+                <ngx-skeleton-loader class="col-3"
+                  [theme]="{ margin: '2px 0px 0px 0px' ,width: '50px', display: 'inline-block', height: '50px', 'border-radius': '100px' }">
+                </ngx-skeleton-loader>
+                <ngx-skeleton-loader class="col-9"
+                  [theme]="{  width: '100%', display: 'inline-block', height: '25px', margin: '20px 0px 0px 2px', 'border-radius': '8px' }">
+                </ngx-skeleton-loader>
               </div>
             </td>
-            <td class="rank_item"><ngx-skeleton-loader 
-              [theme]="{  width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
-            ></ngx-skeleton-loader></td>
-            <td class="rank_item"><ngx-skeleton-loader 
-              [theme]="{  width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
-            ></ngx-skeleton-loader></td>
+            <td class="rank_item">
+              <ngx-skeleton-loader
+                [theme]="{  width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }">
+              </ngx-skeleton-loader>
+            </td>
+            <td class="rank_item">
+              <ngx-skeleton-loader
+                [theme]="{  width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }">
+              </ngx-skeleton-loader>
+            </td>
             <td class="rank-table-none"></td>
-            <td class="rank_item_scores"><ngx-skeleton-loader 
-              [theme]="{  width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
-            ></ngx-skeleton-loader></td>
+            <td class="rank_item_scores">
+              <ngx-skeleton-loader
+                [theme]="{  width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }">
+              </ngx-skeleton-loader>
+            </td>
           </tr>
           <!-- End Skeleton-Loadingg -->
-          
+
         </tbody>
         <tbody class="tbody" *ngIf="statusRanking">
-          <tr *ngFor="let rank of listRanking, ,let i = index" class="rank_item-list" >
+          <tr *ngFor="let rank of listRanking, ,let i = index" class="rank_item-list">
             <th class="rank_item" scope="row">{{i+1}}</th>
-            <td class="rank_item-name"><img class="rank_image" src={{rank.user.avatar}} alt="" width="70"><span class="rank_name">{{rank.user.name}}</span></td>
+            <td class="rank_item-name"><img class="rank_image" src={{rank.user.avatar}} alt="" width="70"><span
+                class="rank_name">{{rank.user.name}}</span></td>
             <td class="rank_item">{{rank.user.email}}</td>
             <td class="rank_item">{{majorsDataTable}}</td>
             <td class="rank-table-none"></td>
@@ -105,25 +95,31 @@
       <div class="pagination" *ngIf="!statusRanking">
         <ul class="pagination-list">
           <li class="pagination-list_box pagination-item" *ngFor="let _ of [].constructor(10)">
-            <ngx-skeleton-loader 
-            [theme]="{  width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
-          ></ngx-skeleton-loader></li>
+            <ngx-skeleton-loader
+              [theme]="{  width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }">
+            </ngx-skeleton-loader>
+          </li>
         </ul>
-        
+
       </div>
       <div class="pagination" *ngIf="statusRanking">
         <ul class="pagination-list">
-          <li class="pagination-list_box pagination-list_first" (click)="paginationPages(first_page_url, false, '1', $event)"><i class="fa-solid fa-angles-left"></i></li>
-          <li class="pagination-list_box pagination-item" *ngFor="let page of links" [ngClass]="page.active ? 'active' : ''"  (click)="paginationPages(page.url, page.active, page.label ,$event)">{{page.label}}</li>
-          <li class="pagination-list_box pagination-list_last" (click)="paginationPages(last_page_url, false,last_page, $event)"><i class="fa-solid fa-angles-right"></i></li>
+          <li class="pagination-list_box pagination-list_first"
+            (click)="paginationPages(first_page_url, false, '1', $event)"><i class="fa-solid fa-angles-left"></i></li>
+          <li class="pagination-list_box pagination-item" *ngFor="let page of links"
+            [ngClass]="page.active ? 'active' : ''"
+            (click)="paginationPages(page.url, page.active, page.label ,$event)">{{page.label}}</li>
+          <li class="pagination-list_box pagination-list_last"
+            (click)="paginationPages(last_page_url, false,last_page, $event)"><i class="fa-solid fa-angles-right"></i>
+          </li>
         </ul>
       </div>
     </div>
   </div>
   <div class="list-capacity">
     <div class="d-flex justify-content-between">
-        <h2 class="capacity_title ">Danh Sách Test Năng Lực</h2>
-        <div class=""><a class="capacity_view-all" routerLink="/test-nang-luc/list">Xem Tất Cả</a></div>
+      <h2 class="capacity_title my-h3">Danh Sách Test Năng Lực</h2>
+      <div class=""><a class="capacity_view-all" routerLink="/test-nang-luc/list">Xem Tất Cả</a></div>
     </div>
     <div class="">
       <!-- skeleton -->

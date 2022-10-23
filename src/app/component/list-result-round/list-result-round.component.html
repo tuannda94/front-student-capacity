@@ -1,12 +1,15 @@
 <div class="table__result-wrapper mt-3">
-  <div class="header d-flex justify-content-between algin-items-center">
+  <div class="header d-flex justify-content-between algin-items-center mb-3">
     <div class="">
-      <h5 class="my-2 fw-bold fs-5 color-blue">Xếp hạng</h5>
-      <div class="title-line"></div>
+      <h5 class="my-h5 section__title ">Xếp hạng</h5>
     </div>
     <div class="d-flex justify-content-end algin-items-center">
       <form action="" class="my-form-search">
-         <input   [attr.disabled]="!resultRoundAll ? true : null" type="text" (keyup)="searchResult($event)"  class="my-input-search"   placeholder="Tìm kiếm đội ...">
+         <input [attr.disabled]="!resultRoundAll ? true : null" type="text" (keyup)="searchResult($event)"  
+         class="my-input-search" placeholder="Tìm kiếm đội ...">
+        <button type="button" class="my-btn-search-inside">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </form>
       <button (click)="payingResultEventSort()" class="btn_sort">
         Sort&nbsp;&nbsp;<i *ngIf="statusSort" class="fa-solid fa-arrow-down"></i

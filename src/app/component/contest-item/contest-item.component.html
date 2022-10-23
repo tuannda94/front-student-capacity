@@ -55,7 +55,7 @@
             </div>
             <a [class.disabled]="!disabled" (click)="runTop()" [routerLink]="['/cuoc-thi/' , item.id]"
                 [state]="{registerNow : item.status_user_has_join_contest}">
-                <button class="my-btn-primary my-btn-xs" [ngClass]=" item.status == 1 || item.status == 0
+                <button class="my-btn-xs" [ngClass]=" item.status == 1 || item.status == 0
               ? 'my-btn-primary'
               : 'my-btn-disabled'
           ">

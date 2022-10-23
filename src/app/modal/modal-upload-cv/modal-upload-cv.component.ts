@@ -51,9 +51,7 @@ export class ModalUploadCvComponent implements OnInit {
   preview(files: any) {
     if (files.length === 0) return;
     var mimeType = files[0].type;
-    // if (mimeType.match(/image\/*/) == null) {
-    //   return;
-    // }
+ 
     this.fileUpload = files[0];
   }
 

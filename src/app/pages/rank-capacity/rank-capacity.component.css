@@ -32,6 +32,9 @@
   line-height: 28.8px;
   font-weight: 700;
 }
+
+
+
 .rank_name{
   display: inline-block;
   color: #0E0759;
@@ -111,12 +114,19 @@
 }
 
 .pagination{
-  margin: 50px auto 20px auto;
-  width: 50%;
+  width: 100%;
+  text-align: center;;
+  display: block
 }
 
 .pagination-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0;
+  margin: 30px 0;
   text-align: center;
+  list-style: none;
 }
 .pagination-list_box{
   background: var(--my-gray);
@@ -161,7 +171,33 @@ tr:nth-of-type(even) {
   background: #F9F9F9; 
 }
 
-.pagination-item .active{
+.pagination-item.active{
   background: #FF6638;
   color: #FFFFFF;
+}
+/* CSS Danh sách capacity */
+
+.list-capacity{
+  margin: 20px 0px 0px 0px;
+}
+
+.test-capacity_list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.capacity_title{
+  color: #0E0759;
+  font-size: 24px;
+  line-height: 28.8px;
+  font-weight: 700;
+}
+
+.capacity_view-all{
+  color: #0E0759;
+  font-size: 20px;
+  line-height: 24.4px;
+  font-weight: 400;
 }

@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
     slidesToScroll: 1,
     fadeSpeed: 1000,
   };
+
   sliderContest = {
     slidesToShow: 4,
     infinite: true,
@@ -91,7 +92,7 @@ export class HomeComponent implements OnInit {
     slidesToShow: 5,
     infinite: true,
     autoplay: true,
-    arrows: true,
+    arrows: false,
     slidesToScroll: 1,
     fadeSpeed: 1000,
     responsive: [
@@ -144,9 +145,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRecruitmentPosition();
-    this.getListPost();
-    this.getAllCompany();
-
     this.contestService.getWhereStatus(1, 'desc').subscribe((res) => {
       if (res.status == true) {
         this.contests = res.payload.filter((res: Contest, index: number) => {
@@ -154,7 +152,8 @@ export class HomeComponent implements OnInit {
         });
       }
     });
-
+    this.getListPost();
+    this.getAllCompany();
     // Slider tính năng
     const advantageFrist = document.querySelector('.advantage__tag--1');
     const advantageImage = document.querySelector('.advantage-show__img');
@@ -163,6 +162,7 @@ export class HomeComponent implements OnInit {
     advantageFrist?.classList.add('active');
     advantageImage?.classList.add('d-block');
     setInterval(() => {
+      // Slider đợt giới thiệu chức năng code online.
       this.advanIndex++;
 
       const advantageEleImage = document.querySelectorAll(
@@ -189,7 +189,20 @@ export class HomeComponent implements OnInit {
         advantage[0].classList.add('active');
         advantageEleImage[0].classList.remove('d-none');
       }
-    }, 4000);
+
+      // Slider đợt tuyển dụng.
+    }, 6000);
+
+    setInterval(() => {      
+      if (this.arrLinkPost) {
+        if(this.currentIndex == this.arrLinkPost.length){
+          this.payingRecruitmentPositionSlider(1);
+        }else if(this.currentIndex <  this.arrLinkPost.length){
+          let index = this.currentIndex + 1;
+            this.payingRecruitmentPositionSlider(index);
+        }
+      }
+    }, 10000);
   }
 
   // Get api list contest after login
@@ -249,6 +262,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // PaydingSlider
+  payingRecruitmentPositionSlider(index: number) {
+    this.currentIndex = index;
+    this.postService.paydingRecruitmentPosition(index).subscribe((res) => {
+      this.setDataRecruitmentPosition(res);
+    });
+  }
+
   //  Phân trang các bài viết tuyển dụng
   payingRecruitmentPosition(index: number) {
     this.statusListPostRecruitment = false;
@@ -260,13 +281,13 @@ export class HomeComponent implements OnInit {
 
   //-----------------------  Danh sách các 3 bài viết
   getListPost() {
-    this.postService.getAllListPost().subscribe(res => {
+    this.postService.getAllListPost().subscribe((res) => {
       if (res.status == true) {
         let arrResult = res.payload.data;
         this.listPostEvent = arrResult.filter((res: Post, index: number) => {
           return index < 3;
         });
       }
-    })
+    });
   }
 }

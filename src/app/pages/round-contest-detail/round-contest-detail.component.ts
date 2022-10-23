@@ -43,7 +43,7 @@ export class RoundContestDetailComponent implements OnInit {
   statusRoundDetail: boolean = false;
   statusIntoExam: boolean = false;
   contestDetail: Contest;
-  contestRelated: Array<any>;
+  contestRelated: Array<any> = [];
   contestCompanySuppor: Enterprise;
   statusContestRelated: boolean = false;
   contentItem: Array<Contest> = [];
@@ -108,7 +108,17 @@ export class RoundContestDetailComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Chi tiết vòng thi');
     this.runTop();
-    this.getListPost();
+
+    this.contest_id = this.route.snapshot.paramMap.get('contest_id');
+    this.contestService.getWhereId(this.contest_id).subscribe((res) => {
+      if (res.status) {
+        this.contestDetail = res.payload;
+        this.contestDetail ? (this.statusContest = true) : false;
+        this.contestDetail.judges !== undefined
+          ? (this.statusJudges = true)
+          : false;
+      }
+    });
 
     this.routeStateRegister = history.state.registerNow;
 
@@ -130,16 +140,9 @@ export class RoundContestDetailComponent implements OnInit {
       this.getResultRank(this.round_id);
     });
 
-    this.contest_id = this.route.snapshot.paramMap.get('contest_id');
-    this.contestService.getWhereId(this.contest_id).subscribe((res) => {
-      if (res.status) {
-        this.contestDetail = res.payload;
-        this.contestDetail ? (this.statusContest = true) : false;
-        this.contestDetail.judges !== undefined
-          ? (this.statusJudges = true)
-          : false;
-      }
-    });
+    this.getListPost();
+
+   
 
     // Các cuộc thi liên quan
     this.contestService
@@ -150,6 +153,7 @@ export class RoundContestDetailComponent implements OnInit {
             return item.id != this.contest_id;
           });
         if (this.contestRelated) {
+
           this.statusContestRelated = true;
         }
       });

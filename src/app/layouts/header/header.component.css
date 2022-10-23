@@ -1,4 +1,8 @@
 /* HEADER */
+h3, p , h2 , h4 , h5 , h6{
+  margin-bottom: 0;
+}
+
 .header {
   z-index: 1000;
   box-shadow: 0px 0px 7px var(--gray);
@@ -39,6 +43,11 @@
   margin: 0 !important;
   animation: slideDown 0.6s ease-in-out;
   box-shadow: 0 0px 6px var(--gray-500);
+}
+
+.open-save-info{
+  margin-right: 30px;
+  cursor: pointer;
 }
 
 .menu-res-item .menu-res-link {
@@ -330,4 +339,106 @@
   .nav-response {
     display: block;
   }
+}
+
+.sidepanel {
+  height: 100vh; 
+  width: 500px;
+  transform: translateX(100%);
+  position: fixed; 
+  z-index: 3; 
+  top: 0;
+  right: 0;
+  border-left: 1px solid #ccc;
+  background-color: #ffff; 
+  overflow-x: hidden; 
+  transition: 0.5s;
+  animation: fade;
+}
+
+
+.save-info-acive{
+  transform: translateX(0%);
+  animation-name: fade;
+  animation-duration: 0.4s;
+}
+
+@keyframes fade {
+  from {
+      opacity: 0.4
+  }
+  to {
+      opacity: 1
+  }
+}
+
+.btn-save-close{
+  border: none;
+  background-color: white;
+  float: end;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.sidepanel-title{
+  color: var(--blue);
+  font-weight: bold;
+}
+
+.overlay-active{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.397);
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.sidepanel__nav-list {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.sidepanel__nav-item {
+  padding: 8px 25px;
+  position: relative;
+  border-bottom: 2px solid var(--my-bg-color);
+  cursor: pointer;
+  transition-duration: .3s;
+}
+
+.sidepanel__nav-item+.sidepanel__nav-item {
+  margin-left: 8px;
+}
+
+.sidepanel__nav-item:hover {
+  color: var(--my-primary);
+  border-bottom-color: var(--my-primary);
+}
+
+.sidepanel__nav-item.active {
+  color: var(--my-primary);
+  border-bottom-color: var(--my-primary);
+}
+
+.sidepanel__nav-link {
+  color: inherit;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.sidepanel::-webkit-scrollbar {
+  width: 3px;
+  background-color: rgb(235, 232, 232);
+}
+
+.sidepanel::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
 }

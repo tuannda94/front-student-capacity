@@ -1,29 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap } from 'rxjs';
 import { Contest } from 'src/app/models/contest';
-import { Slider } from 'src/app/models/slider.model';
 import { ContestService } from 'src/app/services/contest.service';
-import { ModalAddTeamComponent } from 'src/app/modal/modal-add-team/modal-add-team.component';
 import { MatDialog } from '@angular/material/dialog';
-import { GetValueLocalService } from 'src/app/services/get-value-local.service';
-import { Enterprise } from 'src/app/models/enterprise.model';
-import { param } from 'jquery';
-import { Round } from 'src/app/models/round.model';
+
 import { RoundService } from 'src/app/services/round.service';
-import { NgToastService } from 'ng-angular-popup';
-import { FormControl } from '@angular/forms';
 import { ResultRound } from 'src/app/models/result-round.model';
 import { UserService } from 'src/app/services/user.service';
 import * as $ from 'jquery';
-import { SliderService } from 'src/app/services/slider.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user';
 import { TransmitToPost } from 'src/app/models/transmit-to-post.models';
 import { ListPostService } from 'src/app/services/list-post.service';
 import { Post } from 'src/app/models/post.model';
-import { ModalInfoTeamComponent } from 'src/app/modal/modal-info-team/modal-info-team.component';
 import { Title } from '@angular/platform-browser';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-contest-deatail',
   templateUrl: './contest-deatail.component.html',
@@ -82,7 +73,8 @@ export class ContestDeatailComponent implements OnInit {
     private roundService: RoundService,
     private userService: UserService,
     private modalService: NgbModal,
-    private title : Title
+    private title : Title,
+    private location : Location
   ) {}
 
   ngOnInit(): void {
@@ -198,5 +190,12 @@ export class ContestDeatailComponent implements OnInit {
   // Mở nộ dung vòng thi
   open(content: any) {
     this.modalService.open(content, { scrollable: true });
+  }
+
+  // 
+  isContestRelate(event: any){
+    if(event){
+      window.location.reload();
+    }
   }
 }

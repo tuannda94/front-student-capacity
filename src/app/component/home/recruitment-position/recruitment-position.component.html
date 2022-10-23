@@ -12,8 +12,8 @@
                 data-toggle="tooltip" data-placement="top" title={{item.title}}
                     [routerLink]="['/bai-viet/' , item.slug]">{{item.title}}</a>
                 </h3>
-            <button class="my-btn my-add-favorite__btn">
-                <i class="my-add-favorite__icon fa-solid fa-bookmark"></i>
+            <button class="my-btn my-add-favorite__btn " [ngClass]="item.user_wishlist ? 'opacity-100' : ''">
+                <i  (click)="favoriteEvent($event , item)" class=" fa-solid fa-bookmark" [ngClass]="item.user_wishlist ? 'primary-color' : 'my-add-favorite__icon'"></i>
             </button>
         </div>
         <div class="recruitment-position__context-recruitment">

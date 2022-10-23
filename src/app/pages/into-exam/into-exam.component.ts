@@ -39,6 +39,7 @@ export class IntoExamComponent implements OnInit {
   statusInfo: boolean = true;
   statusContest: boolean = false;
   statusTeamDetail: boolean = false;
+  saveLinkSubmitAfter: string;
   contestId: number;
   statusSubmitExam: boolean;
   statusSaveExam: boolean;
@@ -63,31 +64,8 @@ export class IntoExamComponent implements OnInit {
     private _location: Location
   ) {}
 
-  submitAss = new FormGroup({
-    controlLink : new FormControl(
-      [
-        Validators.pattern(
-          '/^(http[s]?://){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/'
-        )
-      ]
-    )
-  })
 
   ngOnInit(): void {
-
-    // Chi tiết cuộc thi
-    this.route.paramMap
-      .pipe(
-        map((params) => params.get('contest_id')),
-        switchMap((id) => this.contestService.getWhereId(id))
-      )
-      .subscribe((res) => {
-        if (res.status) {
-          this.infoContest = res.payload;
-          this.infoContest ? (this.statusContest = true) : this.statusContest;
-        }
-      });
-
     const round = {
       round_id: 0,
     };
@@ -128,6 +106,22 @@ export class IntoExamComponent implements OnInit {
       });
       this.getInfoExam(round);
     });
+
+    // Chi tiết cuộc thi
+    this.route.paramMap
+      .pipe(
+        map((params) => params.get('contest_id')),
+        switchMap((id) => this.contestService.getWhereId(id))
+      )
+      .subscribe((res) => {
+        if (res.status) {
+          this.infoContest = res.payload;
+          this.infoContest ? (this.statusContest = true) : this.statusContest;
+        }
+      });
+
+  
+  
   }
 
   // dowload đề bài
@@ -176,9 +170,7 @@ export class IntoExamComponent implements OnInit {
         });
         
       }
-      
-      console.log(this.infoExam.status);
-      
+          
       if (this.infoExam) this.checkStatusExam(this.infoExam.status);
     });
   }
@@ -214,22 +206,32 @@ export class IntoExamComponent implements OnInit {
 
   // Nộp bài bằng link
   submitExamByLink(link: any) {
+    let regexp = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
+    );
+    let test = regexp.test(link);
+    console.log(test);
+    
     setTimeout(() => {
-      this.statusSubmitExam = false;
-      setTimeout(() => {
-        let resultExam = {
-          result_url: link.target.value,
-          id: this.infoExam.id,
-        };
-        if (resultExam.result_url != '') {
-          this.statusSubmitExam = true;
-          this.assignmentLinks = true;
-        } else {
-          this.assignmentLinks = false;
-          this.statusSubmitExam = true;
-        }
-        this.assignment = resultExam; 
-      },3000);
+      if(link && link  !=  this.saveLinkSubmitAfter){
+        this.statusSubmitExam = false;
+        setTimeout(() => {
+          let resultExam = {
+            result_url: link.target.value,
+            id: this.infoExam.id,
+          };
+          if (resultExam.result_url != '') {
+            this.statusSubmitExam = true;
+            this.assignmentLinks = true;
+     
+          } else {
+            this.assignmentLinks = false;
+            this.statusSubmitExam = true;
+          }
+          this.assignment = resultExam; 
+          this.saveLinkSubmitAfter = link;
+        },3000);
+      }
+     
     }, 3000);
   }
 

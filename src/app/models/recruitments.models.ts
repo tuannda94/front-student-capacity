@@ -20,4 +20,5 @@ export class Recruitments {
     count_user: number;
     contest_count: number;
     rounds_count: number;
+    user_wishlist: boolean;
 }

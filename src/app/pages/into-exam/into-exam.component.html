@@ -135,8 +135,13 @@
           </div>
         </div>
 
-        <p *ngIf="statusTeamDetail == true"   class="fw-bold fs-5 mt-3 color-blue py-2">Đội của bạn</p>
-        <div *ngIf="statusTeamDetail == true"  class="title-line"></div>
+        <p
+          *ngIf="statusTeamDetail == true"
+          class="fw-bold fs-5 mt-3 color-blue py-2"
+        >
+          Đội của bạn
+        </p>
+        <div *ngIf="statusTeamDetail == true" class="title-line"></div>
         <div class="my-3 bg-white team-detail-box pb-3">
           <div *ngIf="statusTeamDetail == true" style="border-radius: 10px">
             <div class="info-your-team text-center" ngbTooltip="Xem chi tiết">
@@ -302,7 +307,7 @@
               [ngClass]="
                 statusTakeExam == true ? 'btn btn-danger' : 'btn btn-main'
               "
-              class="mt-2 text-center btn d-block w-100'"
+              class="my-btn-secondary my-btn-s w-100"
               (click)="
                 statusTakeExam == true
                   ? cancelExam()
@@ -317,7 +322,7 @@
                 mode="indeterminate"
               >
               </mat-progress-bar>
-              <form [formGroup]="submitAss">
+              <form >
                 <div class="modal-header">
                   <h3 class="modal-title fw-bold">Sinh viên nộp bài tại đây</h3>
                   <p (click)="modal.dismiss('Cross click')">
@@ -333,23 +338,24 @@
                     >
                       <div class="submit-assignment-box">
                         <div class="">
-                            <input
-                          #file
-                          type="file"
-                          [disabled]="assignmentFiles"
-                          (change)="submitExamByFile(file.files)"
-                          hidden
-                          id="submit-assignment"
-                        />
-                        <label
-                          class="btn-upload-assignment inline-block"
-                          for="submit-assignment"
-                          ><i class="fas fa-cloud-upload"></i
-                        ></label>
+                          <input
+                            #file
+                            type="file"
+                            [disabled]="assignmentFiles"
+                            (change)="submitExamByFile(file.files)"
+                            hidden
+                            id="submit-assignment"
+                          />
+                          <label
+                            class="btn-upload-assignment inline-block"
+                            for="submit-assignment"
+                            ><i class="fas fa-cloud-upload"></i
+                          ></label>
                         </div>
-                        <p class="pt-3 text-center color-gray fst-italic">Định dạng file nén zip, rar</p>
+                        <p class="pt-3 text-center color-gray fst-italic">
+                          Định dạng file nén zip, rar
+                        </p>
                       </div>
-                      
                     </mat-tab>
                     <mat-tab
                       label="Link"
@@ -359,15 +365,14 @@
                       <div class="submit-assignment-box">
                         <input
                           (keyup)="submitExamByLink($event)"
-                          formControlName="controlLink"
+                       
                           type="text"
+                          value=""
                           name="text"
-                          class="input"
                           class="input-link-submit"
                           placeholder="Link bài làm .."
                         />
-                       
-                      </div>
+                        </div>
                     </mat-tab>
                   </mat-tab-group>
                   <div

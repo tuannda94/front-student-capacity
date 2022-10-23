@@ -1,7 +1,4 @@
-// http://127.0.0.1:8000/api
-//  http://127.0.0.1:8000/api
 const baseApiUrl = "http://127.0.0.1:8000/api";
-// const baseApiUrl = "http://127.0.0.1:8000/api";
 const authApi = `${baseApiUrl}/auth`;
 export const jwtApiUrl = `${baseApiUrl}/v1`;
 export const publicApiUrl = `${baseApiUrl}/public`;
@@ -31,6 +28,7 @@ export const environment = {
   contestV1Url: `${jwtApiUrl}/contest`,
   teamListUrl: `${jwtApiUrl}/teams`,
   takeExamUrl: `${jwtApiUrl}/take-exam`,
-  userV1Url: `${jwtApiUrl}/user`
+  userV1Url: `${jwtApiUrl}/user`,
+  wishListV1Url: `${jwtApiUrl}/wishlist`,
 };
 

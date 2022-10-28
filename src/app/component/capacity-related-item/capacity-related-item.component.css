@@ -92,15 +92,57 @@
 }
 
 .capacity__related-content-list-item-skill-name {
-  text-transform: uppercase;
   padding-left: 4px;
 }
 
 .capacity-countdown {
   text-align: center;
-  margin-bottom: 4px;
 }
 
 .capacity-countdown .my-countdown-item+.my-countdown-item {
   padding-left: 12px;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.capacity__related-top-1 {
+  display: flex;
+  align-items: center;
+  margin: 8px 0 12px;
+}
+
+.capacity__related-top-1-rank {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.capacity__related-top-1-rank-img {
+  display: inline-block;
+  object-fit: cover;
+}
+
+.capacity__related-top-1-user {
+  flex: 3;
+}
+
+
+.capacity__related-top-1-user-avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50px;
+  display: block;
+}
+
+.capacity__related-top-1-user-name {
+  margin-left: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }

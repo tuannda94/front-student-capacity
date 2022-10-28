@@ -40,7 +40,7 @@ export class RecruitmentPositionComponent implements OnInit {
         );
         this.wishlist.wishListRemove(data).subscribe((res) => {
           if (res.status) {
-            this.toast.success({ summary: res.payload, duration: 2000 });
+            this.toast.success({ summary: res.payload, duration: 2000 , detail:"Cảnh báo" });
           }
         });
       } else {
@@ -51,7 +51,7 @@ export class RecruitmentPositionComponent implements OnInit {
         );
         this.wishlist.wishListAdd(data).subscribe((res) => {
           if (res.status) {
-            this.toast.success({ summary: res.payload, duration: 2000 });
+            this.toast.success({ summary: res.payload, detail:"Thông báo" , duration: 2000 });
           }
         });
       }

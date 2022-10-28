@@ -145,7 +145,7 @@ export class ModalListMemberComponent implements OnInit {
             this.dialogRef.close(res.user_pass);
             this.openInfoTeam(this.teamId, this.contestId.toString());
           } else {
-            this.toast.error({ summary: res.payload, duration: 2000 });
+            this.toast.error({ summary: res.payload, detail:"Lỗi" , duration: 2000 });
           }
         });
     }

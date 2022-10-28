@@ -49,12 +49,12 @@ export class RoundDetailComponent implements OnInit {
     let dateTime = new Date(end_time).getTime();
     let todayTime = new Date().getTime();
     if (todayTime > dateTime) {
-      this.toast.warning({ summary: 'Đã hết thời gian thi !!!', duration: 3000 });
+      this.toast.warning({ summary: 'Đã hết thời gian thi !!!', detail:"Cảnh báo" ,duration: 3000 });
     } else {
       this.roundService.getInfoTeamFromContestId(round_id)
         .subscribe(res => {
           if (res.payload.length == 0) {
-            this.toast.warning({ summary: 'Bạn chưa tham gia cuộc thi này !', duration: 5000 });
+            this.toast.warning({ summary: 'Bạn chưa tham gia cuộc thi này !',detail:"Cảnh báo" , duration: 5000 });
           } else {
             this.router.navigate(['/vao-thi', this.roundDetail.contest_id, 'vong', this.roundDetail.id]);
           }

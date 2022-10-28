@@ -134,6 +134,7 @@ export class IntoExamComponent implements OnInit {
       this.toast.error({
         summary: 'Chưa cập nhật đề bài !!!',
         duration: 5000,
+        detail:"Lỗi"
       });
     }
   }
@@ -188,6 +189,7 @@ export class IntoExamComponent implements OnInit {
       this.toast.warning({
         summary: 'Sai định dạng file !!!',
         duration: 5000,
+        detail:"Cảnh báo"
       });
     } else {
       this.statusSubmitExam = false;
@@ -259,12 +261,14 @@ export class IntoExamComponent implements OnInit {
           this.toast.success({
             summary: 'Nộp bài thành công !!!',
             duration: 5000,
+            detail:"Thông báo"
           });
           this.checkStatusExam(2);
         } else {
           this.statusClickSubmit = false;
           this.toast.error({
             summary: 'Lỗi nộp bài !!!',
+            detail:"Lỗi",
             duration: 5000,
           });
         }
@@ -289,7 +293,7 @@ export class IntoExamComponent implements OnInit {
 
   copyLinkUrl() {
     navigator.clipboard.writeText(window.location.href);
-    this.toast.info({ summary: 'Đã copy !!!', duration: 5000 });
+    this.toast.info({ summary: 'Đã copy !!!', detail:"Thông báo" , duration: 5000 });
   }
 
   // Thông tin chi tiết của đội thi

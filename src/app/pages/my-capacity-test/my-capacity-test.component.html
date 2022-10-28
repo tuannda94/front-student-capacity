@@ -27,13 +27,18 @@
           [routerLink]="['/test-nang-luc', capacity.id]"
           class="capacity__item-image"
           [ngStyle]="{ 'background-image': 'url(' + capacity.img }"
+          title="{{ capacity.name }}"
         ></a>
 
         <div class="capacity__content">
           <p class="capacity__content-time my-xs">
             {{ capacity.date_start | formatDatePost }} - {{ capacity.register_deadline | formatDatePost }}
           </p>
-          <a [routerLink]="['/test-nang-luc', capacity.id]" class="capacity__content-title-link">
+          <a
+            [routerLink]="['/test-nang-luc', capacity.id]"
+            class="capacity__content-title-link"
+            title="{{ capacity.name }}"
+          >
             <h2 class="capacity__content-title my-h5">{{ capacity.name }}</h2>
           </a>
 

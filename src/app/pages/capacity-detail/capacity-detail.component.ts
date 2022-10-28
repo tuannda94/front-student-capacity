@@ -100,7 +100,7 @@ export class CapacityDetailComponent implements OnInit {
           });
 
           // get ds doanh nghiệp, xóa DN trùng lặp
-          this.enterprises = res.payload.recruitment_enterprise.reduce((result: Enterprise[], item: Enterprise) => {
+          this.enterprises = res.payload.recruitmentEnterprise.reduce((result: Enterprise[], item: Enterprise) => {
             const exitsEnterprise = result.some((enterprice) => enterprice.id === item.id);
 
             if (!exitsEnterprise) result.push(item);
@@ -230,7 +230,7 @@ export class CapacityDetailComponent implements OnInit {
   handleGoToNextRound() {
     if (this.statusExam.status === 1) {
       if (!this.rounds.length) {
-        this.toast.warning({ summary: "Chưa có bài thi nào", duration: 3000 });
+        this.toast.warning({ summary: "Chưa có bài thi nào", duration: 3000 , detail:"Cánh báo" });
         return;
       }
 

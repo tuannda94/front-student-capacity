@@ -136,7 +136,7 @@ export class ModalInfoTeamComponent implements OnInit {
           this.arrayMembers =  this.arrayMembers.filter((item) => {
             return item.id  != res.user_id[0];
           })
-          this.toast.success({ summary: "Xóa thành công", duration: 2000 });
+          this.toast.success({ summary: "Xóa thành công", detail:"Thông báo" , duration: 2000 });
         }
       })
     }

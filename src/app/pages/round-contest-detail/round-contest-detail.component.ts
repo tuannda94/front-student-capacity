@@ -273,6 +273,7 @@ export class RoundContestDetailComponent implements OnInit {
       this.toast.warning({
         summary: 'Bạn chưa đăng nhập !!!',
         duration: 3000,
+        detail:"Cảnh báo"
       });
       this.router.navigate(['./login']);
     }
@@ -284,6 +285,7 @@ export class RoundContestDetailComponent implements OnInit {
           this.toast.warning({
             summary: 'Đội của bạn chưa tham gia vòng này !',
             duration: 5000,
+            detail:"Cảnh báo"
           });
           this.statusIntoExam = false;
         } else {

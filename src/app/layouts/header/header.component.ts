@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getPost() {
+    this.statusPage = false;
     this.wishlist.getlistWish('post').subscribe((res) => {
       if (res.status) {
         this.posts = res.payload;
@@ -60,6 +61,7 @@ export class HeaderComponent implements OnInit {
   getContestStatus(event: any) {
     if (this.posts) {
       document.querySelector('.post')?.classList.remove('active');
+  
       event.currentTarget.classList.add('active');
       this.getContest();
       this.typeTab = 0;
@@ -91,7 +93,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getPostStatus(event: any) {
-    if (this.contests) {
+    if (this.statusPage) {
       this.statusPage = false;
       this.getPost();
       document.querySelector('.contest')?.classList.remove('active');
@@ -105,14 +107,17 @@ export class HeaderComponent implements OnInit {
   }
 
   openSaveInfo() {
+    this.statusPage = false;
     this.getContest();
     document.querySelector('.sidepanel')?.classList.add('save-info-acive');
-    document.querySelector('.overlay')?.classList.add('overlay-active');
+    document.querySelector('.overlay')?.classList.remove('d-none');
+    console.log(document.querySelector('.overlay'));
+    
   }
 
   closeSaveInfo() {
     document.querySelector('.sidepanel')?.classList.remove('save-info-acive');
-    document.querySelector('.overlay')?.classList.remove('overlay-active');
+    document.querySelector('.overlay')?.classList.add('d-none');
   }
 
   // LogOut

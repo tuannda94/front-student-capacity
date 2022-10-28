@@ -114,12 +114,13 @@ export class ModalAddTeamComponent implements OnInit {
     formDataTeam.append('user_id', this.user_id);
     this.teamService.addTeam(formDataTeam).subscribe((res) => {
       if (!res.status) {
-        this.toast.warning({ summary: res.payload, duration: 2000 });
+        this.toast.warning({ summary: res.payload, detail:"Cảnh báo" , duration: 2000 });
+        
         this.dialogRef.close(true);
       } else {
         this.statusRegister = true;
         this.onNoClick();
-        this.toast.success({ summary: 'Thêm thành công', duration: 2000 });
+        this.toast.success({ summary: 'Thêm thành công', detail:"Cảnh báo" , duration: 2000 });
       }
     });
   }
@@ -131,7 +132,7 @@ export class ModalAddTeamComponent implements OnInit {
     var formDataTeam = new FormData();
 
     if( dataTeam.name === this.teamDetail.name &&  !this.isEditData){
-      this.toast.warning({ summary: 'Bạn chưa chỉnh sửa gì ?', duration: 2000 });
+      this.toast.warning({ summary: 'Bạn chưa chỉnh sửa gì ?',  detail:"Cảnh báo" ,duration: 2000 });
       this.statusRegister = true;
     }else{
       formDataTeam.append('name', dataTeam.name);
@@ -144,12 +145,12 @@ export class ModalAddTeamComponent implements OnInit {
         .editTeam(formDataTeam, this.teamDetail.id)
         .subscribe((res) => {
           if (!res.status) {
-            this.toast.warning({ summary: res.payload, duration: 2000 });
+            this.toast.warning({ summary: res.payload, detail:"Cảnh báo" , duration: 2000 });
             this.dialogRef.close(true);
           } else {
             this.statusRegister = true;
             this.onNoClick();
-            this.toast.success({ summary: 'Sửa thành công', duration: 2000 });
+            this.toast.success({ summary: 'Sửa thành công', detail:"Thông báo" , duration: 2000 });
           }
         });
     }

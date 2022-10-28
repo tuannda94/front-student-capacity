@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
                 
               }, 1000)
             } else {
-              this.toast.error({ summary: 'Không thể đăng nhập', duration: 5000 });
+              this.toast.error({ summary: 'Không thể đăng nhập', detail:"Thông báo" ,  duration: 5000 });
             }
           })
       })

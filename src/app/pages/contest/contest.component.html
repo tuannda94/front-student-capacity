@@ -8,21 +8,23 @@
           [ngClass]="statusCurrContest == 0 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a class="contest__nav-link">Đang diễn ra</a>
+          <a  [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}" class="contest__nav-link">Đang diễn ra</a>
         </li>
         <li
           (click)="updateStatusContest($event, 1)"
+        
           [ngClass]="statusCurrContest == 1 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a class="contest__nav-link">Sắp diễn ra</a>
+          <a   [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}" class="contest__nav-link">Sắp diễn ra</a>
         </li>
         <li
           (click)="updateStatusContest($event, 2)"
+         
           [ngClass]="statusCurrContest == 2 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a class="contest__nav-link">Đã kết thúc</a>
+          <a  [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}"  class="contest__nav-link">Đã kết thúc</a>
         </li>
       </ul>
       <div class="btn__search-contest">

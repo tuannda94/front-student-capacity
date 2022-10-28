@@ -43,9 +43,10 @@ export class HomeLayoutComponent implements OnInit {
     let header = document.querySelector('.header');
     if (window.scrollY > 400) {
       header?.classList.add('fixed');
-    } else {
+      document.querySelector('.overlay')?.classList.add('d-none');
+      document.querySelector('.sidepanel')?.classList.remove('save-info-acive');
+    } else{
       header?.classList.remove('fixed');
-      // document.getElementById = "-50px";
     }
   }
 

@@ -173,7 +173,7 @@
           <a class="sidepanel__nav-link">Cuộc Thi</a>
         </li>
         <li class="sidepanel__nav-item post" (click)="getPostStatus($event)">
-          <a class="sidepanel__nav-link">Tuyển dụng</a>
+          <a [attr.disabled]="!statusPage" class="sidepanel__nav-link">Tuyển dụng</a>
         </li>
       </ul>
       <div *ngIf="statusPage" class="sidepanel__nav-content">
@@ -193,7 +193,7 @@
             typeTab == 0 && contests.length == 0 ||
             typeTab == 1 && posts.length == 0
           "
-          class="d-flex justify-content-center align-items-center mt-3"
+          class="d-flex justify-content-center align-items-center mt-5"
         >
           <img src="https://homebond.ae/assets/images/no-result.png" alt="" />
         </div>
@@ -208,6 +208,8 @@
           animation="pulse"
         ></ngx-skeleton-loader>
       </div>
+       
     </div>
   </div>
 </div>
+<div (click)="closeSaveInfo()" class="overlay d-none"></div>

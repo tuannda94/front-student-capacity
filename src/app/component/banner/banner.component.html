@@ -5,8 +5,8 @@
         </div>
     </ng-template>
 </ngb-carousel>
-<div *ngIf="!bannerStatus">
-    <ngx-skeleton-loader class="loading-banner" [theme]="{ 'height.px' : '550', 'margin-bottom' : '10px' }"
+<div *ngIf="!bannerStatus" class="loading-banner">
+    <ngx-skeleton-loader  [theme]="{ 'height' : '100%', 'margin-bottom' : '10px' }"
         appearance="line">
     </ngx-skeleton-loader>
 </div>

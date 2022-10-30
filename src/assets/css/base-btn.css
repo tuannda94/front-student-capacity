@@ -67,11 +67,13 @@
     font-size: 20px;
     line-height: 24px;
     transition-duration: 0.3s;
+    cursor: pointer;
 }
 
 .my-btn-primary:hover {
     background-color: #E4552A;
-    border-color: #E4552A
+    border-color: #E4552A;
+    color: var(--white);
 }
 
 .my-btn-secondary {
@@ -93,7 +95,8 @@
 }
 
 .my-btn-secondary:hover {
-    background-color: var(--my-primary-50);
+    background-color: var(--primary);
+    color: white;
 }
 
 .my-btn-tertiary {

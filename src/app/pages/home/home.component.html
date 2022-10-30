@@ -16,37 +16,37 @@
           </app-recruitment-position>
         </div>
         <div *ngIf="!statusListPostRecruitment" class="row">
-          <div class="col-6">
+          <div class="col-lg-6  col-md-12 col-sm-12">
             <ngx-skeleton-loader [theme]="{
                       'height.px': '130',
                       'margin-bottom': '20'
                     }" animation="pulse"></ngx-skeleton-loader>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6  col-md-12 col-sm-12">
             <ngx-skeleton-loader [theme]="{
                       'height.px': '130',
                       'margin-bottom': '20'
                     }" animation="pulse"></ngx-skeleton-loader>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6  col-md-12 col-sm-12">
             <ngx-skeleton-loader [theme]="{
                       'height.px': '130',
                       'margin-bottom': '20'
                     }" animation="pulse"></ngx-skeleton-loader>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6  col-md-12 col-sm-12">
             <ngx-skeleton-loader [theme]="{
                       'height.px': '130',
                       'margin-bottom': '20'
                     }" animation="pulse"></ngx-skeleton-loader>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6  col-md-12 col-sm-12">
             <ngx-skeleton-loader [theme]="{
                       'height.px': '130',
                       'margin-bottom': '20'
                     }" animation="pulse"></ngx-skeleton-loader>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6  col-md-12 col-sm-12">
             <ngx-skeleton-loader [theme]="{
                       'height.px': '130',
                       'margin-bottom': '20'
@@ -86,25 +86,25 @@
       </div>
     </div>
     <div *ngIf="!contests" class="row">
-      <div class="col-6">
+      <div class="col-lg-6 col-md-12 col-sm-12">
         <ngx-skeleton-loader [theme]="{
             'height.px': '150',
             'margin-bottom': '20'
           }" animation="pulse"></ngx-skeleton-loader>
       </div>
-      <div class="col-6">
+      <div class="col-lg-6  col-md-12 col-sm-12">
         <ngx-skeleton-loader [theme]="{
             'height.px': '150',
             'margin-bottom': '20'
           }" animation="pulse"></ngx-skeleton-loader>
       </div>
-      <div class="col-6">
+      <div class="col-lg-6  col-md-12 col-sm-12">
         <ngx-skeleton-loader [theme]="{
             'height.px': '150',
             'margin-bottom': '20'
           }" animation="pulse"></ngx-skeleton-loader>
       </div>
-      <div class="col-6">
+      <div class="col-lg-6  col-md-12 col-sm-12">
         <ngx-skeleton-loader [theme]="{
             'height.px': '150',
             'margin-bottom': '20'
@@ -141,7 +141,7 @@
         </div>
       </div>
       <div class="advantage-show-text">
-        <div class="advantage-list">
+        <div class="advantage-list w-100">
           <span class="advantage__tag advantage__tag--1">
             <i class="fa-solid fa-code"></i>
             Giải bài toán lập trình ngay trên code online abc def ghj klmn
@@ -170,7 +170,7 @@
     </h2>
     <div class="section-content">
       <div class="post-event-list grid gy-1" *ngIf="!listPostEvent">
-        <app-post-load-item *ngFor="let item of [].constructor(3); let i = index"></app-post-load-item>
+        <app-post-load-item  class="post-loading" *ngFor="let item of [].constructor(3); let i = index"></app-post-load-item>
 
       </div>
       <div class="post-event-list">
@@ -178,7 +178,7 @@
           <app-post-related-item [postItem]="item"></app-post-related-item>
         </div>
       </div>
-      <div class="contest-view">
+      <div class="contest-view mt-5" *ngIf="listPostEvent">
         <a class="contest-view-link" routerLink="/bai-viet">
           <button class="my-btn-secondary my-btn-m">
             Xem tất cả <i class="fa-solid fa-arrow-right"></i>
@@ -195,7 +195,7 @@
     </h2>
     <div class="section-content">
       <ngx-slick-carousel [config]="sliderCompany" class="recruitment-list">
-        <div ngxSlickItem class="recruitment-item mx-3" *ngFor="let item of companys">
+        <div ngxSlickItem class="recruitment-item mx-3" *ngFor="let item of companies">
           <img class="recruitment-item__img" [src]="item.logo" alt="" />
         </div>
       </ngx-slick-carousel>

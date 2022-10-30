@@ -21,8 +21,9 @@ export class TestCapacityService {
       return this.http.get<ResponsePayload>(`${environment.keywordTrendingUrl}?type=2`);
     }
 
-    getRankingbyMajor(slugMajor: string): Observable<ResponsePayload> {
-        return this.http.get<ResponsePayload>(`${environment.RankCapacityUrl}/${slugMajor}`);
+    getRankingByMajor(slugMajor: string, page: string | null): Observable<ResponsePayload> {
+      let pageQuery =  page == null ? '1' : page;
+      return this.http.get<ResponsePayload>(`${environment.RankCapacityUrl}/${slugMajor}?page=${pageQuery}`);
     }
 
     // Lọc Capacity

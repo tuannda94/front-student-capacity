@@ -1,83 +1,155 @@
 <mat-progress-bar *ngIf="!statusRegister" color="warn" mode="indeterminate">
 </mat-progress-bar>
-<form *ngIf="!formEdit" class="form-resgister-bg" [formGroup]="formRegister" (submit)="addTeam()">
-    <div class="modal-header d-flex  justify-content-between align-items-center">
-        <i class="fas icon-add-team fa-user-plus d-block"></i>
-        <h5 class="mt-2 fw-bold title-form-info-team mx-2 color-blue">{{titleModel}}</h5>
-        <i aria-label="Close" (click)="onNoClick()" class="fas fa-times icon-close-modal d-block"></i>
+<form
+  *ngIf="!formEdit"
+  class="form-resgister-bg"
+  [formGroup]="formRegister"
+  (submit)="addTeam()"
+>
+  <div class="modal-header d-flex justify-content-between align-items-center">
+    <i class="fas icon-add-team fa-user-plus d-block"></i>
+    <h5 class="mt-2 fw-bold title-form-info-team mx-2 color-blue">
+      {{ titleModel }}
+    </h5>
+    <i
+      aria-label="Close"
+      (click)="onNoClick()"
+      class="fas fa-times icon-close-modal d-block"
+    ></i>
+  </div>
+  <div class="modal-body">
+    <!-- <input type="text" hidden [value]="teamDetail.id"> -->
+    <div class="avatar-upload d-flex justify-content-center">
+      <div class="avatar-edit my-2">
+        <input
+          #file
+          type="file"
+          accept="image/*"
+          (change)="preview(file.files)"
+          id=""
+          accept=".png, .jpg, .jpeg"
+          id="imageUpload"
+        />
+        <label for="imageUpload"></label>
+      </div>
+      <div class="avatar-preview">
+        <img
+          [src]="imgURL"
+          id="imagePreview"
+          class="register-avatar-team"
+          alt=""
+       
+        />
+      </div>
     </div>
-    <div class="modal-body">
-        <!-- <input type="text" hidden [value]="teamDetail.id"> -->
-        <div class="avatar-upload d-flex justify-content-center">
-            <div class="avatar-edit">
-                <input #file type='file' accept='image/*' (change)="preview(file.files)" id="imageUpload"
-                    accept=".png, .jpg, .jpeg" />
-                <label for="imageUpload"></label>
-            </div>
-            <div class="avatar-preview">
-                <img [src]="imgURL" id="imagePreview" class="register-avatar-team"  alt="">
-            </div>
-        </div>
-        <h5 class="text-center fs-6 fw-bold">Ảnh nhóm</h5>
-        <div class="register-input-box">
-            <input type="text" formControlName="name" class="register-input-text">
-            <label class="register-label">Tên nhóm</label>
-        </div>
-        <div class="info-team-list mt-3">
-            <div class="px-2 d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-start align-items-center">
-                    <img [src]="user.avatar" alt="" class="info-team-list-avatar d-block">
-                    <div class="mx-3">
-                        <h5 class="info-team-list-name">{{user.name}}</h5>
-                        <p class="info-team-list-email">{{user.email}}</p>
-                    </div>
-                </div>
-                <p class="info-team-list-position" style="padding-right: 10px;">Trưởng nhóm</p>
-            </div>
-        </div>
+    <h5 class="text-center fs-6 fst-italic">Ảnh nhóm</h5>
+    <div class="register-input-box my-2">
+      <input type="text" formControlName="name" placeholder="Nhập tên nhóm" class="my-input" />
+    
     </div>
-    <div class="modal-footer mt-2">
-        <button [disabled]="formRegister.invalid" type="submit" class="btn btn-main">{{buttonName}}</button>
+    <div class="info-team-list mt-3">
+      <div class="p-2 d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-start align-items-center">
+          <img
+            [src]="user.avatar"
+            alt=""
+            class="info-team-list-avatar d-block"
+          />
+          <div class="mx-3">
+            <h5 class="info-team-list-name">{{ user.name }}</h5>
+            <p class="info-team-list-email">{{ user.email }}</p>
+          </div>
+        </div>
+        <p class="info-team-list-position" style="padding-right: 10px">
+          Trưởng nhóm
+        </p>
+      </div>
     </div>
+  </div>
+  <div class="modal-footer mt-2">
+    <button
+      [disabled]="formRegister.invalid"
+      [ngClass]="formRegister.invalid ? 'opacity-50' : ''"
+      type="submit"
+      class="my-btn-primary my-btn-s"
+    >
+      {{ buttonName }}
+    </button>
+  </div>
 </form>
-<form *ngIf="formEdit" class="form-resgister-bg" [formGroup]="formRegister" (submit)="editTeam()">
-    <div class="modal-header d-flex  justify-content-between align-items-center">
-        <i class="fas icon-add-team fa-user-plus d-block"></i>
-        <h5 class="mt-2 fw-bold title-form-info-team mx-2 color-blue">{{titleModel}}</h5>
-        <i aria-label="Close" (click)="onNoClick()" class="fas fa-times icon-close-modal d-block"></i>
+<form
+  *ngIf="formEdit"
+  class="form-resgister-bg"
+  [formGroup]="formRegister"
+  (submit)="editTeam()"
+>
+  <div class="modal-header d-flex justify-content-between align-items-center">
+    <i class="fas icon-add-team fa-user-plus d-block"></i>
+    <h5 class="mt-2 fw-bold title-form-info-team mx-2 color-blue">
+      {{ titleModel }}
+    </h5>
+    <i
+      aria-label="Close"
+      (click)="onNoClick()"
+      class="fas fa-times icon-close-modal d-block"
+    ></i>
+  </div>
+  <div class="modal-body">
+    <!-- <input type="text" hidden [value]="teamDetail.id"> -->
+    <div class="avatar-upload d-flex justify-content-center">
+      <div class="avatar-edit my-2">
+        <input
+          #file
+          type="file"
+          accept="image/*"
+          class="my-input"
+          (change)="preview(file.files)"
+          id="imageUpload"
+          accept=".png, .jpg, .jpeg"
+        />
+        <label for="imageUpload"></label>
+      </div>
+      <div class="avatar-preview">
+        <img
+          [src]="imgURL"
+          id="imagePreview"
+          class="register-avatar-team"
+          alt=""
+        />
+      </div>
     </div>
-    <div class="modal-body">
-        <!-- <input type="text" hidden [value]="teamDetail.id"> -->
-        <div class="avatar-upload d-flex justify-content-center">
-            <div class="avatar-edit">
-                <input #file type='file' accept='image/*' (change)="preview(file.files)" id="imageUpload"
-                    accept=".png, .jpg, .jpeg" />
-                <label for="imageUpload"></label>
-            </div>
-            <div class="avatar-preview">
-                <img [src]="imgURL" id="imagePreview" class="register-avatar-team"  alt="">
-            </div>
-        </div>
-        <h5 class="text-center fs-6 fw-bold">Ảnh nhóm</h5>
-        <div class="register-input-box">
-            <input type="text" formControlName="name" class="register-input-text">
-            <label class="register-label">Tên nhóm</label>
-        </div>
-      
-        <div class="info-team-list mt-3">
-            <div class="px-2 d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-start align-items-center">
-                    <img [src]="user.avatar" alt="" class="info-team-list-avatar d-block">
-                    <div class="mx-3">
-                        <h5 class="info-team-list-name">{{user.name}}</h5>
-                        <p class="info-team-list-email">{{user.email}}</p>
-                    </div>
-                </div>
-                <p class="info-team-list-position" style="padding-right: 10px;">Trưởng nhóm</p>
-            </div>
-        </div>
+    <h5 class="text-center fs-6 fst-italic">Ảnh nhóm</h5>
+    <div class="register-input-box my-2">
+      <input type="text" formControlName="name" placeholder="Nhập tên nhóm"   class="my-input" />
     </div>
-    <div class="modal-footer mt-2">
-        <button [disabled]="formRegister.invalid" type="submit" class="btn btn-main">{{buttonName}}</button>
+
+    <div class="info-team-list mt-3">
+      <div class="p-2 d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-start align-items-center">
+          <img
+            [src]="user.avatar"
+            alt=""
+            class="info-team-list-avatar d-block"
+          />
+          <div class="mx-3">
+            <h5 class="info-team-list-name">{{ user.name }}</h5>
+            <p class="info-team-list-email">{{ user.email }}</p>
+          </div>
+        </div>
+        <p class="info-team-list-position" style="padding-right: 10px">
+          Trưởng nhóm
+        </p>
+      </div>
     </div>
+  </div>
+  <div class="modal-footer mt-2">
+    <button
+      [disabled]="formRegister.invalid"
+      [ngClass]="formRegister.invalid ? 'opacity-75' : ''"
+      type="submit"
+      class="my-btn-primary my-btn-s"
+    >
+      {{ buttonName }}
+    </button>
+  </div>
 </form>

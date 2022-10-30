@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "src/app/models/user";
+import * as $ from "jquery";
+import { WishlistService } from "src/app/services/wishlist.service";
 import Echo from "laravel-echo";
-
 @Component({
   selector: "app-home-layout",
   templateUrl: "./home-layout.component.html",
@@ -11,7 +12,9 @@ export class HomeLayoutComponent implements OnInit {
   user: User;
   statusWindow: boolean = false;
   statusLogin: boolean = false;
-  constructor() {}
+  countContest: number;
+  countPost: number;
+  constructor(private wishlist: WishlistService) {}
 
   ngOnInit(): void {
     const token = (localStorage.getItem("auth_token") as string)?.split("|")[1];
@@ -28,6 +31,7 @@ export class HomeLayoutComponent implements OnInit {
 
     this.backTop();
     this.winBackTop();
+    this.getListCount();
     window.addEventListener("scroll", () => {
       this.winBackTop();
       this.headerBlockScroll();
@@ -43,18 +47,33 @@ export class HomeLayoutComponent implements OnInit {
     }
   }
 
+  getListCount() {
+    this.wishlist.wishListCount().subscribe((res) => {
+      if (res.status) {
+        this.countContest = res.payload.count_post;
+        this.countPost = res.payload.count_contest;
+      }
+    });
+  }
+
   headerBlockScroll() {
     let header = document.querySelector(".header");
     if (window.scrollY > 400) {
       header?.classList.add("fixed");
+      document.querySelector(".overlay")?.classList.add("d-none");
+      document.querySelector(".sidepanel")?.classList.remove("save-info-acive");
     } else {
       header?.classList.remove("fixed");
-      // document.getElementById = "-50px";
     }
   }
 
   // Change screen back top
   backTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    $("html , body").animate(
+      {
+        scrollTop: 0,
+      },
+      1000,
+    );
   }
 }

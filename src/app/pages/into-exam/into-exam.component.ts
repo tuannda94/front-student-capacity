@@ -18,6 +18,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalInfoTeamComponent } from 'src/app/modal/modal-info-team/modal-info-team.component';
 import { environment } from 'src/environments/environment';
 import { GetValueLocalService } from 'src/app/services/get-value-local.service';
+import { AlertErrorIntroExamComponent } from 'src/app/component/alert-error-intro-exam/alert-error-intro-exam.component';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-into-exam',
@@ -37,15 +39,14 @@ export class IntoExamComponent implements OnInit {
   statusInfo: boolean = true;
   statusContest: boolean = false;
   statusTeamDetail: boolean = false;
+  saveLinkSubmitAfter: string;
   contestId: number;
   statusSubmitExam: boolean;
   statusSaveExam: boolean;
   infoExam: TakeExam;
   statusPage: boolean = false;
   assignment: Object;
-
   validFileExtensions: string[] = ['zip', 'rar'];
-
   statusClickSubmit: boolean = false;
   assignmentFiles: boolean = false;
   assignmentLinks: boolean = false;
@@ -59,37 +60,12 @@ export class IntoExamComponent implements OnInit {
     private toast: NgToastService,
     public dialog: MatDialog,
     private router: Router,
-    private getUserLocal: GetValueLocalService
+    private getUserLocal: GetValueLocalService,
+    private _location: Location
   ) {}
 
-  submitAss = new FormGroup({
-    controlLink : new FormControl(
-      [
-        Validators.pattern(
-          '/^(http[s]?://){0,1}(www.){0,1}[a-zA-Z0-9.-]+.[a-zA-Z]{2,5}[.]{0,1}/'
-        )
-      ]
-    )
-  })
 
   ngOnInit(): void {
-    if (!this.getUserLocal.getValueLocalUser('user')) {
-      this.router.navigate(['./login']);
-    }
-
-    // Chi tiết cuộc thi
-    this.route.paramMap
-      .pipe(
-        map((params) => params.get('contest_id')),
-        switchMap((id) => this.contestService.getWhereId(id))
-      )
-      .subscribe((res) => {
-        if (res.status) {
-          this.infoContest = res.payload;
-          this.infoContest ? (this.statusContest = true) : this.statusContest;
-        }
-      });
-
     const round = {
       round_id: 0,
     };
@@ -128,12 +104,24 @@ export class IntoExamComponent implements OnInit {
             }
           });
       });
+      this.getInfoExam(round);
     });
 
-    // thông tin đề thi thoe vòng thi
-    if (this.roundId) {
-      this.getInfoExam(round);
-    }
+    // Chi tiết cuộc thi
+    this.route.paramMap
+      .pipe(
+        map((params) => params.get('contest_id')),
+        switchMap((id) => this.contestService.getWhereId(id))
+      )
+      .subscribe((res) => {
+        if (res.status) {
+          this.infoContest = res.payload;
+          this.infoContest ? (this.statusContest = true) : this.statusContest;
+        }
+      });
+
+  
+  
   }
 
   // dowload đề bài
@@ -146,6 +134,7 @@ export class IntoExamComponent implements OnInit {
       this.toast.error({
         summary: 'Chưa cập nhật đề bài !!!',
         duration: 5000,
+        detail:"Lỗi"
       });
     }
   }
@@ -170,8 +159,20 @@ export class IntoExamComponent implements OnInit {
   getInfoExam(round: object) {
     this.roundService.getInfoExamRound(round).subscribe((res) => {
       if (res.status) this.infoExam = res.payload;
+      if(res.status && res.payload.error){
+        let dialogRef =   this.dialog.open(AlertErrorIntroExamComponent, {
+          width: '300px',
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if(!result){
+            this._location.back();
+          }
+        });
+        
+      }
+          
       if (this.infoExam) this.checkStatusExam(this.infoExam.status);
-      // if(!this.infoExam.exam.external_url)
     });
   }
 
@@ -188,6 +189,7 @@ export class IntoExamComponent implements OnInit {
       this.toast.warning({
         summary: 'Sai định dạng file !!!',
         duration: 5000,
+        detail:"Cảnh báo"
       });
     } else {
       this.statusSubmitExam = false;
@@ -206,22 +208,32 @@ export class IntoExamComponent implements OnInit {
 
   // Nộp bài bằng link
   submitExamByLink(link: any) {
+    let regexp = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
+    );
+    let test = regexp.test(link);
+    console.log(test);
+    
     setTimeout(() => {
-      this.statusSubmitExam = false;
-      setTimeout(() => {
-        let resultExam = {
-          result_url: link.target.value,
-          id: this.infoExam.id,
-        };
-        if (resultExam.result_url != '') {
-          this.statusSubmitExam = true;
-          this.assignmentLinks = true;
-        } else {
-          this.assignmentLinks = false;
-          this.statusSubmitExam = true;
-        }
-        this.assignment = resultExam; 
-      },3000);
+      if(link && link  !=  this.saveLinkSubmitAfter){
+        this.statusSubmitExam = false;
+        setTimeout(() => {
+          let resultExam = {
+            result_url: link.target.value,
+            id: this.infoExam.id,
+          };
+          if (resultExam.result_url != '') {
+            this.statusSubmitExam = true;
+            this.assignmentLinks = true;
+     
+          } else {
+            this.assignmentLinks = false;
+            this.statusSubmitExam = true;
+          }
+          this.assignment = resultExam; 
+          this.saveLinkSubmitAfter = link;
+        },3000);
+      }
+     
     }, 3000);
   }
 
@@ -234,7 +246,6 @@ export class IntoExamComponent implements OnInit {
 
   removeAssLink() {
     this.statusSubmitExam = false;
-
     setTimeout(() => {
       this.resetAllStatus();
     }, 3000);
@@ -250,12 +261,14 @@ export class IntoExamComponent implements OnInit {
           this.toast.success({
             summary: 'Nộp bài thành công !!!',
             duration: 5000,
+            detail:"Thông báo"
           });
           this.checkStatusExam(2);
         } else {
           this.statusClickSubmit = false;
           this.toast.error({
             summary: 'Lỗi nộp bài !!!',
+            detail:"Lỗi",
             duration: 5000,
           });
         }
@@ -280,7 +293,7 @@ export class IntoExamComponent implements OnInit {
 
   copyLinkUrl() {
     navigator.clipboard.writeText(window.location.href);
-    this.toast.info({ summary: 'Đã copy !!!', duration: 5000 });
+    this.toast.info({ summary: 'Đã copy !!!', detail:"Thông báo" , duration: 5000 });
   }
 
   // Thông tin chi tiết của đội thi
@@ -297,7 +310,11 @@ export class IntoExamComponent implements OnInit {
 
   // Check team has  submit ass
   checkStatusExam(status: number) {
-    status == 1 ? (this.statusTakeExam = false) : (this.statusTakeExam = true);
+    if(!status){
+      this.statusTakeExam = false
+    }else{
+      status == 1 ? (this.statusTakeExam = false) : (this.statusTakeExam = true);
+    }
   }
 
   // reset All Status

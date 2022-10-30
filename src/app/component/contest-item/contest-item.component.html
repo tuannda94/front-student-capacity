@@ -4,8 +4,8 @@
             <img class="contest-item__img"[src]="item.img" alt="">
         </a>
         <div class="contest-item__btn-favorite">
-            <button class="my-btn my-add-favorite__btn">
-                <i class="my-add-favorite__icon fa-solid fa-bookmark"></i>
+            <button class="my-btn my-add-favorite__btn " [ngClass]="item.user_wishlist ? 'opacity-100' : ''">
+                <i  (click)="favoriteEvent($event , item)" class=" fa-solid fa-bookmark" [ngClass]="item.user_wishlist ? 'primary-color' : 'my-add-favorite__icon'"></i>
             </button>
         </div>
     </div>
@@ -48,12 +48,12 @@
                 <div class="contest-item__info-item">
                     <i class="fa-solid fa-list-ul"></i>&ensp;
                     <span class="info-item__number">
-                        10
+                        {{item.rounds_count}}
                     </span>
                     vòng thi
                 </div>
             </div>
-            <a [class.disabled]="!disabled" [routerLink]="['/cuoc-thi/' , item.id]"
+            <a [class.disabled]="!disabled" (click)="isContestRelate(true)" [routerLink]="['/cuoc-thi/' , item.id]"
                 [state]="{registerNow : item.status_user_has_join_contest}">
                 <button class="my-btn-primary my-btn-xs" [ngClass]=" item.status == 1 || item.status == 0
               ? 'my-btn-primary'

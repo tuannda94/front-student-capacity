@@ -102,7 +102,7 @@ const routes: Routes = [
         component: RecruitmentComponent,
       },
       {
-        path: "test-nang-luc",
+        path: "test-nang-luc/list",
         component: TestCapacityComponent,
       },
       {
@@ -130,7 +130,7 @@ const routes: Routes = [
         component: CapacityPlayComponent,
       },
       {
-        path: "test-nang-luc/:slug_major/rankings",
+        path: "test-nang-luc",
         component: RankCapacityComponent,
       },
       {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contest } from 'src/app/models/contest';
 import { UserService } from 'src/app/services/user.service';
@@ -15,9 +16,11 @@ export class ContestUserJoinComponent implements OnInit {
   keyword: string = '';
   orderObj: any;
 
-  constructor(private usersService: UserService, private router: Router ,private route: ActivatedRoute) {}
+  constructor(private usersService: UserService, private router: Router ,private route: ActivatedRoute, private titleService: Title) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Cuộc thi đã tham gia")
+
     this.route.queryParamMap.subscribe((params) => {
       this.orderObj = { ...params };
     });

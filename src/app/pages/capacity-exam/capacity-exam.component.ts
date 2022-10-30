@@ -670,6 +670,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
           this.toast.warning({
             summary: "Sắp hết thời gian làm bài, hãy kiểm tra lại bài làm của bạn",
             duration: 10000,
+            detail:"Thông báo"
           });
           this.isNotiExamTimeOut = true;
         }

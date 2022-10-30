@@ -64,8 +64,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 .contest-detail-right-in,
 .contest-detail-section,
 .content-round-page {
-  border-radius: 8px;
-  box-shadow: 0px 0px 7px var(--gray-200);
+  border-radius: 4px;
   background-color: #ffff;
 }
 
@@ -77,7 +76,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   border-bottom-left-radius: 10px;
   margin: 0px -12px !important;
   object-fit: cover;
-  height: 290px;
+  height: 250px;
 }
 
 .contest-date-open-end {
@@ -343,4 +342,17 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 .contest-detail-right-countdown-box p {
   color: rgba(20, 20, 20, 0.333);
   margin-left: 10px;
+}
+
+
+.example-button-item{
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.example-button-item:hover {
+  background-color: var(--primary);
+  color: var(--white);
 }

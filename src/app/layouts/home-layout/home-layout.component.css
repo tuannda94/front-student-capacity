@@ -31,16 +31,6 @@
   transition: all 0.4s ease-out;
 }
 
-.fixed {
-  position: fixed;
-  top: -50px;
-  width: 100%;
-  background: #fff;
-  margin: 0 !important;
-  animation: slideDown 0.6s ease-in-out;
-  box-shadow: 0 0px 6px gray;
-}
-
 .header-icon-message {
   font-size: 20px;
   margin: 3px 30px 0px 10px;
@@ -264,6 +254,8 @@
   }
 }
 
+
+
 /* ----BACK_TOP */
 
 .back-top {
@@ -283,9 +275,5 @@
   
 }
 
-
-@media (max-width:987px) {
-  
-}
 
 

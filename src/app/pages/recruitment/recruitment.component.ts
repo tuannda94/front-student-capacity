@@ -33,7 +33,7 @@ import { Location } from '@angular/common';
 })
 export class RecruitmentComponent implements OnInit {
   companys: Array<Enterprise>;
-  recruitments: Array<Recruitments>;
+  recruitments: Array<Recruitments> = [];
   recruitmentsHot: Array<Recruitments> = [];
   recruitmentLinks: Array<PayingLinks>;
   cinfigData: TransmitToPost;
@@ -46,6 +46,8 @@ export class RecruitmentComponent implements OnInit {
   orderObj: any;
   status: any;
   keyword: string;
+  links : Array<any>;
+  page : number = 1;
 
   // -------------
   statusPostSearch : boolean = false;
@@ -55,6 +57,8 @@ export class RecruitmentComponent implements OnInit {
   statusRecruitmentsHot: boolean = false;
   statusPage: boolean = true;
   statusSubmit: boolean = false;
+  statusLinks : boolean =  false;
+
 
   constructor(
     public dialog: MatDialog,
@@ -113,7 +117,7 @@ export class RecruitmentComponent implements OnInit {
       this.filterRecruitments();
     }else{
       this.getListPost();
-      this.getListRecruitment();
+      this.filterRecruitments();
     }
 
     this.getListMajor();
@@ -237,20 +241,6 @@ export class RecruitmentComponent implements OnInit {
     window.scrollTo({ top: 500, behavior: 'smooth' });
   }
 
-  // Get listRecruitment
-  getListRecruitment() {
-    this.recruitments = [];
-    this.recruitmentService.getAllRecruitment().subscribe((res) => {
-      if (res.status) {
-        this.recruitments = res.payload;
-        this.recruitments
-          ? (this.statusRecruitments = true)
-          : this.statusRecruitments;
-        this.statusPage = false;
-        this.scrollWin();
-      }
-    });
-  }
 
   // get skill limit
   getLimitSkill(arrSkill: Array<Skill>): Array<Skill> {
@@ -263,7 +253,9 @@ export class RecruitmentComponent implements OnInit {
   // Filter recruitments
   filterRecruitments() {
     this.statusRecruitments = false;
-    this.statusPost = false;
+    if(this.page == 1){
+      this.statusPost = false;
+    }
 
     if (this.formFilter.controls['filterName'].value) {
       this.keyword = this.formFilter.controls['filterName'].value;
@@ -282,17 +274,19 @@ export class RecruitmentComponent implements OnInit {
     }
 
 
-    if (this.status  || this.keyword || this.major_id || this.skill_id) {
+    if (this.status  || this.keyword || this.major_id || this.skill_id || this.page) {
       this.router.navigate(['/tuyen-dung'], {
         queryParams: {
           status: this.status,
           keyword: this.keyword,
           major_id: this.major_id,
           skill_id: this.skill_id,
+          page: this.page,
         },
         queryParamsHandling: 'merge',
       });
     }
+
 
     this.listPostService.searchPostRecruitment(this.keyword).subscribe(res => {
       if(res.status && res.payload.data.length > 0 ){      
@@ -300,6 +294,7 @@ export class RecruitmentComponent implements OnInit {
         this.listPostResult = res.payload.data;
         this.statusPost = true;
       }else{
+        this.statusPostSearch = false;
         this.getListPost();
       }
     })
@@ -309,16 +304,47 @@ export class RecruitmentComponent implements OnInit {
         this.keyword,
         this.major_id,
         this.status,
-        this.skill_id
+        this.skill_id,
+        this.page
       )
       .subscribe((res) => {
         if (res.status) {
           this.statusRecruitments = true;
-          this.recruitments = res.payload;
+          this.recruitments = res.payload.data;
+          this.links = res.payload.links;
+          this.links.pop();
+          this.links.shift();
           this.scrollWin();
         }
       });
   }
+
+  nextPage(){
+    this.page = this.page + 1;
+    if(this.page ==  this.links.length + 1){
+      this.page =  1;
+    }
+    console.log(this.page);
+    
+    this.filterRecruitments();
+  }
+
+  prevPage(){
+    this.page = this.page - 1;
+    if(this.page == 0){
+      this.page =  this.links.length;
+    }
+    console.log(this.page);
+    
+    this.filterRecruitments();
+  }
+
+  payingResultEvent(page: number){
+     this.statusRecruitments = false;
+     this.page = page;
+     this.filterRecruitments();     
+  }
+
 
   filterSkill(event: any, id: number) {
     this.statusRecruitments = false;
@@ -329,7 +355,6 @@ export class RecruitmentComponent implements OnInit {
     }
     event.currentTarget.classList.add('active');
     if (id == 0) {
-      this.getListRecruitment();
       this.resetFilter();
     } else {
       this.skill_id = id;
@@ -359,6 +384,7 @@ export class RecruitmentComponent implements OnInit {
     this.skill_id = '';
     this.status = '';
     this.location.replaceState('');
+    this.filterRecruitments();
   }
 
   // Ẩn gợi ý khi seach ko ra kết quả
@@ -373,19 +399,21 @@ export class RecruitmentComponent implements OnInit {
 
 
   getAllPost(){
-    let keyword = '';
-    if(this.statusPostSearch){
-      keyword =  this.keyword;
+    if(this.keyword !== ''){
+      this.router.navigate(['/tim-kiem/bai-viet'], {
+        queryParams: {
+          keyword : this.keyword,
+        },
+        queryParamsHandling: 'merge',
+      });
     }else{
-      keyword =  '';
+      this.router.navigate(['/danh-muc-bai-viet'] , {
+        queryParams: {
+          cate : 'post-recruitment',
+        },
+        queryParamsHandling: 'merge',
+      });
     }
-
-    this.router.navigate(['/tim-kiem/bai-viet'], {
-      queryParams: {
-        keyword :  keyword,
-      },
-      queryParamsHandling: 'merge',
-    });
   }
   
   

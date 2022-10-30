@@ -1,9 +1,9 @@
 <mat-progress-bar class="mb-3" *ngIf="statusAddMember == false" color="warn" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="statusArrayMember == true">
-    <form class="input-group ">
+    <form class="my-form-search">
         <input type="text" placeholder="Tìm kiếm thành viên ..."
-           class="input-search form-control" (keyup)="setValueSearchMember($event)">
-        <button (click)="searchMembers()" class="input-group-text btn__search-major"><i class="fa-solid fa-magnifying-glass"></i
+           class="my-input-search form-control" (keyup)="setValueSearchMember($event)">
+        <button (click)="searchMembers()" class="my-btn-search-inside"><i class="fa-solid fa-magnifying-glass"></i
             ></button>
     </form>
     <div mat-dialog-content *ngIf="statusResultMembers == false">

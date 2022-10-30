@@ -139,6 +139,7 @@
   color: initial;
 }
 
+
 .contest-item__info {
   display: flex;
   justify-content: space-between;
@@ -157,6 +158,46 @@
 .info-item__number {
   font-weight: bold;
   color: var(--my-secondary);
+}
+
+/* -------------- countdown ---------- */
+.my-countdown {
+  display: flex;
+  /* flex-grow important */
+  flex-grow: 4;
+  justify-content: center;
+  margin-bottom: 0;
+  /* width: 100%; */
+  width: fit-content
+}
+
+.my-countdown-item {
+  color: var(--my-darkest-gray);
+}
+
+.my-countdown-item+.my-countdown-item {
+  padding-left: 4px;
+}
+
+.my-countdown-item-box {
+  background-color: transparent;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  margin-bottom: 0;
+}
+
+.my-countdown-item-text {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+
+
+.my-countdown {
+  margin-top: 0;
 }
 
 
@@ -341,5 +382,66 @@
 .advantage__tag--4 i {
   color: #8CC0DE;
 }
+
+
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .banner-img-box {
+    width: 100%;
+    height: 300px;
+  }
+
+  .contest-list {
+    grid-template-columns: 1fr;
+  }
+
+  .recruitment-position-list{
+    grid-template-columns: 1fr;
+  }
+
+  .outstanding-advantages-section {
+    grid-template-columns: 1fr;
+  }
+
+  .advantage__tag{
+    width: 100%;
+    padding: 20px;
+  }
+
+  .post-loading{
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 740px){
+  .banner-img-box {
+    width: 100%;
+    height: 200px;
+  }
+
+  
+
+  .recruitment-position-list{
+    grid-template-columns: 1fr;
+  }
+
+  .outstanding-advantages-section {
+    grid-template-columns: 1fr;
+  }
+
+  .contest-list {
+    grid-template-columns: 1fr;
+  }
+
+  .advantage__tag{
+    width: 100%;
+    padding: 20px;
+  }
+
+  .post-loading{
+    margin-top: 100px;
+  }
+}
+
 
 

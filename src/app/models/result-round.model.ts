@@ -3,12 +3,11 @@ import { User } from "./user";
 
 export class ResultRound {
     id: number;
-    point: number;
-    team: Team;
-    image: string;
-    name: string;
-    result: {
-        point: number;
-    };
-    members: Array<User>
+    point : number;
+    round_id: number;
+    team: {
+        name: string;
+        image: string;
+        users: Array<User>;
+    }
 }

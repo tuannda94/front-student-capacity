@@ -119,13 +119,17 @@ export class ModalListMemberComponent implements OnInit {
     this.statusAddMember = false;
     this.statusSubmit = false;
     let countMemberPresent = this.countMemberJoinTeam.length + this.listUserJoinTeam.length;
+    console.log(this.data.max_user);
+    
+    console.log(countMemberPresent);
+    
     if (this.data.max_user < countMemberPresent) {
       this.toast.warning({
         summary: 'Đã quá giới hạn thành viên cho phép !!!',
         duration: 2000,
       });
-      this.dialogRef.close();
-      this.openInfoTeam(this.teamId, this.contestId.toString());
+      this.statusSubmit = true;
+      this.statusAddMember = true;
     } else {
       let data = {
         user_id: this.listUserJoinTeam,
@@ -141,7 +145,7 @@ export class ModalListMemberComponent implements OnInit {
             this.dialogRef.close(res.user_pass);
             this.openInfoTeam(this.teamId, this.contestId.toString());
           } else {
-            this.toast.error({ summary: res.payload, duration: 2000 });
+            this.toast.error({ summary: res.payload, detail:"Lỗi" , duration: 2000 });
           }
         });
     }
@@ -157,6 +161,7 @@ export class ModalListMemberComponent implements OnInit {
       data: {
         contest_id: contest_id,
         team_id: team_new_id,
+        max_user : this.data.max_user, 
       },
     });
   }

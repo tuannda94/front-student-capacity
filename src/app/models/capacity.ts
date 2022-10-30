@@ -19,6 +19,9 @@ export class Capacity {
   skills: Skill[];
   rounds_count: number;
   user_capacity_done_count: number;
+  user_top: null | {
+    user: User
+  }
 }
 
 class ResultExam {

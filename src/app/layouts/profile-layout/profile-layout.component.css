@@ -27,6 +27,7 @@
 
 .profile-action {
   transition: all 0.25s linear;
+  margin-bottom: 8px;
 }
 
 .profile-action:hover {

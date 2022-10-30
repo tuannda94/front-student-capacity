@@ -9,6 +9,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 
 .contest-detail-right-in {
   position: sticky;
+  border-radius: 4px;
   top: 100px;
 }
 
@@ -38,6 +39,13 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   padding: 2px 20px;
 }
 
+.example-button-item{
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+}
+
 .example-button-item:hover {
   background-color: var(--primary);
   color: var(--white);
@@ -64,9 +72,8 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 .contest-detail-right-in,
 .contest-detail-section,
 .content-round-page {
-  border-radius: 8px;
-  box-shadow: 0px 0px 3px var(--gray-200);
   background-color: #ffff;
+  border-radius: 4px;
 }
 
 /*  */

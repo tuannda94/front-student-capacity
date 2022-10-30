@@ -2,11 +2,9 @@ import { PayingLinks } from "./paying-links";
 import { User } from "./user";
 
 export class ResponsePayload {
-  // id_team(id_team: any) {
-  //   throw new Error('Method not implemented.');
-  // }
   id_team! : number;
   status!: boolean;
+  error: string;
   user_id: [
     number
   ];

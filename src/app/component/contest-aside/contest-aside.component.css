@@ -1,49 +1,54 @@
- .contest-aside-box{
-  box-shadow: 0px 0px 3px var(--gray-200);
- }
+.contest-aside-box {
+  border-radius: 4px;
+}
 
-  .contest-detail-right-name {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 1.1rem;
-  }
-  
-  .img-detail-box img {
-    object-fit: cover;
-    height: 170px;
-    width: 170px;
-    border-radius: 5px;
-  }
-  
-  .contest-detail-right-countdown {
-    display: flex;
-    justify-content: center;
-    margin-bottom: -0.2rem !important;
-  }
-  
-  .contest-detail-right-countdown-box {
-    width: 20%;
-    margin: 0px 3px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.h3 {
+  font-size: 22px;
+  margin: 0px 10px;
+}
+
+.contest-detail-right-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.1rem;
+}
+
+.img-detail-box img {
+  object-fit: cover;
+  height: 170px;
+  width: 170px;
+  border-radius: 5px;
+}
+
+.contest-detail-right-countdown {
+  display: flex;
+  justify-content: center;
+  margin-bottom: -0.2rem !important;
+}
+
+.contest-detail-right-countdown-box {
+  width: 20%;
+  margin: 0px 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  }
-  
-  .contest-detail-right-countdown-item {
-    text-align: center;
-    padding: 10px 5px;
-    background-color: var(--primary);
-    width: 100%;
-    border-radius: 6px;
-    font-size: 17px;
-    font-weight: 500;
-    color: white;
-  }
-  
-  .contest-detail-right-countdown-box p {
-    color: rgba(20, 20, 20, 0.333);
-  }
+}
+
+.contest-detail-right-countdown-item {
+  text-align: center;
+  padding: 10px 5px;
+  background-color: var(--primary);
+  width: 100%;
+  border-radius: 6px;
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
+}
+
+.contest-detail-right-countdown-box p {
+  color: rgba(20, 20, 20, 0.333);
+}

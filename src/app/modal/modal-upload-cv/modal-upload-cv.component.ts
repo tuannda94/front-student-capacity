@@ -51,9 +51,7 @@ export class ModalUploadCvComponent implements OnInit {
   preview(files: any) {
     if (files.length === 0) return;
     var mimeType = files[0].type;
-    // if (mimeType.match(/image\/*/) == null) {
-    //   return;
-    // }
+ 
     this.fileUpload = files[0];
   }
 
@@ -72,11 +70,11 @@ export class ModalUploadCvComponent implements OnInit {
     setTimeout(() => {
       this.postService.uploadCV(formDataInput).subscribe((res : any) => {
         if (res.status == false) {
-          this.toast.warning({ summary: res.message.file_link[0], duration: 2000 });
+          this.toast.warning({ summary: res.message.file_link[0], duration: 2000 , detail:"Cảnh báo" });
         } else {
           this.statusRegister = true;
           this.dialogRef.close();
-          this.toast.success({ summary: "Upload CV thành công", duration: 2000 });
+          this.toast.success({ summary: "Upload CV thành công", duration: 2000 , detail:"Thông báo"});
         }
         return "Ok"
       });

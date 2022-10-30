@@ -3,10 +3,11 @@
     [routerLink]="['/bai-viet', postItem.slug]"
     class="capacity__post-item-image"
     [ngStyle]="{ 'background-image': 'url(' + postItem.thumbnail_url + ')' }"
+    title="{{ postItem.title }}"
   ></a>
 
   <div class="capacity__post-content">
-    <a [routerLink]="['/bai-viet', postItem.slug]" class="capacity__post-content-title-link">
+    <a [routerLink]="['/bai-viet', postItem.slug]" class="capacity__post-content-title-link" title="{{ postItem.title }}">
       <h2 class="capacity__post-content-title">{{ postItem.title }}</h2>
     </a>
 

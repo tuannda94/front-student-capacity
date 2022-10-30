@@ -58,14 +58,14 @@ export class ProfileUserComponent implements OnInit {
     this.userService.editInfoUser(formDataUser).subscribe((res) => {
       if (res.status) {
         this.statusEditUser = false;
-        this.toast.success({ summary: "Cập nhật thông tin thành công!", duration: 2000 });
+        this.toast.success({ summary: "Cập nhật thông tin thành công!", detail:"Thông báo" , duration: 2000 });
         this.userService.setLocalStorageHasEdit(res.payload);
       } else {
         if (res.payload.name) {
-          this.toast.warning({ summary: res.payload.name, duration: 2000 });
+          this.toast.warning({ summary: res.payload.name, duration: 2000 ,  detail:"Cảnh báo"});
           this.statusEditUser = false;
         } else if (res.payload.avatar) {
-          this.toast.warning({ summary: res.payload.avatar, duration: 2000 });
+          this.toast.warning({ summary: res.payload.avatar, duration: 2000 ,  detail:"Cảnh báo" });
           this.statusEditUser = false;
         }
       }
@@ -79,7 +79,7 @@ export class ProfileUserComponent implements OnInit {
       this.nameUser = this.userInfo.name;
     }
     if (this.nameUser.length > 30) {
-      this.toast.warning({ summary: "Tên không được vượt quá 30 ký tự!", duration: 3000 });
+      this.toast.warning({ summary: "Tên không được vượt quá 30 ký tự!", duration: 3000 ,  detail:"Cảnh báo"});
     }
   }
 }

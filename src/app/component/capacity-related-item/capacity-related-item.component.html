@@ -1,16 +1,24 @@
-<div class="capacity__related-item my-shadow-3-hover">
-  <a [routerLink]="['/test-nang-luc', capacityItem.id]" class="capacity__related-item-image"
-    [ngStyle]="{ 'background-image': 'url(' + capacityItem.img + ')' }"></a>
+<div class="capacity__related-item my-shadow-3-hover d-flex flex-column flex-1">
+  <a
+    [routerLink]="['/test-nang-luc', capacityItem.id]"
+    class="capacity__related-item-image"
+    [ngStyle]="{ 'background-image': 'url(' + capacityItem.img + ')' }"
+    title="{{ capacityItem.name }}"
+  ></a>
 
-  <div class="capacity__related-content">
+  <div class="capacity__related-content d-flex flex-1 flex-column">
     <p class="capacity__related-content-time my-xs">
       {{ capacityItem.date_start | formatDatePost }} - {{ capacityItem.register_deadline | formatDatePost }}
     </p>
-    <a [routerLink]="['/test-nang-luc', capacityItem.id]" class="capacity__related-content-title-link">
+    <a
+      [routerLink]="['/test-nang-luc', capacityItem.id]"
+      class="capacity__related-content-title-link"
+      title="{{ capacityItem.name }}"
+    >
       <h3 class="capacity__related-content-title my-h5">{{ capacityItem.name }}</h3>
     </a>
 
-    <ul class="capacity__related-content-list ">
+    <ul class="capacity__related-content-list">
       <!-- <li class="capacity__related-content-list-item">
         <div class="capacity__related-content-list-item-icon">
           <i class="fa-solid fa-file-pen"></i>
@@ -20,7 +28,7 @@
           <span>bài thi</span>
         </span>
       </li> -->
-      <li class="capacity__related-content-list-item ">
+      <li class="capacity__related-content-list-item">
         <div class="capacity__related-content-list-item-icon">
           <i class="fa-solid fa-user-group"></i>
         </div>
@@ -40,30 +48,60 @@
         </div>
       </li>
     </ul>
-    <div class="capacity-countdown">
+    <div class="capacity-countdown my-auto" *ngIf="statusExam.status === 0">
       <ul class="my-countdown">
         <li class="my-countdown-item text-center">
-          <div class="my-countdown-item-box my-body-2"> {{countDown.days}}</div>
+          <div class="my-countdown-item-box my-body-2">{{ countDown.days }}</div>
           <span class="my-countdown-item-text my-xs">Ngày</span>
         </li>
         <li class="my-countdown-item text-center">
-          <div class="my-countdown-item-box my-body-2"> {{countDown.hours}}</div>
+          <div class="my-countdown-item-box my-body-2">{{ countDown.hours }}</div>
           <span class="my-countdown-item-text my-xs">Giờ</span>
         </li>
         <li class="my-countdown-item text-center">
-          <div class="my-countdown-item-box my-body-2"> {{countDown.minutes}}</div>
+          <div class="my-countdown-item-box my-body-2">{{ countDown.minutes }}</div>
           <span class="my-countdown-item-text my-xs">Phút</span>
         </li>
         <li class="my-countdown-item text-center">
-          <div class="my-countdown-item-box my-body-2"> {{countDown.seconds}}</div>
+          <div class="my-countdown-item-box my-body-2">{{ countDown.seconds }}</div>
           <span class="my-countdown-item-text my-xs">Giây</span>
         </li>
       </ul>
     </div>
 
-    <button class="w-100 my-btn-s" (click)="handleGoToExam(capacityItem.id)"
+    <!-- user top 1 -->
+    <div class="capacity__related-top-1" *ngIf="statusExam.status !== 0 && capacityItem.user_top">
+      <div class="capacity__related-top-1-rank flex-1">
+        <img src="../../../assets/img/rank1_contest.svg" alt="" class="capacity__related-top-1-rank-img" />
+      </div>
+
+      <div class="capacity__related-top-1-user d-flex align-items-center">
+        <img src="{{ capacityItem.user_top.user.avatar }}" alt="" class="capacity__related-top-1-user-avatar" />
+
+        <span class="capacity__related-top-1-user-name flex-1" title="{{ capacityItem.user_top.user.name }}">{{
+          capacityItem.user_top.user.name
+        }}</span>
+      </div>
+    </div>
+
+    <div class="capacity__related-top-1" *ngIf="statusExam.status !== 0 && !capacityItem.user_top">
+      <div class="capacity__related-top-1-rank flex-1">
+        <img src="../../../assets/img/rank1_contest.svg" alt="" class="capacity__related-top-1-rank-img" />
+      </div>
+
+      <div class="capacity__related-top-1-user d-flex align-items-center">
+        <img src="../../../assets/img/default-avatar.png" alt="" class="capacity__related-top-1-user-avatar" />
+
+        <span class="capacity__related-top-1-user-name flex-1" title="Chưa có SV nộp bài!">Chưa có SV nộp bài!</span>
+      </div>
+    </div>
+
+    <button
+      class="w-100 my-btn-s"
+      (click)="handleGoToExam(capacityItem.id)"
       [ngClass]="statusExam.status === 0 || statusExam.status === 2 ? 'my-btn-disabled' : 'my-btn-primary'"
-      [disabled]="statusExam.status === 0 || statusExam.status === 2">
+      [disabled]="statusExam.status === 0 || statusExam.status === 2"
+    >
       {{ statusExam.status === 1 ? "Tham gia ngay" : statusExam.statustext }}
     </button>
   </div>

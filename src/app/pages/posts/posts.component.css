@@ -37,7 +37,7 @@ h3:hover>a {
 
 }
 
-.post-new-latest__img-section .post-new-latest__img {
+.post-new-latest__img {
     border-radius: 10px;
     width: 100%;
     height: 420px;
@@ -200,4 +200,16 @@ h3:hover>a {
 
 .post-new-latest_img{
     border-radius: var(--my-rounded-2);
+    height: 150px;
+    width: 100%;
+}
+
+.post-new-latest_box{
+    margin: 0px 5px;
+}
+
+.post-new-latest_right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

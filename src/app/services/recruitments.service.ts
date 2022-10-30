@@ -30,12 +30,13 @@ export class RecruitmentsService {
   }
 
   //  Filter recruitment
-  filterRecruitment(keyword:string , major_id: any = '' , status: string , skill:any = ''):Observable<ResponsePayload>{
+  filterRecruitment(keyword:string , major_id: any = '' , status: string , skill:any = '' , page : number):Observable<ResponsePayload>{
     const params = new HttpParams()
     .set('keyword', keyword)
     .set('recruitmentHot', status)
     .set('skill_id', skill)
     .set('major_id', major_id)
+    .set('page', page)
     return this.http.get<ResponsePayload>(`${environment.recruitment}?${params}`);
   }
 }

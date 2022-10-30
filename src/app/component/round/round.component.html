@@ -1,6 +1,6 @@
 <div class="list-round-box mt-4">
-  <p class="fw-bold my-2 fs-5 color-blue">Danh sách vòng thi</p>
-  <div class="title-line margin-0"></div>
+  <p  *ngIf="statusContest == true" class="fw-bold my-2 fs-5 color-blue">Danh sách vòng thi</p>
+  <div  *ngIf="statusContest == true" class="title-line margin-0"></div>
   <mat-accordion *ngIf="statusContest == true">
     <p hidden *ngFor="let item of contestDetail.rounds">
       {{ checkStatusRound(item.start_time, item.end_time, item.id) }}
@@ -17,7 +17,7 @@
               <img [src]="item.image" class="w-100 h-100" />
             </div>
             &nbsp;
-            <p class="text-collapse">{{ item.name }}</p>
+            <p style="margin-left: 15px;" class="text-collapse color-blue">{{ item.name }}</p>
           </div>
           <p hidden>
             {{ checkStatusRound(item.start_time, item.end_time, item.id) }}
@@ -79,7 +79,7 @@
             </div>
           </div>
           <div class="">
-            <a class="btn-main float-end" [routerLink]="['./vong', item.id]"
+            <a class="my-btn-primary my-btn-xs" [routerLink]="['./vong', item.id]"
               >Chi tiết</a
             >
           </div>

@@ -1,57 +1,214 @@
-<app-loading-page *ngIf="statusPage" [status]="statusPage">
-</app-loading-page>
 <div class="container-recruitment-detail">
-    <div class="recruitment-header-banner">
-        <img src="./../../../assets/img/d777e81c8070422e1b61.jpg" alt="" class="recruitment-header-banner-img w-100">
-        <div class="recruitment-banner-header-coating">
-        </div>
-        <div class="container">  <img *ngIf="recruitmentDetail" [src]="recruitmentDetail.image" class="recruitment-detail-img" alt=""></div>
+  <div *ngIf="recruitmentDetail" class="recruitment-header-banner">
+    <img
+      src="./../../../assets/img/d777e81c8070422e1b61.jpg"
+      alt=""
+      class="recruitment-header-banner-img w-100"
+    />
+    <div class="recruitment-banner-header-coating"></div>
+    <div class="container">
+      <img
+        [src]="recruitmentDetail.image"
+        class="recruitment-detail-img"
+        alt=""
+      />
     </div>
-    <div class="container mt-2">
-        <marquee width="100%" class="recruitment-detail-marquee_info" direction="left" height="30px">
-            Phần tiếp theo của bài giới thiệu công ty, bạn cần nêu rõ tầm nhìn, sứ mệnh doanh nghiệp. Đây là phần rất
-            quan trọng trong bài giới thiệu doanh nghiệp. Trước khi viết bạn phải nắm rõ khái niệm thế nào là tầm nhìn,
-            sứ mệnh
-        </marquee>
-    </div>
-    <div class="container recruitment-detail-info-box">
-        <div class="row" *ngIf="recruitmentDetail">
-            <div class="col-9 ">
-                <div class=" recruitment-detail-info-left">
-                    <h1 class="color-blue fw-bold ">{{recruitmentDetail.name}}</h1>
-                    <p *ngIf="recruitmentDetail" class="color-text mb-2">{{recruitmentDetail.start_time | formatDate}} -
-                        {{recruitmentDetail.end_time | formatDate}}</p>
-                    <ul class="recruitment-list-skill d-flex ">
-                        <li *ngFor="let skill of recruitmentDetail.skill" class="recruitment-item-skill">
-                            {{skill.short_name}}</li>
-                    </ul>
-                    <h4 class="my-2 count-person-joind">Số người tham gia: {{recruitmentDetail.user.length}}</h4>
-                    <div class="mt-2" [innerHTML]="recruitmentDetail.description"></div>
-                    <div *ngIf="recruitmentDetail.enterprise.length > 0">
-                        <h4 class="fw-bold title d-block mt-2">Doanh nghiệp hỗ trợ:</h4>
-                        <div class="company-joind my-2" *ngFor="let item of recruitmentDetail.enterprise" >
-                            <h4 class="fw-bold">- {{item.name}}</h4>
-                            <p class="ml-3" [innerHTML]="item.description" ></p>
-                            <p *ngIf="item.link_web" class="fw-bold ">Xem chi tiết : <a class="fw-normal text-decoration-underline" [href]="item.link_web">{{item.link_web}}</a></p>
-                        </div>
-                    </div>
-                    <iframe width="780" height="450" src="https://www.youtube.com/embed/VcGnT9f4_-w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-
+  </div>
+  <div *ngIf="!recruitmentDetail">
+    <ngx-skeleton-loader
+    [theme]="{ 'height.px': 300, 'margin-bottom': '10px' }"
+    appearance="line"
+  >
+  </ngx-skeleton-loader>
+  </div>
+ 
+  <div *ngIf="recruitmentDetail" class="container mt-2">
+    <marquee
+      width="100%"
+      class="recruitment-detail-marquee_info"
+      direction="left"
+      height="30px"
+    >
+      Phần tiếp theo của bài giới thiệu công ty, bạn cần nêu rõ tầm nhìn, sứ
+      mệnh doanh nghiệp. Đây là phần rất quan trọng trong bài giới thiệu doanh
+      nghiệp. Trước khi viết bạn phải nắm rõ khái niệm thế nào là tầm nhìn, sứ
+      mệnh
+    </marquee>
+  </div>
+  <div class="container recruitment-detail-info-box">
+    <div class="row">
+      <div class="col-9 recruitment__detail-info">
+        <div *ngIf="recruitmentDetail" class="recruitment-detail-info-left">
+          <h1 class="color-blue fw-bold">{{ recruitmentDetail.name }}</h1>
+          <p class="color-text mb-2">
+            {{ recruitmentDetail.start_time | formatDate }} -
+            {{ recruitmentDetail.end_time | formatDate }}
+          </p>
+          <ul class="recruitment-list-skill d-flex">
+            <li
+              *ngFor="let skill of recruitmentDetail.skill"
+              class="recruitment-item-skill"
+            >
+              {{ skill.short_name }}
+            </li>
+          </ul>
+          <h4 class="my-2 count-person-joind">
+            Số người tham gia: {{ recruitmentDetail.count_user }}
+          </h4>
+          <div class="mt-2" [innerHTML]="recruitmentDetail.description"></div>
+          <div *ngIf="recruitmentDetail.enterprise.length > 0">
+            <h4 class="fw-bold title d-block mt-2">Doanh nghiệp hỗ trợ:</h4>
+            <div
+              class="company-joind my-2"
+              *ngFor="let item of recruitmentDetail.enterprise"
+            >
+              <h4 class="fw-bold">- {{ item.name }}</h4>
+              <p class="ml-3" [innerHTML]="item.description"></p>
+              <p *ngIf="item.link_web" class="fw-bold">
+                Xem chi tiết :
+                <a
+                  class="fw-normal text-decoration-underline"
+                  [href]="item.link_web"
+                  >{{ item.link_web }}</a
+                >
+              </p>
             </div>
-            <div class="col-3">
-                <p class="color-text mb-2">Danh sách bài test ({{recruitmentDetail.contest.length}})</p>
-                <div *ngIf="recruitmentDetail">
-                    <app-capacity-related-item class="mb-2" *ngFor="let capacity of recruitmentCapacity"
-                        [capacityItem]="capacity"></app-capacity-related-item>
-                </div>
-            </div>
+          </div>
+          <iframe
+            width="780"
+            height="450"
+            src="https://www.youtube.com/embed/VcGnT9f4_-w"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
-        <div *ngIf="listPostResult" class="list-post-box mt-3">
-            <h3 class="fw-bold title text-uppercase mb-2 text-left color-blue">Bài viết tuyển dụng</h3>
-            <div class="title-line">
-            </div>
-            <app-list-post [listPost]="listPostResult"></app-list-post>
+        <div *ngIf="!recruitmentDetail" class="">
+          <ngx-skeleton-loader
+            [theme]="{ 'height.px': 25, margin: '15px 0px' }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <div class="d-flex">
+            <ngx-skeleton-loader
+              count="5"
+              [theme]="{
+                'height.px': 25,
+                'width.px': 100,
+                margin: '0px 15px 15px 0px'
+              }"
+              appearance="line"
+            >
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader
+              [theme]="{
+                'height.px': 25,
+                'width.px': 100,
+                margin: '0px 15px 15px 0px'
+              }"
+              appearance="line"
+            >
+            </ngx-skeleton-loader>
+          </div>
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': 40,
+              'margin-bottom': '15px'
+            }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': 200,
+              'margin-bottom': '15px'
+            }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': 40,
+              'margin-bottom': '15px'
+            }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': 200,
+              'margin-bottom': '15px'
+            }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': 40,
+              'margin-bottom': '15px'
+            }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': 200,
+              'margin-bottom': '15px'
+            }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': 40,
+              'margin-bottom': '15px'
+            }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': 200,
+              'margin-bottom': '15px'
+            }"
+            appearance="line"
+          >
+          </ngx-skeleton-loader>
+          <ngx-skeleton-loader
+          [theme]="{ 'height.px': 300,'margin-bottom': '15px' }"
+          appearance="line"
+        >
+        </ngx-skeleton-loader>
         </div>
+      </div>
+      <div class="col-3 recruitment__capacity-list">
+        <p *ngIf="recruitmentDetail" class="color-text mb-2">
+          Danh sách bài test ({{ recruitmentCapacity.length }})
+        </p>
+        <div *ngIf="recruitmentDetail">
+          <app-capacity-related-item
+            class="mb-2"
+            *ngFor="let capacity of recruitmentCapacity"
+            [capacityItem]="capacity"
+          ></app-capacity-related-item>
+        </div>
+        <ngx-skeleton-loader
+          *ngIf="!recruitmentDetail"
+          count="4"
+          [theme]="{ 'height.px': 300, margin: '10px 0px' }"
+          appearance="line"
+        >
+        </ngx-skeleton-loader>
+      >
+      </div>
     </div>
+    <div *ngIf="listPostResult" class="list-post-box mt-3">
+      <h3 class="fw-bold title text-uppercase mb-2 text-left color-blue">
+        Bài viết tuyển dụng
+      </h3>
+      <div class="title-line"></div>
+      <app-list-post [listPost]="listPostResult"></app-list-post>
+    </div>
+  </div>
 </div>

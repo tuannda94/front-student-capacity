@@ -2,6 +2,14 @@
   padding: 0px 0px !important;
 }
 
+h3, h1,h2 ,h4 , h5{
+  margin-bottom: 0px;
+}
+
+p{
+  margin-top: 0px;
+}
+
 .modal-box {
   box-shadow: 0px 0px 10px #ccc;
   padding: 10px;
@@ -158,8 +166,8 @@
 
 .info-team-list-name {
   font-size: 14px;
-  margin: 12px 0px 0px -5px;
   font-weight: 600;
+  margin-left: -5px;
 }
 
 .info-team-list-email {
@@ -170,7 +178,6 @@
 
 .info-team-list-position {
   font-style: italic;
-  margin-top: 12px;
   color: #596275;
   font-size: 13px;
 }

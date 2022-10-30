@@ -1,7 +1,7 @@
 <div class="p-2">
   <header class="border-bottom">
-    <h3 class="fs-5 primary-color">Danh sách bài test năng lực</h3>
-    <p style="margin-top: -12px" class="color-gray">Tổng hợp các bài test năng lực đã làm</p>
+    <h3 class="fs-5 primary-color m-0">Danh sách bài test năng lực</h3>
+    <p class="color-gray mb-2">Tổng hợp các bài test năng lực đã làm</p>
   </header>
 
   <!-- search -->
@@ -27,13 +27,18 @@
           [routerLink]="['/test-nang-luc', capacity.id]"
           class="capacity__item-image"
           [ngStyle]="{ 'background-image': 'url(' + capacity.img }"
+          title="{{ capacity.name }}"
         ></a>
 
         <div class="capacity__content">
           <p class="capacity__content-time my-xs">
             {{ capacity.date_start | formatDatePost }} - {{ capacity.register_deadline | formatDatePost }}
           </p>
-          <a [routerLink]="['/test-nang-luc', capacity.id]" class="capacity__content-title-link">
+          <a
+            [routerLink]="['/test-nang-luc', capacity.id]"
+            class="capacity__content-title-link"
+            title="{{ capacity.name }}"
+          >
             <h2 class="capacity__content-title my-h5">{{ capacity.name }}</h2>
           </a>
 

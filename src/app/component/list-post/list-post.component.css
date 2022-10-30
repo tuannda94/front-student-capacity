@@ -12,14 +12,13 @@ h5 {
   background-color: var(--white);
   border-radius: 10px;
   transition: all ease-in 0.3s;
-  box-shadow: 0px 0px 7px var(--gray);
+  border: 1px solid var(--my-dark-gray);
   transform: translateY(0px);
 }
 
 .post-item:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   transition: all ease-in 0.3s;
-  box-shadow: 0px 0px 5px var(--primary);
   cursor: pointer;
 }
 

@@ -134,13 +134,15 @@ export class ContestComponent implements OnInit {
 
   // Update status  contest
   updateStatusContest(event: any, status: number) {
-    this.statusCurrContest = status;
-    const statusAll = document.querySelectorAll('.contest__nav-item');
-    for (let i = 0; i < statusAll.length; i++) {
-      statusAll[i]?.classList.remove('active');
+    if (this.statusContest) {
+      this.statusCurrContest = status;
+      const statusAll = document.querySelectorAll('.contest__nav-item');
+      for (let i = 0; i < statusAll.length; i++) {
+        statusAll[i]?.classList.remove('active');
+      }
+      this.filterContest();
+      event.currentTarget.classList.add('active');
     }
-    this.filterContest();
-    event.currentTarget.classList.add('active');
   }
 
   // Function dùng chung để lọc sản phẩm

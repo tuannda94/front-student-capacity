@@ -41,11 +41,15 @@ export class LoginComponent implements OnInit {
               setTimeout(() => {
                 this.toast.success({ summary: 'Đăng nhập thành công', duration: 5000 });
                 const backUrl  = localStorage.getItem('url-current');
+                if(!backUrl){
+                  this.router.navigate(['/']);
+                }else{
+                  this.router.navigate([backUrl]);
+                }
                 
-                this.router.navigate([backUrl]);
               }, 1000)
             } else {
-              this.toast.error({ summary: 'Không thể đăng nhập', duration: 5000 });
+              this.toast.error({ summary: 'Không thể đăng nhập', detail:"Thông báo" ,  duration: 5000 });
             }
           })
       })

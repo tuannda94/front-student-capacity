@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -19,10 +18,8 @@ import { HomeLayoutComponent } from "./layouts/home-layout/home-layout.component
 import { ContestDeatailComponent } from "./pages/contest-detail/contest-deatail.component";
 import { BannerComponent } from "./component/banner/banner.component";
 import { BackTimeComponent } from "./component/back-time/back-time.component";
-
 import { RoundComponent } from "./component/round/round.component";
 import { BackTopComponent } from "./component/back-top/back-top.component";
-
 import { LoadingItemComponent } from "./loading/loading-item/loading-item.component";
 import { TypeExamPipe } from "./helper/pipe/type-exam.pipe";
 import { FormatDatePipe } from "./helper/pipe/format-date.pipe";
@@ -36,7 +33,6 @@ import { NgToastModule } from "ng-angular-popup";
 import { InfoTeamComponent } from "./pages/info-team/info-team.component";
 import { ProfileUserComponent } from "./component/profile-user/profile-user.component";
 import { ContestUserJoinComponent } from "./component/contest-user-join/contest-user-join.component";
-
 import { ContestItemComponent } from "./component/contest-item/contest-item.component";
 import { ModalListMemberComponent } from "./modal/modal-list-member/modal-list-member.component";
 import { RoundDetailComponent } from "./component/round-detail/round-detail.component";
@@ -64,7 +60,6 @@ registerLocaleData(en);
 import { ModalUploadCvComponent } from "./modal/modal-upload-cv/modal-upload-cv.component";
 import { ProfileLayoutComponent } from "./layouts/profile-layout/profile-layout.component";
 import { MyCapacityTestComponent } from "./pages/my-capacity-test/my-capacity-test.component";
-
 import { CapacityExamComponent } from "./pages/capacity-exam/capacity-exam.component";
 import { DialogConfirmComponent } from "./modal/dialog-confirm/dialog-confirm.component";
 import { CapacityDetailComponent } from "./pages/capacity-detail/capacity-detail.component";
@@ -98,8 +93,9 @@ import { PostLoadItemComponent } from "./loading/post-load-item/post-load-item.c
 import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
 import { AngularSplitModule } from "angular-split";
 import { MonacoEditorModule } from "ngx-monaco-editor";
-import { ChallengeComponent } from './pages/challenge/challenge.component';
-import { ModalSubmitChallengeSuccessComponent } from './modal/modal-submit-challenge-success/modal-submit-challenge-success.component';
+import { ChallengeComponent } from "./pages/challenge/challenge.component";
+import { ModalSubmitChallengeSuccessComponent } from "./modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
+import { AlertErrorIntroExamComponent } from "./component/alert-error-intro-exam/alert-error-intro-exam.component";
 
 @NgModule({
   declarations: [
@@ -170,6 +166,7 @@ import { ModalSubmitChallengeSuccessComponent } from './modal/modal-submit-chall
     ChallengeExamComponent,
     ChallengeComponent,
     ModalSubmitChallengeSuccessComponent,
+    AlertErrorIntroExamComponent,
   ],
   imports: [
     BrowserModule,

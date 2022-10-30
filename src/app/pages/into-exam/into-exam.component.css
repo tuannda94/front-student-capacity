@@ -27,7 +27,7 @@ h3 ,p{
 .info-contest-header,
 .team-detail-box {
   background-color: #ffff;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: 0px 0px 3px var(--gray-200);
 }
 
@@ -58,13 +58,12 @@ h3 ,p{
   box-shadow: 0px 0px 3px var(--gray-200);
   height: 270px;
   background-color: #ffff;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .contest-detail-right-countdown {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .contest-detail-right-countdown-box {
@@ -82,7 +81,7 @@ h3 ,p{
   background-color: var(--primary);
   width: 100%;
   margin: 0px 5px;
-  border-radius: 6px;
+  border-radius: 4px;
   font-size: 17px;
   font-weight: 500;
   color: white;
@@ -95,7 +94,7 @@ h3 ,p{
 
 .node-submit-assignment {
   box-shadow: 0px 0px 3px var(--gray-200);
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .node-submit-assignment p {
@@ -118,7 +117,7 @@ h3 ,p{
   background-color: var(--primary);
   font-size: 14px;
   display: inline-block;
-  border-radius: 5px;
+  border-radius: 4px;
   color: var(--white);
 }
 
@@ -130,7 +129,6 @@ h3 ,p{
   cursor: pointer;
 }
 
-
 .info-your-team-avatar {
   width: 100px;
   height: 100px;
@@ -138,7 +136,6 @@ h3 ,p{
   object-fit: cover;
   margin: auto;
 }
-
 
 /* Nút bấm upload file*/
 .submit-assignment-box {

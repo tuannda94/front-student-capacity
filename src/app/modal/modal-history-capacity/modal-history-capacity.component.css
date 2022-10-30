@@ -179,6 +179,10 @@
   color: #898989;
 }
 
+.question__content-item-content {
+  margin-bottom: 8px;
+}
+
 .answer {
   border-radius: 10px;
   border: 1px solid #d9d9d9;

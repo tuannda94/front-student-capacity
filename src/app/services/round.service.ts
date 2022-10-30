@@ -51,8 +51,13 @@ export class RoundService {
   }
 
   // Trả kết quả của vòng thi
-  getResultRound(round_id: number) {
-    return this.http.get<ResponsePayload>(`${environment.publicApiUrl}/contest/round/${round_id}/result`)
+  getResultRound(round_id: number ,sort: string , limit : number) {
+    return this.http.get<ResponsePayload>(`${environment.publicApiUrl}/contest/round/${round_id}/result?sort=${sort}&limit=${limit}`)
+  }
+
+  // Trả kết quả của vòng thi
+  getResultRoundUrl(url: string) {
+    return this.http.get<ResponsePayload>(url);
   }
 
   // thông tin vòng thi capacity tiếp theo

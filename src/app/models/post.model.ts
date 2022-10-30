@@ -10,5 +10,6 @@ export class Post {
     description: string;
     content: string;
     postable_type: string;
-    postable?: any
+    postable?: any;
+    user_wishlist: boolean;
 }

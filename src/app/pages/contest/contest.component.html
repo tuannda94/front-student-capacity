@@ -8,21 +8,23 @@
           [ngClass]="statusCurrContest == 0 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a class="contest__nav-link">Đang diễn ra</a>
+          <a  [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}" class="contest__nav-link">Đang diễn ra</a>
         </li>
         <li
           (click)="updateStatusContest($event, 1)"
+        
           [ngClass]="statusCurrContest == 1 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a class="contest__nav-link">Sắp diễn ra</a>
+          <a   [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}" class="contest__nav-link">Sắp diễn ra</a>
         </li>
         <li
           (click)="updateStatusContest($event, 2)"
+         
           [ngClass]="statusCurrContest == 2 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a class="contest__nav-link">Đã kết thúc</a>
+          <a  [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}"  class="contest__nav-link">Đã kết thúc</a>
         </li>
       </ul>
       <div class="btn__search-contest">
@@ -34,12 +36,13 @@
           <input
             formControlName="keywordContest"
             type="text"
-            class="form-control input-search"
+            class="form-control"
+            [attr.disabled]="!statusContest ? true : null"
             placeholder="Tìm kiếm cuộc thi ..."
             aria-label="Username"
             aria-describedby="addon-wrapping"
           />
-          <button class="input-group-text primary-color bg-white border-none">
+          <button [attr.disabled]="!statusContest ? true : null" class="input-group-text primary-color bg-white border-none">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -49,7 +52,7 @@
 
   <div class="container">
     <div class="row contest__content py-3">
-      <div class="col-3">
+      <div class="col-3 d-lg-block d-lx-block d-md-none d-sm-none">
         <div class="contest__content-aside--inner">
           <div class="contest__content-aside--header">
             <div class="">
@@ -61,17 +64,18 @@
             </div>
           </div>
           <form
-            class="input-group contest__content-form--search"
+            class="my-form-search my-2"
             [formGroup]="formSearchMajor"
             (submit)="searchMajor()"
           >
             <input
+            [attr.disabled]="!statusContest ? true : null"
               type="text"
               placeholder="Tìm kiếm chuyên ngành..."
-              class="input-search form-control"
+              class="my-input-search"
               formControlName="keywordMajor"
             />
-            <button class="input-group-text btn__search-major">
+            <button    [attr.disabled]="!statusContest ? true : null" class="my-btn-search-inside">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
@@ -101,7 +105,7 @@
       <!-- ---Main -->
       <div
         *ngIf="statusContest && contests.length > 0"
-        class="contest__list col-9"
+        class="contest__list col-lg-9 col-lx-9  col-md-12 col-sm-12"
       >
         <div *ngFor="let item of contests">
           <app-contest-item class="mb-3" [item]="item"></app-contest-item>
@@ -118,11 +122,11 @@
         </div>
       </div>
 
-      <div *ngIf="!statusContest" class="col-9">
+      <div *ngIf="!statusContest" class="col-lg-9 col-lx-9 col-md-12 col-sm-12">
         <ngx-skeleton-loader
           [theme]="{
             'height.px': '200',
-            'margin-bottom': '20'
+            'margin-top': '20'
           }"
           count="6"
           animation="pulse"

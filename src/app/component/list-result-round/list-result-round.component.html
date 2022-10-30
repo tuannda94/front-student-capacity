@@ -1,58 +1,94 @@
 <div class="table__result-wrapper mt-3">
   <div class="header d-flex justify-content-between algin-items-center">
-     <div class="">
-        <h5 *ngIf="!checkTeamPoint" class="my-2 fw-bold fs-5 color-blue">
-            Xếp hạng
-          </h5>
-          <div class="title-line"></div>
-     </div>
-     <div class="">
-        <button class="btn_sort">Sort&nbsp;&nbsp;<i class="fa-solid fa-arrow-up"></i></button>
-     </div>
+    <div class="">
+      <h5 class="my-2 fw-bold fs-5 color-blue">Xếp hạng</h5>
+      <div class="title-line"></div>
+    </div>
+    <div class="d-flex justify-content-end algin-items-center">
+      <form action="" class="my-form-search">
+         <input   [attr.disabled]="!resultRoundAll ? true : null" type="text" (keyup)="searchResult($event)"  class="my-input-search"   placeholder="Tìm kiếm đội ...">
+      </form>
+      <button (click)="payingResultEventSort()" class="btn_sort">
+        Sort&nbsp;&nbsp;<i *ngIf="statusSort" class="fa-solid fa-arrow-down"></i
+        ><i *ngIf="!statusSort" class="fa-solid fa-arrow-up"></i>
+      </button>
+    </div>
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th  width="100px" class="text-center">#</th>
-        <th width="300px">Đội thi</th>
-        <th>Thành viên</th>
-        <th class="text-center">Tổng điểm</th>
+  <table class="rank-table" *ngIf="statusLinks">
+    <thead class="rank-thead-table">
+      <tr class="rank_head-table">
+        <th  width="80px"  class="rank_title-table">#</th>
+        <th width="300px" class="rank_title-table">Đội thi</th>
+        <th class="rank_title-table">Thành viên</th>
+        <th class="rank_title-table" class="rank_title-table-score" scope="col"><span class="score">Tổng điểm</span> </th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let item of roundResult; let i = index" class="table-row">
-        <td class="text-center">
-             <span class="fw-bold name-team"  *ngIf="i > 2" >{{i + 1}}</span>
-            <img  *ngIf="i < 3"  width="35px" class="img-avatar" [src]="i == 0 ? './../../../assets/img/4.png' : i == 1 ? './../../../assets/img/5.png' : './../../../assets/img/6.png'" alt="">
+    <tbody  class="tbody">
+      <tr *ngFor="let item of roundResult; let i = index" class="rank_item-list ">
+        <td class="rank_item text-center">
+          <span class="fw-bold name-team" *ngIf="i > 2 && page == 1 && !isSearch || !statusSort && page == 1 && !isSearch">{{statusSort ?  i + 1  : total - i}}</span>
+          <span class="fw-bold name-team" *ngIf="page > 1 && !isSearch">{{statusSort ? 6 * (page - 1 ) + (i + 1) : total -  (6 * (page -1)) - i}}</span>
+          <span class="fw-bold name-team" *ngIf=" isSearch && resultRoundAll">{{searchCheckIndex(item.id)}}</span>
+         
+          <img
+            *ngIf="i < 3 && page == 1 && !isSearch && statusSort" 
+            width="35px"
+            class="img-avatar"
+            [src]="
+              i == 0
+                ? './../../../assets/img/4.png'
+                : i == 1
+                ? './../../../assets/img/5.png'
+                : './../../../assets/img/6.png'
+            "
+            alt=""
+          />
         </td>
-        <td>
+        <td class="rank_item-name">
           <div class="d-flex justify-content-start align-items-center">
-            <img
-              class="avatar"
-              [src]="item.image"
-              alt=""
-            />
-            <p class="px-3 fw-bold name-team text-collapse">{{item.name}}</p>
+            <img class="avatar" [src]="item.team.image" alt="" />
+            <p class="px-3 fw-bold name-team text-collapse">
+              {{ item.team.name }}
+            </p>
           </div>
         </td>
-        <td>
+        <td class="rank_item">
           <app-list-avatar-user
-            [listTeam]="item.members"
+            [listTeam]="item.team.users"
             class="d-flex list-avatar-user"
           >
           </app-list-avatar-user>
         </td>
-        <td class="text-center ponit">{{item.result.point}}đ</td>
+        <td class="rank_item ponit">{{ item.point }}đ</td>
       </tr>
-     
     </tbody>
   </table>
-  <ul class="list__result-paying mt-3 d-flex justify-content-center algin-items-center">
-    <li class="payding-item"><i class="fa-solid fa-chevron-left"></i></li>
-    <li class="payding-item active">1</li>
-    <li class="payding-item">2</li>
-    <li class="payding-item">3</li>
-    <li class="payding-item">4</li>
-    <li class="payding-item"><i class="fa-solid fa-chevron-right"></i></li>
+  <ul *ngIf="statusLinks && links.length > 1 && !isSearch"
+    class="list__result-paying mt-3 d-flex justify-content-center algin-items-center"
+  >
+    <li (click)="payingResultEvent(next)" class="payding-item">
+      <i class="fa-solid fa-chevron-left"></i>
+    </li>
+    <li
+      *ngFor="let item of links"
+      (click)="payingResultEvent(item.url)"
+      class="payding-item"
+      [ngClass]="item.active ? 'active' : ''"
+    >
+      {{ item.label }}
+    </li>
+    <li (click)="payingResultEvent(prev)" class="payding-item">
+      <i class="fa-solid fa-chevron-right"></i>
+    </li>
   </ul>
+  <div *ngIf="!statusLinks" class="">
+    <ngx-skeleton-loader
+      [theme]="{
+        'height.px': '40',
+        'margin-bottom': '15'
+      }"
+      count="8"
+      animation="pulse"
+    ></ngx-skeleton-loader>
+  </div>
 </div>

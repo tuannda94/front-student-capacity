@@ -37,8 +37,8 @@
 
 
 .list-team-in {
-  padding: 10px 25px;
+  padding:5px 15px;
   margin-bottom: 10px;
-  box-shadow: 0px 0px 10px var(--gray-200);
   border-radius: 6px;
+  border: 1px solid var(--my-dark-gray);
 }

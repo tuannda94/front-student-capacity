@@ -24,4 +24,5 @@ export class Contest {
     post_new: string;
     teams_count: number;
     max_user:number;
+    user_wishlist : boolean;
 }

@@ -1,4 +1,4 @@
-<div class=" rounded contest-aside-box">
+<div class=" contest-aside-box">
     <div class="p-2 text-center" *ngIf="statusContest">
         {{ runTime()}}
         <div class="img-detail-box">
@@ -6,37 +6,29 @@
             <p style="margin: 10px 0px;font-size:17px"
                 class="fw-bold  pt-2 contest-detail-right-name text-dark">
                 {{contestDetail.name}}</p>
-            <ul *ngIf="!contestDetail.status_user_has_join_contest" class="contest-detail-right-countdown">
-                <div class="contest-detail-right-countdown-box">
-                    <li class="contest-detail-right-countdown-item"><span
-                            class="contest-detail-right-countdown-number days">{{days}}</span>
-                    </li>
-                    <p class="text-center">Ngày</p>
-                </div>
-                <div class="contest-detail-right-countdown-box">
-                    <li class="contest-detail-right-countdown-item"><span
-                            class="contest-detail-right-countdown-number days">{{hours}}</span>
-                    </li>
-                    <p class="text-center">Giờ</p>
-                </div>
-                <div class="contest-detail-right-countdown-box">
-                    <li class="contest-detail-right-countdown-item"><span
-                            class="contest-detail-right-countdown-number days">{{minutes}}</span>
-                    </li>
-                    <p class="text-center">Phút</p>
-                </div>
-                <div class="contest-detail-right-countdown-box">
-                    <li class="contest-detail-right-countdown-item"><span
-                            class="contest-detail-right-countdown-number days">{{seconds}}</span>
-                    </li>
-                    <p class="text-center">Giây</p>
-                </div>
+            <ul  *ngIf="!contestDetail.status_user_has_join_contest"  class="my-countdown my-2">
+                <li class="my-countdown-item text-center">
+                    <div class="my-countdown-item-box h3"> {{days}}</div>
+                    <span class="my-countdown-item-text">Ngày</span>
+                </li>
+                <li class="my-countdown-item text-center">
+                    <div class="my-countdown-item-box  h3"> {{hours}}</div>
+                    <span class="my-countdown-item-text">Giờ</span>
+                </li>
+                <li class="my-countdown-item text-center">
+                    <div class="my-countdown-item-box  h3"> {{minutes}}</div>
+                    <span class="my-countdown-item-text">Phút</span>
+                </li>
+                <li class="my-countdown-item text-center">
+                    <div class="my-countdown-item-box  h3"> {{seconds}}</div>
+                    <span class="my-countdown-item-text">Giây</span>
+                </li>
             </ul>
             <a *ngIf="contestDetail.status_user_has_join_contest"
-                style="background-color: #e67e22;margin: 10px 0px 20px 0px;" class="btn text-white"
+                style="background-color: #e67e22;margin: 7px 0px 10px 0px;" class="btn text-white"
                 (click)="openInfoTeam()"><i class="fas fa-user text-white"></i> Đội của bạn</a>
             <button (click)="openFormRegister()"
-            class="w-100"
+            class="w-100 mt-2"
                 [disabled]="!disabled || contestDetail.status_user_has_join_contest"
                 [ngClass]="classNameWhereStatus(contestDetail)">{{ checkStatusContest(contestDetail) }}</button>
         </div>

@@ -1,44 +1,49 @@
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/user';
-import { NgToastService } from 'ng-angular-popup';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CapacityService } from 'src/app/services/capacity.service';
+import { UserService } from "src/app/services/user.service";
+import { User } from "src/app/models/user";
+import { NgToastService } from "ng-angular-popup";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { CapacityService } from "src/app/services/capacity.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-capacity-play',
-  templateUrl: './capacity-play.component.html',
-  styleUrls: ['./capacity-play.component.css'],
+  selector: "app-capacity-play",
+  templateUrl: "./capacity-play.component.html",
+  styleUrls: ["./capacity-play.component.css"],
 })
 export class CapacityPlayComponent implements OnInit {
-  users: any = [];
-  flagStart: any = false;
-  flagEnd: any = false;
+  users: User[] = [];
+  flagStart: boolean = false;
+  flagEnd: boolean = false;
   question: any = {};
   answers: any = [];
   usersRanks: any = [];
   userRank: any = [];
-  rank: any = 0;
+  rank: number = 0;
   audio: any;
   userLogged: User;
   exam: any;
-  loadingSubmit: any = false;
-  flagLoadingNextQuestion: any = false;
+  loadingSubmit: boolean = false;
+  flagLoadingNextQuestion: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private capacityService: CapacityService,
     private toastService: NgToastService,
-    private userService: UserService
+    private userService: UserService,
+    private titleSerive: Title,
   ) {}
 
   ngOnInit(): void {
+    this.titleSerive.setTitle("Trò chơi");
+
     const user = this.userService.getUserValue();
     const token = this.userService.getJwtToken();
     const isLogged = user && token;
     if (!isLogged) {
-      this.router.navigate(['/login']);
+      this.toastService.info({ summary: "Vui lòng đăng nhập trước khi tham gia!", detail: "Thông báo" });
+      this.router.navigate(["/login"]);
       return;
     }
 
@@ -49,11 +54,13 @@ export class CapacityPlayComponent implements OnInit {
       const that = this;
       this.capacityService.connectRoom(code).subscribe(
         (res: any) => {
+          this.titleSerive.setTitle(`Trò chơi: ${res.payload.exam.name}`);
+
           that.userRank = res.payload.rank;
           that.usersRanks = res.payload.ranks;
           that.renderRankUser();
 
-          if (res.payload.exam.status == 2 || res.payload.status == 'Done') {
+          if (res.payload.exam.status == 2 || res.payload.status == "Done") {
             that.flagEnd = true;
             return;
           }
@@ -76,14 +83,14 @@ export class CapacityPlayComponent implements OnInit {
             that.question = res.payload.question;
             that.flagStart = true;
           }
-
         },
         (err) => {
           this.toastService.warning({
-            summary: 'Đã có lỗi xảy ra ! Không thể tiếp tục tham gia trò chơi ',
+            summary: "Không thể tiếp tục tham gia trò chơi!",
+            detail: "Đã có lỗi xảy ra",
           });
-          that.router.navigate(['/capacity-join']);
-        }
+          that.router.navigate(["/capacity-join"]);
+        },
       );
     });
   }
@@ -91,7 +98,7 @@ export class CapacityPlayComponent implements OnInit {
   ngOnDestroy(): void {
     this.route.params.subscribe((params) => {
       const { code } = params;
-      (window as any).Echo.leave('room.' + code);
+      (window as any).Echo.leave("room." + code);
     });
   }
 
@@ -121,7 +128,7 @@ export class CapacityPlayComponent implements OnInit {
             that.usersRanks = res.payload.ranks;
             that.question = res.payload.question;
             that.userRank = res.payload.rank;
-            if (res.payload.status == 'Done') {
+            if (res.payload.status == "Done") {
               that.flagEnd = true;
               return;
             }
@@ -132,20 +139,19 @@ export class CapacityPlayComponent implements OnInit {
           (err: any) => {
             that.loadingSubmit = false;
             that.toastService.warning({
-              summary:
-                'Đã có lỗi xảy ra ! Không thể tiếp tục tham gia trò chơi ',
+              summary: "Không thể tiếp tục tham gia trò chơi!",
+              detail: "Đã có lỗi xảy ra",
             });
-            that.router.navigate(['/capacity-join']);
-          }
+            that.router.navigate(["/capacity-join"]);
+          },
         );
     });
   }
 
   channel(code: any, that: any, type: any = false) {
-    const echoChannel = (window as any).Echo.join('room.' + code)
+    const echoChannel = (window as any).Echo.join("room." + code)
       .here((users: any) => {
         this.users = users;
-        console.log('Here');
       })
       .joining((user: any) => {
         this.users.push(user);
@@ -156,18 +162,18 @@ export class CapacityPlayComponent implements OnInit {
         });
         this.users = us;
       })
-      .listen('UpdateGameEvent', function (data: any) {
+      .listen("UpdateGameEvent", function (data: any) {
         that.usersRanks = data.ranks;
         that.renderRankUser();
       })
-      .listen('PlayGameEvent', function (data: any) {
+      .listen("PlayGameEvent", function (data: any) {
         that.flagStart = true;
         that.flagLoadingNextQuestion = false;
         that.usersRanks = data.ranks;
         that.renderRankUser();
         that.question = data.question;
       })
-      .listen('EndGameEvent', function (data: any) {
+      .listen("EndGameEvent", function (data: any) {
         if (that.exam.type == 1) {
           that.flagEnd = true;
           return;
@@ -187,20 +193,18 @@ export class CapacityPlayComponent implements OnInit {
             },
             (err: any) => {
               that.toastService.warning({
-                summary:
-                  'Đã có lỗi xảy ra ! Không thể tiếp tục tham gia trò chơi ',
+                summary: "Không thể tiếp tục tham gia trò chơi!",
+                detail: "Đã có lỗi xảy ra",
               });
-              that.router.navigate(['/capacity-join']);
-            }
+              that.router.navigate(["/capacity-join"]);
+            },
           );
       })
-      .listen('BeforNextGame', function (data: any) {
-        console.log('BeforNextGame');
-
+      .listen("BeforNextGame", function (data: any) {
         that.flagLoadingNextQuestion = true;
       });
     if (type == false) {
-      echoChannel.listen('NextGameEvent', function (data: any) {
+      echoChannel.listen("NextGameEvent", function (data: any) {
         that.capacityService
           .submitCode(code, {
             question_id: that.question.id,
@@ -214,11 +218,11 @@ export class CapacityPlayComponent implements OnInit {
             },
             (err: any) => {
               that.toastService.warning({
-                summary:
-                  'Đã có lỗi xảy ra ! Không thể tiếp tục tham gia trò chơi ',
+                summary: "Không thể tiếp tục tham gia trò chơi!",
+                detail: "Đã có lỗi xảy ra",
               });
-              that.router.navigate(['/capacity-join']);
-            }
+              that.router.navigate(["/capacity-join"]);
+            },
           );
         // that.flagLoadingNextQuestion = false;
         that.answers = [];
@@ -263,6 +267,6 @@ export class CapacityPlayComponent implements OnInit {
   }
 
   renderContent(content: string, type: number) {
-    return ` ${content} ( ${type == 1 ? 'Nhiều đáp án' : 'Một đáp án '} ) `;
+    return ` ${content} ( ${type == 1 ? "Nhiều đáp án" : "Một đáp án "} ) `;
   }
 }

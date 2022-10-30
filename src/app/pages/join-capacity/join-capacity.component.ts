@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { CapacityService } from "src/app/services/capacity.service";
 import { Router } from "@angular/router";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-join-capacity",
@@ -19,9 +20,12 @@ export class JoinCapacityComponent implements OnInit {
     private router: Router,
     private toastService: NgToastService,
     private userService: UserService,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Nhập mã trò chơi");
+
     this.formCheckCode = new FormGroup({
       code: new FormControl(""),
     });
@@ -38,7 +42,7 @@ export class JoinCapacityComponent implements OnInit {
 
     const { code } = this.formCheckCode.value;
     if (!code.trim()) {
-      return this.toastService.info({ summary: "Vui lòng nhập mã code" });
+      return this.toastService.info({ summary: "Vui lòng nhập mã code", detail: "Thông báo" });
     }
 
     this.isCheckCode = true;
@@ -47,7 +51,7 @@ export class JoinCapacityComponent implements OnInit {
         this.router.navigate(["/capacity-play", code]);
       },
       (err) => {
-        this.toastService.warning({ summary: err });
+        this.toastService.warning({ summary: err, detail: "Lỗi" });
         this.isCheckCode = false;
       },
     );

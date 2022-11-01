@@ -1,22 +1,21 @@
 <div class="capacity py-4">
   <div class="container">
+    <!-- breadcrumb -->
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" *ngIf="!isFetchingCapacity">
+        <li class="breadcrumb-item"><a routerLink="/" class="breadcrumb-item__link">Trang chủ</a></li>
+        <li class="breadcrumb-item">
+          <a routerLink="/test-nang-luc" class="breadcrumb-item__link">Test năng lực</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{ capacity.name }}</li>
+      </ol>
+    </nav>
+    <div *ngIf="isFetchingCapacity">
+      <ngx-skeleton-loader [theme]="{ width: '50%' }"></ngx-skeleton-loader>
+    </div>
+    <!-- breadcrumb -->
     <div class="row">
       <div class="col col-lg-9 col-md-12 col-sm-12 col-12">
-        <!-- breadcrumb -->
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb" *ngIf="!isFetchingCapacity">
-            <li class="breadcrumb-item"><a routerLink="/" class="breadcrumb-item__link">Trang chủ</a></li>
-            <li class="breadcrumb-item">
-              <a routerLink="/test-nang-luc" class="breadcrumb-item__link">Test năng lực</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">{{ capacity.name }}</li>
-          </ol>
-        </nav>
-        <div *ngIf="isFetchingCapacity">
-          <ngx-skeleton-loader [theme]="{ width: '50%' }"></ngx-skeleton-loader>
-        </div>
-        <!-- breadcrumb -->
-
         <div class="capacity__info">
           <div *ngIf="!isFetchingCapacity">
             <div class="capacity__info-time-start">

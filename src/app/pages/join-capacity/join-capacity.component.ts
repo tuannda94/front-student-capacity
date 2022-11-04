@@ -24,7 +24,7 @@ export class JoinCapacityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.titleService.setTitle("Nhập mã trò chơi");
+    this.titleService.setTitle("Nhập code trò chơi");
 
     this.formCheckCode = new FormGroup({
       code: new FormControl(""),
@@ -42,7 +42,7 @@ export class JoinCapacityComponent implements OnInit {
 
     const { code } = this.formCheckCode.value;
     if (!code.trim()) {
-      return this.toastService.info({ summary: "Vui lòng nhập mã code", detail: "Thông báo" });
+      return this.toastService.info({ summary: "Vui lòng nhập code trò chơi", detail: "Thông báo" });
     }
 
     this.isCheckCode = true;

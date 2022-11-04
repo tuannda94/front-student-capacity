@@ -156,7 +156,7 @@ export class ChallengeComponent implements OnInit {
 
     // set query str from url to params varible
     const queryParams = this.route.snapshot.queryParamMap;
-    const keyword = queryParams.get("keyword");
+    const keyword = queryParams.get("q");
     const type = queryParams.get("type");
     const language = queryParams.get("language_id");
     const page = queryParams.get("page");

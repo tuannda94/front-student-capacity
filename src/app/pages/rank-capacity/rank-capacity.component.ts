@@ -17,6 +17,7 @@ export class RankCapacityComponent implements OnInit {
   slugMajor: string 
   majors: Array<Major>;
   listRanking: any = []
+  urlBanner: any = ""
   statusNotResultReturn: boolean = false;
   majorsDataTable: string
   listCapacity: Array<Capacity>;
@@ -52,6 +53,7 @@ export class RankCapacityComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Xếp Hạng Test Năng Lực');
+    this.getUrlBannerCapacity()
     // khi không có param trên web thì sẽ lấy chuyên ngành lập trình web
     this.slugMajor = this.route.snapshot.queryParamMap.get('major')!
     this.slugMajor == null ? this.slugMajor = "lap-trinh-web" : this.slugMajor
@@ -78,13 +80,18 @@ export class RankCapacityComponent implements OnInit {
             this.links = res.payload.links.slice(1, totalItemPages-1)
             this.statusRanking = true;
             this.statusNotResultReturn = false;
-            console.log(this.listRanking)
           }
         }
       })
     
       this.getListTestCapacity()
     }
+  }
+
+  getUrlBannerCapacity(){
+    this.testCapacityService.getBannerCapacity().subscribe((res)=>{
+      this.urlBanner = res.payload[0].image_url
+    })
   }
 
   // lấy danh sách test năng lực trả về 8 bài bài test mới nhất
@@ -97,6 +104,8 @@ export class RankCapacityComponent implements OnInit {
         });
         this.listCapacity.length > 0 ? (this.statusCapacity = true) : this.statusCapacity;
       }
+      console.log(this.listCapacity);
+      
     });
   }
 

@@ -37,4 +37,8 @@ export class TestCapacityService {
     paginationCapacity(url: string ):Observable<ResponsePayload>{
       return this.http.get<ResponsePayload>(url);
     }
+
+    getBannerCapacity():Observable<ResponsePayload>{
+      return this.http.get<ResponsePayload>(`${environment.sliderListUrl}?capacity=1`);
+    }
 }

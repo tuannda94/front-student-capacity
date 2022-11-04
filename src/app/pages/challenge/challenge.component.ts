@@ -3,7 +3,9 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Challenge } from "src/app/models/challenge.model";
+import { Slider } from "src/app/models/slider.model";
 import { ChallengeService } from "src/app/services/challenge.service";
+import { SliderService } from "src/app/services/slider.service";
 
 @Component({
   selector: "app-challenge",
@@ -22,6 +24,7 @@ export class ChallengeComponent implements OnInit {
     limit: this.limit,
   };
   isFetchingCodeLang!: boolean;
+  isFetchingSlider!: boolean;
 
   queryParams!: { page: number; limit?: number; q?: string; type?: number; language_id?: number };
 
@@ -53,8 +56,11 @@ export class ChallengeComponent implements OnInit {
     },
   ];
 
+  slider!: Slider;
+
   constructor(
     private challengeService: ChallengeService,
+    private sliderService: SliderService,
     private titleService: Title,
     private router: Router,
     private route: ActivatedRoute,
@@ -71,6 +77,9 @@ export class ChallengeComponent implements OnInit {
 
     this.titleService.setTitle("Thử thách");
     this.handleScrollTop();
+
+    // get slider
+    this.getSlider();
 
     // get ds ngôn ngữ code
     this.isFetchingCodeLang = true;
@@ -89,6 +98,22 @@ export class ChallengeComponent implements OnInit {
         this.isFetchingCodeLang = false;
       },
     );
+  }
+
+  getSlider() {
+    this.isFetchingSlider = true;
+
+    this.sliderService
+      .getSliderByParams({
+        code: 1,
+      })
+      .subscribe(({ status, payload }) => {
+        if (status) {
+          this.isFetchingSlider = false;
+
+          this.slider = payload[0];
+        }
+      });
   }
 
   getChallenges() {

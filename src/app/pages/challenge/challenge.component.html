@@ -1,6 +1,19 @@
 <div class="container">
   <!-- banner -->
-  <div class="challenge__banner"></div>
+  <a
+    href="{{ slider.link_to }}"
+    target="_blank"
+    title="Banner"
+    class="challenge__banner d-block"
+    [ngStyle]="{ 'background-image': 'url(' + slider.image_url + ')' }"
+    *ngIf="!isFetchingSlider"
+  ></a>
+
+  <!-- skeleton banner -->
+  <ngx-skeleton-loader
+    [theme]="{ 'padding-top': '25%', margin: '12px 0 -4px', 'border-radius': '8px' }"
+    *ngIf="isFetchingSlider"
+  ></ngx-skeleton-loader>
 
   <!-- filter -->
   <form
@@ -181,8 +194,6 @@
 
     <!-- empty result -->
     <div class="challenge__list-empty" *ngIf="!challenges.length">
-      <p>Không tồn tại bài thử thách nào!</p>
-
       <div class="challenge__list-empty-img-wrap">
         <img src="../../../assets/img/no-result.png" alt="" class="challenge__list-empty-img" />
       </div>

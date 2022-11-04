@@ -94,6 +94,7 @@ import { OutstandingAdvantagesComponent } from './component/home/outstanding-adv
 import { RankCapacityComponent } from './pages/rank-capacity/rank-capacity.component';
 import { PostLoadItemComponent } from './loading/post-load-item/post-load-item.component';
 import { AlertErrorIntroExamComponent } from './component/alert-error-intro-exam/alert-error-intro-exam.component';
+import { CountDatePipe } from './helper/pipe/count-date.pipe';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import { AlertErrorIntroExamComponent } from './component/alert-error-intro-exam
     RankCapacityComponent,
     PostLoadItemComponent,
     AlertErrorIntroExamComponent,
+    CountDatePipe,
   ],
   imports: [
     BrowserModule,

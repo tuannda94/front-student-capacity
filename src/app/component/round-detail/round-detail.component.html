@@ -6,7 +6,10 @@
             <div class="team-item d-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="img-avatar-round my-2">
-                        <img [src]="item.image" alt="" class="w-100 h-100">
+                        <img  [src]="
+                        item.image ||
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+                      " alt="">
                     </div>
                     &nbsp;
                     &nbsp;
@@ -36,7 +39,10 @@
     <div class="modal-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="img-avatar-round my-2">
-                <img [src]="team.image" alt="" class="w-100 h-100">
+                <img  [src]="
+                team.image ||
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+              " alt="">
             </div>
             &nbsp;
             <h6 class="modal-title mx-3 mt-3 text-gray fs-6 fw-bold color-primary">{{team.name}}</h6>

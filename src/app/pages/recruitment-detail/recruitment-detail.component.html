@@ -39,11 +39,17 @@
     <div class="row">
       <div class="col-9 recruitment__detail-info">
         <div *ngIf="recruitmentDetail" class="recruitment-detail-info-left">
-          <h1 class="color-blue fw-bold">{{ recruitmentDetail.name }}</h1>
-          <p class="color-text mb-2">
-            {{ recruitmentDetail.start_time | formatDate }} -
-            {{ recruitmentDetail.end_time | formatDate }}
-          </p>
+          <div class="d-flex justify-content-between my-3" style="align-items: center;">
+            <p class="color-text recruitment-time">
+              {{ recruitmentDetail.start_time | formatDate }} -
+              {{ recruitmentDetail.end_time | formatDate }}
+            </p>
+            <h4 class="count-person-joind">
+              Số người tham gia: {{ recruitmentDetail.count_user }}
+            </h4>
+          </div>
+          <h1 class="color-blue fw-bold recruitment-detail-name">{{ recruitmentDetail.name }}</h1>
+         
           <ul class="recruitment-list-skill d-flex">
             <li
               *ngFor="let skill of recruitmentDetail.skill"
@@ -52,9 +58,7 @@
               {{ skill.short_name }}
             </li>
           </ul>
-          <h4 class="my-2 count-person-joind">
-            Số người tham gia: {{ recruitmentDetail.count_user }}
-          </h4>
+    
           <div class="mt-2" [innerHTML]="recruitmentDetail.description"></div>
           <div *ngIf="recruitmentDetail.enterprise.length > 0">
             <h4 class="fw-bold title d-block mt-2">Doanh nghiệp hỗ trợ:</h4>
@@ -187,11 +191,12 @@
           Danh sách bài test ({{ recruitmentCapacity.length }})
         </p>
         <div *ngIf="recruitmentDetail">
-          <app-capacity-related-item
-            class="mb-2"
+          <div class="recruitment-related">
+            <app-capacity-related-item
             *ngFor="let capacity of recruitmentCapacity"
             [capacityItem]="capacity"
           ></app-capacity-related-item>
+          </div>
         </div>
         <ngx-skeleton-loader
           *ngIf="!recruitmentDetail"
@@ -200,14 +205,12 @@
           appearance="line"
         >
         </ngx-skeleton-loader>
-      >
       </div>
     </div>
     <div *ngIf="listPostResult" class="list-post-box mt-3">
-      <h3 class="fw-bold title text-uppercase mb-2 text-left color-blue">
+      <h3 class="fw-bold title text-uppercase text-left color-blue">
         Bài viết tuyển dụng
       </h3>
-      <div class="title-line"></div>
       <app-list-post [listPost]="listPostResult"></app-list-post>
     </div>
   </div>

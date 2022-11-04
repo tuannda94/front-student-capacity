@@ -305,6 +305,10 @@ img {
   color: var(--primary);
 }
 
+.color-blue{
+  color: var(--my-secondary);
+}
+
 /* ------------------- button favorite ------------ */
 .my-add-favorite__btn {
   /* vi base btn import config sau base css */

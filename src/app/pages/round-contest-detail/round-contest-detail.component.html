@@ -201,23 +201,23 @@
           <div class="example-button-row p-2">
             <button
               *ngIf="resultRank.length > 0"
-              (click)="scrollWin('#round', 100)"
+              (click)="scrollWin('#rank', 100)"
               class="example-button-item fw-bold"
             >
               Xếp hạng
             </button>
             <button
-              (click)="scrollWin('#round', 150)"
+              (click)="scrollWin('#team', 150)"
               class="example-button-item fw-bold"
             >
               Đội thi
             </button>
             <button
               *ngIf="listPostResult.length > 0"
-              (click)="scrollWin('#more', 200)"
+              (click)="scrollWin('#new', 200)"
               class="example-button-item fw-bold"
             >
-              Tin tức
+              Tin tức liên quan
             </button>
             <button
               *ngIf="contestRelated.length > 0"

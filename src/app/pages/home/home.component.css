@@ -67,6 +67,7 @@
   font-size: 2rem;
   color: var(--primary);
   opacity: 0.7;
+  background-color: transparent;
 }
 
 .list-post-control:hover {

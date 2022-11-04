@@ -9,6 +9,25 @@ import { Post } from 'src/app/models/post.model';
 export class ListPostComponent implements OnInit {
   @Input() countColumn: number;
   @Input() listPost : Array<Post>;
+
+  sliderPostColFour = {
+    slidesToShow: 4,
+    infinite: true,
+    autoplay: true,
+    arrows: true,
+    slidesToScroll: 1,
+    fadeSpeed: 1000,
+  };
+
+  sliderPostColThree = {
+    slidesToShow: 3,
+    infinite: true,
+    autoplay: true,
+    arrows: true,
+    slidesToScroll: 1,
+    fadeSpeed: 1000,
+  };
+
   constructor() { }
   
   ngOnInit(): void {

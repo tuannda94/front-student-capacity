@@ -1,14 +1,14 @@
-p , ul{
+p,
+ul {
   margin-bottom: 0;
 }
 
-
 /* CONTENT */
-.recruitment-filter-box{
-  background-color: var(--gray-200);
+.recruitment-filter-box {
+  background-color: var(--my-primary-50);
 }
 
-.filter-skill-item{
+.filter-skill-item {
   padding: 10px 20px;
   font-size: 0.9rem;
   background-color: var(--gray-200);
@@ -17,32 +17,42 @@ p , ul{
   cursor: pointer;
 }
 
-.filter-skill-box .active{
+.btn-recruitment {
+  box-sizing: border-box;
+  background-color: var(--my-primary);
+  color: var(--my-white);
+  border-radius: var(--my-rounded);
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--my-primary);
+  padding: 16px 32px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  padding: 10px 24px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.filter-skill-box .active {
   background-color: var(--primary);
   color: var(--white);
 }
 
-.btn-search-recruitment{
-  background-color: var(--primary);
-  color: var(--white);
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  padding-top: 3px;
-}
-
-.btn-search-recruitment:hover{
+.btn-search-recruitment:hover {
   opacity: 0.8;
 }
 
-.image-title{
+.image-title {
   width: 30px;
   margin-right: 15px;
   display: inline-block;
-}
-
-.recruitment-content {
-  background-color: #F8F8F8;
 }
 
 .recruitment-list-hot-box {
@@ -51,13 +61,13 @@ p , ul{
   overflow-y: auto;
 }
 
-.input__search-keyword--sugg{
+.input__search-keyword--sugg {
   max-height: 250px;
   overflow-y: auto;
 }
 
 .recruitment-list-hot-box::-webkit-scrollbar,
-.input__search-keyword--sugg::-webkit-scrollbar{
+.input__search-keyword--sugg::-webkit-scrollbar {
   width: 3px;
   background-color: rgb(235, 232, 232);
 }
@@ -67,7 +77,7 @@ p , ul{
 }
 
 .recruitment-list-hot-item-box {
-  border: 1px solid #E8EAEE;
+  border: 1px solid #e8eaee;
   padding: 15px;
   border-radius: 10px;
   margin-top: 20px;
@@ -85,12 +95,11 @@ p , ul{
   transition: all ease-in-out 0.3s;
 }
 
-
 .recruitment-image-box {
   position: relative;
 }
 
-.recruitment-outs-commom{
+.recruitment-outs-commom {
   position: absolute;
   top: 0;
   right: 10px;
@@ -100,40 +109,42 @@ p , ul{
   line-height: 36px;
 }
 
-.recruitment-isHot::before{
-  content:"";
+.recruitment-isHot::before {
+  content: "";
   position: absolute;
   left: 0;
   bottom: -7px;
   border-width: 0px 20px 7px;
   border-style: solid;
-  border-color: transparent rgba(255, 0, 0, 0.781) transparent rgba(255, 0, 0, 0.781);
+  border-color: transparent rgba(255, 0, 0, 0.781) transparent
+    rgba(255, 0, 0, 0.781);
 }
 
-.recruitment-isNew::before{
-  content:"";
+.recruitment-isNew::before {
+  content: "";
   position: absolute;
   left: 0;
   bottom: -7px;
   border-width: 0px 20px 7px;
   border-style: solid;
-  border-color: transparent rgba(0, 128, 0, 0.726) transparent rgba(0, 128, 0, 0.726);
+  border-color: transparent rgba(0, 128, 0, 0.726) transparent
+    rgba(0, 128, 0, 0.726);
 }
 
-.recruitment-isHot{
-  background-color: rgba(255, 0, 0, 0.781) ;
+.recruitment-isHot {
+  background-color: rgba(255, 0, 0, 0.781);
 }
-.recruitment-isNew{
+.recruitment-isNew {
   background-color: rgba(0, 128, 0, 0.726);
 }
 
-.recruitment-left{
+.recruitment-left {
   position: sticky;
   top: 100px;
 }
 
 .recruitment-list-hot-item-text {
-font-style: normal;
+  font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 1.6;
@@ -186,7 +197,6 @@ font-style: normal;
   font-size: 12px;
 }
 
-
 .list-company-support img {
   width: 35px;
   height: 35px;
@@ -199,10 +209,9 @@ font-style: normal;
   margin-left: 20px;
 }
 
-.number-test{
+.number-test {
   font-size: 1rem;
 }
-
 
 .recruitment-list-hot-item-name {
   font-size: 17px;
@@ -214,23 +223,28 @@ font-style: normal;
   transform: translateY(0);
   transition: all ease-in-out 0.3s;
   margin-top: 20px;
+  border: 1px solid var(--gray);
+  border-radius: 8px;
 }
 
 .recruitment-list-item {
   display: grid;
-  grid-template-columns: 250px auto;
+  grid-template-columns: 230px auto;
   grid-gap: 20px;
   cursor: pointer;
 }
 
 .recruitment-list-item .recruitment-image {
-  height: 200px;
+  height: 150px;
   width: 100%;
-  border-radius: 6px;
+  border-radius: var(--my-rounded-2);
 }
 
 .recruitment-list-item-name {
-  width: 90%;
+  width: 85%;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--my-secondary);
 }
 
 .recruitment-list-item-box:hover .recruitment-list-item-name {
@@ -250,7 +264,7 @@ font-style: normal;
   border-radius: 5px;
 }
 
-.recruitment-paying-page-item a{
+.recruitment-paying-page-item a {
   padding: 10px 15px;
   background-color: var(--white);
   cursor: pointer;
@@ -258,7 +272,7 @@ font-style: normal;
   color: #444;
 }
 
-.recruitment-paying-page-item .active{
+.recruitment-paying-page-item .active {
   background-color: var(--primary);
   color: var(--white);
 }
@@ -270,11 +284,10 @@ font-style: normal;
 }
 
 /* RESPONSiVE */
-@media (max-width:568px) {
+@media (max-width: 568px) {
   .recruitment-banner-in {
     padding: 0px 30px;
   }
-
 
   .recruitment-list-hot-reponsive {
     display: flex;
@@ -299,8 +312,7 @@ font-style: normal;
   }
 }
 
-
-@media (max-width:987px) {
+@media (max-width: 987px) {
   .col-md-none {
     display: none;
   }
@@ -336,25 +348,24 @@ font-style: normal;
   width: 100%;
 }
 
-.post-item__info-item+.post-item__info-item {
+.post-item__info-item + .post-item__info-item {
   margin-left: 10px;
 }
 
 .post-item__info,
 .post-item-bottom {
-  color: #8E8E95
+  color: #8e8e95;
 }
 
 .btn-detail {
   background-color: white;
-  border: solid 1px #8E8E95
+  border: solid 1px #8e8e95;
 }
 
 .btn-detail:hover {
-  background-color: #0E0759;
-  color: white
+  background-color: #0e0759;
+  color: white;
 }
-
 
 .post-item-bottom .btn {
   font-size: 12px;
@@ -362,22 +373,21 @@ font-style: normal;
   margin-top: 5px;
 }
 
-
 /* ----PAYING----- */
 
-.payding-item{
-  margin: 0px  5px;
+.payding-item {
+  margin: 0px 5px;
   cursor: pointer;
   padding: 7px 10px;
   border-radius: 4px;
 }
 
-.payding-item.active{
+.payding-item.active {
   background-color: var(--primary);
   color: var(--white);
 }
 
-.payding-item:hover{
+.payding-item:hover {
   background-color: var(--gray-200);
   transition: all ease-in-out 0.4s;
 }

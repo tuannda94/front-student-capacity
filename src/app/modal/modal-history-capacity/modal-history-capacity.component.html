@@ -11,9 +11,9 @@
     </div>
 
     <div class="text-center">
+      <p>Phần thi: {{ data.round.name }}</p>
       <div>
-        <span>Phần thi: {{ data.round.name }}</span
-        >, bắt đầu: <span class="text-red">{{ data.round.start_time | formatDate }}</span
+        Bắt đầu: <span class="text-red">{{ data.round.start_time | formatDate }}</span
         >, kết thúc:
         <span class="text-red">{{ data.round.end_time | formatDate }}</span>
       </div>

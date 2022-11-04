@@ -7,6 +7,7 @@ import { ConfigViewService } from 'src/app/services/config-view.service';
 import { GetValueLocalService } from 'src/app/services/get-value-local.service';
 import * as $ from 'jquery';
 import { WishlistService } from 'src/app/services/wishlist.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home-layout',
@@ -21,12 +22,16 @@ export class HomeLayoutComponent implements OnInit {
   countPost: number;
   constructor(
     private wishlist: WishlistService,
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
     this.backTop();
     this.winBackTop();
-    this.getListCount();
+    if(this.userService.getUserValue().id){
+      this.getListCount();
+    }
+
     window.addEventListener('scroll', () => {
       this.winBackTop();
       this.headerBlockScroll();
@@ -53,7 +58,7 @@ export class HomeLayoutComponent implements OnInit {
 
   headerBlockScroll() {
     let header = document.querySelector('.header');
-    if (window.scrollY > 400) {
+    if (window.scrollY > 200) {
       header?.classList.add('fixed');
       document.querySelector('.overlay')?.classList.add('d-none');
       document.querySelector('.sidepanel')?.classList.remove('save-info-acive');

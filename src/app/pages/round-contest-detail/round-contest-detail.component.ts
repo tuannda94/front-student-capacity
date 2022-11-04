@@ -204,11 +204,7 @@ export class RoundContestDetailComponent implements OnInit {
   getListPost() {
     this.listPostService.getPostWhereCate('post-round').subscribe((res) => {
       if (res.status) {
-        this.listPostResult = res.payload.data.filter(
-          (res: Post, index: number) => {
-            return index < 3;
-          }
-        );
+        this.listPostResult = res.payload.data;
       }
     });
   }
@@ -281,9 +277,9 @@ export class RoundContestDetailComponent implements OnInit {
     this.roundService
       .getInfoExamRound({ round_id: round_id })
       .subscribe((res) => {
-        if (res.payload.length == 0) {
+        if (res.payload.error) {
           this.toast.warning({
-            summary: 'Đội của bạn chưa tham gia vòng này !',
+            summary: res.payload.error,
             duration: 5000,
             detail:"Cảnh báo"
           });

@@ -2,6 +2,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post.model';
 import { ListPostService } from 'src/app/services/list-post.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post-category',
@@ -16,9 +17,12 @@ export class PostCategoryComponent implements OnInit {
     private postService : ListPostService,
     private router: Router,
     private route: ActivatedRoute,
+    private titleService: Title
     ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Danh Mục Bài Viết');
+
     let typePost= this.route.snapshot.queryParamMap.get('cate')
     if(typePost == 'post-recruitment'){
       let listTab = document.querySelectorAll('.post__nav-item')

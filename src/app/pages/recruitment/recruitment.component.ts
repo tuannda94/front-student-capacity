@@ -38,7 +38,7 @@ export class RecruitmentComponent implements OnInit {
   recruitmentLinks: Array<PayingLinks>;
   cinfigData: TransmitToPost;
   listPostResult: Array<Post>;
-  majors: Array<Major>  | null;
+  majors: Array<Major> | null;
   skills: Array<Skill>;
   skill_id: any;
   major_id: any;
@@ -46,19 +46,18 @@ export class RecruitmentComponent implements OnInit {
   orderObj: any;
   status: any;
   keyword: string;
-  links : Array<any>;
-  page : number = 1;
+  links: Array<any>;
+  page: number = 1;
 
   // -------------
-  statusPostSearch : boolean = false;
-  statusPost : boolean = false;
+  statusPostSearch: boolean = false;
+  statusPost: boolean = false;
   statusCompany: boolean = false;
   statusRecruitments: boolean = false;
   statusRecruitmentsHot: boolean = false;
   statusPage: boolean = true;
   statusSubmit: boolean = false;
-  statusLinks : boolean =  false;
-
+  statusLinks: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -72,7 +71,7 @@ export class RecruitmentComponent implements OnInit {
     public keywordService: KeywordService,
     private router: Router,
     private location: Location,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   statusFilter: Array<any> = [
@@ -94,12 +93,12 @@ export class RecruitmentComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.backTop();
     this.titleService.setTitle('Tuyển dụng');
     this.route.queryParamMap.subscribe((params) => {
       this.orderObj = { ...params };
     });
 
-    
     if (this.orderObj.params) {
       this.keyword = this.orderObj.params.keyword
         ? this.orderObj.params.keyword
@@ -115,23 +114,21 @@ export class RecruitmentComponent implements OnInit {
         : '';
 
       this.filterRecruitments();
-    }else{
+    } else {
       this.getListPost();
       this.filterRecruitments();
     }
 
     this.getListMajor();
     this.getAllSkill();
-    this.getKeywordAll()
-
-    
+    this.getKeywordAll();
 
     window.addEventListener('scroll', this.noneSuggestFilter);
 
     const inputElement = document.querySelectorAll('.form-control');
     inputElement.forEach((item) => {
       item.addEventListener('focus', () => {
-        item.nextElementSibling?.classList.remove('d-none')
+        item.nextElementSibling?.classList.remove('d-none');
       });
     });
   }
@@ -161,15 +158,16 @@ export class RecruitmentComponent implements OnInit {
     });
   }
 
-
   // Check btn submit
-  checkBtnSubmit(){
-    if(this.formFilter.controls['filterStatus'].value ||
-    this.formFilter.controls['filterName'].value  ||
-    this.formFilter.controls['filterMajor'].value ){
-      this.statusSubmit =  true;
-    }else{
-      this.statusSubmit =  false;
+  checkBtnSubmit() {
+    if (
+      this.formFilter.controls['filterStatus'].value ||
+      this.formFilter.controls['filterName'].value ||
+      this.formFilter.controls['filterMajor'].value
+    ) {
+      this.statusSubmit = true;
+    } else {
+      this.statusSubmit = false;
     }
   }
 
@@ -188,11 +186,10 @@ export class RecruitmentComponent implements OnInit {
               return this.configService
                 .changeString(item.name)
                 .includes(this.configService.changeString(value));
-                
             });
-            this.majors.length > 0 &&  this.noneSuggestFilter();
+            this.majors.length > 0 && this.noneSuggestFilter();
           }
-          
+
           break;
         case 'keyword':
           this.checkBtnSubmit();
@@ -200,14 +197,13 @@ export class RecruitmentComponent implements OnInit {
             this.keywords = null;
             this.keyword = '';
             this.getKeywordAll();
-        
           } else {
             this.keywords = arr.filter((item) => {
               return this.configService
                 .changeString(item.keyword)
                 .includes(this.configService.changeString(value));
             });
-            this.keywords.length > 0 &&  this.noneSuggestFilter();
+            this.keywords.length > 0 && this.noneSuggestFilter();
           }
           break;
         default:
@@ -223,7 +219,7 @@ export class RecruitmentComponent implements OnInit {
       .subscribe((res) => {
         if (res.status) {
           this.listPostResult = res.payload.data;
-          if( this.listPostResult ) this.statusPost = true;
+          if (this.listPostResult) this.statusPost = true;
         }
       });
   }
@@ -241,7 +237,6 @@ export class RecruitmentComponent implements OnInit {
     window.scrollTo({ top: 500, behavior: 'smooth' });
   }
 
-
   // get skill limit
   getLimitSkill(arrSkill: Array<Skill>): Array<Skill> {
     let arrResult = arrSkill.filter((res, index) => {
@@ -253,7 +248,7 @@ export class RecruitmentComponent implements OnInit {
   // Filter recruitments
   filterRecruitments() {
     this.statusRecruitments = false;
-    if(this.page == 1){
+    if (this.page == 1) {
       this.statusPost = false;
     }
 
@@ -273,8 +268,13 @@ export class RecruitmentComponent implements OnInit {
       )[0].prams;
     }
 
-
-    if (this.status  || this.keyword || this.major_id || this.skill_id || this.page) {
+    if (
+      this.status ||
+      this.keyword ||
+      this.major_id ||
+      this.skill_id ||
+      this.page
+    ) {
       this.router.navigate(['/tuyen-dung'], {
         queryParams: {
           status: this.status,
@@ -287,17 +287,18 @@ export class RecruitmentComponent implements OnInit {
       });
     }
 
-
-    this.listPostService.searchPostRecruitment(this.keyword).subscribe(res => {
-      if(res.status && res.payload.data.length > 0 ){      
-        this.statusPostSearch = true;
-        this.listPostResult = res.payload.data;
-        this.statusPost = true;
-      }else{
-        this.statusPostSearch = false;
-        this.getListPost();
-      }
-    })
+    this.listPostService
+      .searchPostRecruitment(this.keyword)
+      .subscribe((res) => {
+        if (res.status && res.payload.data.length > 0) {
+          this.statusPostSearch = true;
+          this.listPostResult = res.payload.data;
+          this.statusPost = true;
+        } else {
+          this.statusPostSearch = false;
+          this.getListPost();
+        }
+      });
 
     this.recruitmentService
       .filterRecruitment(
@@ -319,32 +320,31 @@ export class RecruitmentComponent implements OnInit {
       });
   }
 
-  nextPage(){
+  nextPage() {
     this.page = this.page + 1;
-    if(this.page ==  this.links.length + 1){
-      this.page =  1;
+    if (this.page == this.links.length + 1) {
+      this.page = 1;
     }
     console.log(this.page);
-    
+
     this.filterRecruitments();
   }
 
-  prevPage(){
+  prevPage() {
     this.page = this.page - 1;
-    if(this.page == 0){
-      this.page =  this.links.length;
+    if (this.page == 0) {
+      this.page = this.links.length;
     }
     console.log(this.page);
-    
+
     this.filterRecruitments();
   }
 
-  payingResultEvent(page: number){
-     this.statusRecruitments = false;
-     this.page = page;
-     this.filterRecruitments();     
+  payingResultEvent(page: number) {
+    this.statusRecruitments = false;
+    this.page = page;
+    this.filterRecruitments();
   }
-
 
   filterSkill(event: any, id: number) {
     this.statusRecruitments = false;
@@ -373,7 +373,6 @@ export class RecruitmentComponent implements OnInit {
     });
   }
 
-
   // Cập nhất tất cả trạng thái về more
   resetFilter() {
     this.formFilter.controls['filterMajor'].setValue('');
@@ -388,7 +387,7 @@ export class RecruitmentComponent implements OnInit {
   }
 
   // Ẩn gợi ý khi seach ko ra kết quả
-  noneSuggestFilter(){
+  noneSuggestFilter() {
     const keywordSugg = document.querySelectorAll(
       '.input__search-keyword--sugg'
     );
@@ -397,24 +396,43 @@ export class RecruitmentComponent implements OnInit {
     });
   }
 
-
-  getAllPost(){
-    if(this.keyword !== ''){
+  getAllPost() {
+    if (this.keyword !== '') {
       this.router.navigate(['/tim-kiem/bai-viet'], {
         queryParams: {
-          keyword : this.keyword,
+          keyword: this.keyword,
         },
         queryParamsHandling: 'merge',
       });
-    }else{
-      this.router.navigate(['/danh-muc-bai-viet'] , {
+    } else {
+      this.router.navigate(['/danh-muc-bai-viet'], {
         queryParams: {
-          cate : 'post-recruitment',
+          cate: 'post-recruitment',
         },
         queryParamsHandling: 'merge',
       });
     }
   }
-  
-  
+
+  // Back top after load page
+  backTop() {
+    $('html , body').animate(
+      {
+        scrollTop: 0,
+      },
+      1000
+    );
+  }
+
+
+  // Check time  finish recruitment
+  checkTimeEndRecrument(date: string) : boolean{
+    let isCheck : boolean;
+    let dayCheck = new Date(date).getDay();
+    let monthCheck = new Date(date).getMonth();
+    let nowTime = new Date().getDay();
+    let monthTime = new Date().getMonth();
+    isCheck =  (nowTime > dayCheck && monthCheck == monthTime) || monthCheck < monthTime ? false :  true;
+    return isCheck;
+  }
 }

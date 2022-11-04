@@ -1,3 +1,7 @@
+.ml-8 {
+  margin-left: 8px;
+}
+
 .exam {
   position: fixed;
   top: 0;
@@ -7,10 +11,6 @@
   background-color: #fff;
   overflow-y: scroll;
   z-index: 1000;
-}
-
-.capacity__exam-heading {
-  margin-bottom: 32px;
 }
 
 .capacity__exam-heading-title {
@@ -30,7 +30,7 @@
 }
 
 .capacity__exam-description {
-  padding: 120px 0;
+  height: calc(100vh - 500px);
 }
 
 .capacity__exam-description-title {
@@ -66,6 +66,18 @@
 
 .capacity__exam-result-actions-item {
   text-transform: none;
+}
+
+.capacity__exam-btn-take-exam {
+  font-size: 16px;
+}
+
+.capacity__exam-result-table {
+  text-align: left;
+}
+
+.capacity__exam-result-table tr td:last-child {
+  text-align: right;
 }
 
 /* sidebar */
@@ -109,9 +121,8 @@
 }
 
 .sidebar__countdown-btn {
-  width: 100%;
-  padding: 4px 12px;
   margin-bottom: 12px;
+  width: 100%;
 }
 
 .question {

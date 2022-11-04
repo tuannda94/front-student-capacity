@@ -3,6 +3,8 @@ import { User } from "src/app/models/user";
 import * as $ from "jquery";
 import { WishlistService } from "src/app/services/wishlist.service";
 import Echo from "laravel-echo";
+import { UserService } from "src/app/services/user.service";
+
 @Component({
   selector: "app-home-layout",
   templateUrl: "./home-layout.component.html",
@@ -14,7 +16,7 @@ export class HomeLayoutComponent implements OnInit {
   statusLogin: boolean = false;
   countContest: number;
   countPost: number;
-  constructor(private wishlist: WishlistService) {}
+  constructor(private wishlist: WishlistService, private userService: UserService) {}
 
   ngOnInit(): void {
     const token = (localStorage.getItem("auth_token") as string)?.split("|")[1];
@@ -31,7 +33,10 @@ export class HomeLayoutComponent implements OnInit {
 
     this.backTop();
     this.winBackTop();
-    this.getListCount();
+    if (this.userService.getUserValue().id) {
+      this.getListCount();
+    }
+
     window.addEventListener("scroll", () => {
       this.winBackTop();
       this.headerBlockScroll();
@@ -58,7 +63,7 @@ export class HomeLayoutComponent implements OnInit {
 
   headerBlockScroll() {
     let header = document.querySelector(".header");
-    if (window.scrollY > 400) {
+    if (window.scrollY > 200) {
       header?.classList.add("fixed");
       document.querySelector(".overlay")?.classList.add("d-none");
       document.querySelector(".sidepanel")?.classList.remove("save-info-acive");

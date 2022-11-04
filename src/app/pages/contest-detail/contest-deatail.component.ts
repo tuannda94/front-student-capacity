@@ -33,9 +33,9 @@ export class ContestDeatailComponent implements OnInit {
     numberColumn: 4,
   };
   // ---------------------------
-  payLinkArrayResult :  Array<any>;
-  payLinkNextResult : string = '';
-  payLinkPrevResult :  string = '';
+  payLinkArrayResult: Array<any>;
+  payLinkNextResult: string = '';
+  payLinkPrevResult: string = '';
 
   contestDetail: Contest;
   contestRelated: Array<any>;
@@ -50,10 +50,10 @@ export class ContestDeatailComponent implements OnInit {
   statusCheckDate: boolean = true;
   statusUserLogin: boolean = false;
   statusLinks: boolean = false;
-  total : number;
+  total: number;
   listPostResult: Array<Post> = [];
 
-   sliderSupporter = {
+  sliderSupporter = {
     slidesToShow: 3,
     infinite: true,
     autoplay: true,
@@ -73,15 +73,17 @@ export class ContestDeatailComponent implements OnInit {
     private roundService: RoundService,
     private userService: UserService,
     private modalService: NgbModal,
-    private title : Title,
-    private location : Location
+    private title: Title,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
     this.title.setTitle('Chi tiết cuộc thi');
-  
+
     // Check user đã đăng nhập hay chưa
-    this.userService.getUserValue() ? (this.statusUserLogin = true) : this.statusUserLogin;
+    this.userService.getUserValue()
+      ? (this.statusUserLogin = true)
+      : this.statusUserLogin;
     this.runTop();
     this.routeStateRegister = history.state.registerNow;
 
@@ -95,82 +97,79 @@ export class ContestDeatailComponent implements OnInit {
     });
 
     this.getListPost();
-    
+
     // Các cuộc thi liên quan
     this.contestService
-      .getContestWhereMajor( this.contest_id)
+      .getContestWhereMajor(this.contest_id)
       .subscribe((res) => {
         if (res.status)
           this.contestRelated = res.payload.data.filter((item: Contest) => {
-            return item.id !=  this.contest_id;
+            return item.id != this.contest_id;
           });
         if (this.contestRelated) {
-          console.log(this.contestRelated);
-          
           this.statusContestRelated = true;
           this.contestRelated.length > 0
             ? (this.countContestRelated = true)
             : this.countContestRelated;
         }
       });
-  
-    
   }
 
   //Cac bai post
   getListPost() {
     this.listPostService.getPostWhereCate('post-contest').subscribe((res) => {
       if (res.status) {
-        this.listPostResult = res.payload.data.filter(
-          (item: Contest, index: number) => {
-            return index < 4;
-          }
-        );
-        if(this.listPostResult.length > 0){
+        this.listPostResult = res.payload.data;
+        console.log(this.listPostResult.length);
+        
+        if (this.listPostResult.length > 0) {
           this.countPostRelated == true;
         }
       }
     });
   }
 
-  getUrlPaying(url: string){
+  getUrlPaying(url: string) {
     this.statusLinks = false;
     this.roundService.getResultRoundUrl(url).subscribe((res) => {
-      if(res.status){
-       this.resultRank = res.payload.data;
-       this.payLinkArrayResult = res.payload.links;
-       this.payLinkNextResult = res.payload.next_page_url;
-       this.payLinkPrevResult = res.payload.prev_page_url;
-       this.payLinkArrayResult.pop();
-       this.payLinkArrayResult.shift();
-       this.statusLinks = true;
+      if (res.status) {
+        this.resultRank = res.payload.data;
+        this.payLinkArrayResult = res.payload.links;
+        this.payLinkNextResult = res.payload.next_page_url;
+        this.payLinkPrevResult = res.payload.prev_page_url;
+        this.payLinkArrayResult.pop();
+        this.payLinkArrayResult.shift();
+        this.statusLinks = true;
       }
-   });
+    });
   }
 
-  sortResult(status: boolean){
+  sortResult(status: boolean) {
     this.statusLinks = false;
     status ? this.getResultRank('desc') : this.getResultRank('asc');
   }
 
   // Mở model thêm đội thi
-  getResultRank(sort : string) {
-    console.log(this.contestDetail.rounds[this.contestDetail.rounds.length - 1].id);
-    
-    this.roundService.getResultRound(this.contestDetail.rounds[this.contestDetail.rounds.length - 1].id,  sort , 6).subscribe((res) => {
-       if(res.status){
-        this.resultRank = res.payload.data;
-        this.payLinkArrayResult = res.payload.links;
-        this.payLinkNextResult = res.payload.next_page_url;
-        this.payLinkPrevResult = res.payload.prev_page_url;
-        this.total =  res.payload.total;
-        this.payLinkArrayResult.pop();
-        this.payLinkArrayResult.shift();
-        this.statusLinks = true;
-       }
-    });
+  getResultRank(sort: string) {
+    this.roundService
+      .getResultRound(
+        this.contestDetail.rounds[this.contestDetail.rounds.length - 1].id,
+        sort,
+        6
+      )
+      .subscribe((res) => {
+        if (res.status) {
+          this.resultRank = res.payload.data;
+          this.payLinkArrayResult = res.payload.links;
+          this.payLinkNextResult = res.payload.next_page_url;
+          this.payLinkPrevResult = res.payload.prev_page_url;
+          this.total = res.payload.total;
+          this.payLinkArrayResult.pop();
+          this.payLinkArrayResult.shift();
+          this.statusLinks = true;
+        }
+      });
   }
-
 
   scrollWin(elementString: any, distanceApart: number) {
     let element = document.querySelector(elementString);
@@ -192,9 +191,9 @@ export class ContestDeatailComponent implements OnInit {
     this.modalService.open(content, { scrollable: true });
   }
 
-  // 
-  isContestRelate(event: any){
-    if(event){
+  //
+  isContestRelate(event: any) {
+    if (event) {
       window.location.reload();
     }
   }

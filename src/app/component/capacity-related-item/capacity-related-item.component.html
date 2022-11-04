@@ -84,15 +84,9 @@
       </div>
     </div>
 
-    <div class="capacity__related-top-1" *ngIf="statusExam.status !== 0 && !capacityItem.user_top">
-      <div class="capacity__related-top-1-rank flex-1">
-        <img src="../../../assets/img/rank1_contest.svg" alt="" class="capacity__related-top-1-rank-img" />
-      </div>
-
+    <div class="capacity__related-top-1 m-auto" *ngIf="statusExam.status !== 0 && !capacityItem.user_top">
       <div class="capacity__related-top-1-user d-flex align-items-center">
-        <img src="../../../assets/img/default-avatar.png" alt="" class="capacity__related-top-1-user-avatar" />
-
-        <span class="capacity__related-top-1-user-name flex-1" title="Chưa có SV nộp bài!">Chưa có SV nộp bài!</span>
+        <span class="capacity__related-top-1-user-name flex-1 m-0" title="Chưa có SV nộp bài!">Chưa có SV nộp bài!</span>
       </div>
     </div>
 

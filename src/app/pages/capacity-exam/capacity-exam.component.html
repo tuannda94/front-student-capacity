@@ -1,10 +1,14 @@
 <nz-spin [nzSpinning]="isFetchingHistoryExam" nzTip="Đang lấy dữ liệu bài làm...">
   <div [ngClass]="{ exam: statusTakingExam === 1 || isFullScreen ? true : false }">
     <div class="container my-4">
-      <div class="capacity__exam-heading" *ngIf="!isFetchingRound">
+      <div
+        class="capacity__exam-heading"
+        *ngIf="!isFetchingRound"
+        [ngClass]="{ 'mb-4': isFetchingExam || statusTakingExam === 1 }"
+      >
         <div class="capacity__exam-heading-inner d-flex align-items-center justify-content-center">
           <span class="capacity__exam-heading-line"></span>
-          <h1 class="capacity__exam-heading-title text-center">
+          <h1 class="capacity__exam-heading-title text-center fw-bold">
             Bài test năng lực:
             <a class="text-body" [routerLink]="['/test-nang-luc', roundDetail.contest.id]">{{
               roundDetail.contest.name
@@ -14,29 +18,37 @@
         </div>
 
         <div class="text-center">
-          <p *ngIf="statusTakingExam === 1">
-            Câu hỏi: <span class="text-red">{{ examData.questions.length }} câu</span>, thời gian:
-            <span class="text-red">{{ examData.time_exam }} phút</span>, phần thi: {{ roundDetail.name }}
-          </p>
+          <div *ngIf="statusTakingExam === 1">
+            <p>Phần thi: {{ roundDetail.name }}</p>
+            <div>
+              Câu hỏi: <span class="text-red">{{ examData.questions.length }} câu</span>, thời gian:
+              <span class="text-red">{{ examData.time_exam }} phút</span>
+            </div>
+          </div>
 
-          <ngx-skeleton-loader *ngIf="isFetchingExam" [theme]="{ 'margin-top': '6px' }"></ngx-skeleton-loader>
+          <div *ngIf="isFetchingExam">
+            <ngx-skeleton-loader [theme]="{ width: '65%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ width: '35%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
+          </div>
 
           <div *ngIf="statusTakingExam !== 1 && !isFetchingExam">
-            <span>Phần thi: {{ roundDetail.name }}</span
-            >, bắt đầu: <span class="text-red">{{ roundDetail.start_time | formatDate }}</span
-            >, hạn chót: <span class="text-red">{{ roundDetail.end_time | formatDate }}</span>
+            <p>Phần thi: {{ roundDetail.name }}</p>
+            <div>
+              Bắt đầu: <span class="text-red">{{ roundDetail.start_time | formatDate }}</span
+              >, kết thúc: <span class="text-red">{{ roundDetail.end_time | formatDate }}</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- chờ làm bài -->
       <section
-        class="capacity__exam-description text-center"
+        class="capacity__exam-description text-center ng-star-inserted d-flex align-items-center justify-content-center flex-column"
         *ngIf="statusTakingExam === 0 && !isFetchingRound && !isFetchingSttExam && !isFetchingExam"
       >
         <!-- button bắt đầu làm bài -->
         <div *ngIf="!isContinueExam">
-          <h2 class="text-center capacity__exam-description-title">
+          <h2 class="text-center capacity__exam-description-title fw-bold">
             Hãy nhấn
             <span class="text-uppercase text-red">bắt đầu</span>
             để làm bài
@@ -45,7 +57,7 @@
 
         <!-- button tiếp tục làm bài -->
         <div *ngIf="isContinueExam">
-          <h2 class="text-center capacity__exam-description-title">
+          <h2 class="text-center capacity__exam-description-title fw-bold">
             Bạn chưa hoàn thành bài thi. Hãy nhấn
             <span class="text-uppercase text-red">tiếp tục</span>
             để tiếp tục làm bài!
@@ -53,7 +65,7 @@
         </div>
 
         <button
-          class="btn btn-main text-center btn-base-type-bg"
+          class="my-btn my-btn-primary my-btn-s capacity__exam-btn-take-exam"
           (click)="isContinueExam ? handleContinueTakeExam() : handleTakeExam()"
         >
           {{ isContinueExam ? "Tiếp tục" : "Bắt đầu" }}
@@ -62,8 +74,16 @@
 
       <!-- loading khi đàn get dữ liệu vòng thi và check trạng thái làm bài -->
       <section>
-        <ngx-skeleton-loader count="2" *ngIf="isFetchingRound"></ngx-skeleton-loader>
-        <section class="capacity__exam-description text-center" *ngIf="isFetchingSttExam || isFetchingRound">
+        <div *ngIf="isFetchingRound" class="text-center">
+          <ngx-skeleton-loader [theme]="{ margin: 0 }"></ngx-skeleton-loader>
+          <ngx-skeleton-loader [theme]="{ width: '65%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
+          <ngx-skeleton-loader [theme]="{ width: '35%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
+        </div>
+
+        <section
+          class="capacity__exam-description text-center ng-star-inserted d-flex align-items-center justify-content-center flex-column"
+          *ngIf="isFetchingSttExam || isFetchingRound"
+        >
           <ngx-skeleton-loader [theme]="{ width: '300px' }"></ngx-skeleton-loader>
           <ngx-skeleton-loader [theme]="{ width: '100px', height: '35px' }" class="d-block"></ngx-skeleton-loader>
         </section>
@@ -124,7 +144,7 @@
                 </li>
               </ul>
 
-              <button class="btn btn-main sidebar__countdown-btn">Nộp bài</button>
+              <button class="my-btn my-btn-s my-btn-primary sidebar__countdown-btn">Nộp bài</button>
 
               <section class="question">
                 <span class="question__title">Câu hỏi</span>
@@ -254,58 +274,66 @@
         </div>
       </div>
 
-      <!-- kết quả làm bài -->
+      <!-- kết quả bài làm-->
       <div class="capacity__exam-result text-center" *ngIf="statusTakingExam === 2">
         <h2>Kết quả bài làm</h2>
         <span class="text-uppercase text-red capacity__exam-result-point">{{ this.resultExam.score }}/10</span>
 
-        <ul class="capacity__exam-result-list">
-          <li class="capacity__exam-result-list-item d-flex justify-content-between align-items-center my-1">
-            <span>Thời gian</span>
-            <span class="fw-bolder">{{ this.resultExam.examTime }}</span>
-          </li>
+        <table class="capacity__exam-result-table mx-auto mt-3">
+          <tbody>
+            <tr>
+              <td class="pb-1">Thời gian</td>
+              <td class="pb-1 fw-bold">{{ this.resultExam.examTime }}</td>
+            </tr>
 
-          <li class="capacity__exam-result-list-item d-flex justify-content-between align-items-center my-1">
-            <span>Nộp lúc</span>
-            <span class="fw-bolder">{{ this.resultExam.submitAt }}</span>
-          </li>
+            <tr>
+              <td class="pb-1">Nộp lúc</td>
+              <td class="pb-1 fw-bold">{{ this.resultExam.submitAt }}</td>
+            </tr>
 
-          <li class="capacity__exam-result-list-item d-flex justify-content-between align-items-center my-1">
-            <span>Số câu đúng</span>
-            <span class="fw-bolder">{{ this.resultExam.trueAnswer }}</span>
-          </li>
+            <tr>
+              <td class="pb-1">Số câu đúng</td>
+              <td class="pb-1 fw-bold">{{ this.resultExam.trueAnswer }}</td>
+            </tr>
 
-          <li class="capacity__exam-result-list-item d-flex justify-content-between align-items-center my-1">
-            <span>Số câu sai</span>
-            <span class="fw-bolder">{{ this.resultExam.falseAnswer }}</span>
-          </li>
+            <tr>
+              <td class="pb-1">Số câu sai</td>
+              <td class="pb-1 fw-bold">{{ this.resultExam.falseAnswer }}</td>
+            </tr>
 
-          <li class="capacity__exam-result-list-item d-flex justify-content-between align-items-center my-1">
-            <span>Chưa làm</span>
-            <span class="fw-bolder">{{ this.resultExam.donotAnswer }}</span>
-          </li>
-        </ul>
+            <tr>
+              <td class="pb-1">Chưa làm</td>
+              <td class="pb-1 fw-bold">{{ this.resultExam.donotAnswer }}</td>
+            </tr>
 
-        <ul class="flex-wrap capacity__exam-result-actions d-flex justify-content-center align-items-center">
-          <li (click)="handleOpenHistoryExam()" class="capacity__exam-result-actions-item btn btn-main mx-1 my-1">
-            Lịch sử làm bài
-          </li>
+            <tr>
+              <td class="pb-1">
+                <button
+                  (click)="handleOpenHistoryExam()"
+                  class="capacity__exam-result-actions-item my-btn-primary my-btn-s my-btn--no-bg my-1"
+                >
+                  Lịch sử làm bài
+                </button>
+              </td>
+              <td class="pb-1">
+                <li
+                  (click)="handleGoToNextRound(getNextRound().round_id)"
+                  class="capacity__exam-result-actions-item my-btn my-btn-primary my-btn-s d-flex align-items-center ml-8 my-1"
+                  *ngIf="getNextRound().status"
+                >
+                  Phần thi tiếp theo
+                  <div class="capacity__exam-result-actions-item-icon mx-1">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                </li>
 
-          <li
-            (click)="handleGoToNextRound(getNextRound().round_id)"
-            class="capacity__exam-result-actions-item btn-base-type-bg btn btn-main d-flex align-items-center mx-1 my-1"
-            *ngIf="getNextRound().status"
-          >
-            Phần thi tiếp theo
-            <div class="capacity__exam-result-actions-item-icon mx-1">
-              <i class="fa-solid fa-arrow-right"></i>
-            </div>
-          </li>
-
-          <li class="capacity__exam-result-actions-item mx-1 my-1" *ngIf="!getNextRound().status">
-            <a href="" class="btn btn-main">Bảng xếp hạng</a>
-          </li>
-        </ul>
+                <div class="capacity__exam-result-actions-item my-1 ml-8" *ngIf="!getNextRound().status">
+                  <a href="" class="my-btn-primary my-btn-s my-btn--no-bg">Bảng xếp hạng</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

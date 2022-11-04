@@ -1,11 +1,47 @@
-<div *ngIf="listPost" class="row mt-3">
-    <div *ngFor="let item of listPost"  routerLink="/bai-viet/{{item.slug}}" [ngClass]="countColumn == 3 ? 'col-4' : 'col-3'">
-         <div class="post-item p-3">
-            <img class="post-item-image" [src]="item.thumbnail_url" alt="">
-            <h4 class="fw-bold post-new-name text-collapse my-2">{{item.title}}</h4>
-            <p class="mb-2 color-text"><i class="fa-solid fa-user-pen"></i>&nbsp;{{item.user.name}}</p>
-            <p class="color-text mb-2"><i class="fa-solid fa-clock"></i>&nbsp; {{item.published_at | formatDate}}</p>
-            <p class="post-new-content color-text" [innerHTML]="item.description"></p>
-         </div>
+<div *ngIf="listPost && listPost.length <= 4" class="row mt-3">
+  <div
+    *ngFor="let item of listPost"
+    [ngClass]="countColumn == 3 ? 'col-4' : 'col-3'"
+  >
+    <div class="post-item p-3">
+      <img class="post-item-image"   routerLink="/bai-viet/{{ item.slug }}" [src]="item.thumbnail_url" alt="" />
+      <h4 class="fw-bold post-new-name  text-collapse-row-2 my-2"   routerLink="/bai-viet/{{ item.slug }}">{{ item.title }}</h4>
+      <p class="mb-2 color-text">
+        <i class="fa-solid fa-user-pen"></i>&nbsp;{{ item.user.name }}
+      </p>
+      <p class="color-text mb-2">
+        <i class="fa-solid fa-clock"></i>&nbsp;
+        {{ item.published_at | formatDate }}
+      </p>
+      <p class="post-new-content color-text text-collapse-row-3" [innerHTML]="item.description"></p>
     </div>
+  </div>
+</div>
+<div  *ngIf="listPost && listPost.length > 4" class="list-post-more">
+  <ngx-slick-carousel [config]="countColumn == 3 ? sliderPostColThree :  sliderPostColFour">
+    <div
+    ngxSlickItem
+    *ngFor="let item of listPost"
+  
+    [ngClass]="countColumn == 3 ? 'col-4 mx-2' : 'col-3 mx-2'"
+  >
+    <div class="post-item p-3">
+      <img class="post-item-image"   routerLink="/bai-viet/{{ item.slug }}" [src]="item.thumbnail_url" alt="" />
+      <h4 class="fw-bold post-new-name text-collapse-row-2 my-2"   routerLink="/bai-viet/{{ item.slug }}">
+        {{ item.title }}
+      </h4>
+      <p class="mb-2 color-text">
+        <i class="fa-solid fa-user-pen"></i>&nbsp;{{ item.user.name }}
+      </p>
+      <p class="color-text mb-2">
+        <i class="fa-solid fa-clock"></i>&nbsp;
+        {{ item.published_at | formatDate }}
+      </p>
+      <p
+        class="post-new-content color-text text-collapse-row-3"
+        [innerHTML]="item.description"
+      ></p>
+    </div>
+  </div>
+  </ngx-slick-carousel>
 </div>

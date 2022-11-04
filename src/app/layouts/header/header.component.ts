@@ -31,14 +31,10 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    
     this.userService.user.subscribe((data) => {
       this.user = data!;
     });
     
-   
-
     this.user = this.userInfo.getValueLocalUser('user');
     this.saveUrlCurrent();
   }
@@ -129,9 +125,11 @@ export class HeaderComponent implements OnInit {
     document.querySelector('.overlay')?.classList.remove('d-none');    
   }
 
-  closeSaveInfo() {
-    document.querySelector('.sidepanel')?.classList.remove('save-info-acive');
-    document.querySelector('.overlay')?.classList.add('d-none');
+  closeSaveInfo(status : boolean) {
+    if(status){
+      document.querySelector('.sidepanel')?.classList.remove('save-info-acive');
+      document.querySelector('.overlay')?.classList.add('d-none');
+    }
   }
 
   // LogOut

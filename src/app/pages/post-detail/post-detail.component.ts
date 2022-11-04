@@ -5,6 +5,7 @@ import { ListPostService } from 'src/app/services/list-post.service';
 import { Post } from 'src/app/models/post.model';
 import { ModalUploadCvComponent } from 'src/app/modal/modal-upload-cv/modal-upload-cv.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post-detail',
@@ -20,10 +21,14 @@ export class PostDetailComponent implements OnInit {
     private postService: ListPostService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public title: Title
   ) { }
 
+  
   ngOnInit(): void {
+    this.title.setTitle("Chi tiết bài viết");
+
     this.route.paramMap.pipe(
       map(params => params.get('slug')),
       switchMap(slug => this.postService.getPostBySlug(slug))

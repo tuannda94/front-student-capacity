@@ -22,6 +22,7 @@ import { RecruitmentsService } from 'src/app/services/recruitments.service';
 import { Recruitments } from 'src/app/models/recruitments.models';
 import { Enterprise } from 'src/app/models/enterprise.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-test-capacity',
@@ -57,7 +58,8 @@ export class TestCapacityComponent implements OnInit {
     public listPostService: ListPostService,
     public majorService: MajorService,
     public configService: ConfigFunctionService,
-    public skillService: SkillServiceService
+    public skillService: SkillServiceService,
+    private titleService: Title
   ) {}
 
   formFilter = new FormGroup({
@@ -68,6 +70,7 @@ export class TestCapacityComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.titleService.setTitle('Danh Sách Test Năng Lực');
     if (
       this.formFilter.controls['filterSkill'].value ||
       this.formFilter.controls['filterName'].value ||

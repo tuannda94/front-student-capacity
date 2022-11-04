@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post.model';
 import { ListPostService } from 'src/app/services/list-post.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-posts',
@@ -30,9 +31,11 @@ export class PostsComponent implements OnInit {
   constructor(
     private postService : ListPostService,
     private router: Router,
+    private titleService: Title
     ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Danh Sách Bài Viết');
     this.getListPostRecruitment();
     this.getListPostCapacity()
     this.getListPostContest()

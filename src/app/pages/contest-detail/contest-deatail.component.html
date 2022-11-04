@@ -331,10 +331,10 @@
       >
         Cuộc thi liên quan
       </p>
-      <div class="title-line mx-auto"></div>
+      <div     *ngIf="countContestRelated == true" class="title-line mx-auto"></div>
       <div class="mt-3 row" *ngIf="countContestRelated == true">
         <div *ngFor="let item of contestRelated" class="col-6">
-          <app-contest-item [isRelate]="true" (contestRelated)="isContestRelate($event)" [item]="item"> </app-contest-item>
+          <app-contest-item   [item]="item"> </app-contest-item>
         </div>
       </div>
     </div>

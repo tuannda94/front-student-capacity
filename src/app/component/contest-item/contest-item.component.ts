@@ -53,6 +53,7 @@ export class ContestItemComponent implements OnInit {
       moment(this.item.start_register_time).format('lll')
     ).getTime();
 
+    
     setInterval(() => {
       this.date_register_end = new Date(
         moment(this.item.end_register_time).format('lll')
@@ -66,9 +67,9 @@ export class ContestItemComponent implements OnInit {
       if (
         distance < 0 ||
         this.item.status == 2 ||
-        this.date_register_start > this.today ||
-        this.today > this.date_end
+        this.date_register_start > this.today
       ) {
+        this.disabled = false;
         this.statusCountDown = false;
         this.days = 0;
         this.hours = 0;

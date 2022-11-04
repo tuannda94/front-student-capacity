@@ -28,6 +28,7 @@ export class RecruitmentDetailComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.backTop();
     this.route.paramMap.pipe(
       map(params => params.get('id')),
       switchMap(id => this.recruitmentService.getRecruitmentDetail(id))
@@ -42,6 +43,19 @@ export class RecruitmentDetailComponent implements OnInit {
     })
 
     this.getListPost();
+   
+  }
+
+
+  
+  // Back top after load page
+  backTop() {
+    $('html , body').animate(
+      {
+        scrollTop: 0,
+      },
+      1000
+    );
   }
 
 // List Posts

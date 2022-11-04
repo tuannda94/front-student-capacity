@@ -96,6 +96,7 @@ import { MonacoEditorModule } from "ngx-monaco-editor";
 import { ChallengeComponent } from "./pages/challenge/challenge.component";
 import { ModalSubmitChallengeSuccessComponent } from "./modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
 import { AlertErrorIntroExamComponent } from "./component/alert-error-intro-exam/alert-error-intro-exam.component";
+import { CountDatePipe } from "./helper/pipe/count-date.pipe";
 
 @NgModule({
   declarations: [
@@ -167,6 +168,7 @@ import { AlertErrorIntroExamComponent } from "./component/alert-error-intro-exam
     ChallengeComponent,
     ModalSubmitChallengeSuccessComponent,
     AlertErrorIntroExamComponent,
+    CountDatePipe,
   ],
   imports: [
     BrowserModule,

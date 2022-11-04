@@ -215,7 +215,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
         // check user logged
         const userLogged = this.userService.getUserValue();
         if (!userLogged.id) {
-          this.toast.warning({ summary: "Vui lòng đăng nhập trước khi làm bài", duration: 3000 });
+          this.toast.warning({ summary: "Vui lòng đăng nhập trước khi làm bài!", duration: 3000, detail: "Thông báo" });
           this.router.navigate(["/login"]);
           return;
         }
@@ -226,11 +226,11 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
         const timeEnd = new Date(this.roundDetail.end_time).getTime();
 
         if (todayTime < timeStart) {
-          this.toast.warning({ summary: "Chưa đến thời gian làm bài" });
+          this.toast.warning({ summary: "Chưa đến thời gian làm bài!", detail: "Thông báo" });
           return;
         }
         if (todayTime >= timeEnd) {
-          this.toast.warning({ summary: "Phần thi đã kết thúc" });
+          this.toast.warning({ summary: "Phần thi đã kết thúc!", detail: "Thông báo" });
           return;
         }
 
@@ -240,14 +240,14 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
           const { status, payload } = this.statusPreRound;
           if (status) {
             if (payload === 0) {
-              this.toast.info({ summary: "Vui lòng hoàn thành phần thi trước đó" });
+              this.toast.info({ summary: "Vui lòng hoàn thành phần thi trước đó!", detail: "Thông báo" });
               return;
             }
 
             this.openFullscreen();
             this.takeExam();
           } else {
-            this.toast.info({ summary: "Bạn chưa làm phần thi trước đó!" });
+            this.toast.info({ summary: "Bạn chưa làm phần thi trước đó!", detail: "Thông báo" });
           }
 
           return;
@@ -670,7 +670,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
           this.toast.warning({
             summary: "Sắp hết thời gian làm bài, hãy kiểm tra lại bài làm của bạn",
             duration: 10000,
-            detail:"Thông báo"
+            detail: "Thông báo",
           });
           this.isNotiExamTimeOut = true;
         }

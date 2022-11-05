@@ -40,20 +40,12 @@ import { IntoExamComponent } from "./pages/into-exam/into-exam.component";
 import { ListResultRoundComponent } from "./component/list-result-round/list-result-round.component";
 import { RoundContestDetailComponent } from "./pages/round-contest-detail/round-contest-detail.component";
 import { LoadingPageComponent } from "./loading/loading-page/loading-page.component";
-
-import { NZ_I18N } from "ng-zorro-antd/i18n";
-import { en_US } from "ng-zorro-antd/i18n";
 import { registerLocaleData } from "@angular/common";
 import en from "@angular/common/locales/en";
 import { HeaderComponent } from "./layouts/header/header.component";
 import { FooterComponent } from "./layouts/footer/footer.component";
 import { RecruitmentComponent } from "./pages/recruitment/recruitment.component";
-import { NzSelectModule } from "ng-zorro-antd/select";
-import { NzSpinModule } from "ng-zorro-antd/spin";
-import { NzPaginationModule } from "ng-zorro-antd/pagination";
-import { NzToolTipModule } from "ng-zorro-antd/tooltip";
 import { ModalInfoTeamComponent } from "./modal/modal-info-team/modal-info-team.component";
-// import { AndesginModule } from './anDesgin/andesgin/andesgin.module';
 
 registerLocaleData(en);
 
@@ -189,10 +181,6 @@ import { LoadingOverlayComponent } from "./component/loading-overlay/loading-ove
     NgxSkeletonLoaderModule,
     MaterialModule,
     NgToastModule,
-    NzSelectModule,
-    NzSpinModule,
-    NzPaginationModule,
-    NzToolTipModule,
     AngularSplitModule,
     MonacoEditorModule.forRoot(),
   ],
@@ -219,7 +207,6 @@ import { LoadingOverlayComponent } from "./component/loading-overlay/loading-ove
       useClass: ErrorInterceptor,
       multi: true,
     },
-    { provide: NZ_I18N, useValue: en_US },
   ],
   bootstrap: [AppComponent],
 })

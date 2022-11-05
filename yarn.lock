@@ -121,14 +121,14 @@
     "ora" "5.4.1"
     "rxjs" "6.6.7"
 
-"@angular/animations@^13.0.0 || ^14.0.0-0", "@angular/animations@^13.0.1", "@angular/animations@13.2.0":
+"@angular/animations@^13.0.0 || ^14.0.0-0", "@angular/animations@13.2.0":
   "integrity" "sha512-zLmNxkfxDQShJ97V9gTyQdlEbCD/zDUdpHXKlUViBIbe2M13FLGV3e2D+x9jGr/PRzFe0cukOnYxNEHJqqjqPA=="
   "resolved" "https://registry.npmjs.org/@angular/animations/-/animations-13.2.0.tgz"
   "version" "13.2.0"
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/cdk@^13.0.1", "@angular/cdk@13.3.1":
+"@angular/cdk@13.3.1":
   "integrity" "sha512-JUCvhN6XomY5JOMH7Qyj/JodAuAtKgLlJYKs0tPmjCkGcBdR/T3/hOJ9gSRhz8PCOoiEORj+3xCh547oJRyesA=="
   "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-13.3.1.tgz"
   "version" "13.3.1"
@@ -162,7 +162,7 @@
     "symbol-observable" "4.0.0"
     "uuid" "8.3.2"
 
-"@angular/common@ ^13.0.0-rc.0 || ^13.0.0", "@angular/common@^12.0.0", "@angular/common@^13.0.0", "@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@^13.0.1", "@angular/common@^13.1.0", "@angular/common@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/common@>=8.0.0", "@angular/common@>=9.0.0", "@angular/common@13.2.0":
+"@angular/common@ ^13.0.0-rc.0 || ^13.0.0", "@angular/common@^12.0.0", "@angular/common@^13.0.0", "@angular/common@^13.0.0 || ^14.0.0-0", "@angular/common@^13.1.0", "@angular/common@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/common@>=8.0.0", "@angular/common@>=9.0.0", "@angular/common@13.2.0":
   "integrity" "sha512-zyq3kscl5BoY+xxl4YOfbKP72xwzx/vKLE+2ougjPu2spm5KIllIAo/VrxVqIBrsGWT/4gs9pvIOqOdOfufxUA=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-13.2.0.tgz"
   "version" "13.2.0"
@@ -193,14 +193,14 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^12.0.0", "@angular/core@^13.0.0", "@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@^13.0.0-rc.0 || ^13.0.0", "@angular/core@^13.0.1", "@angular/core@^13.1.0", "@angular/core@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/core@>=8.0.0", "@angular/core@>=9.0.0", "@angular/core@13.2.0":
+"@angular/core@^12.0.0", "@angular/core@^13.0.0", "@angular/core@^13.0.0 || ^14.0.0-0", "@angular/core@^13.0.0-rc.0 || ^13.0.0", "@angular/core@^13.1.0", "@angular/core@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/core@>=8.0.0", "@angular/core@>=9.0.0", "@angular/core@13.2.0":
   "integrity" "sha512-mWRWbbZ6k00AicA/GrxmWKaw8upo77sRQz4tSYKpwVKt2TtCeoW8OkdYUpnmuVjxpF0bD6PtVc0e1fD6es/ElA=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-13.2.0.tgz"
   "version" "13.2.0"
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/forms@^13.0.0", "@angular/forms@^13.0.0 || ^14.0.0-0", "@angular/forms@^13.0.1", "@angular/forms@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/forms@13.2.0":
+"@angular/forms@^13.0.0", "@angular/forms@^13.0.0 || ^14.0.0-0", "@angular/forms@^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0", "@angular/forms@13.2.0":
   "integrity" "sha512-aduXLuvqynDRRdb316yY1O5rdMQ2DKeNxu5P2FG1nkLQ3hqZvpiaUMhFyXvKDG3s0rV5e/PZs1cpg0Aqdfwevw=="
   "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-13.2.0.tgz"
   "version" "13.2.0"
@@ -230,34 +230,19 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/platform-browser@^13.0.0 || ^14.0.0-0", "@angular/platform-browser@^13.0.1", "@angular/platform-browser@13.2.0":
+"@angular/platform-browser@^13.0.0 || ^14.0.0-0", "@angular/platform-browser@13.2.0":
   "integrity" "sha512-FB9eKdRqpjopTFbea5JXnqSPFR7DZD4nepOSGnYttV9cVj4pABqx2A6FJCnyvPPUSTamODye/pNkGmzP2P1gcw=="
   "resolved" "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-13.2.0.tgz"
   "version" "13.2.0"
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/router@^13.0.1", "@angular/router@13.2.0":
+"@angular/router@13.2.0":
   "integrity" "sha512-8fWxcWT/LpaGhmXJ8xH+E7UObzt5IMGzK1sJGRu508y5tcbuBlTJt3yV97mCeUQ0g/E+2GEv6vuxY7OcfDaZow=="
   "resolved" "https://registry.npmjs.org/@angular/router/-/router-13.2.0.tgz"
   "version" "13.2.0"
   dependencies:
     "tslib" "^2.3.0"
-
-"@ant-design/colors@^5.0.0":
-  "integrity" "sha512-Txy4KpHrp3q4XZdfgOBqLl+lkQIc3tEvHXOimRN1giX1AEC7mGtyrO9p8iRGJ3FLuVMGa2gNEzQyghVymLttKQ=="
-  "resolved" "https://registry.npmjs.org/@ant-design/colors/-/colors-5.1.1.tgz"
-  "version" "5.1.1"
-  dependencies:
-    "@ctrl/tinycolor" "^3.3.1"
-
-"@ant-design/icons-angular@^13.0.1":
-  "integrity" "sha512-bQ1pxiDmR8Hx7kUwQImxLGAtexv0uDCCMlKSWdyaw39TnNAPz+Hls0XL+UqVIjHgt/D4R8tkmSMpx3eBGFIY/Q=="
-  "resolved" "https://registry.npmjs.org/@ant-design/icons-angular/-/icons-angular-13.1.0.tgz"
-  "version" "13.1.0"
-  dependencies:
-    "@ant-design/colors" "^5.0.0"
-    "tslib" "^2.0.0"
 
 "@assemblyscript/loader@^0.10.1":
   "integrity" "sha512-H71nDOOL8Y7kWRLqf6Sums+01Q5msqBW2KhDUTemh1tvY04eSkSXrK0uj/4mmY0Xr16/3zyZmsrxN7CKuRbNRg=="
@@ -1198,11 +1183,6 @@
   "version" "1.2.0"
   dependencies:
     "postcss-value-parser" "^4.2.0"
-
-"@ctrl/tinycolor@^3.3.1":
-  "integrity" "sha512-ej5oVy6lykXsvieQtqZxCOaLT+xD4+QNarq78cIYISHmZXshCvROLudpQN3lfL8G0NL7plMSSK+zlyvCaIJ4Iw=="
-  "resolved" "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.4.1.tgz"
-  "version" "3.4.1"
 
 "@discoveryjs/json-ext@0.5.6":
   "integrity" "sha512-ws57AidsDvREKrZKYffXddNkyaF14iHNHm8VQnZH6t99E8gczjNN0GpvcGny0imC80yQ0tHz1xVUKk/KFQSUyA=="
@@ -2576,11 +2556,6 @@
   "integrity" "sha512-GAj5FOq0Hd+RsCGVJxZuKaIDXDf3h6GQoNEjFgbLLI/trgtavwUbSnZ5pVfg27DVCaWjIohryS0JFwIJyT2cMg=="
   "resolved" "https://registry.npmjs.org/custom-event/-/custom-event-1.0.1.tgz"
   "version" "1.0.1"
-
-"date-fns@^2.16.1":
-  "integrity" "sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw=="
-  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.28.0.tgz"
-  "version" "2.28.0"
 
 "date-format@^4.0.13":
   "integrity" "sha512-bnYCwf8Emc3pTD8pXnre+wfnjGtfi5ncMDKy7+cWZXbmRAsdWkOQHrfC1yz/KiwP5thDp2kCHWYWKBX4HP1hoQ=="
@@ -4399,16 +4374,6 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"ng-zorro-antd@13.2.2":
-  "integrity" "sha512-77M8o3fsCIZPmEqUicwa6N3RGq5oAppLhCAbyINGaqnkVvEa4Rf8ys4JkC6n8tWzpHNxj37dBO19mXaO7S8jLQ=="
-  "resolved" "https://registry.npmjs.org/ng-zorro-antd/-/ng-zorro-antd-13.2.2.tgz"
-  "version" "13.2.2"
-  dependencies:
-    "@angular/cdk" "^13.0.1"
-    "@ant-design/icons-angular" "^13.0.1"
-    "date-fns" "^2.16.1"
-    "tslib" "^2.3.0"
-
 "ngx-monaco-editor@^12.0.0":
   "integrity" "sha512-/HXTILVwWvrk4OkT1p88nb+PGEqlecQot2VMTdSLbVW7A24fNZpDAF6tNR4Bp3V/abZjShDK8LfsqLePA0tPmw=="
   "resolved" "https://registry.npmjs.org/ngx-monaco-editor/-/ngx-monaco-editor-12.0.0.tgz"
@@ -5418,7 +5383,7 @@
   dependencies:
     "queue-microtask" "^1.2.2"
 
-"rxjs@^6.0.0 || ^7.0.0", "rxjs@^6.0.1 || ^7.0.0", "rxjs@^6.4.0 || ^7.4.0", "rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.2.0", "rxjs@>=6.0.0", "rxjs@7.5.0":
+"rxjs@^6.0.0 || ^7.0.0", "rxjs@^6.0.1 || ^7.0.0", "rxjs@^6.5.3 || ^7.4.0", "rxjs@^7.2.0", "rxjs@>=6.0.0", "rxjs@7.5.0":
   "integrity" "sha512-fuCKAfFawVYX0pyFlETtYnXI+5iiY9Dftgk+VdgeOq+Qyi9ZDWckHZRDaXRt5WCNbbLkmAheoSGDiceyCIKNZA=="
   "resolved" "https://registry.npmjs.org/rxjs/-/rxjs-7.5.0.tgz"
   "version" "7.5.0"

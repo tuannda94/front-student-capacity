@@ -105,12 +105,12 @@
                     class="pagination d-flex justify-content-center mb-3"
                     *ngIf="ranks.length && paginateRank.total > paginateRank.limit"
                   >
-                    <nz-pagination
-                      [nzPageIndex]="paginateRank.page"
-                      [nzTotal]="paginateRank.total"
-                      [nzPageSize]="paginateRank.limit"
-                      (nzPageIndexChange)="handleChangePageNum($event)"
-                    ></nz-pagination>
+                    <app-pagination
+                      [currentPage]="paginateRank.page"
+                      [total]="paginateRank.total"
+                      [pageSize]="paginateRank.limit"
+                      (changePageNumber)="handleChangePageNum($event)"
+                    ></app-pagination>
                   </div>
                 </div>
               </div>

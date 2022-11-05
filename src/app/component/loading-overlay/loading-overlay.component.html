@@ -1,0 +1,9 @@
+<div class="loading d-flex align-items-center justify-content-center" [ngClass]="{ active: active }">
+  <div class="loading__overlay"></div>
+
+  <div class="loading__content d-flex align-items-center justicy-content-center flex-column">
+    <app-loading-item></app-loading-item>
+
+    <div class="loading__content-text mt-2 text-white" *ngIf="textLoading">{{ textLoading }}</div>
+  </div>
+</div>

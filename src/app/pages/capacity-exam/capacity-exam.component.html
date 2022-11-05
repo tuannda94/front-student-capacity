@@ -1,340 +1,342 @@
-<nz-spin [nzSpinning]="isFetchingHistoryExam" nzTip="Đang lấy dữ liệu bài làm...">
-  <div [ngClass]="{ exam: statusTakingExam === 1 || isFullScreen ? true : false }">
-    <div class="container my-4">
-      <div
-        class="capacity__exam-heading"
-        *ngIf="!isFetchingRound"
-        [ngClass]="{ 'mb-4': isFetchingExam || statusTakingExam === 1 }"
-      >
-        <div class="capacity__exam-heading-inner d-flex align-items-center justify-content-center">
-          <span class="capacity__exam-heading-line"></span>
-          <h1 class="capacity__exam-heading-title text-center fw-bold">
-            Bài test năng lực:
-            <a class="text-body" [routerLink]="['/test-nang-luc', roundDetail.contest.id]">{{
-              roundDetail.contest.name
-            }}</a>
-          </h1>
-          <span class="capacity__exam-heading-line"></span>
-        </div>
-
-        <div class="text-center">
-          <div *ngIf="statusTakingExam === 1">
-            <p>Phần thi: {{ roundDetail.name }}</p>
-            <div>
-              Câu hỏi: <span class="text-red">{{ examData.questions.length }} câu</span>, thời gian:
-              <span class="text-red">{{ examData.time_exam }} phút</span>
-            </div>
-          </div>
-
-          <div *ngIf="isFetchingExam">
-            <ngx-skeleton-loader [theme]="{ width: '65%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ width: '35%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
-          </div>
-
-          <div *ngIf="statusTakingExam !== 1 && !isFetchingExam">
-            <p>Phần thi: {{ roundDetail.name }}</p>
-            <div>
-              Bắt đầu: <span class="text-red">{{ roundDetail.start_time | formatDate }}</span
-              >, kết thúc: <span class="text-red">{{ roundDetail.end_time | formatDate }}</span>
-            </div>
-          </div>
-        </div>
+<div [ngClass]="{ exam: statusTakingExam === 1 || isFullScreen ? true : false }">
+  <div class="container my-4">
+    <div
+      class="capacity__exam-heading"
+      *ngIf="!isFetchingRound"
+      [ngClass]="{ 'mb-4': isFetchingExam || statusTakingExam === 1 }"
+    >
+      <div class="capacity__exam-heading-inner d-flex align-items-center justify-content-center">
+        <span class="capacity__exam-heading-line"></span>
+        <h1 class="capacity__exam-heading-title text-center fw-bold">
+          Bài test năng lực:
+          <a class="text-body" [routerLink]="['/test-nang-luc', roundDetail.contest.id]">{{
+            roundDetail.contest.name
+          }}</a>
+        </h1>
+        <span class="capacity__exam-heading-line"></span>
       </div>
 
-      <!-- chờ làm bài -->
-      <section
-        class="capacity__exam-description text-center ng-star-inserted d-flex align-items-center justify-content-center flex-column"
-        *ngIf="statusTakingExam === 0 && !isFetchingRound && !isFetchingSttExam && !isFetchingExam"
-      >
-        <!-- button bắt đầu làm bài -->
-        <div *ngIf="!isContinueExam">
-          <h2 class="text-center capacity__exam-description-title fw-bold">
-            Hãy nhấn
-            <span class="text-uppercase text-red">bắt đầu</span>
-            để làm bài
-          </h2>
+      <div class="text-center">
+        <div *ngIf="statusTakingExam === 1">
+          <p>Phần thi: {{ roundDetail.name }}</p>
+          <div>
+            Câu hỏi: <span class="text-red">{{ examData.questions.length }} câu</span>, thời gian:
+            <span class="text-red">{{ examData.time_exam }} phút</span>
+          </div>
         </div>
 
-        <!-- button tiếp tục làm bài -->
-        <div *ngIf="isContinueExam">
-          <h2 class="text-center capacity__exam-description-title fw-bold">
-            Bạn chưa hoàn thành bài thi. Hãy nhấn
-            <span class="text-uppercase text-red">tiếp tục</span>
-            để tiếp tục làm bài!
-          </h2>
-        </div>
-
-        <button
-          class="my-btn my-btn-primary my-btn-s capacity__exam-btn-take-exam"
-          (click)="isContinueExam ? handleContinueTakeExam() : handleTakeExam()"
-        >
-          {{ isContinueExam ? "Tiếp tục" : "Bắt đầu" }}
-        </button>
-      </section>
-
-      <!-- loading khi đàn get dữ liệu vòng thi và check trạng thái làm bài -->
-      <section>
-        <div *ngIf="isFetchingRound" class="text-center">
-          <ngx-skeleton-loader [theme]="{ margin: 0 }"></ngx-skeleton-loader>
+        <div *ngIf="isFetchingExam">
           <ngx-skeleton-loader [theme]="{ width: '65%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
           <ngx-skeleton-loader [theme]="{ width: '35%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
         </div>
 
-        <section
-          class="capacity__exam-description text-center ng-star-inserted d-flex align-items-center justify-content-center flex-column"
-          *ngIf="isFetchingSttExam || isFetchingRound"
-        >
-          <ngx-skeleton-loader [theme]="{ width: '300px' }"></ngx-skeleton-loader>
-          <ngx-skeleton-loader [theme]="{ width: '100px', height: '35px' }" class="d-block"></ngx-skeleton-loader>
-        </section>
-      </section>
-
-      <!-- làm bài -->
-      <form (ngSubmit)="handleSubmitExam()" [formGroup]="formAnswers" *ngIf="statusTakingExam === 1">
-        <div class="row">
-          <div class="col col-12 col-md-3">
-            <div class="sidebar">
-              <h2 class="sidebar__title">{{ examData.name }}</h2>
-
-              <ul class="sidebar__list m-0 p-0">
-                <li class="sidebar__list-item d-flex align-items-center">
-                  <div class="sidebar__list-item-icon">
-                    <i class="fa-solid fa-list"></i>
-                  </div>
-
-                  <div class="sidebar__list-item-text">
-                    <strong>{{ examData.questions.length }}</strong> câu hỏi
-                  </div>
-                </li>
-
-                <li class="sidebar__list-item d-flex align-items-center">
-                  <div class="sidebar__list-item-icon">
-                    <i class="fa-solid fa-clock"></i>
-                  </div>
-
-                  <div class="sidebar__list-item-text">
-                    <strong>{{ examData.time_exam }}</strong> phút làm bài
-                  </div>
-                </li>
-
-                <li class="sidebar__list-item d-flex align-items-center primary-color">
-                  <div class="sidebar__list-item-icon primary-color">
-                    <i class="fa-solid fa-hourglass"></i>
-                  </div>
-
-                  <div class="sidebar__list-item-text">Thời gian còn lại</div>
-                </li>
-              </ul>
-
-              <ul class="sidebar__countdown d-flex justify-content-center p-0">
-                <li class="sidebar__countdown-item text-center">
-                  <strong class="sidebar__countdown-item-time d-block primary-color">{{
-                    countDownTimeExam.minutes
-                  }}</strong>
-                  Phút
-                </li>
-
-                <li class="primary-color sidebar__countdown-item-time">:</li>
-
-                <li class="sidebar__countdown-item text-center">
-                  <strong class="sidebar__countdown-item-time d-block primary-color">{{
-                    countDownTimeExam.seconds
-                  }}</strong>
-                  Giây
-                </li>
-              </ul>
-
-              <button class="my-btn my-btn-s my-btn-primary sidebar__countdown-btn">Nộp bài</button>
-
-              <section class="question">
-                <span class="question__title">Câu hỏi</span>
-
-                <div class="question__list">
-                  <!-- active câu hỏi đã làm -->
-                  <div
-                    class="question__list-item"
-                    (click)="scrollToQuestion(i)"
-                    [ngClass]="{ active: checkQuesAnswered('question-' + (i + 1) + '-' + ques.id + '-' + ques.type) }"
-                    *ngFor="let ques of examData.questions; let i = index"
-                  >
-                    <div class="question__list-item-inner">{{ i + 1 }}</div>
-                  </div>
-                </div>
-              </section>
-
-              <section class="sidebar__note">
-                <span class="sidebar__note-title primary-color">* Lưu ý</span>
-
-                <ul class="sidebar__note-list">
-                  <li class="sidebar__note-list-item">
-                    1. Câu hỏi có đáp án hình ô vuông là câu hỏi có nhiều câu trả lời
-                  </li>
-                  <li class="sidebar__note-list-item">
-                    2. Thí sinh sẽ bị hủy kết quả bài thi nếu có bất kỳ hành vi gian lận nào!
-                  </li>
-                </ul>
-              </section>
-            </div>
-          </div>
-
-          <div class="col col-12 col-md-9 question__content">
-            <ul class="question__content-list">
-              <li class="question__content-item" *ngFor="let question of examData.questions; let i = index" #questions>
-                <span class="question__content-item-num d-block">Câu {{ i + 1 }}:</span>
-
-                <p class="question__content-item-content" [innerHTML]="question.content"></p>
-
-                <ul class="answers">
-                  <!-- câu hỏi có 1 đáp án -->
-                  <div *ngIf="question.type === 0">
-                    <li class="answers__item" *ngFor="let answer of question.answers; let j = index">
-                      <input
-                        class="answers__input"
-                        type="radio"
-                        hidden
-                        [id]="'answer-' + answer.id"
-                        [formControlName]="'question-' + (i + 1) + '-' + question.id + '-' + question.type"
-                        [value]="answer.id"
-                      />
-                      <label
-                        (click)="handleAutoSaveAnswer('question-' + (i + 1) + '-' + question.id + '-' + question.type)"
-                        [for]="'answer-' + answer.id"
-                        class="answer d-flex align-items-center"
-                      >
-                        <span class="answer__num d-flex justify-content-center align-items-center">{{
-                          (j + 10).toString(36).toUpperCase()
-                        }}</span>
-                        <p class="answer__content m-0">{{ answer.content }}</p>
-                      </label>
-                    </li>
-                  </div>
-
-                  <!-- câu hỏi có nhiều đáp án -->
-                  <div *ngIf="question.type === 1">
-                    <li class="answers__item border-square" *ngFor="let answer of question.answers; let j = index">
-                      <input
-                        class="answers__input"
-                        type="checkbox"
-                        hidden
-                        [checked]="
-                          checkAnswerd('question-' + (i + 1) + '-' + question.id + '-' + question.type, answer.id)
-                        "
-                        [id]="'answer-' + answer.id"
-                        (change)="
-                          onCheckChange('question-' + (i + 1) + '-' + question.id + '-' + question.type, $event)
-                        "
-                        [value]="answer.id"
-                      />
-                      <label
-                        (click)="handleAutoSaveAnswer('question-' + (i + 1) + '-' + question.id + '-' + question.type)"
-                        [for]="'answer-' + answer.id"
-                        class="answer d-flex align-items-center"
-                      >
-                        <span class="answer__num d-flex justify-content-center align-items-center">{{
-                          (j + 10).toString(36).toUpperCase()
-                        }}</span>
-                        <p class="answer__content m-0">{{ answer.content }}</p>
-                      </label>
-                    </li>
-                  </div>
-                </ul>
-              </li>
-            </ul>
+        <div *ngIf="statusTakingExam !== 1 && !isFetchingExam">
+          <p>Phần thi: {{ roundDetail.name }}</p>
+          <div>
+            Bắt đầu: <span class="text-red">{{ roundDetail.start_time | formatDate }}</span
+            >, kết thúc: <span class="text-red">{{ roundDetail.end_time | formatDate }}</span>
           </div>
         </div>
-      </form>
+      </div>
+    </div>
 
-      <!-- skeleton -->
-      <div class="row" *ngIf="isFetchingExam">
+    <!-- chờ làm bài -->
+    <section
+      class="capacity__exam-description text-center ng-star-inserted d-flex align-items-center justify-content-center flex-column"
+      *ngIf="statusTakingExam === 0 && !isFetchingRound && !isFetchingSttExam && !isFetchingExam"
+    >
+      <!-- button bắt đầu làm bài -->
+      <div *ngIf="!isContinueExam">
+        <h2 class="text-center capacity__exam-description-title fw-bold">
+          Hãy nhấn
+          <span class="text-uppercase text-red">bắt đầu</span>
+          để làm bài
+        </h2>
+      </div>
+
+      <!-- button tiếp tục làm bài -->
+      <div *ngIf="isContinueExam">
+        <h2 class="text-center capacity__exam-description-title fw-bold">
+          Bạn chưa hoàn thành bài thi. Hãy nhấn
+          <span class="text-uppercase text-red">tiếp tục</span>
+          để tiếp tục làm bài!
+        </h2>
+      </div>
+
+      <button
+        class="my-btn my-btn-primary my-btn-s capacity__exam-btn-take-exam"
+        (click)="isContinueExam ? handleContinueTakeExam() : handleTakeExam()"
+      >
+        {{ isContinueExam ? "Tiếp tục" : "Bắt đầu" }}
+      </button>
+    </section>
+
+    <!-- loading khi đàn get dữ liệu vòng thi và check trạng thái làm bài -->
+    <section>
+      <div *ngIf="isFetchingRound" class="text-center">
+        <ngx-skeleton-loader [theme]="{ margin: 0 }"></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{ width: '65%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{ width: '35%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
+      </div>
+
+      <section
+        class="capacity__exam-description text-center ng-star-inserted d-flex align-items-center justify-content-center flex-column"
+        *ngIf="isFetchingSttExam || isFetchingRound"
+      >
+        <ngx-skeleton-loader [theme]="{ width: '300px' }"></ngx-skeleton-loader>
+        <ngx-skeleton-loader [theme]="{ width: '100px', height: '35px' }" class="d-block"></ngx-skeleton-loader>
+      </section>
+    </section>
+
+    <!-- làm bài -->
+    <form (ngSubmit)="handleSubmitExam()" [formGroup]="formAnswers" *ngIf="statusTakingExam === 1">
+      <div class="row">
         <div class="col col-12 col-md-3">
-          <div class="sidebar py-0">
-            <ngx-skeleton-loader></ngx-skeleton-loader>
+          <div class="sidebar">
+            <h2 class="sidebar__title">{{ examData.name }}</h2>
 
             <ul class="sidebar__list m-0 p-0">
-              <ngx-skeleton-loader count="3"></ngx-skeleton-loader>
+              <li class="sidebar__list-item d-flex align-items-center">
+                <div class="sidebar__list-item-icon">
+                  <i class="fa-solid fa-list"></i>
+                </div>
+
+                <div class="sidebar__list-item-text">
+                  <strong>{{ examData.questions.length }}</strong> câu hỏi
+                </div>
+              </li>
+
+              <li class="sidebar__list-item d-flex align-items-center">
+                <div class="sidebar__list-item-icon">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div class="sidebar__list-item-text">
+                  <strong>{{ examData.time_exam }}</strong> phút làm bài
+                </div>
+              </li>
+
+              <li class="sidebar__list-item d-flex align-items-center primary-color">
+                <div class="sidebar__list-item-icon primary-color">
+                  <i class="fa-solid fa-hourglass"></i>
+                </div>
+
+                <div class="sidebar__list-item-text">Thời gian còn lại</div>
+              </li>
             </ul>
-            <ngx-skeleton-loader count="2"></ngx-skeleton-loader>
+
+            <ul class="sidebar__countdown d-flex justify-content-center p-0">
+              <li class="sidebar__countdown-item text-center">
+                <strong class="sidebar__countdown-item-time d-block primary-color">{{
+                  countDownTimeExam.minutes
+                }}</strong>
+                Phút
+              </li>
+
+              <li class="primary-color sidebar__countdown-item-time">:</li>
+
+              <li class="sidebar__countdown-item text-center">
+                <strong class="sidebar__countdown-item-time d-block primary-color">{{
+                  countDownTimeExam.seconds
+                }}</strong>
+                Giây
+              </li>
+            </ul>
+
+            <button class="my-btn my-btn-s my-btn-primary sidebar__countdown-btn">Nộp bài</button>
 
             <section class="question">
-              <ngx-skeleton-loader count="3"></ngx-skeleton-loader>
+              <span class="question__title">Câu hỏi</span>
+
+              <div class="question__list">
+                <!-- active câu hỏi đã làm -->
+                <div
+                  class="question__list-item"
+                  (click)="scrollToQuestion(i)"
+                  [ngClass]="{ active: checkQuesAnswered('question-' + (i + 1) + '-' + ques.id + '-' + ques.type) }"
+                  *ngFor="let ques of examData.questions; let i = index"
+                >
+                  <div class="question__list-item-inner">{{ i + 1 }}</div>
+                </div>
+              </div>
             </section>
 
             <section class="sidebar__note">
-              <ngx-skeleton-loader count="2"></ngx-skeleton-loader>
+              <span class="sidebar__note-title primary-color">* Lưu ý</span>
+
+              <ul class="sidebar__note-list">
+                <li class="sidebar__note-list-item">
+                  1. Câu hỏi có đáp án hình ô vuông là câu hỏi có nhiều câu trả lời
+                </li>
+                <li class="sidebar__note-list-item">
+                  2. Thí sinh sẽ bị hủy kết quả bài thi nếu có bất kỳ hành vi gian lận nào!
+                </li>
+              </ul>
             </section>
           </div>
         </div>
 
         <div class="col col-12 col-md-9 question__content">
           <ul class="question__content-list">
-            <li class="question__content-item" *ngFor="let item of [].constructor(10)">
-              <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+            <li class="question__content-item" *ngFor="let question of examData.questions; let i = index" #questions>
+              <span class="question__content-item-num d-block">Câu {{ i + 1 }}:</span>
+
+              <p class="question__content-item-content" [innerHTML]="question.content"></p>
+
+              <ul class="answers">
+                <!-- câu hỏi có 1 đáp án -->
+                <div *ngIf="question.type === 0">
+                  <li class="answers__item" *ngFor="let answer of question.answers; let j = index">
+                    <input
+                      class="answers__input"
+                      type="radio"
+                      hidden
+                      [id]="'answer-' + answer.id"
+                      [formControlName]="'question-' + (i + 1) + '-' + question.id + '-' + question.type"
+                      [value]="answer.id"
+                    />
+                    <label
+                      (click)="handleAutoSaveAnswer('question-' + (i + 1) + '-' + question.id + '-' + question.type)"
+                      [for]="'answer-' + answer.id"
+                      class="answer d-flex align-items-center"
+                    >
+                      <span class="answer__num d-flex justify-content-center align-items-center">{{
+                        (j + 10).toString(36).toUpperCase()
+                      }}</span>
+                      <p class="answer__content m-0">{{ answer.content }}</p>
+                    </label>
+                  </li>
+                </div>
+
+                <!-- câu hỏi có nhiều đáp án -->
+                <div *ngIf="question.type === 1">
+                  <li class="answers__item border-square" *ngFor="let answer of question.answers; let j = index">
+                    <input
+                      class="answers__input"
+                      type="checkbox"
+                      hidden
+                      [checked]="
+                        checkAnswerd('question-' + (i + 1) + '-' + question.id + '-' + question.type, answer.id)
+                      "
+                      [id]="'answer-' + answer.id"
+                      (change)="onCheckChange('question-' + (i + 1) + '-' + question.id + '-' + question.type, $event)"
+                      [value]="answer.id"
+                    />
+                    <label
+                      (click)="handleAutoSaveAnswer('question-' + (i + 1) + '-' + question.id + '-' + question.type)"
+                      [for]="'answer-' + answer.id"
+                      class="answer d-flex align-items-center"
+                    >
+                      <span class="answer__num d-flex justify-content-center align-items-center">{{
+                        (j + 10).toString(36).toUpperCase()
+                      }}</span>
+                      <p class="answer__content m-0">{{ answer.content }}</p>
+                    </label>
+                  </li>
+                </div>
+              </ul>
             </li>
           </ul>
         </div>
       </div>
+    </form>
 
-      <!-- kết quả bài làm-->
-      <div class="capacity__exam-result text-center" *ngIf="statusTakingExam === 2">
-        <h2>Kết quả bài làm</h2>
-        <span class="text-uppercase text-red capacity__exam-result-point">{{ this.resultExam.score }}/10</span>
+    <!-- skeleton -->
+    <div class="row" *ngIf="isFetchingExam">
+      <div class="col col-12 col-md-3">
+        <div class="sidebar py-0">
+          <ngx-skeleton-loader></ngx-skeleton-loader>
 
-        <table class="capacity__exam-result-table mx-auto mt-3">
-          <tbody>
-            <tr>
-              <td class="pb-1">Thời gian</td>
-              <td class="pb-1 fw-bold">{{ this.resultExam.examTime }}</td>
-            </tr>
+          <ul class="sidebar__list m-0 p-0">
+            <ngx-skeleton-loader count="3"></ngx-skeleton-loader>
+          </ul>
+          <ngx-skeleton-loader count="2"></ngx-skeleton-loader>
 
-            <tr>
-              <td class="pb-1">Nộp lúc</td>
-              <td class="pb-1 fw-bold">{{ this.resultExam.submitAt }}</td>
-            </tr>
+          <section class="question">
+            <ngx-skeleton-loader count="3"></ngx-skeleton-loader>
+          </section>
 
-            <tr>
-              <td class="pb-1">Số câu đúng</td>
-              <td class="pb-1 fw-bold">{{ this.resultExam.trueAnswer }}</td>
-            </tr>
+          <section class="sidebar__note">
+            <ngx-skeleton-loader count="2"></ngx-skeleton-loader>
+          </section>
+        </div>
+      </div>
 
-            <tr>
-              <td class="pb-1">Số câu sai</td>
-              <td class="pb-1 fw-bold">{{ this.resultExam.falseAnswer }}</td>
-            </tr>
-
-            <tr>
-              <td class="pb-1">Chưa làm</td>
-              <td class="pb-1 fw-bold">{{ this.resultExam.donotAnswer }}</td>
-            </tr>
-
-            <tr>
-              <td class="pb-1">
-                <button
-                  (click)="handleOpenHistoryExam()"
-                  class="capacity__exam-result-actions-item my-btn-primary my-btn-s my-btn--no-bg my-1"
-                >
-                  Lịch sử làm bài
-                </button>
-              </td>
-              <td class="pb-1">
-                <li
-                  (click)="handleGoToNextRound(getNextRound().round_id)"
-                  class="capacity__exam-result-actions-item my-btn my-btn-primary my-btn-s d-flex align-items-center ml-8 my-1"
-                  *ngIf="getNextRound().status"
-                >
-                  Phần thi tiếp theo
-                  <div class="capacity__exam-result-actions-item-icon mx-1">
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </div>
-                </li>
-
-                <div class="capacity__exam-result-actions-item my-1 ml-8" *ngIf="!getNextRound().status">
-                  <a href="" class="my-btn-primary my-btn-s my-btn--no-bg">Bảng xếp hạng</a>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col col-12 col-md-9 question__content">
+        <ul class="question__content-list">
+          <li class="question__content-item" *ngFor="let item of [].constructor(10)">
+            <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+          </li>
+        </ul>
       </div>
     </div>
+
+    <!-- kết quả bài làm-->
+    <div class="capacity__exam-result text-center" *ngIf="statusTakingExam === 2">
+      <h2>Kết quả bài làm</h2>
+      <span class="text-uppercase text-red capacity__exam-result-point">{{ this.resultExam.score }}/10</span>
+
+      <table class="capacity__exam-result-table mx-auto mt-3">
+        <tbody>
+          <tr>
+            <td class="pb-1">Thời gian</td>
+            <td class="pb-1 fw-bold">{{ this.resultExam.examTime }}</td>
+          </tr>
+
+          <tr>
+            <td class="pb-1">Nộp lúc</td>
+            <td class="pb-1 fw-bold">{{ this.resultExam.submitAt }}</td>
+          </tr>
+
+          <tr>
+            <td class="pb-1">Số câu đúng</td>
+            <td class="pb-1 fw-bold">{{ this.resultExam.trueAnswer }}</td>
+          </tr>
+
+          <tr>
+            <td class="pb-1">Số câu sai</td>
+            <td class="pb-1 fw-bold">{{ this.resultExam.falseAnswer }}</td>
+          </tr>
+
+          <tr>
+            <td class="pb-1">Chưa làm</td>
+            <td class="pb-1 fw-bold">{{ this.resultExam.donotAnswer }}</td>
+          </tr>
+
+          <tr>
+            <td class="pb-1">
+              <button
+                (click)="handleOpenHistoryExam()"
+                class="capacity__exam-result-actions-item my-btn-primary my-btn-s my-btn--no-bg my-1"
+              >
+                Lịch sử làm bài
+              </button>
+            </td>
+            <td class="pb-1">
+              <li
+                (click)="handleGoToNextRound(getNextRound().round_id)"
+                class="capacity__exam-result-actions-item my-btn my-btn-primary my-btn-s d-flex align-items-center ml-8 my-1"
+                *ngIf="getNextRound().status"
+              >
+                Phần thi tiếp theo
+                <div class="capacity__exam-result-actions-item-icon mx-1">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </div>
+              </li>
+
+              <div class="capacity__exam-result-actions-item my-1 ml-8" *ngIf="!getNextRound().status">
+                <a href="" class="my-btn-primary my-btn-s my-btn--no-bg">Bảng xếp hạng</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</nz-spin>
+</div>
+
+<!-- loading overlay -->
+<app-loading-overlay
+  [active]="isFetchingHistoryExam"
+  [textLoading]="'Đang lấy dữ liệu bài làm...'"
+></app-loading-overlay>

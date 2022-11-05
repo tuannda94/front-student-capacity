@@ -97,6 +97,8 @@ import { ChallengeComponent } from "./pages/challenge/challenge.component";
 import { ModalSubmitChallengeSuccessComponent } from "./modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
 import { AlertErrorIntroExamComponent } from "./component/alert-error-intro-exam/alert-error-intro-exam.component";
 import { CountDatePipe } from "./helper/pipe/count-date.pipe";
+import { PaginationComponent } from "./component/pagination/pagination.component";
+import { LoadingOverlayComponent } from "./component/loading-overlay/loading-overlay.component";
 
 @NgModule({
   declarations: [
@@ -169,6 +171,8 @@ import { CountDatePipe } from "./helper/pipe/count-date.pipe";
     ModalSubmitChallengeSuccessComponent,
     AlertErrorIntroExamComponent,
     CountDatePipe,
+    PaginationComponent,
+    LoadingOverlayComponent,
   ],
   imports: [
     BrowserModule,

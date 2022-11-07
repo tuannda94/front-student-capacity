@@ -4,13 +4,7 @@
       <label class="icon-open-nav-mobile" for="input_check">
         <i class="fas fa-bars"></i>
       </label>
-      <input
-        #inputChecked
-        hidden
-        class="input-menu"
-        type="checkbox"
-        id="input_check"
-      />
+      <input #inputChecked hidden class="input-menu" type="checkbox" id="input_check" />
 
       <label for="input_check" class="over__lay"> </label>
 
@@ -22,27 +16,16 @@
         </div>
         <ul class="menu-res mt-5 border-top">
           <li (click)="closeMenuRes(inputChecked)" class="menu-res-item">
-            <a routerLink="/" class="menu-res-link text-decoration-none">
-              Trang chủ
-            </a>
+            <a routerLink="/" class="menu-res-link text-decoration-none">Trang chủ</a>
           </li>
           <li class="menu-res-item">
-            <a
-              routerLink="/cuoc-thi"
-              class="menu-res-link text-decoration-none"
-            >
-              Cuộc thi
-            </a>
+            <a routerLink="/cuoc-thi" class="menu-res-link text-decoration-none">Cuộc thi</a>
           </li>
           <li class="menu-res-item">
-            <a href="" class="menu-res-link text-decoration-none">
-              Test năng lực
-            </a>
+            <a href="" class="menu-res-link text-decoration-none">Test năng lực</a>
           </li>
           <li class="menu-res-item">
-            <a href="" class="menu-res-link text-decoration-none">
-              Tuyển dụng
-            </a>
+            <a href="" class="menu-res-link text-decoration-none">Tuyển dụng</a>
           </li>
         </ul>
 
@@ -57,30 +40,30 @@
     </a>
     <div class="menu-desktop d-flex align-self-stretch">
       <div class="d-flex" id="menu_login-box">
-        <ul
-          class="nav menu_login-box d-flex align-items-center mr-auto home-nav pr-2"
-        >
+        <ul class="nav menu_login-box d-flex align-items-center mr-auto home-nav pr-2">
           <li
-            class="nav-item"
+            class="nav-item align-self-stretch d-flex align-items-center"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="text-decoration-none nav-link-item" routerLink="/"
+            <a
+              class="fw-bold text-decoration-none nav-link-item p-0 align-self-stretch d-flex align-items-center"
+              routerLink="/"
               >Trang chủ</a
             >
           </li>
-          <li class="nav-item" routerLinkActive="active">
+          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
             <a
-              class="nav-link-item text-decoration-none"
+              class="fw-bold text-decoration-none nav-link-item p-0 align-self-stretch d-flex align-items-center"
               [routerLink]="['/cuoc-thi']"
             >
               Cuộc thi
             </a>
           </li>
 
-          <li class="nav-item" routerLinkActive="active">
+          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
             <div
-              class="position-relative nav-link-item text-decoration-none d-flex align-items-center"
+              class="fw-bold position-relative text-decoration-none nav-link-item p-0 align-self-stretch d-flex align-items-center"
             >
               <span [routerLink]="['/tuyen-dung']">Tuyển dụng</span>
               <div class="nav-item__icon">
@@ -88,17 +71,17 @@
               </div>
 
               <ul class="sub-menu position-absolute">
-                <li class="sub-menu__item">
+                <li class="sub-menu__item" routerLinkActive="active">
                   <a
-                    class="sub-menu__link nav-link-item text-decoration-none"
+                    class="fw-bold sub-menu__link fw-bold nav-link-item text-decoration-none"
                     [routerLink]="['/tuyen-dung']"
                   >
                     Tin tuyển dụng
                   </a>
                 </li>
-                <li class="sub-menu__item">
+                <li class="sub-menu__item" routerLinkActive="active">
                   <a
-                    class="sub-menu__link nav-link-item text-decoration-none"
+                    class="fw-bold sub-menu__link fw-bold nav-link-item text-decoration-none"
                     routerLink="/test-nang-luc"
                   >
                     Test năng lực
@@ -107,9 +90,9 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item" routerLinkActive="active">
+          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
             <a
-              class="nav-link-item text-decoration-none"
+              class="fw-bold text-decoration-none nav-link-item p-0 align-self-stretch d-flex align-items-center"
               routerLink="/bai-viet"
             >
               Bài viết
@@ -177,25 +160,17 @@
   <div id="mySidepanel" class="sidepanel">
     <div class="p-3">
       <header class="d-flex justify-content-between align-items-center">
-        <h2 class="sidepanel-title">
-          <i class="primary-color fa-solid fs-5 fa-bookmark"></i> Nội dung được
-          lưu
-        </h2>
+        <h2 class="sidepanel-title"><i class="primary-color fa-solid fs-5 fa-bookmark"></i> Nội dung được lưu</h2>
         <button (click)="closeSaveInfo(true)" class="btn-save-close">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </header>
       <ul class="sidepanel__nav-list my-3">
-        <li
-          class="sidepanel__nav-item contest active"
-          (click)="getContestStatus($event)"
-        >
+        <li class="sidepanel__nav-item contest active" (click)="getContestStatus($event)">
           <a class="sidepanel__nav-link">Cuộc Thi ({{ countPost }})</a>
         </li>
         <li class="sidepanel__nav-item post" (click)="getPostStatus($event)">
-          <a [attr.disabled]="!statusPage" class="sidepanel__nav-link"
-            >Tuyển dụng ({{ countContest  }})</a
-          >
+          <a [attr.disabled]="!statusPage" class="sidepanel__nav-link">Tuyển dụng ({{ countContest }})</a>
         </li>
       </ul>
       <div *ngIf="statusPage" class="sidepanel__nav-content">
@@ -208,18 +183,11 @@
           ></app-contest-item>
         </div>
         <div class="" *ngIf="typeTab == 1 && posts.length > 0">
-          <app-recruitment-position
-            *ngFor="let item of posts"
-            [item]="item"
-            (requestFavorite)="filterPost($event)"
-          >
+          <app-recruitment-position *ngFor="let item of posts" [item]="item" (requestFavorite)="filterPost($event)">
           </app-recruitment-position>
         </div>
         <div
-          *ngIf="
-            (typeTab == 0 && contests.length == 0) ||
-            (typeTab == 1 && posts.length == 0)
-          "
+          *ngIf="(typeTab == 0 && contests.length == 0) || (typeTab == 1 && posts.length == 0)"
           class="d-flex justify-content-center align-items-center mt-5"
         >
           <img src="../../../assets/img/no-result.png" alt="No data" />

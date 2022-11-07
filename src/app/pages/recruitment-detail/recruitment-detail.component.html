@@ -192,10 +192,10 @@
         </p>
         <div *ngIf="recruitmentDetail">
           <div class="recruitment-related">
-            <app-capacity-related-item
+            <app-capacity-item
             *ngFor="let capacity of recruitmentCapacity"
             [capacityItem]="capacity"
-          ></app-capacity-related-item>
+          ></app-capacity-item>
           </div>
         </div>
         <ngx-skeleton-loader

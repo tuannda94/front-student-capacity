@@ -3,11 +3,11 @@ import { Component, Input, OnInit } from "@angular/core";
 import { Capacity } from "src/app/models/capacity";
 
 @Component({
-  selector: "app-capacity-related-item",
-  templateUrl: "./capacity-related-item.component.html",
-  styleUrls: ["./capacity-related-item.component.css"],
+  selector: "app-capacity-item",
+  templateUrl: "./capacity-item.component.html",
+  styleUrls: ["./capacity-item.component.css"],
 })
-export class CapacityRelatedItemComponent implements OnInit {
+export class CapacityItemComponent implements OnInit {
   @Input() capacityItem!: Capacity;
 
   countDown: {

@@ -1,126 +1,126 @@
 /* BTN REGISTER  */
 .btn-main {
-    color: var(--primary);
-    padding: 7px 15px;
-    border: 1px solid var(--primary);
-    border-radius: 6px;
-    font-size: 1rem;
+  color: var(--primary);
+  padding: 7px 15px;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 .btn-submit {
-    background-color: var(--primary) !important;
-    color: var(--white);
+  background-color: var(--primary) !important;
+  color: var(--white);
 }
 
 .btn-main:hover {
-    transition: all ease-in-out 0.5s;
-    background-color: var(--primary);
-    color: var(--white);
+  transition: all ease-in-out 0.5s;
+  background-color: var(--primary);
+  color: var(--white);
 }
 
 .btn-main-disable {
-    background-color: #7f8c8d;
-    color: white;
+  background-color: #7f8c8d;
+  color: white;
 }
 
 .btn-paint-color {
-    background-color: var(--primary);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
 }
 
 .btn-paint-color:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .my-btn {
-    box-sizing: border-box;
-    border-radius: var(--my-rounded);
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid transparent;
-    border: none;
-    padding: 16px 32px;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    transition-duration: 0.3s;
+  box-sizing: border-box;
+  border-radius: var(--my-rounded);
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  border: none;
+  padding: 16px 32px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  transition-duration: 0.3s;
 }
 
 .my-btn-primary {
-    box-sizing: border-box;
-    background-color: var(--my-primary);
-    color: var(--my-white);
-    border-radius: var(--my-rounded);
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid var(--my-primary);
-    padding: 16px 32px;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    transition-duration: 0.3s;
-    cursor: pointer;
+  box-sizing: border-box;
+  background-color: var(--my-primary);
+  color: var(--my-white);
+  border-radius: var(--my-rounded);
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--my-primary);
+  padding: 16px 32px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  transition-duration: 0.3s;
+  cursor: pointer;
 }
 
 .my-btn-primary:hover {
-    background-color: #E4552A;
-    border-color: #E4552A;
-    color: var(--white);
+  background-color: #e4552a;
+  border-color: #e4552a;
+  color: var(--white);
 }
 
 .my-btn-secondary {
-    box-sizing: border-box;
-    background-color: var(--my-white);
-    color: var(--my-primary);
-    border: 1px solid var(--my-primary);
-    border-radius: var(--my-rounded);
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 32px;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    transition-duration: 0.3s;
+  box-sizing: border-box;
+  background-color: var(--my-white);
+  color: var(--my-primary);
+  border: 1px solid var(--my-primary);
+  border-radius: var(--my-rounded);
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  transition-duration: 0.3s;
 }
 
 .my-btn-secondary:hover {
-    background-color: var(--primary);
-    color: white;
+  background-color: var(--primary);
+  color: white;
 }
 
 .my-btn-tertiary {
-    box-sizing: border-box;
-    background-color: transparent;
-    border-radius: var(--my-rounded);
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid transparent;
-    padding: 16px 32px;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    transition-duration: 0.3s;
+  box-sizing: border-box;
+  background-color: transparent;
+  border-radius: var(--my-rounded);
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  padding: 16px 32px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  transition-duration: 0.3s;
 }
 
 .my-btn-tertiary:hover,
 .my-btn-tertiary:focus,
 .my-btn-tertiary:active {
-    background: var(--my-disabled);
-    border: 1px solid var(--my-disabled);
+  background: var(--my-disabled);
+  border: 1px solid var(--my-disabled);
 }
 
 .my-btn-primary:focus,
@@ -129,61 +129,80 @@
 .my-btn-primary:active,
 .my-btn-secondary:active,
 .my-btn-tertiary:active {
-    box-shadow: 0 0 0 4px rgba(255, 103, 56, .3)
+  box-shadow: 0 0 0 4px rgba(255, 103, 56, 0.3);
 }
 
 .my-btn-disabled {
-    box-sizing: border-box;
-    background-color: var(--my-disabled);
-    color: var(--my-text-disabled);
-    border-radius: var(--my-rounded);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid var(--my-disabled);
-    cursor: no-drop !important;
-    padding: 16px 32px;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+  box-sizing: border-box;
+  background-color: var(--my-disabled);
+  color: var(--my-text-disabled);
+  border-radius: var(--my-rounded);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--my-disabled);
+  cursor: no-drop !important;
+  padding: 16px 32px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.my-btn--no-bg {
+    background-color: transparent;
+    border: 1px solid var(--my-primary);
+    color: var(--my-primary);
+}
+
+.my-btn--no-bg:hover {
+    background-color: var(--my-primary);
+    border-color: var(--my-primary);
 }
 
 /* size button */
 .my-btn-l {
-    padding: 20px 32px;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+  padding: 20px 32px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .my-btn-m {
-    padding: 14px 32px;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-
+  padding: 14px 32px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .my-btn-s {
-    padding: 12px 24px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-
+  padding: 12px 24px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 .my-btn-xs {
-    padding: 8px 24px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+  padding: 8px 24px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 .my-btn-ss {
-    padding: 8px 12px;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 14px;
+  padding: 8px 12px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 14px;
+}
+
+/* Dàn hàng ngang btn */
+.btn-wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-wrapper button {
+  width: 131px;
 }

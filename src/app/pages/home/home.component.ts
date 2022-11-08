@@ -4,17 +4,13 @@ import { UserService } from 'src/app/services/user.service';
 import { Contest } from 'src/app/models/contest';
 import { ContestService } from 'src/app/services/contest.service';
 import { Major } from 'src/app/models/major';
-import { MajorService } from 'src/app/services/major.service';
 import { ResultMajor } from 'src/app/models/result-major.model';
-import { RankStudentComponent } from 'src/app/modal/rank-student/rank-student.component';
-import { MatDialog } from '@angular/material/dialog';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from 'src/app/models/company.models';
-import { NgToastService } from 'ng-angular-popup';
-import { ConfigViewService } from 'src/app/services/config-view.service';
 import { Post } from 'src/app/models/post.model';
 import { ListPostService } from 'src/app/services/list-post.service';
 import { ResponsePayload } from 'src/app/models/response-payload';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -52,47 +48,11 @@ export class HomeComponent implements OnInit {
     fadeSpeed: 1000,
   };
 
-  sliderContest = {
-    slidesToShow: 4,
-    infinite: true,
-    autoplay: true,
-    arrows: true,
-    prevArrow: '.prev-arrow',
-    nextArrow: '.next-arrow',
-    slidesToScroll: 1,
-    fadeSpeed: 1000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 586,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   sliderCompany = {
     slidesToShow: 5,
     infinite: true,
     autoplay: true,
-    arrows: false,
+    arrows: true,
     slidesToScroll: 1,
     fadeSpeed: 1000,
     responsive: [
@@ -133,16 +93,14 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private contestService: ContestService,
-    private majorService: MajorService,
     private userService: UserService,
-    private dialog: MatDialog,
     private companyService: CompanyService,
-    private toast: NgToastService,
-    private configView: ConfigViewService,
-    private postService: ListPostService
+    private postService: ListPostService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Trang chủ");
     this.getRecruitmentPosition();
     this.contestService.getWhereStatus(1, 'desc').subscribe((res) => {
       if (res.status == true) {
@@ -185,10 +143,12 @@ export class HomeComponent implements OnInit {
         }
       });
 
-      if (this.advanIndex == advantage.length + 1) {
-        this.advanIndex = 0;
-        advantage[0].classList.add('active');
-        advantageEleImage[0].classList.remove('d-none');
+      if(advantage){
+        if (this.advanIndex == advantage.length + 1) {
+          this.advanIndex = 0;
+          advantage[0].classList.add('active');
+          advantageEleImage[0].classList.remove('d-none');
+        }
       }
 
       // Slider đợt tuyển dụng.

@@ -26,35 +26,27 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
-               "node_modules/slick-carousel/slick/slick.css",
-               "node_modules/slick-carousel/slick/slick-theme.css",
-               "src/styles.css",
-                "src/assets/css/base.css",
-                "src/assets/css/base-color.css",
-                "src/assets/css/base-text.css",
-                "src/assets/css/base-btn.css",
-                "src/assets/css/base-typography.css",
-                "src/assets/css/config-bootstrap.css"
+              "node_modules/slick-carousel/slick/slick.css",
+              "node_modules/slick-carousel/slick/slick-theme.css",
+              "src/styles.css",
+              "src/assets/css/base.css",
+              "src/assets/css/base-color.css",
+              "src/assets/css/base-text.css",
+              "src/assets/css/base-btn.css",
+              "src/assets/css/base-typography.css",
+              "src/assets/css/config-bootstrap.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/slick-carousel/slick/slick.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-              ]
+            ]
           },
           "configurations": {
             "production": {
@@ -115,14 +107,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "src/styles.css"],
             "scripts": []
           }
         }

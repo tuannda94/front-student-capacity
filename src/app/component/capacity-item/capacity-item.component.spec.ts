@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CapacityRelatedItemComponent } from './capacity-related-item.component';
+import { CapacityRelatedItemComponent } from './capacity-item.component';
 
 describe('CapacityRelatedItemComponent', () => {
   let component: CapacityRelatedItemComponent;

@@ -42,6 +42,20 @@ ul {
     top: 100px;
 }
 
+.recruitment-time{
+    font-size: 1rem;
+}
+
+
+.recruitment-related{
+    margin-bottom: 20px;
+}
+
+.recruitment-detail-name{
+    width:450px;
+    word-wrap:normal;
+}
+
 .recruitment-header-banner {
     margin-bottom: 60px;
     border-bottom: 5px solid var(--primary);
@@ -61,7 +75,8 @@ ul {
 }
 
 .count-person-joind {
-    font-size: 0.9rem;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .recruitment-item-skill {

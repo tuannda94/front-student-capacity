@@ -10,7 +10,12 @@ import { param } from 'jquery';
 import { TeamService } from 'src/app/services/team.service';
 import { Team } from 'src/app/models/team';
 import { RoundService } from 'src/app/services/round.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { TakeExam } from 'src/app/models/take-exam.model';
 import { NgToastService } from 'ng-angular-popup';
 import { Round } from 'src/app/models/round.model';
@@ -19,7 +24,9 @@ import { ModalInfoTeamComponent } from 'src/app/modal/modal-info-team/modal-info
 import { environment } from 'src/environments/environment';
 import { GetValueLocalService } from 'src/app/services/get-value-local.service';
 import { AlertErrorIntroExamComponent } from 'src/app/component/alert-error-intro-exam/alert-error-intro-exam.component';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { ConfigFunctionService } from 'src/app/services/config-function.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-into-exam',
@@ -51,7 +58,7 @@ export class IntoExamComponent implements OnInit {
   assignmentFiles: boolean = false;
   assignmentLinks: boolean = false;
   statusTakeExam: boolean = false;
-
+  myForm: FormGroup;
   constructor(
     private modalService: NgbModal,
     private route: ActivatedRoute,
@@ -60,12 +67,13 @@ export class IntoExamComponent implements OnInit {
     private toast: NgToastService,
     public dialog: MatDialog,
     private router: Router,
-    private getUserLocal: GetValueLocalService,
-    private _location: Location
+    private title: Title,
+    private _location: Location,
+    public configFunctionService: ConfigFunctionService
   ) {}
 
-
   ngOnInit(): void {
+    this.title.setTitle('Vào thi');
     const round = {
       round_id: 0,
     };
@@ -96,7 +104,6 @@ export class IntoExamComponent implements OnInit {
           .subscribe((res) => {
             if (res.status) {
               this.teamDetail = res.payload;
-
               this.teamDetail
                 ? (this.statusTeamDetail = true)
                 : this.statusTeamDetail;
@@ -119,9 +126,6 @@ export class IntoExamComponent implements OnInit {
           this.infoContest ? (this.statusContest = true) : this.statusContest;
         }
       });
-
-  
-  
   }
 
   // dowload đề bài
@@ -134,7 +138,7 @@ export class IntoExamComponent implements OnInit {
       this.toast.error({
         summary: 'Chưa cập nhật đề bài !!!',
         duration: 5000,
-        detail:"Lỗi"
+        detail: 'Lỗi',
       });
     }
   }
@@ -159,19 +163,16 @@ export class IntoExamComponent implements OnInit {
   getInfoExam(round: object) {
     this.roundService.getInfoExamRound(round).subscribe((res) => {
       if (res.status) this.infoExam = res.payload;
-      if(res.status && res.payload.error){
-        let dialogRef =   this.dialog.open(AlertErrorIntroExamComponent, {
+      if (res.status && res.payload.error) {
+        let dialogRef = this.dialog.open(AlertErrorIntroExamComponent, {
           width: '300px',
         });
-
-        dialogRef.afterClosed().subscribe(result => {
-          if(!result){
+        dialogRef.afterClosed().subscribe((result) => {
+          if (!result) {
             this._location.back();
           }
         });
-        
       }
-          
       if (this.infoExam) this.checkStatusExam(this.infoExam.status);
     });
   }
@@ -189,7 +190,7 @@ export class IntoExamComponent implements OnInit {
       this.toast.warning({
         summary: 'Sai định dạng file !!!',
         duration: 5000,
-        detail:"Cảnh báo"
+        detail: 'Cảnh báo',
       });
     } else {
       this.statusSubmitExam = false;
@@ -208,12 +209,8 @@ export class IntoExamComponent implements OnInit {
 
   // Nộp bài bằng link
   submitExamByLink(link: any) {
-    let regexp = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
-    );
-    let test = regexp.test(link);
-    console.log(test);
-    
-    setTimeout(() => {
+     
+    if (this.isValidURL(link.target.value)) {
       if(link && link  !=  this.saveLinkSubmitAfter){
         this.statusSubmitExam = false;
         setTimeout(() => {
@@ -224,17 +221,21 @@ export class IntoExamComponent implements OnInit {
           if (resultExam.result_url != '') {
             this.statusSubmitExam = true;
             this.assignmentLinks = true;
-     
           } else {
             this.assignmentLinks = false;
             this.statusSubmitExam = true;
           }
-          this.assignment = resultExam; 
+          this.assignment = resultExam;
           this.saveLinkSubmitAfter = link;
-        },3000);
+        },1000);
       }
-     
-    }, 3000);
+    } else {
+      this.toast.warning({
+        summary: 'Link sai định dạng !!!',
+        duration: 5000,
+        detail: 'Cảnh báo',
+      });
+    }
   }
 
   removeAssFile() {
@@ -261,14 +262,14 @@ export class IntoExamComponent implements OnInit {
           this.toast.success({
             summary: 'Nộp bài thành công !!!',
             duration: 5000,
-            detail:"Thông báo"
+            detail: 'Thông báo',
           });
           this.checkStatusExam(2);
         } else {
           this.statusClickSubmit = false;
           this.toast.error({
             summary: 'Lỗi nộp bài !!!',
-            detail:"Lỗi",
+            detail: 'Lỗi',
             duration: 5000,
           });
         }
@@ -293,7 +294,11 @@ export class IntoExamComponent implements OnInit {
 
   copyLinkUrl() {
     navigator.clipboard.writeText(window.location.href);
-    this.toast.info({ summary: 'Đã copy !!!', detail:"Thông báo" , duration: 5000 });
+    this.toast.info({
+      summary: 'Đã copy !!!',
+      detail: 'Thông báo',
+      duration: 5000,
+    });
   }
 
   // Thông tin chi tiết của đội thi
@@ -310,10 +315,12 @@ export class IntoExamComponent implements OnInit {
 
   // Check team has  submit ass
   checkStatusExam(status: number) {
-    if(!status){
-      this.statusTakeExam = false
-    }else{
-      status == 1 ? (this.statusTakeExam = false) : (this.statusTakeExam = true);
+    if (!status) {
+      this.statusTakeExam = false;
+    } else {
+      status == 1
+        ? (this.statusTakeExam = false)
+        : (this.statusTakeExam = true);
     }
   }
 
@@ -325,6 +332,14 @@ export class IntoExamComponent implements OnInit {
     this.assignmentFiles = false;
     this.statusSubmitExam = true;
     this.statusClickSubmit = false;
+  }
+
+  isValidURL(link: string) {
+    console.log(link);
+    var urlRegex =
+      '^(?!mailto:)(?:(?:http|https|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
+    var regex = new RegExp(urlRegex, 'i');
+    return link.length < 2083 && regex.test(link);
   }
 
   displayedColumns: string[] = ['index', 'name', 'avatar', 'email', 'bot'];

@@ -33,6 +33,10 @@
   font-weight: 700;
 }
 
+.test-capacity_item{
+  display: flex;
+  flex: 1
+}
 
 
 .rank_name{

@@ -230,7 +230,7 @@ export class CapacityDetailComponent implements OnInit {
   handleGoToNextRound() {
     if (this.statusExam.status === 1) {
       if (!this.rounds.length) {
-        this.toast.warning({ summary: "Chưa có bài thi nào", duration: 3000 , detail:"Cánh báo" });
+        this.toast.warning({ summary: "Chưa có bài thi nào!", duration: 3000, detail: "Thông báo" });
         return;
       }
 

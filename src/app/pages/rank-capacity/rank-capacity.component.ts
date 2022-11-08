@@ -6,6 +6,7 @@ import { Major } from 'src/app/models/major';
 import { ConfigFunctionService } from 'src/app/services/config-function.service';
 import { MajorService } from 'src/app/services/major.service';
 import { TestCapacityService } from 'src/app/services/test-capacity.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-rank-capacity',
@@ -39,7 +40,10 @@ export class RankCapacityComponent implements OnInit {
     private route: ActivatedRoute,
     public majorService: MajorService,
     public configService: ConfigFunctionService,
-  ) { }
+    private titleService: Title
+  ) { 
+  }
+  
 
   formFilter = new FormGroup({
     filterName: new FormControl(''),
@@ -47,6 +51,7 @@ export class RankCapacityComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.titleService.setTitle('Xếp Hạng Test Năng Lực');
     // khi không có param trên web thì sẽ lấy chuyên ngành lập trình web
     this.slugMajor = this.route.snapshot.queryParamMap.get('major')!
     this.slugMajor == null ? this.slugMajor = "lap-trinh-web" : this.slugMajor
@@ -73,6 +78,7 @@ export class RankCapacityComponent implements OnInit {
             this.links = res.payload.links.slice(1, totalItemPages-1)
             this.statusRanking = true;
             this.statusNotResultReturn = false;
+            console.log(this.listRanking)
           }
         }
       })

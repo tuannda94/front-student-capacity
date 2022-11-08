@@ -79,7 +79,7 @@
                 </div>
               </div>
 
-              <button class="btn capacity__info-footer-btn btn-main">
+              <button class="capacity__info-footer-btn my-btn my-btn-primary my-btn-s my-btn--no-bg">
                 {{ statusExam.statustext }}
               </button>
             </div>
@@ -201,7 +201,7 @@
                 <div *ngIf="getStatusButtonJoinExam(round.status, round.user_status_join).isShowBtn">
                   <a
                     [routerLink]="['/test-nang-luc/vao-thi', capacity.id, 'bai-thi', round.id]"
-                    class="btn btn-main capacity__test-detail-btn"
+                    class="my-btn my-btn-primary my-btn-s my-btn--no-bg capacity__test-detail-btn"
                   >
                     {{ getStatusButtonJoinExam(round.status, round.user_status_join).buttonText }}
                   </a>
@@ -209,7 +209,13 @@
               </div>
             </li>
 
-            <li *ngIf="!rounds.length">Chưa có bài thi nào!</li>
+            <li *ngIf="!rounds.length">
+              <img
+                src="../../../assets/img/no-result.png"
+                alt="No data"
+                class="capacity__related-no-result d-block mx-auto"
+              />
+            </li>
           </ul>
 
           <!-- skeleton -->
@@ -231,11 +237,17 @@
               class="mb-4 mb-lg-0 col col-lg-4 col-md-6 col-sm-12 col-12 d-flex"
               *ngFor="let capacity of capacityRelated"
             >
-              <app-capacity-related-item class="d-flex flex-1" [capacityItem]="capacity"></app-capacity-related-item>
+              <app-capacity-item class="d-flex flex-1" [capacityItem]="capacity"></app-capacity-item>
             </div>
           </ul>
 
-          <p *ngIf="!isFetchingCapacityRelated && !capacityRelated.length">Không có bài test liên quan nào!</p>
+          <div *ngIf="!isFetchingCapacityRelated && !capacityRelated.length">
+            <img
+              src="../../../assets/img/no-result.png"
+              alt="No data"
+              class="capacity__related-no-result d-block mx-auto"
+            />
+          </div>
 
           <!-- skeleton -->
           <ul class="capacity__related-list row" *ngIf="isFetchingCapacityRelated">
@@ -251,9 +263,18 @@
                 <ngx-skeleton-loader
                   [theme]="{ margin: '0 0 4px', width: '70%', display: 'block' }"
                 ></ngx-skeleton-loader>
-                <ngx-skeleton-loader
-                  [theme]="{ margin: '0 0 4px', width: '85%', display: 'block' }"
-                ></ngx-skeleton-loader>
+
+                <!-- skeleton user top 1 -->
+                <div class="capacity__related-top-1 d-flex align-items-center">
+                  <ngx-skeleton-loader
+                    [theme]="{ width: '32px', height: '32px', margin: '0 8px 0 0' }"
+                    appearance="circle"
+                  ></ngx-skeleton-loader>
+
+                  <div class="flex-1">
+                    <ngx-skeleton-loader [theme]="{ margin: 0 }"></ngx-skeleton-loader>
+                  </div>
+                </div>
 
                 <ngx-skeleton-loader [theme]="{ height: '40px', margin: '6px 0 0' }"></ngx-skeleton-loader>
               </div>
@@ -272,7 +293,13 @@
             </div>
           </ul>
 
-          <p *ngIf="!isFetchingPost && !posts.length">Không có bài viết liên quan nào!</p>
+          <div *ngIf="!isFetchingPost && !posts.length">
+            <img
+              src="../../../assets/img/no-result.png"
+              alt="No data"
+              class="capacity__related-no-result d-block mx-auto"
+            />
+          </div>
 
           <!-- skeleton -->
           <ul class="capacity__related-list row" *ngIf="isFetchingPost">

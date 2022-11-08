@@ -56,15 +56,20 @@
 }
 
 .capacity__info-footer-btn {
-  padding: 4px 12px;
+  padding: 8px 12px;
   cursor: default;
-  border-radius: var(--my-rounded);
 }
 
 .capacity__info-footer-btn:hover {
   opacity: unset;
   background-color: #fff;
   color: var(--primary);
+}
+
+.capacity__related-top-1 {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
 }
 
 /* start: Avatar */
@@ -341,7 +346,7 @@
 }
 
 .capacity__test-detail-btn {
-  padding: 4px 12px;
+  padding: 8px 12px;
   margin-top: 8px;
 }
 

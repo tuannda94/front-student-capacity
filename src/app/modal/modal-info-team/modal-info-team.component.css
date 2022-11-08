@@ -84,3 +84,14 @@ th {
   background-color: var(--primary);
   border-radius: 6px;
 }
+
+.text-algin-left{
+  text-align: left !important;
+  padding-left: 30px;
+}
+
+
+.table-member-th {
+  font-size: 14px;
+  font-weight: bold;
+}

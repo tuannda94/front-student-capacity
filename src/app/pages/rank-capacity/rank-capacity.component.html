@@ -98,7 +98,7 @@
             <td class="rank_item">{{rank.user.email}}</td>
             <td class="rank_item">{{majorsDataTable}}</td>
             <td class="rank-table-none"></td>
-            <td class="rank_item_scores">{{rank.scores}}</td>
+            <td class="rank_item_scores">{{rank.total_scores}}</td>
           </tr>
         </tbody>
       </table>
@@ -146,8 +146,8 @@
       <!-- skeleton -->
     </div>
     <div class="test-capacity_list">
-      <app-capacity-related-item *ngFor="let capacity of listCapacity" [capacityItem]="capacity">
-      </app-capacity-related-item>
+      <app-capacity-item class="test-capacity_item" *ngFor="let capacity of listCapacity" [capacityItem]="capacity">
+      </app-capacity-item>
     </div>
   </div>
 </div>

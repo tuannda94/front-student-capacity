@@ -57,15 +57,18 @@ export class ContestAsideComponent implements OnInit {
       moment(this.contestDetail.start_register_time).format('lll')
     ).getTime();
 
+    this.date_register_start > this.today
+    ? (this.disabled = false)
+    : this.disabled;
+
+    
     setInterval(() => {
       this.date_register_end = new Date(
         moment(this.contestDetail.end_register_time).format('lll')
       ).getTime();
       this.today = new Date().getTime();
       let distance = this.date_register_end - this.today;
-      this.date_register_start > this.today
-        ? (this.disabled = false)
-        : this.disabled;
+    
 
       if (
         distance < 0 ||

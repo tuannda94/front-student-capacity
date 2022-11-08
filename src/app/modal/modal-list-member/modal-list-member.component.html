@@ -2,7 +2,7 @@
 <div *ngIf="statusArrayMember == true">
     <form class="my-form-search">
         <input type="text" placeholder="Tìm kiếm thành viên ..."
-           class="my-input-search form-control" (keyup)="setValueSearchMember($event)">
+           class="my-input-search" (keyup)="setValueSearchMember($event)">
         <button (click)="searchMembers()" class="my-btn-search-inside"><i class="fa-solid fa-magnifying-glass"></i
             ></button>
     </form>
@@ -22,7 +22,10 @@
                 <ng-container matColumnDef="img">
                     <th mat-header-cell *matHeaderCellDef class=" table-member-th"> Ảnh </th>
                     <td mat-cell *matCellDef="let element">
-                        <img width="30px" class="rounded-circle item-member-img" [src]="element.avatar" alt="">
+                        <img width="30px" class="rounded-circle item-member-img" [src]="
+                        element.avatar ||
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+                      " alt="">
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="email">

@@ -1,43 +1,16 @@
 <div class="header bg-white">
   <nav class="container d-flex justify-content-between align-items-center">
-    <div class="nav-response flex-2">
-      <label class="icon-open-nav-mobile" for="input_check">
+    <!-- icon bar mobile -->
+    <div class="nav-response flex-2 d-block d-lg-none">
+      <div class="icon-open-nav-mobile d-inline-block" (click)="handleToggleMenuMobile()">
         <i class="fas fa-bars"></i>
-      </label>
-      <input #inputChecked hidden class="input-menu" type="checkbox" id="input_check" />
-
-      <label for="input_check" class="over__lay"> </label>
-
-      <div class="menu-response">
-        <div class="border-bottom">
-          <label for="input_check" class="close-menu h-1 float-end">
-            <i class="fas fa-times"></i>
-          </label>
-        </div>
-        <ul class="menu-res mt-5 border-top">
-          <li (click)="closeMenuRes(inputChecked)" class="menu-res-item">
-            <a routerLink="/" class="menu-res-link text-decoration-none">Trang chủ</a>
-          </li>
-          <li class="menu-res-item">
-            <a routerLink="/cuoc-thi" class="menu-res-link text-decoration-none">Cuộc thi</a>
-          </li>
-          <li class="menu-res-item">
-            <a href="" class="menu-res-link text-decoration-none">Test năng lực</a>
-          </li>
-          <li class="menu-res-item">
-            <a href="" class="menu-res-link text-decoration-none">Tuyển dụng</a>
-          </li>
-        </ul>
-
-        <div class="logo-nav-bar-res text-center">
-          <img class="w-75" src="./../../../assets/img/logo.png" alt="" />
-        </div>
       </div>
     </div>
 
     <a routerLink="/" class="img-header-box">
       <img class="" src="./../../../assets/img/logo.png" alt="" />
     </a>
+
     <div class="menu-desktop d-none d-lg-flex align-self-stretch">
       <div class="d-flex" id="menu_login-box">
         <ul class="nav menu_login-box d-flex align-items-center mr-auto home-nav pr-2">
@@ -224,3 +197,50 @@
   </div>
 </div>
 <div (click)="closeSaveInfo(true)" class="overlay d-none"></div>
+
+<!-- menu mobile -->
+<div class="menu-mobile" [ngClass]="{ active: isOpenMenuMobile }">
+  <div class="menu-mobile__overlay" (click)="handleToggleMenuMobile()"></div>
+
+  <div class="menu-response">
+    <div class="border-bottom">
+      <div (click)="handleToggleMenuMobile()" class="close-menu h-1 float-end">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+
+    <ul class="menu-res mt-5 border-top">
+      <li class="menu-res-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a (click)="handleToggleMenuMobile()" routerLink="/" class="menu-res-link text-decoration-none d-block"
+          >Trang chủ</a
+        >
+      </li>
+      <li class="menu-res-item" routerLinkActive="active">
+        <a (click)="handleToggleMenuMobile()" routerLink="/cuoc-thi" class="menu-res-link text-decoration-none d-block"
+          >Cuộc thi</a
+        >
+      </li>
+      <li class="menu-res-item" routerLinkActive="active">
+        <a
+          (click)="handleToggleMenuMobile()"
+          routerLink="/tuyen-dung"
+          class="menu-res-link text-decoration-none d-block"
+          >Tuyển dụng</a
+        >
+      </li>
+      <li class="menu-res-item" routerLinkActive="active">
+        <a
+          (click)="handleToggleMenuMobile()"
+          routerLink="/test-nang-luc"
+          class="menu-res-link text-decoration-none d-block"
+          >Test năng lực</a
+        >
+      </li>
+      <li class="menu-res-item" routerLinkActive="active">
+        <a (click)="handleToggleMenuMobile()" routerLink="/bai-viet" class="menu-res-link text-decoration-none d-block"
+          >Bài viết</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

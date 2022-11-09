@@ -82,11 +82,8 @@ import { RecruitmentPositionComponent } from "./component/home/recruitment-posit
 import { OutstandingAdvantagesComponent } from "./component/home/outstanding-advantages/outstanding-advantages.component";
 import { RankCapacityComponent } from "./pages/rank-capacity/rank-capacity.component";
 import { PostLoadItemComponent } from "./loading/post-load-item/post-load-item.component";
-import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
 import { AngularSplitModule } from "angular-split";
 import { MonacoEditorModule } from "ngx-monaco-editor";
-import { ChallengeComponent } from "./pages/challenge/challenge.component";
-import { ModalSubmitChallengeSuccessComponent } from "./modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
 import { AlertErrorIntroExamComponent } from "./component/alert-error-intro-exam/alert-error-intro-exam.component";
 import { CountDatePipe } from "./helper/pipe/count-date.pipe";
 import { PaginationComponent } from "./component/pagination/pagination.component";
@@ -158,9 +155,6 @@ import { LoadingOverlayComponent } from "./component/loading-overlay/loading-ove
     OutstandingAdvantagesComponent,
     RankCapacityComponent,
     PostLoadItemComponent,
-    ChallengeExamComponent,
-    ChallengeComponent,
-    ModalSubmitChallengeSuccessComponent,
     AlertErrorIntroExamComponent,
     CountDatePipe,
     PaginationComponent,

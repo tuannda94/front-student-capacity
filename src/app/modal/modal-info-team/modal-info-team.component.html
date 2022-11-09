@@ -4,7 +4,7 @@
         <p style="margin-top: -12px;" class="color-gray">Xem thông tin các thành viên</p>
     </div>
     <div class="">
-        <button  *ngIf="statusTeamDetail" (click)="openListMemberJoinTeam()" class="my-btn-primary my-btn-s">Thêm thành viên</button>
+        <button  *ngIf="statusTeamDetail && statusLeader == true" (click)="openListMemberJoinTeam()" class="my-btn-primary my-btn-s">Thêm thành viên</button>
     </div>
 </div>
 <div *ngIf="statusTeamDetail" class="body-team-user-box text-center">
@@ -29,7 +29,7 @@
                 </ng-container>
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef class="text-center table-member-th"> Tên </th>
-                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-algin-left"> {{element.name}} </td>
                 </ng-container>
 
 
@@ -43,7 +43,7 @@
                 <!-- Weight Column -->
                 <ng-container matColumnDef="weight">
                     <th mat-header-cell *matHeaderCellDef class="text-center table-member-th"> Email </th>
-                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    <td mat-cell *matCellDef="let element" class="text-algin-left"> {{element.email}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="bot">

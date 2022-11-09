@@ -57,6 +57,7 @@ export class ModalInfoTeamComponent implements OnInit {
         contest_id:  this.contest_id,
         team_id: this.team_id,
         teams: this.teamDetail,
+        max_user: this.data.max_user
       },
     });
 
@@ -101,12 +102,21 @@ export class ModalInfoTeamComponent implements OnInit {
         
         this.statusTeamDetail = true;
         this.arrayMembers = this.teamDetail.members;
+        
         this.checkUserTeamLeader();
         this.arrayMembers.map(res => {
           res.checked = false;
         })
       }
     })
+  }
+
+   // Check xem ai là trưởng nhóm
+   checkLeader(bot: number) {
+    if (bot == 1) {
+      return 'Trưởng nhóm';
+    }
+    return '';
   }
 
   checkUserTeamLeader() {

@@ -56,7 +56,7 @@ import { CapacityExamComponent } from "./pages/capacity-exam/capacity-exam.compo
 import { DialogConfirmComponent } from "./modal/dialog-confirm/dialog-confirm.component";
 import { CapacityDetailComponent } from "./pages/capacity-detail/capacity-detail.component";
 import { RecruitmentDetailComponent } from "./pages/recruitment-detail/recruitment-detail.component";
-import { CapacityRelatedItemComponent } from "./component/capacity-related-item/capacity-related-item.component";
+import { CapacityItemComponent } from "./component/capacity-item/capacity-item.component";
 import { ListPostComponent } from "./component/list-post/list-post.component";
 import { PostsComponent } from "./pages/posts/posts.component";
 import { RankStudentComponent } from "./modal/rank-student/rank-student.component";
@@ -127,7 +127,7 @@ import { LoadingOverlayComponent } from "./component/loading-overlay/loading-ove
     CapacityExamComponent,
     DialogConfirmComponent,
     CapacityDetailComponent,
-    CapacityRelatedItemComponent,
+    CapacityItemComponent,
     ModalHistoryCapacityComponent,
     RecruitmentDetailComponent,
     ListPostComponent,

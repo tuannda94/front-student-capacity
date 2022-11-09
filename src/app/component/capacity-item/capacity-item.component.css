@@ -68,7 +68,7 @@
   min-width: 24px;
 }
 
-.capacity__related-content-list-item-icon-text>* {
+.capacity__related-content-list-item-icon-text > * {
   font-size: 14px;
 }
 
@@ -97,9 +97,10 @@
 
 .capacity-countdown {
   text-align: center;
+  min-height: 50px;
 }
 
-.capacity-countdown .my-countdown-item+.my-countdown-item {
+.capacity-countdown .my-countdown-item + .my-countdown-item {
   padding-left: 12px;
 }
 
@@ -110,7 +111,11 @@
 .capacity__related-top-1 {
   display: flex;
   align-items: center;
-  margin: 8px 0 12px;
+  min-height: 50px;
+}
+
+.capacity__related-top-1--no-user {
+  min-height: 30px;
 }
 
 .capacity__related-top-1-rank {
@@ -128,7 +133,6 @@
 .capacity__related-top-1-user {
   flex: 3;
 }
-
 
 .capacity__related-top-1-user-avatar {
   width: 32px;

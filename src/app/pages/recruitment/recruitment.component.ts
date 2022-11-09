@@ -125,7 +125,7 @@ export class RecruitmentComponent implements OnInit {
 
     window.addEventListener('scroll', this.noneSuggestFilter);
 
-    const inputElement = document.querySelectorAll('.form-control');
+    const inputElement = document.querySelectorAll('.my-input');
     inputElement.forEach((item) => {
       item.addEventListener('focus', () => {
         item.nextElementSibling?.classList.remove('d-none');
@@ -155,6 +155,8 @@ export class RecruitmentComponent implements OnInit {
   getKeywordAll() {
     this.keywordService.getKeywordWhereType(1).subscribe((res) => {
       if (res.status) this.keywords = res.payload;
+      console.log(this.keywords);
+      
     });
   }
 
@@ -174,8 +176,10 @@ export class RecruitmentComponent implements OnInit {
   // Fillter comom recruitments
   filterSelect(arr: Array<any> | null, value: string, input: string) {
     if (arr) {
+      console.log(input);
       switch (input) {
         case 'major':
+          console.log(value);
           this.checkBtnSubmit();
           if (!value) {
             this.majors = null;
@@ -192,6 +196,8 @@ export class RecruitmentComponent implements OnInit {
 
           break;
         case 'keyword':
+          console.log(value);
+          
           this.checkBtnSubmit();
           if (!value) {
             this.keywords = null;
@@ -290,6 +296,8 @@ export class RecruitmentComponent implements OnInit {
     this.listPostService
       .searchPostRecruitment(this.keyword)
       .subscribe((res) => {
+        console.log(res.payload);
+        
         if (res.status && res.payload.data.length > 0) {
           this.statusPostSearch = true;
           this.listPostResult = res.payload.data;

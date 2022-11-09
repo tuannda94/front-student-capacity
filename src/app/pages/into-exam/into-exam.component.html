@@ -166,7 +166,14 @@
                     STT
                   </th>
                   <td mat-cell class="text-center" *matCellDef="let element">
-                    {{ element.id }}
+                    {{
+                      configFunctionService.indexTable(
+                        element.id,
+                        teamDetail.members,
+                        0,
+                        0
+                      )
+                    }}
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="name">
@@ -322,7 +329,7 @@
                 mode="indeterminate"
               >
               </mat-progress-bar>
-              <form >
+              <form>
                 <div class="modal-header">
                   <h3 class="modal-title fw-bold">Sinh viên nộp bài tại đây</h3>
                   <p (click)="modal.dismiss('Cross click')">
@@ -349,11 +356,12 @@
                           <label
                             class="btn-upload-assignment inline-block"
                             for="submit-assignment"
+                            [ngClass]="!assignmentFiles ? 'active' : ''"
                             ><i class="fas fa-cloud-upload"></i
                           ></label>
                         </div>
                         <p class="pt-3 text-center color-gray fst-italic">
-                          Định dạng file nén zip, rar
+                          Lưu ý: Định dạng file nén zip, rar
                         </p>
                       </div>
                     </mat-tab>
@@ -363,16 +371,20 @@
                       color="warn"
                     >
                       <div class="submit-assignment-box">
-                        <input
-                          (keyup)="submitExamByLink($event)"
-                       
-                          type="text"
-                          value=""
-                          name="text"
-                          class="input-link-submit"
-                          placeholder="Link bài làm .."
-                        />
-                        </div>
+                          <input
+                            (blur)="submitExamByLink($event)"
+                            [disabled]="assignmentLinks"
+                            type="text"
+                            value=""
+                            name="text"
+                            class="input-link-submit"
+                            placeholder="Link bài làm .."
+                          />
+                    
+                        <p class="pt-3 text-center color-gray fst-italic">
+                          Lưu ý: Thả link đúng định dạng rồi <br> click ra ngoài nhé mấy bé.
+                        </p>
+                      </div>
                     </mat-tab>
                   </mat-tab-group>
                   <div
@@ -446,7 +458,8 @@
         >
           <p class="p-3 color-gray fst-italic">
             Lưu ý : Sinh viên hoàn thành bài và nộp đúng thời hạn , các bài làm
-            nộp muộn sẽ không được chấp nhận
+            nộp muộn sẽ không được chấp nhận và mỗi bài làm chỉ được upload 1
+            lần hoặc file hoặc link.
           </p>
         </div>
       </div>

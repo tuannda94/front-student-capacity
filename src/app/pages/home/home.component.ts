@@ -4,17 +4,13 @@ import { UserService } from 'src/app/services/user.service';
 import { Contest } from 'src/app/models/contest';
 import { ContestService } from 'src/app/services/contest.service';
 import { Major } from 'src/app/models/major';
-import { MajorService } from 'src/app/services/major.service';
 import { ResultMajor } from 'src/app/models/result-major.model';
-import { RankStudentComponent } from 'src/app/modal/rank-student/rank-student.component';
-import { MatDialog } from '@angular/material/dialog';
 import { CompanyService } from 'src/app/services/company.service';
 import { Company } from 'src/app/models/company.models';
-import { NgToastService } from 'ng-angular-popup';
-import { ConfigViewService } from 'src/app/services/config-view.service';
 import { Post } from 'src/app/models/post.model';
 import { ListPostService } from 'src/app/services/list-post.service';
 import { ResponsePayload } from 'src/app/models/response-payload';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -97,16 +93,14 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private contestService: ContestService,
-    private majorService: MajorService,
     private userService: UserService,
-    private dialog: MatDialog,
     private companyService: CompanyService,
-    private toast: NgToastService,
-    private configView: ConfigViewService,
-    private postService: ListPostService
+    private postService: ListPostService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Trang chủ");
     this.getRecruitmentPosition();
     this.contestService.getWhereStatus(1, 'desc').subscribe((res) => {
       if (res.status == true) {

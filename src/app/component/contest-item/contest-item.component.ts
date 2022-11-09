@@ -52,7 +52,9 @@ export class ContestItemComponent implements OnInit {
     this.date_register_start = new Date(
       moment(this.item.start_register_time).format('lll')
     ).getTime();
-
+    this.date_register_start > this.today
+        ? (this.disabled = false)
+        : this.disabled;
     
     setInterval(() => {
       this.date_register_end = new Date(
@@ -60,10 +62,6 @@ export class ContestItemComponent implements OnInit {
       ).getTime();
       this.today = new Date().getTime();
       let distance = this.date_register_end - this.today;
-      this.date_register_start > this.today
-        ? (this.disabled = false)
-        : this.disabled;
-
       if (
         distance < 0 ||
         this.item.status == 2 ||
@@ -127,7 +125,7 @@ export class ContestItemComponent implements OnInit {
         event.currentTarget.classList.remove('primary-color');
         event.currentTarget.parentElement.classList.remove('opacity-100');
         event.currentTarget.parentElement.classList.add('my-add-favorite__icon');
-        this.wishlist.wishListRemove(data);
+        this.wishlist.wishListRemove(data).subscribe();
       }else{
         event.currentTarget.classList.add('primary-color');
         event.currentTarget.parentElement.classList.add('opacity-100');

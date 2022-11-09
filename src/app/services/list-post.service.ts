@@ -62,8 +62,9 @@ export class ListPostService {
     let statusPostChange = status == null ? '' : status;
     return this.http.get<ResponsePayload>(`${environment.postListUrl}?keyword=${keywordQuery}&post=${typePostChange}&postHot=${statusPostChange}`);
   } 
+
   searchPostRecruitment(keyword: string): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.postListUrl}?post=post-recruitment&keyword=${keyword}`);
+    return this.http.get<ResponsePayload>(`${environment.postListUrl}?keyword=${keyword}&post=post-recruitment`);
   } 
 
   // Post  recruitment  page trang chủ.
@@ -75,4 +76,9 @@ export class ListPostService {
   paydingRecruitmentPosition(index: number):Observable<ResponsePayload>{
     return this.http.get<ResponsePayload>(`${environment.postListUrl}?page=${index}&post=post-recruitment&limit=6`);
   } 
+
+
+  postContestRelate(contest_id: number){
+    return this.http.get<ResponsePayload>(`${environment.postListUrl}?contest_id=${contest_id}`);
+  }
 }

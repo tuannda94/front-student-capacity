@@ -1,67 +1,88 @@
 <div class="contest-item">
-    <div class="contest-item__img-section">
-        <a   [routerLink]="['/cuoc-thi/' , item.id]" >
-            <img class="contest-item__img"[src]="item.img" alt="">
+  <div class="contest-item__img-section">
+    <a [routerLink]="['/cuoc-thi/', item.id]">
+      <img class="contest-item__img" [src]="item.img" alt="" />
+    </a>
+    <div class="contest-item__btn-favorite">
+      <button class="my-btn my-add-favorite__btn" [ngClass]="item.user_wishlist ? 'opacity-100' : ''">
+        <i
+          (click)="favoriteEvent($event, item)"
+          class="fa-solid fa-bookmark"
+          [ngClass]="item.user_wishlist ? 'primary-color' : 'my-add-favorite__icon'"
+        ></i>
+      </button>
+    </div>
+  </div>
+  <div class="contest-item-content">
+    <div class="contest-item-content-row">
+      <h3 class="contest-item__title">
+        <a
+          class="contest-item__title-link"
+          [routerLink]="['/cuoc-thi/', item.id]"
+          data-toggle="tooltip"
+          data-placement="top"
+          title="{{ item.name }}"
+        >
+          {{ item.name }}
+          <span class="fw-normal" style="font-size: 15px"
+            >({{ item.status == 1 ? "Thời gian bắt đầu : " : "Ngày kết thúc : "
+            }}{{ checkDateContest(item) | formatDate }})</span
+          >
         </a>
-        <div class="contest-item__btn-favorite">
-            <button class="my-btn my-add-favorite__btn " [ngClass]="item.user_wishlist ? 'opacity-100' : ''">
-                <i  (click)="favoriteEvent($event , item)" class=" fa-solid fa-bookmark" [ngClass]="item.user_wishlist ? 'primary-color' : 'my-add-favorite__icon'"></i>
-            </button>
-        </div>
+      </h3>
+      <ul *ngIf="checkStatusContest(item, 2) == 0" class="my-countdown">
+        <li class="my-countdown-item text-center">
+          <div class="my-countdown-item-box h4">{{ days }}</div>
+          <span class="my-countdown-item-text">Ngày</span>
+        </li>
+        <li class="my-countdown-item text-center">
+          <div class="my-countdown-item-box h4">{{ hours }}</div>
+          <span class="my-countdown-item-text">Giờ</span>
+        </li>
+        <li class="my-countdown-item text-center">
+          <div class="my-countdown-item-box h4">{{ minutes }}</div>
+          <span class="my-countdown-item-text">Phút</span>
+        </li>
+        <li class="my-countdown-item text-center">
+          <div class="my-countdown-item-box h4">{{ seconds }}</div>
+          <span class="my-countdown-item-text">Giây</span>
+        </li>
+      </ul>
+      <p *ngIf="checkStatusContest(item, 2) != 0">
+        {{ checkStatusContest(item, 2) == 1 ? "Sẽ diễn ra: " : checkStatusContest(item, 2) }}TG:{{
+          checkStatusContest(item, 2) == 1 ? (item.date_start | formatDate) : (item.date_end | formatDate)
+        }}
+      </p>
     </div>
-    <div class="contest-item-content">
-        <div class="contest-item-content-row">
-            <h3 class="contest-item__title">
-                <a class="contest-item__title-link" [routerLink]="['/cuoc-thi/' , item.id]" data-toggle="tooltip"
-                    data-placement="top" title={{item.name}}>
-                    {{item.name}}  <span class="fw-normal" style="font-size: 15px;">({{item.status == 1 ? 'Thời gian bắt đầu : ' : 'Ngày kết thúc : '}}{{ checkDateContest(item) | formatDate}})</span>
-                </a>
-            </h3>
-            <ul class="my-countdown">
-                <li class="my-countdown-item text-center">
-                    <div class="my-countdown-item-box h4"> {{days}}</div>
-                    <span class="my-countdown-item-text">Ngày</span>
-                </li>
-                <li class="my-countdown-item text-center">
-                    <div class="my-countdown-item-box h4"> {{hours}}</div>
-                    <span class="my-countdown-item-text">Giờ</span>
-                </li>
-                <li class="my-countdown-item text-center">
-                    <div class="my-countdown-item-box h4"> {{minutes}}</div>
-                    <span class="my-countdown-item-text">Phút</span>
-                </li>
-                <li class="my-countdown-item text-center">
-                    <div class="my-countdown-item-box h4"> {{seconds}}</div>
-                    <span class="my-countdown-item-text">Giây</span>
-                </li>
-            </ul>
+    <div class="contest-item-content-row">
+      <div class="contest-item__info">
+        <div class="contest-item__info-item">
+          <i class="fa-regular fa-user"></i>&ensp;
+          <span class="info-item__number">
+            {{ item.teams_count }}
+          </span>
+          đội thi
         </div>
-        <div class="contest-item-content-row">
-            <div class="contest-item__info">
-                <div class="contest-item__info-item">
-                    <i class="fa-regular fa-user"></i>&ensp;
-                    <span class="info-item__number">
-                        {{item.teams_count}}
-                    </span>
-                    đội thi
-                </div>
-                <div class="contest-item__info-item">
-                    <i class="fa-solid fa-list-ul"></i>&ensp;
-                    <span class="info-item__number">
-                        {{item.rounds_count}}
-                    </span>
-                    vòng thi
-                </div>
-            </div>
-            <a [class.disabled]="!disabled" routerLink="/cuoc-thi/{{item.id}}"
-                [state]="{registerNow : item.status_user_has_join_contest}">
-                <button class="my-btn-primary my-btn-xs" [ngClass]=" item.status == 1 || item.status == 0
-              ? 'my-btn-primary'
-              : 'my-btn-disabled'
-          ">
-                    {{checkStatusContest(item)}}
-                </button>
-            </a>
+        <div class="contest-item__info-item">
+          <i class="fa-solid fa-list-ul"></i>&ensp;
+          <span class="info-item__number">
+            {{ item.rounds_count }}
+          </span>
+          vòng thi
         </div>
+      </div>
+      <a
+        [class.disabled]="!disabled"
+        routerLink="/cuoc-thi/{{ item.id }}"
+        [state]="{ registerNow: item.status_user_has_join_contest }"
+      >
+        <button
+          class="my-btn-primary my-btn-xs"
+          [ngClass]="item.status == 1 || item.status == 0 ? 'my-btn-primary' : 'my-btn-disabled'"
+        >
+          {{ checkStatusContest(item, 1) }}
+        </button>
+      </a>
     </div>
+  </div>
 </div>

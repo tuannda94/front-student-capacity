@@ -115,10 +115,14 @@ export class HeaderComponent implements OnInit {
   }
 
   closeSaveInfo(status: boolean) {
-    if (status) {
-      document.querySelector(".sidepanel")?.classList.remove("save-info-acive");
-      document.querySelector(".overlay")?.classList.add("d-none");
-    }
+    const menuRes = document.querySelector(".sidepanel");
+    const overlay = document.querySelector(".overlay");
+    menuRes?.classList.remove("save-info-acive");
+    overlay?.classList.add("d-none");
+  }
+
+  closeMenu() {
+    const overlay = document.querySelector(".overlay");
   }
 
   // LogOut

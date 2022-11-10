@@ -6,38 +6,61 @@
       </div> -->
       <div class="">
         <form class="my-box-filter my-box-filter-3" [formGroup]="formFilter" (submit)="filterCapacity()">
-          <input type="text" class="my-input" (keyup)="setValueKeyword($event)" placeholder="Tìm kiếm..."
-            formControlName="filterName" />
+          <input
+            type="text"
+            class="my-input"
+            (keyup)="setValueKeyword($event)"
+            placeholder="Tìm kiếm..."
+            formControlName="filterName"
+          />
           <div ngbDropdown class="d-inline-block w-100">
-            <input type="text" (keyup)="
-                    filterSelect(majors, $any($event.target).value, 'major')
-                  " formControlName="filterMajor" class="my-input" placeholder="Chuyên ngành" id="dropdownBasic1"
-              ngbDropdownToggle />
+            <input
+              type="text"
+              (keyup)="filterSelect(majors, $any($event.target).value, 'major')"
+              formControlName="filterMajor"
+              class="my-input"
+              placeholder="Chuyên ngành"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            />
             <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
               <div *ngIf="!majors" class="d-flex justify-content-center">
                 <app-loading-item class="py-2"></app-loading-item>
               </div>
-              <a *ngFor="let item of majors" (click)="setValueFilterMajor(item)" class="capacity-text-majors"
-                ngbDropdownItem>{{ item.name }}</a>
+              <a
+                *ngFor="let item of majors"
+                (click)="setValueFilterMajor(item)"
+                class="capacity-text-majors"
+                ngbDropdownItem
+                >{{ item.name }}</a
+              >
             </div>
           </div>
           <div ngbDropdown class="d-inline-block w-100">
-            <input type="text" (keyup)="
-                    filterSelect(skills, $any($event.target).value, 'skill')
-                  " formControlName="filterSkill" class="my-input w-100" placeholder="Kĩ năng" id="dropdownBasic1"
-              ngbDropdownToggle />
+            <input
+              type="text"
+              (keyup)="filterSelect(skills, $any($event.target).value, 'skill')"
+              formControlName="filterSkill"
+              class="my-input w-100"
+              placeholder="Kĩ năng"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            />
             <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
               <div *ngIf="!skills" class="d-flex justify-content-center">
                 <app-loading-item class="py-2"></app-loading-item>
               </div>
-              <a *ngFor="let item of skills" (click)="setValueSkill(item)" class="capacity-text-majors" ngbDropdownItem>{{
-                item.name }}</a>
+              <a
+                *ngFor="let item of skills"
+                (click)="setValueSkill(item)"
+                class="capacity-text-majors"
+                ngbDropdownItem
+                >{{ item.name }}</a
+              >
             </div>
           </div>
           <div class="btn-wrapper">
-            <button type="button" class="my-btn-secondary my-btn-s" (click)="resetFilterCapacity()">
-              Làm mới
-            </button>
+            <button type="button" class="my-btn-secondary my-btn-s" (click)="resetFilterCapacity()">Làm mới</button>
             <button [disabled]="!statusSubmit" class="my-btn-primary my-btn-s">
               Tìm kiếm
               <i class="fa-solid fa-magnifying-glass"></i>
@@ -46,15 +69,16 @@
         </form>
         <ul class="d-flex flex-wrap filter-skill-box">
           <li class="test-capacity__keyword my-h5">Đề xuất cho bạn:</li>
-          <li *ngFor="let item of keywordTrending" (click)="setValueKeywordTrending(item.keyword)"
-            class="test-capacity__keyword-item">
+          <li
+            *ngFor="let item of keywordTrending"
+            (click)="setValueKeywordTrending(item.keyword)"
+            class="test-capacity__keyword-item"
+          >
             <i class="fa-solid fa-fire test-capacity__keyword-icon"></i>
             <span class="test-capacity__keyword-title">{{ item.keyword }}</span>
           </li>
         </ul>
-        <div class="no-results" *ngIf="statusNotResultReturn">
-          Không tìm thấy kết quả nào
-        </div>
+        <div class="no-results" *ngIf="statusNotResultReturn">Không tìm thấy kết quả nào</div>
       </div>
       <div class="">
         <!-- skeleton -->

@@ -5,14 +5,13 @@
   background: transparent;
 }
 
-
 @keyframes slideDown {
   from {
     transform: translateY(-100%);
   }
 
   to {
-    transform: translateY(0)
+    transform: translateY(0);
   }
 }
 
@@ -22,7 +21,7 @@
   }
 
   to {
-    transform: translateY(-100%)
+    transform: translateY(-100%);
   }
 }
 
@@ -67,7 +66,7 @@
 }
 
 .menu_login-box .nav-link-item::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -84,13 +83,12 @@
   transform: scaleX(1);
 }
 
-
 /* - */
-.input-menu:checked~.over__lay {
+.input-menu:checked ~ .over__lay {
   display: block;
 }
 
-.input-menu:checked~.menu-response {
+.input-menu:checked ~ .menu-response {
   /* display: block; */
   transform: translateX(0%);
   opacity: 1;
@@ -140,7 +138,6 @@
   margin-top: 5%;
 }
 
-
 @keyframes button {
   0% {
     background-color: #158127;
@@ -149,13 +146,13 @@
   }
 
   25% {
-    background-color: #0652DD;
+    background-color: #0652dd;
     left: 0;
-    top: 0
+    top: 0;
   }
 
   100% {
-    background-color: #EA2027;
+    background-color: #ea2027;
     left: 0;
     top: 0;
   }
@@ -221,10 +218,7 @@
   margin-top: 50px;
 }
 
-
-
-
-@media (max-width:568px) {
+@media (max-width: 568px) {
   .menu_login-box {
     display: none;
   }
@@ -233,12 +227,9 @@
     height: 65px;
   }
 
-
-
   .img-header-box {
     margin-right: -7%;
   }
-
 
   .btn-outline-login {
     display: none;
@@ -254,8 +245,6 @@
   }
 }
 
-
-
 /* ----BACK_TOP */
 
 .back-top {
@@ -268,12 +257,6 @@
   right: 20px;
 }
 
-
-
 /* ---END HEADER---- */
-@media (max-width:568px) {
-  
+@media (max-width: 568px) {
 }
-
-
-

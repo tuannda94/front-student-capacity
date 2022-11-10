@@ -73,6 +73,8 @@ import { ListTagComponent } from "./component/list-tag/list-tag.component";
 import { PostCategoryComponent } from "./pages/post-category/post-category.component";
 import { PostResultSearchComponent } from "./pages/post-result-search/post-result-search.component";
 import { TestCapacityComponent } from "./pages/test-capacity/test-capacity.component";
+import { JoinCapacityComponent } from "./pages/join-capacity/join-capacity.component";
+import { CapacityPlayComponent } from "./pages/capacity-play/capacity-play.component";
 import { FormatDatePostPipe } from "./helper/pipe/format-date-post.pipe";
 import { ContestItemSubComponent } from "./component/contest-item-sub/contest-item-sub.component";
 import { PostItemComponent } from "./component/post-item/post-item.component";
@@ -80,6 +82,8 @@ import { RecruitmentPositionComponent } from "./component/home/recruitment-posit
 import { OutstandingAdvantagesComponent } from "./component/home/outstanding-advantages/outstanding-advantages.component";
 import { RankCapacityComponent } from "./pages/rank-capacity/rank-capacity.component";
 import { PostLoadItemComponent } from "./loading/post-load-item/post-load-item.component";
+import { AngularSplitModule } from "angular-split";
+import { MonacoEditorModule } from "ngx-monaco-editor";
 import { AlertErrorIntroExamComponent } from "./component/alert-error-intro-exam/alert-error-intro-exam.component";
 import { CountDatePipe } from "./helper/pipe/count-date.pipe";
 import { PaginationComponent } from "./component/pagination/pagination.component";
@@ -142,6 +146,8 @@ import { LoadingOverlayComponent } from "./component/loading-overlay/loading-ove
     MyCapacityTestComponent,
     ContestAsideComponent,
     TestCapacityComponent,
+    JoinCapacityComponent,
+    CapacityPlayComponent,
     FormatDatePostPipe,
     ContestItemSubComponent,
     PostItemComponent,
@@ -169,6 +175,8 @@ import { LoadingOverlayComponent } from "./component/loading-overlay/loading-ove
     NgxSkeletonLoaderModule,
     MaterialModule,
     NgToastModule,
+    AngularSplitModule,
+    MonacoEditorModule.forRoot(),
   ],
   providers: [
     {

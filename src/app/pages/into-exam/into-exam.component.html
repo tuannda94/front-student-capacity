@@ -9,29 +9,19 @@
               alt=""
               class="info-contest-img"
             />
-            <p
-              class="fw-bold fs-text color-gray d-flex justify-content-center align-items-center"
-            >
+            <p class="fw-bold fs-text color-gray d-flex justify-content-center align-items-center">
               Số đội: &nbsp;{{ roundDetail.teams.length }} &nbsp;
               <i class="fas fa-users d-block primary-color"></i>
             </p>
             <div class="d-flex justify-content-center mt-2">
-              <app-list-avatar-user
-                [listTeam]="roundDetail.teams"
-                [titleModelName]="'Danh sách các đội'"
-              >
+              <app-list-avatar-user [listTeam]="roundDetail.teams" [titleModelName]="'Danh sách các đội'">
               </app-list-avatar-user>
             </div>
           </div>
           <div class="col-8 my-2 exam-info-box">
             <div class="d-flex ml-3 justify-content-between align-items-center">
               <h3 class="fw-bold fs-6">Vòng: {{ roundDetail.name }}</h3>
-              <button
-                mat-icon-button
-                color="warn"
-                class="btn-copy-link"
-                [matMenuTriggerFor]="menu"
-              >
+              <button mat-icon-button color="warn" class="btn-copy-link" [matMenuTriggerFor]="menu">
                 <i class="fas fa-ellipsis-v"></i>
               </button>
               <mat-menu #menu="matMenu">
@@ -40,18 +30,11 @@
             </div>
             <p class="color-gray color-blue exam-info-item fs-text fw-bold">
               Hạn nộp:
-              <span class="fw-normal">{{
-                roundDetail.end_time | formatDate
-              }}</span>
+              <span class="fw-normal">{{ roundDetail.end_time | formatDate }}</span>
             </p>
-            <p
-              *ngIf="statusContest == true"
-              class="info-contest-item exam-info-item fw-bold"
-            >
+            <p *ngIf="statusContest == true" class="info-contest-item exam-info-item fw-bold">
               Cuộc Thi:
-              <span class="color-primary fw-normal">{{
-                infoContest.name
-              }}</span>
+              <span class="color-primary fw-normal">{{ infoContest.name }}</span>
             </p>
             <p class="info-contest-item fw-bold exam-info-item">
               Trạng thái: <span class="color-primary fw-normal">Vào thi</span>
@@ -60,15 +43,10 @@
             <div class="d-flex mb-3 justify-content-start align-items-center">
               <p class="fw-bold fs-text color-gray">Ban giám khảo :</p>
               &nbsp; &nbsp;
-              <p class="" *ngIf="roundDetail.judges.length == 0">
-                Chưa có ban giám khảo !
-              </p>
+              <p class="" *ngIf="roundDetail.judges.length == 0">Chưa có ban giám khảo !</p>
               <div *ngIf="roundDetail.judges.length > 0">
                 <!-- {{roundDetail.judges}} -->
-                <app-list-avatar-user
-                  [listTeam]="roundDetail.judges"
-                  [titleModelName]="'Danh sách ban giám khảo'"
-                >
+                <app-list-avatar-user [listTeam]="roundDetail.judges" [titleModelName]="'Danh sách ban giám khảo'">
                 </app-list-avatar-user>
               </div>
             </div>
@@ -111,46 +89,22 @@
             ></ngx-skeleton-loader>
           </div>
           <div class="col-8">
-            <ngx-skeleton-loader
-              [theme]="{ 'height.px': 25 }"
-              appearance="line"
-            ></ngx-skeleton-loader>
-            <ngx-skeleton-loader
-              [theme]="{ 'height.px': 20 }"
-              appearance="line"
-            ></ngx-skeleton-loader>
-            <ngx-skeleton-loader
-              [theme]="{ 'height.px': 20 }"
-              appearance="line"
-            ></ngx-skeleton-loader>
-            <ngx-skeleton-loader
-              [theme]="{ 'height.px': 20 }"
-              appearance="line"
-            ></ngx-skeleton-loader>
-            <ngx-skeleton-loader
-              [theme]="{ 'height.px': 35, 'width.px': 100 }"
-              appearance="line"
-            >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 25 }" appearance="line"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 20 }" appearance="line"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 20 }" appearance="line"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 20 }" appearance="line"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 35, 'width.px': 100 }" appearance="line">
             </ngx-skeleton-loader>
           </div>
         </div>
 
-        <p
-          *ngIf="statusTeamDetail == true"
-          class="fw-bold fs-5 mt-3 color-blue py-2"
-        >
-          Đội của bạn
-        </p>
+        <p *ngIf="statusTeamDetail == true" class="fw-bold fs-5 mt-3 color-blue py-2">Đội của bạn</p>
         <div *ngIf="statusTeamDetail == true" class="title-line"></div>
         <div class="my-3 bg-white team-detail-box pb-3">
           <div *ngIf="statusTeamDetail == true" style="border-radius: 10px">
             <div class="info-your-team text-center" ngbTooltip="Xem chi tiết">
               <div (click)="openInfoTeamDetail()" class="p-3 bg-white">
-                <img
-                  class="info-your-team-avatar"
-                  [src]="teamDetail.image"
-                  alt=""
-                />
+                <img class="info-your-team-avatar" [src]="teamDetail.image" alt="" />
                 <h3 class="fw-bold mt-2 color-blue">{{ teamDetail.name }}</h3>
                 <p>Tổng số : {{ teamDetail.members.length }} thành viên</p>
               </div>
@@ -158,38 +112,17 @@
             <table mat-table class="w-100" [dataSource]="teamDetail.members">
               <div class="example-table-container">
                 <ng-container matColumnDef="index">
-                  <th
-                    mat-header-cell
-                    *matHeaderCellDef
-                    class="text-center table-member-th"
-                  >
-                    STT
-                  </th>
+                  <th mat-header-cell *matHeaderCellDef class="text-center table-member-th">STT</th>
                   <td mat-cell class="text-center" *matCellDef="let element">
-                    {{
-                      configFunctionService.indexTable(
-                        element.id,
-                        teamDetail.members,
-                        0,
-                        0
-                      )
-                    }}
+                    {{ configFunctionService.indexTable(element.id, teamDetail.members, 0, 0) }}
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef class="table-member-th">
-                    Tên
-                  </th>
+                  <th mat-header-cell *matHeaderCellDef class="table-member-th">Tên</th>
                   <td mat-cell *matCellDef="let element">{{ element.name }}</td>
                 </ng-container>
                 <ng-container matColumnDef="avatar">
-                  <th
-                    mat-header-cell
-                    *matHeaderCellDef
-                    class="table-member-th column-avatar"
-                  >
-                    Ảnh
-                  </th>
+                  <th mat-header-cell *matHeaderCellDef class="table-member-th column-avatar">Ảnh</th>
                   <td mat-cell *matCellDef="let element">
                     <img
                       width="30px"
@@ -203,9 +136,7 @@
 
                 <!-- Weight Column -->
                 <ng-container matColumnDef="email">
-                  <th mat-header-cell *matHeaderCellDef class="table-member-th">
-                    Email
-                  </th>
+                  <th mat-header-cell *matHeaderCellDef class="table-member-th">Email</th>
                   <td mat-cell *matCellDef="let element">
                     {{ element.email }}
                   </td>
@@ -213,9 +144,7 @@
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="bot">
-                  <th mat-header-cell *matHeaderCellDef class="table-member-th">
-                    Chức danh
-                  </th>
+                  <th mat-header-cell *matHeaderCellDef class="table-member-th">Chức danh</th>
                   <td mat-cell *matCellDef="let element">
                     <p *ngIf="element.pivot.bot == 1" class="team-leader">
                       {{ checkLeader(element.pivot.bot) }}
@@ -279,56 +208,40 @@
             <ul class="contest-detail-right-countdown">
               <div class="contest-detail-right-countdown-box">
                 <li class="contest-detail-right-countdown-item">
-                  <span class="contest-detail-right-countdown-number days">{{
-                    days
-                  }}</span>
+                  <span class="contest-detail-right-countdown-number days">{{ days }}</span>
                 </li>
                 <p class="text-center">Ngày</p>
               </div>
               <div class="contest-detail-right-countdown-box">
                 <li class="contest-detail-right-countdown-item">
-                  <span class="contest-detail-right-countdown-number days">{{
-                    hours
-                  }}</span>
+                  <span class="contest-detail-right-countdown-number days">{{ hours }}</span>
                 </li>
                 <p class="text-center">Giờ</p>
               </div>
               <div class="contest-detail-right-countdown-box">
                 <li class="contest-detail-right-countdown-item">
-                  <span class="contest-detail-right-countdown-number days">{{
-                    minutes
-                  }}</span>
+                  <span class="contest-detail-right-countdown-number days">{{ minutes }}</span>
                 </li>
                 <p class="text-center">Phút</p>
               </div>
               <div class="contest-detail-right-countdown-box">
                 <li class="contest-detail-right-countdown-item">
-                  <span class="contest-detail-right-countdown-number">{{
-                    seconds
-                  }}</span>
+                  <span class="contest-detail-right-countdown-number">{{ seconds }}</span>
                 </li>
                 <p class="text-center">Giây</p>
               </div>
             </ul>
             <a
-              [ngClass]="
-                statusTakeExam == true ? 'btn btn-danger' : 'btn btn-main'
-              "
+              [ngClass]="statusTakeExam == true ? 'btn btn-danger' : 'btn btn-main'"
               class="my-btn-secondary my-btn-s w-100"
-              (click)="
-                statusTakeExam == true
-                  ? cancelExam()
-                  : openVerticallyCentered(submit)
-              "
+              (click)="statusTakeExam == true ? cancelExam() : openVerticallyCentered(submit)"
               >{{ statusTakeExam == true ? "Huỷ bài " : "Nộp bài" }}</a
             >
             <ng-template #submit let-modal>
-              <mat-progress-bar
-                *ngIf="statusSubmitExam == false"
-                color="warn"
-                mode="indeterminate"
-              >
-              </mat-progress-bar>
+              <div class="pt-2">
+                <mat-progress-bar *ngIf="statusSubmitExam == false" color="warn" mode="indeterminate">
+                </mat-progress-bar>
+              </div>
               <form>
                 <div class="modal-header">
                   <h3 class="modal-title fw-bold">Sinh viên nộp bài tại đây</h3>
@@ -338,11 +251,7 @@
                 </div>
                 <div class="modal-body">
                   <mat-tab-group animationDuration="0ms">
-                    <mat-tab
-                      color="warn"
-                      [disabled]="assignmentLinks"
-                      label="Tải file"
-                    >
+                    <mat-tab color="warn" [disabled]="assignmentLinks" label="Tải file">
                       <div class="submit-assignment-box">
                         <div class="">
                           <input
@@ -360,37 +269,29 @@
                             ><i class="fas fa-cloud-upload"></i
                           ></label>
                         </div>
-                        <p class="pt-3 text-center color-gray fst-italic">
-                          Lưu ý: Định dạng file nén zip, rar
-                        </p>
+                        <p class="pt-3 text-center color-gray fst-italic">Lưu ý: Định dạng file nén zip, rar</p>
                       </div>
                     </mat-tab>
-                    <mat-tab
-                      label="Link"
-                      [disabled]="assignmentFiles"
-                      color="warn"
-                    >
+                    <mat-tab label="Link" [disabled]="assignmentFiles" color="warn">
                       <div class="submit-assignment-box">
-                          <input
-                            (blur)="submitExamByLink($event)"
-                            [disabled]="assignmentLinks"
-                            type="text"
-                            value=""
-                            name="text"
-                            class="input-link-submit"
-                            placeholder="Link bài làm .."
-                          />
-                    
+                        <input
+                          (blur)="submitExamByLink($event)"
+                          [disabled]="assignmentLinks"
+                          type="text"
+                          value=""
+                          name="text"
+                          class="input-link-submit"
+                          placeholder="Link bài làm .."
+                        />
+
                         <p class="pt-3 text-center color-gray fst-italic">
-                          Lưu ý: Thả link đúng định dạng rồi <br> click ra ngoài nhé mấy bé.
+                          Lưu ý: Thả link đúng định dạng rồi <br />
+                          click ra ngoài nhé mấy bé.
                         </p>
                       </div>
                     </mat-tab>
                   </mat-tab-group>
-                  <div
-                    *ngIf="assignmentFiles"
-                    class="d-flex justify-content-start align-items-center"
-                  >
+                  <div *ngIf="assignmentFiles" class="d-flex justify-content-start align-items-center">
                     <div
                       style="cursor: pointer"
                       (click)="removeAssFile()"
@@ -401,10 +302,7 @@
                     </div>
                   </div>
                   &nbsp;&nbsp;
-                  <div
-                    *ngIf="assignmentLinks"
-                    class="d-flex justify-content-start align-items-center"
-                  >
+                  <div *ngIf="assignmentLinks" class="d-flex justify-content-start align-items-center">
                     <div
                       style="cursor: pointer"
                       (click)="removeAssLink()"
@@ -416,13 +314,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button
-                    type="button"
-                    mat-stroked-button
-                    (click)="modal.close('Close click')"
-                  >
-                    Đóng
-                  </button>
+                  <button type="button" mat-stroked-button (click)="modal.close('Close click')">Đóng</button>
                   &nbsp;&nbsp;
                   <button
                     type="button"
@@ -442,24 +334,16 @@
             </ng-template>
           </div>
           <div class="p-3" *ngIf="statusInfo == true && !infoExam">
-            <ngx-skeleton-loader [theme]="{ height: '30px' }" appearance="line">
-            </ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line">
-            </ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line">
-            </ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line">
-            </ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '30px' }" appearance="line"> </ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line"> </ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line"> </ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line"> </ngx-skeleton-loader>
           </div>
         </div>
-        <div
-          *ngIf="statusInfo == false && infoExam"
-          class="node-submit-assignment mt-2 bg-white"
-        >
+        <div *ngIf="statusInfo == false && infoExam" class="node-submit-assignment mt-2 bg-white">
           <p class="p-3 color-gray fst-italic">
-            Lưu ý : Sinh viên hoàn thành bài và nộp đúng thời hạn , các bài làm
-            nộp muộn sẽ không được chấp nhận và mỗi bài làm chỉ được upload 1
-            lần hoặc file hoặc link.
+            Lưu ý : Sinh viên hoàn thành bài và nộp đúng thời hạn , các bài làm nộp muộn sẽ không được chấp nhận và mỗi
+            bài làm chỉ được upload 1 lần hoặc file hoặc link.
           </p>
         </div>
       </div>

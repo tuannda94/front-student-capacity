@@ -169,9 +169,19 @@ h6 {
   transform: scaleX(1);
 }
 
-.menu-res-item {
-  margin: 20px 0px;
-  font-size: 17px;
+.menu-res-item a {
+  width: 100%;
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 15px;
+  color: var(--blue);
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.menu-res-item:hover a {
+  background-color: var(--my-primary);
+  color: #ffff;
+  transition: all ease 0.3s;
 }
 
 .overlay {
@@ -476,6 +486,11 @@ h6 {
 
 .sidepanel::-webkit-scrollbar-thumb {
   background-color: var(--primary);
+}
+
+.responsive-logo img {
+  margin-left: 10px;
+  margin-top: 100px;
 }
 
 @media only screen and (max-width: 740px) {

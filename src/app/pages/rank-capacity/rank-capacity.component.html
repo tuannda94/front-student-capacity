@@ -133,9 +133,15 @@
           <tr *ngFor="let rank of listRanking; let i = index" class="rank_item-list">
             <th class="rank_item" scope="row">{{ i + 1 }}</th>
             <td class="rank_item-name">
-              <img class="rank_image" src="{{ rank.user.avatar }}" alt="" width="70" /><span class="rank_name">{{
-                rank.user.name
-              }}</span>
+              <img
+                class="rank_image"
+                src="{{
+                  rank.user.avatar ||
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+                }}"
+                alt=""
+                width="70"
+              /><span class="rank_name">{{ rank.user.name }}</span>
             </td>
             <td class="rank_item">{{ rank.user.email }}</td>
             <td class="rank_item">{{ majorsDataTable }}</td>

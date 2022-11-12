@@ -150,7 +150,12 @@ export class ContestItemComponent implements OnInit {
     return type_display == 1 ? result : type_time;
   }
 
-  isContestRelate(event: boolean) {
-    this.contestRelated.emit(event);
+  isContestRelate(itemID: number) {
+    if (this.isRelate) {
+      this.router.navigate(["/cuoc-thi/" + itemID]);
+      setTimeout(() => {
+        this.contestRelated.emit(true);
+      }, 200);
+    }
   }
 }

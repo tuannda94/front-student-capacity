@@ -1,35 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-import { CompanyService } from 'src/app/services/company.service';
-import { Enterprise } from 'src/app/models/enterprise.model';
-import { RecruitmentsService } from 'src/app/services/recruitments.service';
-import { Recruitments } from 'src/app/models/recruitments.models';
-import { Slider } from 'src/app/models/slider.model';
-import { Contest } from 'src/app/models/contest';
-import { PayingLinks } from 'src/app/models/paying-links';
-import { TransmitToPost } from 'src/app/models/transmit-to-post.models';
-import { Skill } from 'src/app/models/skill.models';
-import { ListPostService } from 'src/app/services/list-post.service';
-import { Post } from 'src/app/models/post.model';
-import { MajorService } from 'src/app/services/major.service';
-import { Major } from 'src/app/models/major';
-import { FormGroup, FormControl } from '@angular/forms';
-import { ConfigFunctionService } from 'src/app/services/config-function.service';
-import { SkillServiceService } from 'src/app/services/skill-service.service';
-import { Title } from '@angular/platform-browser';
-import { KeywordService } from 'src/app/services/keyword.service';
-import { Keyword } from 'src/app/models/keyword';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Component, OnInit } from "@angular/core";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { CompanyService } from "src/app/services/company.service";
+import { Enterprise } from "src/app/models/enterprise.model";
+import { RecruitmentsService } from "src/app/services/recruitments.service";
+import { Recruitments } from "src/app/models/recruitments.models";
+import { Slider } from "src/app/models/slider.model";
+import { Contest } from "src/app/models/contest";
+import { PayingLinks } from "src/app/models/paying-links";
+import { TransmitToPost } from "src/app/models/transmit-to-post.models";
+import { Skill } from "src/app/models/skill.models";
+import { ListPostService } from "src/app/services/list-post.service";
+import { Post } from "src/app/models/post.model";
+import { MajorService } from "src/app/services/major.service";
+import { Major } from "src/app/models/major";
+import { FormGroup, FormControl } from "@angular/forms";
+import { ConfigFunctionService } from "src/app/services/config-function.service";
+import { SkillServiceService } from "src/app/services/skill-service.service";
+import { Title } from "@angular/platform-browser";
+import { KeywordService } from "src/app/services/keyword.service";
+import { Keyword } from "src/app/models/keyword";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Location } from "@angular/common";
 
 @Component({
-  selector: 'app-recruitment',
-  templateUrl: './recruitment.component.html',
-  styleUrls: ['./recruitment.component.css'],
+  selector: "app-recruitment",
+  templateUrl: "./recruitment.component.html",
+  styleUrls: ["./recruitment.component.css"],
 })
 export class RecruitmentComponent implements OnInit {
   companys: Array<Enterprise>;
@@ -71,47 +67,39 @@ export class RecruitmentComponent implements OnInit {
     public keywordService: KeywordService,
     private router: Router,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   statusFilter: Array<any> = [
     {
-      prams: 'normal',
-      name: 'Mới nhất',
+      prams: "normal",
+      name: "Mới nhất",
     },
     {
-      prams: 'hot',
-      name: 'Hot nhất',
+      prams: "hot",
+      name: "Hot nhất",
     },
   ];
 
   formFilter = new FormGroup({
-    filterSkill: new FormControl(''),
-    filterName: new FormControl(''),
-    filterMajor: new FormControl(''),
-    filterStatus: new FormControl(''),
+    filterSkill: new FormControl(""),
+    filterName: new FormControl(""),
+    filterMajor: new FormControl(""),
+    filterStatus: new FormControl(""),
   });
 
   ngOnInit(): void {
     this.backTop();
-    this.titleService.setTitle('Tuyển dụng');
+    this.titleService.setTitle("Tuyển dụng");
     this.route.queryParamMap.subscribe((params) => {
       this.orderObj = { ...params };
     });
 
     if (this.orderObj.params) {
-      this.keyword = this.orderObj.params.keyword
-        ? this.orderObj.params.keyword
-        : '';
-      this.major_id = this.orderObj.params.major_id
-        ? this.orderObj.params.major_id
-        : '';
-      this.skill_id = this.orderObj.params.skill_id
-        ? this.orderObj.params.skill_id
-        : '';
-      this.status = this.orderObj.params.status
-        ? this.orderObj.params.status
-        : '';
+      this.keyword = this.orderObj.params.keyword ? this.orderObj.params.keyword : "";
+      this.major_id = this.orderObj.params.major_id ? this.orderObj.params.major_id : "";
+      this.skill_id = this.orderObj.params.skill_id ? this.orderObj.params.skill_id : "";
+      this.status = this.orderObj.params.status ? this.orderObj.params.status : "";
 
       this.filterRecruitments();
     } else {
@@ -121,14 +109,13 @@ export class RecruitmentComponent implements OnInit {
 
     this.getListMajor();
     this.getAllSkill();
-    this.getKeywordAll();
 
-    window.addEventListener('scroll', this.noneSuggestFilter);
+    window.addEventListener("scroll", this.noneSuggestFilter);
 
-    const inputElement = document.querySelectorAll('.my-input');
+    const inputElement = document.querySelectorAll(".my-input");
     inputElement.forEach((item) => {
-      item.addEventListener('focus', () => {
-        item.nextElementSibling?.classList.remove('d-none');
+      item.addEventListener("focus", () => {
+        item.nextElementSibling?.classList.remove("d-none");
       });
     });
   }
@@ -136,19 +123,19 @@ export class RecruitmentComponent implements OnInit {
   // Set filter value
   setValueFilterMajor(item: Major) {
     this.statusSubmit = true;
-    this.formFilter.controls['filterMajor'].setValue(item.name);
+    this.formFilter.controls["filterMajor"].setValue(item.name);
   }
 
   // Set filter status
   setValueStatus(status: string) {
     this.statusSubmit = true;
-    this.formFilter.controls['filterStatus'].setValue(status);
+    this.formFilter.controls["filterStatus"].setValue(status);
   }
 
   // Set keyword recruitments
   setValueKeyword(keyword: string) {
     this.statusSubmit = true;
-    this.formFilter.controls['filterName'].setValue(keyword);
+    this.formFilter.controls["filterName"].setValue(keyword);
   }
 
   // Get All keyword trending;
@@ -156,16 +143,15 @@ export class RecruitmentComponent implements OnInit {
     this.keywordService.getKeywordWhereType(1).subscribe((res) => {
       if (res.status) this.keywords = res.payload;
       console.log(this.keywords);
-      
     });
   }
 
   // Check btn submit
   checkBtnSubmit() {
     if (
-      this.formFilter.controls['filterStatus'].value ||
-      this.formFilter.controls['filterName'].value ||
-      this.formFilter.controls['filterMajor'].value
+      this.formFilter.controls["filterStatus"].value ||
+      this.formFilter.controls["filterName"].value ||
+      this.formFilter.controls["filterMajor"].value
     ) {
       this.statusSubmit = true;
     } else {
@@ -178,36 +164,32 @@ export class RecruitmentComponent implements OnInit {
     if (arr) {
       console.log(input);
       switch (input) {
-        case 'major':
+        case "major":
           console.log(value);
           this.checkBtnSubmit();
           if (!value) {
             this.majors = null;
-            this.major_id = '';
+            this.major_id = "";
             this.getListMajor();
           } else {
             this.majors = arr.filter((item) => {
-              return this.configService
-                .changeString(item.name)
-                .includes(this.configService.changeString(value));
+              return this.configService.changeString(item.name).includes(this.configService.changeString(value));
             });
             this.majors.length > 0 && this.noneSuggestFilter();
           }
 
           break;
-        case 'keyword':
+        case "keyword":
           console.log(value);
-          
+
           this.checkBtnSubmit();
           if (!value) {
             this.keywords = null;
-            this.keyword = '';
+            this.keyword = "";
             this.getKeywordAll();
           } else {
             this.keywords = arr.filter((item) => {
-              return this.configService
-                .changeString(item.keyword)
-                .includes(this.configService.changeString(value));
+              return this.configService.changeString(item.keyword).includes(this.configService.changeString(value));
             });
             this.keywords.length > 0 && this.noneSuggestFilter();
           }
@@ -220,14 +202,12 @@ export class RecruitmentComponent implements OnInit {
 
   // Get list post
   getListPost() {
-    this.listPostService
-      .getPostWhereCate('post-recruitmentt')
-      .subscribe((res) => {
-        if (res.status) {
-          this.listPostResult = res.payload.data;
-          if (this.listPostResult) this.statusPost = true;
-        }
-      });
+    this.listPostService.getPostWhereCate("post-recruitmentt").subscribe((res) => {
+      if (res.status) {
+        this.listPostResult = res.payload.data;
+        if (this.listPostResult) this.statusPost = true;
+      }
+    });
   }
 
   getListMajor() {
@@ -240,7 +220,7 @@ export class RecruitmentComponent implements OnInit {
 
   // ScrollWin
   scrollWin() {
-    window.scrollTo({ top: 500, behavior: 'smooth' });
+    window.scrollTo({ top: 500, behavior: "smooth" });
   }
 
   // get skill limit
@@ -258,30 +238,22 @@ export class RecruitmentComponent implements OnInit {
       this.statusPost = false;
     }
 
-    if (this.formFilter.controls['filterName'].value) {
-      this.keyword = this.formFilter.controls['filterName'].value;
+    if (this.formFilter.controls["filterName"].value) {
+      this.keyword = this.formFilter.controls["filterName"].value;
     }
 
-    if (this.formFilter.controls['filterMajor'].value && this.majors) {
-      this.major_id = this.majors.filter(
-        (item) => item.name === this.formFilter.controls['filterMajor'].value
-      )[0].id;
+    if (this.formFilter.controls["filterMajor"].value && this.majors) {
+      this.major_id = this.majors.filter((item) => item.name === this.formFilter.controls["filterMajor"].value)[0].id;
     }
 
-    if (this.formFilter.controls['filterStatus'].value) {
+    if (this.formFilter.controls["filterStatus"].value) {
       this.status = this.statusFilter.filter(
-        (item) => item.name === this.formFilter.controls['filterStatus'].value
+        (item) => item.name === this.formFilter.controls["filterStatus"].value,
       )[0].prams;
     }
 
-    if (
-      this.status ||
-      this.keyword ||
-      this.major_id ||
-      this.skill_id ||
-      this.page
-    ) {
-      this.router.navigate(['/tuyen-dung'], {
+    if (this.status || this.keyword || this.major_id || this.skill_id || this.page) {
+      this.router.navigate(["/tuyen-dung"], {
         queryParams: {
           status: this.status,
           keyword: this.keyword,
@@ -289,33 +261,25 @@ export class RecruitmentComponent implements OnInit {
           skill_id: this.skill_id,
           page: this.page,
         },
-        queryParamsHandling: 'merge',
+        queryParamsHandling: "merge",
       });
     }
 
-    this.listPostService
-      .searchPostRecruitment(this.keyword)
-      .subscribe((res) => {
-        console.log(res.payload);
-        
-        if (res.status && res.payload.data.length > 0) {
-          this.statusPostSearch = true;
-          this.listPostResult = res.payload.data;
-          this.statusPost = true;
-        } else {
-          this.statusPostSearch = false;
-          this.getListPost();
-        }
-      });
+    this.listPostService.searchPostRecruitment(this.keyword).subscribe((res) => {
+      console.log(res.payload);
+
+      if (res.status && res.payload.data.length > 0) {
+        this.statusPostSearch = true;
+        this.listPostResult = res.payload.data;
+        this.statusPost = true;
+      } else {
+        this.statusPostSearch = false;
+        this.getListPost();
+      }
+    });
 
     this.recruitmentService
-      .filterRecruitment(
-        this.keyword,
-        this.major_id,
-        this.status,
-        this.skill_id,
-        this.page
-      )
+      .filterRecruitment(this.keyword, this.major_id, this.status, this.skill_id, this.page)
       .subscribe((res) => {
         if (res.status) {
           this.statusRecruitments = true;
@@ -356,12 +320,12 @@ export class RecruitmentComponent implements OnInit {
 
   filterSkill(event: any, id: number) {
     this.statusRecruitments = false;
-    const skills = document.querySelectorAll('.filter-skill-item');
+    const skills = document.querySelectorAll(".filter-skill-item");
     for (let index = 0; index < skills.length; index++) {
       const element = skills[index];
-      element.classList.remove('active');
+      element.classList.remove("active");
     }
-    event.currentTarget.classList.add('active');
+    event.currentTarget.classList.add("active");
     if (id == 0) {
       this.resetFilter();
     } else {
@@ -383,64 +347,61 @@ export class RecruitmentComponent implements OnInit {
 
   // Cập nhất tất cả trạng thái về more
   resetFilter() {
-    this.formFilter.controls['filterMajor'].setValue('');
-    this.formFilter.controls['filterStatus'].setValue('');
-    this.formFilter.controls['filterName'].setValue('');
-    this.keyword = '';
-    this.major_id = '';
-    this.skill_id = '';
-    this.status = '';
-    this.location.replaceState('');
+    this.formFilter.controls["filterMajor"].setValue("");
+    this.formFilter.controls["filterStatus"].setValue("");
+    this.formFilter.controls["filterName"].setValue("");
+    this.keyword = "";
+    this.major_id = "";
+    this.skill_id = "";
+    this.status = "";
+    this.location.replaceState("");
     this.filterRecruitments();
   }
 
   // Ẩn gợi ý khi seach ko ra kết quả
   noneSuggestFilter() {
-    const keywordSugg = document.querySelectorAll(
-      '.input__search-keyword--sugg'
-    );
+    const keywordSugg = document.querySelectorAll(".input__search-keyword--sugg");
     keywordSugg.forEach((item) => {
-      item.classList.add('d-none');
+      item.classList.add("d-none");
     });
   }
 
   getAllPost() {
-    if (this.keyword !== '') {
-      this.router.navigate(['/tim-kiem/bai-viet'], {
+    if (this.keyword !== "") {
+      this.router.navigate(["/tim-kiem/bai-viet"], {
         queryParams: {
           keyword: this.keyword,
         },
-        queryParamsHandling: 'merge',
+        queryParamsHandling: "merge",
       });
     } else {
-      this.router.navigate(['/danh-muc-bai-viet'], {
+      this.router.navigate(["/danh-muc-bai-viet"], {
         queryParams: {
-          cate: 'post-recruitment',
+          cate: "post-recruitment",
         },
-        queryParamsHandling: 'merge',
+        queryParamsHandling: "merge",
       });
     }
   }
 
   // Back top after load page
   backTop() {
-    $('html , body').animate(
+    $("html , body").animate(
       {
         scrollTop: 0,
       },
-      1000
+      1000,
     );
   }
 
-
   // Check time  finish recruitment
-  checkTimeEndRecrument(date: string) : boolean{
-    let isCheck : boolean;
+  checkTimeEndRecrument(date: string): boolean {
+    let isCheck: boolean;
     let dayCheck = new Date(date).getDay();
     let monthCheck = new Date(date).getMonth();
     let nowTime = new Date().getDay();
     let monthTime = new Date().getMonth();
-    isCheck =  (nowTime > dayCheck && monthCheck == monthTime) || monthCheck < monthTime ? false :  true;
+    isCheck = (nowTime > dayCheck && monthCheck == monthTime) || monthCheck < monthTime ? false : true;
     return isCheck;
   }
 }

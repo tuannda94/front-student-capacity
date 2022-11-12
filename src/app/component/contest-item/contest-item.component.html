@@ -24,10 +24,6 @@
           title="{{ item.name }}"
         >
           {{ item.name }}
-          <span class="fw-normal" style="font-size: 15px"
-            >({{ item.status == 1 ? "Thời gian bắt đầu : " : "Ngày kết thúc : "
-            }}{{ checkDateContest(item) | formatDate }})</span
-          >
         </a>
       </h3>
       <ul *ngIf="checkStatusContest(item, 2) == 0" class="my-countdown">
@@ -49,7 +45,7 @@
         </li>
       </ul>
       <p *ngIf="checkStatusContest(item, 2) != 0">
-        {{ checkStatusContest(item, 2) == 1 ? "Sẽ diễn ra: " : checkStatusContest(item, 2) }}TG:{{
+        {{ checkStatusContest(item, 2) == 1 ? "Sắp diễn ra: " : checkStatusContest(item, 2) }}TG:{{
           checkStatusContest(item, 2) == 1 ? (item.date_start | formatDate) : (item.date_end | formatDate)
         }}
       </p>
@@ -72,12 +68,22 @@
         </div>
       </div>
       <a
+        *ngIf="!isRelate"
         [class.disabled]="!disabled"
         routerLink="/cuoc-thi/{{ item.id }}"
         [state]="{ registerNow: item.status_user_has_join_contest }"
       >
         <button
           class="my-btn-primary my-btn-xs"
+          [ngClass]="item.status == 1 || item.status == 0 ? 'my-btn-primary' : 'my-btn-disabled'"
+        >
+          {{ checkStatusContest(item, 1) }}
+        </button>
+      </a>
+      <a *ngIf="isRelate" [class.disabled]="!disabled">
+        <button
+          class="my-btn-primary my-btn-xs"
+          (click)="isContestRelate(item.id)"
           [ngClass]="item.status == 1 || item.status == 0 ? 'my-btn-primary' : 'my-btn-disabled'"
         >
           {{ checkStatusContest(item, 1) }}

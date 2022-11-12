@@ -181,6 +181,12 @@ export class IntoExamComponent implements OnInit {
         duration: 5000,
         detail: "Cảnh báo",
       });
+    } else if (files[0].size > 1000000) {
+      this.toast.warning({
+        summary: "Dung lượng quá lớn !!!",
+        duration: 5000,
+        detail: "Cảnh báo",
+      });
     } else {
       this.statusSubmitExam = false;
       var resultExam = new FormData();
@@ -286,18 +292,6 @@ export class IntoExamComponent implements OnInit {
       summary: "Đã copy !!!",
       detail: "Thông báo",
       duration: 5000,
-    });
-  }
-
-  // Thông tin chi tiết của đội thi
-  openInfoTeamDetail() {
-    this.dialog.open(ModalInfoTeamComponent, {
-      width: "900px",
-      data: {
-        statusExam: true,
-        contest_id: this.contestId,
-        team_id: this.teamDetail.id,
-      },
     });
   }
 

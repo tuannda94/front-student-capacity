@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Contest } from 'src/app/models/contest';
-import { ContestService } from 'src/app/services/contest.service';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Contest } from "src/app/models/contest";
+import { ContestService } from "src/app/services/contest.service";
+import { MatDialog } from "@angular/material/dialog";
 
-import { RoundService } from 'src/app/services/round.service';
-import { ResultRound } from 'src/app/models/result-round.model';
-import { UserService } from 'src/app/services/user.service';
-import * as $ from 'jquery';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { User } from 'src/app/models/user';
-import { TransmitToPost } from 'src/app/models/transmit-to-post.models';
-import { ListPostService } from 'src/app/services/list-post.service';
-import { Post } from 'src/app/models/post.model';
-import { Title } from '@angular/platform-browser';
-import { Location } from '@angular/common';
+import { RoundService } from "src/app/services/round.service";
+import { ResultRound } from "src/app/models/result-round.model";
+import { UserService } from "src/app/services/user.service";
+import * as $ from "jquery";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { User } from "src/app/models/user";
+import { TransmitToPost } from "src/app/models/transmit-to-post.models";
+import { ListPostService } from "src/app/services/list-post.service";
+import { Post } from "src/app/models/post.model";
+import { Title } from "@angular/platform-browser";
+import { Location } from "@angular/common";
 @Component({
-  selector: 'app-contest-deatail',
-  templateUrl: './contest-deatail.component.html',
-  styleUrls: ['./contest-deatail.component.css'],
+  selector: "app-contest-deatail",
+  templateUrl: "./contest-deatail.component.html",
+  styleUrls: ["./contest-deatail.component.css"],
 })
 export class ContestDeatailComponent implements OnInit {
   round_id: number;
@@ -34,8 +34,8 @@ export class ContestDeatailComponent implements OnInit {
   };
   // ---------------------------
   payLinkArrayResult: Array<any>;
-  payLinkNextResult: string = '';
-  payLinkPrevResult: string = '';
+  payLinkNextResult: string = "";
+  payLinkPrevResult: string = "";
 
   contestDetail: Contest;
   contestRelated: Array<any>;
@@ -58,8 +58,8 @@ export class ContestDeatailComponent implements OnInit {
     infinite: true,
     autoplay: true,
     arrows: true,
-    prevArrow: '.supporters-arrow-left',
-    nextArrow: '.supporters-arrow-right',
+    prevArrow: ".supporters-arrow-left",
+    nextArrow: ".supporters-arrow-right",
     slidesToScroll: 1,
     fadeSpeed: 1000,
   };
@@ -73,45 +73,43 @@ export class ContestDeatailComponent implements OnInit {
     private userService: UserService,
     private modalService: NgbModal,
     private title: Title,
-    private location: Location
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Chi tiết cuộc thi');
+    this.title.setTitle("Chi tiết cuộc thi");
 
     // Check user đã đăng nhập hay chưa
-    this.userService.getUserValue()
-      ? (this.statusUserLogin = true)
-      : this.statusUserLogin;
+    this.userService.getUserValue() ? (this.statusUserLogin = true) : this.statusUserLogin;
     this.runTop();
     this.routeStateRegister = history.state.registerNow;
 
-    this.contest_id = this.route.snapshot.paramMap.get('contest_id');
-    this.contestService.getWhereId(this.contest_id).subscribe((res) => {
-      if (res.status) {
-        this.contestDetail = res.payload;
-        this.contestDetail.rounds.length > 0 && this.getResultRank('desc');
-        this.contestDetail ? (this.statusContest = true) : this.statusContest;
-      }
-    });
+    this.contest_id = this.route.snapshot.paramMap.get("contest_id");
+    try {
+      this.contestService.getWhereId(this.contest_id).subscribe((res) => {
+        if (res.status) {
+          this.contestDetail = res.payload;
+          this.contestDetail.rounds.length > 0 && this.getResultRank("desc");
+          this.contestDetail ? (this.statusContest = true) : this.statusContest;
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
     this.getListPost();
 
     // Các cuộc thi liên quan
-    this.contestService
-      .getContestWhereMajor(this.contest_id)
-      .subscribe((res) => {
-        if (res.status)
-          this.contestRelated = res.payload.data.filter((item: Contest) => {
-            return item.id != this.contest_id;
-          });
-        if (this.contestRelated) {
-          this.statusContestRelated = true;
-          this.contestRelated.length > 0
-            ? (this.countContestRelated = true)
-            : this.countContestRelated;
-        }
-      });
+    this.contestService.getContestWhereMajor(this.contest_id).subscribe((res) => {
+      if (res.status)
+        this.contestRelated = res.payload.data.filter((item: Contest) => {
+          return item.id != this.contest_id;
+        });
+      if (this.contestRelated) {
+        this.statusContestRelated = true;
+        this.contestRelated.length > 0 ? (this.countContestRelated = true) : this.countContestRelated;
+      }
+    });
   }
 
   //List post relate
@@ -143,17 +141,13 @@ export class ContestDeatailComponent implements OnInit {
 
   sortResult(status: boolean) {
     this.statusLinks = false;
-    status ? this.getResultRank('desc') : this.getResultRank('asc');
+    status ? this.getResultRank("desc") : this.getResultRank("asc");
   }
 
   // Mở model thêm đội thi
   getResultRank(sort: string) {
     this.roundService
-      .getResultRound(
-        this.contestDetail.rounds[this.contestDetail.rounds.length - 1].id,
-        sort,
-        6
-      )
+      .getResultRound(this.contestDetail.rounds[this.contestDetail.rounds.length - 1].id, sort, 6)
       .subscribe((res) => {
         if (res.status) {
           this.resultRank = res.payload.data;
@@ -171,15 +165,15 @@ export class ContestDeatailComponent implements OnInit {
   scrollWin(elementString: any, distanceApart: number) {
     let element = document.querySelector(elementString);
     let numberScroll = element.offsetTop;
-    window.scrollTo({ top: numberScroll - distanceApart, behavior: 'smooth' });
+    window.scrollTo({ top: numberScroll - distanceApart, behavior: "smooth" });
   }
 
   runTop() {
-    $('html , body').animate(
+    $("html , body").animate(
       {
         scrollTop: 0,
       },
-      1000
+      1000,
     );
   }
 

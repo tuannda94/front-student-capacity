@@ -102,8 +102,8 @@
         <div *ngIf="statusTeamDetail == true" class="title-line"></div>
         <div class="my-3 bg-white team-detail-box pb-3">
           <div *ngIf="statusTeamDetail == true" style="border-radius: 10px">
-            <div class="info-your-team text-center" ngbTooltip="Xem chi tiết">
-              <div (click)="openInfoTeamDetail()" class="p-3 bg-white">
+            <div class="info-your-team text-center">
+              <div class="p-3 bg-white">
                 <img class="info-your-team-avatar" [src]="teamDetail.image" alt="" />
                 <h3 class="fw-bold mt-2 color-blue">{{ teamDetail.name }}</h3>
                 <p>Tổng số : {{ teamDetail.members.length }} thành viên</p>
@@ -275,7 +275,7 @@
                     <mat-tab label="Link" [disabled]="assignmentFiles" color="warn">
                       <div class="submit-assignment-box">
                         <input
-                          (blur)="submitExamByLink($event)"
+                          (keyup)="submitExamByLink($event)"
                           [disabled]="assignmentLinks"
                           type="text"
                           value=""
@@ -335,9 +335,9 @@
           </div>
           <div class="p-3" *ngIf="statusInfo == true && !infoExam">
             <ngx-skeleton-loader [theme]="{ height: '30px' }" appearance="line"> </ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line"> </ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line"> </ngx-skeleton-loader>
-            <ngx-skeleton-loader [theme]="{ height: '50px' }" appearance="line"> </ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '20px' }" appearance="line"> </ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '20px' }" appearance="line"> </ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ height: '30px' }" appearance="line"> </ngx-skeleton-loader>
           </div>
         </div>
         <div *ngIf="statusInfo == false && infoExam" class="node-submit-assignment mt-2 bg-white">

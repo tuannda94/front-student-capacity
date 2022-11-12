@@ -1,71 +1,52 @@
 <div class="header bg-white">
   <nav class="container d-flex justify-content-between align-items-center">
-    <div class="nav-response">
-      <label class="icon-open-nav-mobile" for="input_check">
+    <!-- icon bar mobile -->
+    <div class="nav-response flex-2 d-block d-lg-none">
+      <div class="icon-open-nav-mobile d-inline-block" (click)="handleToggleMenuMobile()">
         <i class="fas fa-bars"></i>
-      </label>
-      <input #inputChecked hidden class="input-menu" type="checkbox" id="input_check" />
-
-      <label for="input_check" class="over__lay"> </label>
-
-      <div class="menu-response">
-        <div class="border-bottom">
-          <label for="input_check" class="close-menu h-1 float-end">
-            <i class="fas fa-times"></i>
-          </label>
-        </div>
-        <ul class="menu-res mt-5 border-top">
-          <li (click)="closeMenuRes(inputChecked)" class="menu-res-item">
-            <a routerLink="/" class="menu-res-link text-decoration-none"> Trang chủ </a>
-          </li>
-          <li class="menu-res-item">
-            <a routerLink="/cuoc-thi" class="menu-res-link text-decoration-none"> Cuộc thi </a>
-          </li>
-          <li class="menu-res-item">
-            <a href="" class="menu-res-link text-decoration-none"> Test năng lực </a>
-          </li>
-          <li class="menu-res-item">
-            <a href="" class="menu-res-link text-decoration-none"> Tuyển dụng </a>
-          </li>
-        </ul>
-
-        <div class="logo-nav-bar-res text-center">
-          <img class="w-75" src="./../../../assets/img/logo.png" alt="" />
-        </div>
       </div>
     </div>
 
     <a routerLink="/" class="img-header-box">
       <img class="" src="./../../../assets/img/logo.png" alt="" />
     </a>
-    <div class="menu-desktop d-flex align-self-stretch">
+
+    <div class="menu-desktop d-none d-lg-flex align-self-stretch">
       <div class="d-flex" id="menu_login-box">
         <ul class="nav menu_login-box d-flex align-items-center mr-auto home-nav pr-2">
-          <li
-            class="nav-item align-self-stretch d-flex align-items-center"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a
-              class="fw-bold text-decoration-none nav-link-item p-0 align-self-stretch d-flex align-items-center"
-              routerLink="/"
-              >Trang chủ</a
-            >
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="fw-bold text-decoration-none nav-link-item" routerLink="/">Trang chủ</a>
           </li>
-          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
-            <a
-              class="fw-bold text-decoration-none nav-link-item p-0 align-self-stretch d-flex align-items-center"
-              [routerLink]="['/cuoc-thi']"
-            >
-              Cuộc thi
-            </a>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="fw-bold nav-link-item text-decoration-none" [routerLink]="['/cuoc-thi']"> Cuộc thi </a>
           </li>
 
+          <li class="nav-item" routerLinkActive="active">
+            <div class="position-relative fw-bold nav-link-item text-decoration-none d-flex align-items-center">
+              <span [routerLink]="['/tuyen-dung']">Tuyển dụng</span>
+              <div class="nav-item__icon">
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+
+              <ul class="sub-menu position-absolute">
+                <li class="sub-menu__item">
+                  <a class="sub-menu__link fw-bold nav-link-item text-decoration-none" [routerLink]="['/tuyen-dung']">
+                    Tin tuyển dụng
+                  </a>
+                </li>
+                <li class="sub-menu__item">
+                  <a class="sub-menu__link fw-bold nav-link-item text-decoration-none" routerLink="/test-nang-luc">
+                    Test năng lực
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
             <div
               class="fw-bold position-relative text-decoration-none nav-link-item p-0 align-self-stretch d-flex align-items-center"
             >
-              <span [routerLink]="['/tuyen-dung']">Tuyển dụng</span>
+              <span>Thử thách</span>
               <div class="nav-item__icon">
                 <i class="fa-solid fa-caret-down"></i>
               </div>
@@ -74,28 +55,21 @@
                 <li class="sub-menu__item" routerLinkActive="active">
                   <a
                     class="fw-bold sub-menu__link fw-bold nav-link-item text-decoration-none"
-                    [routerLink]="['/tuyen-dung']"
+                    [routerLink]="['/capacity-join']"
                   >
-                    Tin tuyển dụng
+                    Trò chơi trực tiếp
                   </a>
                 </li>
                 <li class="sub-menu__item" routerLinkActive="active">
-                  <a
-                    class="fw-bold sub-menu__link fw-bold nav-link-item text-decoration-none"
-                    routerLink="/test-nang-luc"
+                  <a class="fw-bold sub-menu__link fw-bold nav-link-item text-decoration-none" routerLink="/challenge"
+                    >Thử thách mã</a
                   >
-                    Test năng lực
-                  </a>
                 </li>
               </ul>
             </div>
           </li>
-          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
-            <a
-              class="fw-bold text-decoration-none nav-link-item p-0 align-self-stretch d-flex align-items-center"
-              routerLink="/bai-viet"
-              >Bài viết</a
-            >
+          <li class="nav-item" routerLinkActive="active">
+            <a class="fw-bold nav-link-item text-decoration-none" routerLink="/bai-viet"> Bài viết </a>
           </li>
 
           <li *ngIf="user" (click)="openSaveInfo()" class="open-save-info">
@@ -107,7 +81,7 @@
             ></i>
           </li>
 
-          <li *ngIf="!user" class="btn-login-desktop">
+          <li *ngIf="!user" class="btn-login-desktop d-none d-lg-block">
             <a (click)="saveUrlCurrent()" routerLink="/login" class="">
               <button class="my-btn-primary my-btn-s">Đăng nhập</button>
             </a>
@@ -134,28 +108,45 @@
         </ul>
       </div>
     </div>
-    <a routerLink="/login" *ngIf="!user" class="fa-icon-login">
-      <fa-icon [icon]="['fas', 'sign-in-alt']"></fa-icon>
-    </a>
-    <div *ngIf="user" class="avatar-user-desktop">
-      <img
-        *ngIf="user.avatar"
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        class="header-avatar-user"
-        [src]="user.avatar"
-        alt=""
-      />
-      <mat-menu class="mt-2" #menu="matMenu">
-        <button mat-menu-item routerLink="/tai-khoan">
-          <span>Thông tin tài khoản</span>
-        </button>
-        <button (click)="logOut()" mat-menu-item>
-          <span>Đăng xuất</span>
-        </button>
-      </mat-menu>
-    </div>
+
+    <!-- icon right mobile -->
+    <ul class="header__mobile-right d-flex d-lg-none m-0 flex-2 justify-content-end">
+      <li *ngIf="user" (click)="openSaveInfo()" class="open-save-info">
+        <i
+          [matBadge]="getCountAll()"
+          matBadgePosition="after"
+          class="fa-solid fs-5 fa-bookmark"
+          matBadgeColor="warn"
+        ></i>
+      </li>
+
+      <li *ngIf="!user">
+        <a (click)="saveUrlCurrent()" routerLink="/login">
+          <button class="my-btn my-btn-primary my-btn-xs">Đăng nhập</button>
+        </a>
+      </li>
+
+      <li *ngIf="user">
+        <img
+          *ngIf="user.avatar"
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          class="header-avatar-user"
+          [src]="user.avatar"
+          alt=""
+        />
+        <mat-menu class="mt-2" #menu="matMenu">
+          <button mat-menu-item routerLink="/tai-khoan">
+            <span>Thông tin tài khoản</span>
+          </button>
+          <button (click)="logOut()" mat-menu-item>
+            <span>Đăng xuất</span>
+          </button>
+        </mat-menu>
+      </li>
+    </ul>
   </nav>
+
   <div id="mySidepanel" class="sidepanel">
     <div class="p-3">
       <header class="d-flex justify-content-between align-items-center">
@@ -166,10 +157,10 @@
       </header>
       <ul class="sidepanel__nav-list my-3">
         <li class="sidepanel__nav-item contest active" (click)="getContestStatus($event)">
-          <a class="sidepanel__nav-link">Cuộc Thi ({{ countContest }})</a>
+          <a class="sidepanel__nav-link">Cuộc Thi ({{ countPost }})</a>
         </li>
         <li class="sidepanel__nav-item post" (click)="getPostStatus($event)">
-          <a [attr.disabled]="!statusPage" class="sidepanel__nav-link">Tuyển dụng ({{ countPost }})</a>
+          <a [attr.disabled]="!statusPage" class="sidepanel__nav-link">Tuyển dụng ({{ countContest }})</a>
         </li>
       </ul>
       <div *ngIf="statusPage" class="sidepanel__nav-content">
@@ -206,3 +197,81 @@
   </div>
 </div>
 <div (click)="closeSaveInfo(true)" class="overlay d-none"></div>
+
+<!-- menu mobile -->
+<div class="menu-mobile" [ngClass]="{ active: isOpenMenuMobile }">
+  <div class="menu-mobile__overlay" (click)="handleToggleMenuMobile()"></div>
+
+  <div class="menu-response">
+    <div class="border-bottom">
+      <div (click)="handleToggleMenuMobile()" class="close-menu h-1 float-end">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+
+    <ul class="menu-res mt-5 border-top">
+      <li class="menu-res-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a (click)="handleToggleMenuMobile()" class="fw-bold text-decoration-none nav-link-item" routerLink="/"
+          >Trang chủ</a
+        >
+      </li>
+      <li class="menu-res-item" routerLinkActive="active">
+        <a
+          class="fw-bold nav-link-item text-decoration-none"
+          (click)="handleToggleMenuMobile()"
+          [routerLink]="['/cuoc-thi']"
+        >
+          Cuộc thi
+        </a>
+      </li>
+
+      <li class="menu-res-item" routerLinkActive="active">
+        <a
+          class="fw-bold nav-link-item text-decoration-none"
+          (click)="handleToggleMenuMobile()"
+          [routerLink]="['/tuyen-dung']"
+        >
+          Tin tuyển dụng
+        </a>
+      </li>
+
+      <li class="menu-res-item" routerLinkActive="active">
+        <a
+          (click)="handleToggleMenuMobile()"
+          class="fw-bold nav-link-item text-decoration-none"
+          routerLink="/test-nang-luc"
+        >
+          Test năng lực</a
+        >
+      </li>
+
+      <li class="menu-res-item" routerLinkActive="active">
+        <a
+          (click)="handleToggleMenuMobile()"
+          class="fw-bold nav-link-item text-decoration-none"
+          [routerLink]="['/capacity-join']"
+          >Thử thách
+        </a>
+      </li>
+
+      <li class="menu-res-item" routerLinkActive="active">
+        <a
+          (click)="handleToggleMenuMobile()"
+          class="fw-bold nav-link-item text-decoration-none"
+          [routerLink]="['/cuoc-thi']"
+          >Trò chơi trực tiếp</a
+        >
+      </li>
+
+      <li class="menu-res-item" routerLinkActive="active">
+        <a (click)="handleToggleMenuMobile()" class="fw-bold nav-link-item text-decoration-none" routerLink="/bai-viet">
+          Bài viết
+        </a>
+      </li>
+
+      <a routerLink="/" class="responsive-logo text-center">
+        <img class="" (click)="handleToggleMenuMobile()" src="./../../../assets/img/logo.png" alt="" />
+      </a>
+    </ul>
+  </div>
+</div>

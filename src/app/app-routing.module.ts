@@ -7,22 +7,24 @@ import { HomeLayoutComponent } from "./layouts/home-layout/home-layout.component
 import { ContestDeatailComponent } from "./pages/contest-detail/contest-deatail.component";
 import { ProfileUserComponent } from "./component/profile-user/profile-user.component";
 import { ContestUserJoinComponent } from "./component/contest-user-join/contest-user-join.component";
-import { PostDetailComponent } from './pages/post-detail/post-detail.component';
-import { PostResultSearchComponent } from './pages/post-result-search/post-result-search.component';
+import { PostDetailComponent } from "./pages/post-detail/post-detail.component";
+import { PostResultSearchComponent } from "./pages/post-result-search/post-result-search.component";
 import { ProfileLayoutComponent } from "./layouts/profile-layout/profile-layout.component";
 import { MyCapacityTestComponent } from "./pages/my-capacity-test/my-capacity-test.component";
 import { AuthGuard } from "./guard/auth.guard";
-import { IntoExamComponent } from './pages/into-exam/into-exam.component';
-import { RoundContestDetailComponent } from './pages/round-contest-detail/round-contest-detail.component';
-import { RecruitmentComponent } from './pages/recruitment/recruitment.component';
-import { CapacityDetailComponent } from './pages/capacity-detail/capacity-detail.component';
-import { CapacityExamComponent } from './pages/capacity-exam/capacity-exam.component';
-import { PostsComponent } from './pages/posts/posts.component';
-import { RecruitmentDetailComponent } from './pages/recruitment-detail/recruitment-detail.component';
-import { TestCapacityComponent } from './pages/test-capacity/test-capacity.component';
-
-import { PostCategoryComponent } from './pages/post-category/post-category.component';
+import { IntoExamComponent } from "./pages/into-exam/into-exam.component";
+import { RoundContestDetailComponent } from "./pages/round-contest-detail/round-contest-detail.component";
+import { RecruitmentComponent } from "./pages/recruitment/recruitment.component";
+import { CapacityDetailComponent } from "./pages/capacity-detail/capacity-detail.component";
+import { CapacityExamComponent } from "./pages/capacity-exam/capacity-exam.component";
+import { PostsComponent } from "./pages/posts/posts.component";
+import { RecruitmentDetailComponent } from "./pages/recruitment-detail/recruitment-detail.component";
+import { TestCapacityComponent } from "./pages/test-capacity/test-capacity.component";
+import { PostCategoryComponent } from "./pages/post-category/post-category.component";
+import { JoinCapacityComponent } from "./pages/join-capacity/join-capacity.component";
+import { CapacityPlayComponent } from "./pages/capacity-play/capacity-play.component";
 import { RankCapacityComponent } from "./pages/rank-capacity/rank-capacity.component";
+
 const routes: Routes = [
   {
     path: "",
@@ -34,28 +36,28 @@ const routes: Routes = [
       },
       {
         path: "cuoc-thi",
-        data: { title: 'Cuộc thi' },
+        data: { title: "Cuộc thi" },
         component: ContestComponent,
       },
       {
         path: "bai-viet",
-        data: { title: 'Bài viết' },
+        data: { title: "Bài viết" },
         component: PostsComponent,
       },
       {
-        path: 'bai-viet/:slug',
+        path: "bai-viet/:slug",
         component: PostDetailComponent,
       },
       {
-        path: 'danh-muc-bai-viet',
+        path: "danh-muc-bai-viet",
         component: PostCategoryComponent,
       },
       {
-        path: 'tim-kiem/bai-viet',
+        path: "tim-kiem/bai-viet",
         component: PostResultSearchComponent,
       },
       {
-        path: 'vao-thi/:contest_id/vong/:round_id',
+        path: "vao-thi/:contest_id/vong/:round_id",
         component: IntoExamComponent,
       },
       {
@@ -116,6 +118,14 @@ const routes: Routes = [
       {
         path: "test-nang-luc/vao-thi/:capacity_id/bai-thi/:round_id",
         component: CapacityExamComponent,
+      },
+      {
+        path: "capacity-join",
+        component: JoinCapacityComponent,
+      },
+      {
+        path: "capacity-play/:code",
+        component: CapacityPlayComponent,
       },
       {
         path: "test-nang-luc",

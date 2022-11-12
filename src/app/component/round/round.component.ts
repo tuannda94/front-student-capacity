@@ -19,7 +19,6 @@ export class RoundComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // console.log(this.contestDetail.rounds);
   }
 
   setStep(index: number) {
@@ -28,6 +27,7 @@ export class RoundComponent implements OnInit {
 
   // Lấy image ban giám khảo
   getImageJudges(judges: any): Array<any> {
+    
     let arrayImage: any = [];
     let imageItem = {
       avatar: '',

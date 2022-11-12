@@ -1,4 +1,4 @@
-const baseApiUrl = "http://127.0.0.1:8000/api";
+const baseApiUrl = "https://admin.svpoly.breezecandles.vn/api";
 const authApi = `${baseApiUrl}/auth`;
 export const jwtApiUrl = `${baseApiUrl}/v1`;
 export const publicApiUrl = `${baseApiUrl}/public`;
@@ -22,6 +22,9 @@ export const environment = {
   keywordListUrl: `${publicApiUrl}/keywords`,
   keywordTrendingUrl: `${publicApiUrl}/keywords`,
   RankCapacityUrl: `${publicApiUrl}/rating/major-capacity`,
+  challengeListUrl: `${publicApiUrl}/challenge`,
+  codeLanguageListUrl: `${publicApiUrl}/code-language`,
+
   // Router API V1;
   userListUrl: `${jwtApiUrl}/users`,
   roundV1Url: `${jwtApiUrl}/round`,
@@ -29,6 +32,6 @@ export const environment = {
   teamListUrl: `${jwtApiUrl}/teams`,
   takeExamUrl: `${jwtApiUrl}/take-exam`,
   userV1Url: `${jwtApiUrl}/user`,
+  challengeV1Url: `${jwtApiUrl}/challenge`,
   wishListV1Url: `${jwtApiUrl}/wishlist`,
 };
-

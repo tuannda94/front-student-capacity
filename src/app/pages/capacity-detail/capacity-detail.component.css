@@ -66,6 +66,12 @@
   color: var(--primary);
 }
 
+.capacity__related-top-1 {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
 /* start: Avatar */
 .avatar-group {
   display: flex;

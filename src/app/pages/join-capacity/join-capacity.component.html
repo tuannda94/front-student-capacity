@@ -1,0 +1,24 @@
+<div class="capacity__container">
+  <div class="capacity__container-overlay"></div>
+  <form
+    action=""
+    method="post"
+    class="capacity__container-form"
+    (ngSubmit)="handleCheckCode()"
+    [formGroup]="formCheckCode"
+  >
+    <img class="capacity__container-logo" src="../../../assets/img/capacity-join.gif" alt="" />
+    <input
+      type="text"
+      class="form-control"
+      formControlName="code"
+      aria-describedby="helpId"
+      placeholder="Nhập code trò chơi"
+      autofocus
+    />
+    <button class="mt-2 my-btn my-btn-primary my-btn-m btn-enter">Vào chơi</button>
+  </form>
+</div>
+
+<!-- loading overlay -->
+<app-loading-overlay [active]="isCheckCode"></app-loading-overlay>

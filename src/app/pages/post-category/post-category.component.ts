@@ -7,74 +7,82 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-post-category',
   templateUrl: './post-category.component.html',
-  styleUrls: ['./post-category.component.css']
+  styleUrls: ['./post-category.component.css'],
 })
 export class PostCategoryComponent implements OnInit {
-  ListPost: Post[] | null
-
+  ListPost: Post[] | null;
 
   constructor(
-    private postService : ListPostService,
+    private postService: ListPostService,
     private router: Router,
     private route: ActivatedRoute,
     private titleService: Title
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.titleService.setTitle('Danh Mục Bài Viết');
+    this.backTop();
+    let typePost = this.route.snapshot.queryParamMap.get('cate');
+    if (typePost == 'post-recruitment') {
+      let listTab = document.querySelectorAll('.post__nav-item');
+      let type = document.querySelector('.recruitment');
 
-    let typePost= this.route.snapshot.queryParamMap.get('cate')
-    if(typePost == 'post-recruitment'){
-      let listTab = document.querySelectorAll('.post__nav-item')
-      let type = document.querySelector('.recruitment')
-
-      listTab.forEach(item =>{
-        item.classList.remove('active')
-      })
-      type?.classList.add('active')
-      this.postService.getPostByCategory(typePost).subscribe(res => {
-        if(res.status){
-          this.ListPost = res.payload.data
+      listTab.forEach((item) => {
+        item.classList.remove('active');
+      });
+      type?.classList.add('active');
+      this.postService.getPostByCategory(typePost).subscribe((res) => {
+        if (res.status) {
+          this.ListPost = res.payload.data;
         }
-      })
-    }else if(typePost == 'post-capacity'){
-      let listTab = document.querySelectorAll('.post__nav-item')
-      let type = document.querySelector('.capacity')
+      });
+    } else if (typePost == 'post-capacity') {
+      let listTab = document.querySelectorAll('.post__nav-item');
+      let type = document.querySelector('.capacity');
 
-      listTab.forEach(item =>{
-        item.classList.remove('active')
-      })
-      type?.classList.add('active')
-      this.postService.getPostByCategory(typePost).subscribe(res => {
-        if(res.status){
-          this.ListPost = res.payload.data
+      listTab.forEach((item) => {
+        item.classList.remove('active');
+      });
+      type?.classList.add('active');
+      this.postService.getPostByCategory(typePost).subscribe((res) => {
+        if (res.status) {
+          this.ListPost = res.payload.data;
         }
-      })
-    }else if(typePost == 'post-contest'){
-      let listTab = document.querySelectorAll('.post__nav-item')
-      let type = document.querySelector('.contest')
+      });
+    } else if (typePost == 'post-contest') {
+      let listTab = document.querySelectorAll('.post__nav-item');
+      let type = document.querySelector('.contest');
 
-      listTab.forEach(item =>{
-        item.classList.remove('active')
-      })
-      type?.classList.add('active')
-      this.postService.getPostByCategory(typePost).subscribe(res => {
-        if(res.status){
-          this.ListPost = res.payload.data
+      listTab.forEach((item) => {
+        item.classList.remove('active');
+      });
+      type?.classList.add('active');
+      this.postService.getPostByCategory(typePost).subscribe((res) => {
+        if (res.status) {
+          this.ListPost = res.payload.data;
         }
-      })
+      });
     }
-    
   }
 
-  getListPost(){
-    this.postService.getPostByCategory("post-recruitment").subscribe(res => {
-       if(res.status){
-        this.ListPost = res.payload.data
-       }
-    })
+  // Change screen back top
+  backTop() {
+    $('html , body').animate(
+      {
+        scrollTop: 0,
+      },
+      1000
+    );
   }
-  onChangeDataPost(event: any,  data: string){
+
+  getListPost() {
+    this.postService.getPostByCategory('post-recruitment').subscribe((res) => {
+      if (res.status) {
+        this.ListPost = res.payload.data;
+      }
+    });
+  }
+  onChangeDataPost(event: any, data: string) {
     const statusAll = document.querySelectorAll('.post__nav-item');
     for (let i = 0; i < statusAll.length; i++) {
       statusAll[i]?.classList.remove('active');
@@ -84,13 +92,11 @@ export class PostCategoryComponent implements OnInit {
 
     this.router.navigateByUrl(`danh-muc-bai-viet?cate=${data}`);
 
-    this.ListPost = null
-      this.postService.getPostByCategory(data).subscribe(res => {
-        if(res.status){
-          this.ListPost = res.payload.data
-        }
-      })
-   
+    this.ListPost = null;
+    this.postService.getPostByCategory(data).subscribe((res) => {
+      if (res.status) {
+        this.ListPost = res.payload.data;
+      }
+    });
   }
- 
 }

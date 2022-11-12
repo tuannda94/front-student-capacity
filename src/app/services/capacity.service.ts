@@ -1,9 +1,10 @@
+import { jwtApiUrl } from "./../../environments/environment";
 import { Observable } from "rxjs";
-import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { ResponsePayload } from "../models/response-payload";
 import { ResponseCapacityHistory } from "../models/capacity";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -33,5 +34,22 @@ export class CapacityService {
     return this.http.post<ResponseCapacityHistory>(`${environment.takeExamUrl}/student-capacity-history`, {
       result_capacity_id: capacity_id,
     });
+  }
+
+  // real time
+  checkCode(code: string): Observable<ResponsePayload> {
+    return this.http.get<ResponsePayload>(`${jwtApiUrl}/auth-room-play/${code}`);
+  }
+
+  connectRoom(code: string): Observable<ResponsePayload> {
+    return this.http.get<ResponsePayload>(`${jwtApiUrl}/connect-room/${code}`);
+  }
+
+  submitCode(code: string, data: any): Observable<ResponsePayload> {
+    return this.http.post<ResponsePayload>(`${jwtApiUrl}/sumit-room/${code}`, data);
+  }
+
+  nextSubmitCode(code: string, data: any): Observable<ResponsePayload> {
+    return this.http.post<ResponsePayload>(`${jwtApiUrl}/next-sumit-room/${code}`, data);
   }
 }

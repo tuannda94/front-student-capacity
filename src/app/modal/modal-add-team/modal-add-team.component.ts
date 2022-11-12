@@ -52,7 +52,7 @@ export class ModalAddTeamComponent implements OnInit {
 
     config: NgbModalConfig,
     @Inject(MAT_DIALOG_DATA)
-    public data: { contest_id: string; team_id: number; teams: Team }
+    public data: { contest_id: string; team_id: number; teams: Team , max_user: number }
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -172,6 +172,7 @@ export class ModalAddTeamComponent implements OnInit {
       data: {
         contest_id: contest_id,
         team_id: team_new_id,
+        max_user: this.data.max_user,
       },
     });
 

@@ -7,16 +7,16 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
+  styleUrls: ['./posts.component.css'],
 })
 export class PostsComponent implements OnInit {
-  postRecruitmentFirst : Post; 
-  listPostRecruitment: Post[]
+  postRecruitmentFirst: Post;
+  listPostRecruitment: Post[];
 
-  postContestFirst : Post; 
-  listPostContest: Post[]
+  postContestFirst: Post;
+  listPostContest: Post[];
 
-  postCapacityFirst : Post; 
+  postCapacityFirst: Post;
   listPostCapacity: Post[];
 
   sliderPost = {
@@ -29,61 +29,79 @@ export class PostsComponent implements OnInit {
   };
 
   constructor(
-    private postService : ListPostService,
+    private postService: ListPostService,
     private router: Router,
     private titleService: Title
-    ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.backTop();
     this.titleService.setTitle('Danh Sách Bài Viết');
     this.getListPostRecruitment();
-    this.getListPostCapacity()
-    this.getListPostContest()
+    this.getListPostCapacity();
+    this.getListPostContest();
   }
 
-
-  getListPostRecruitment(){
-    this.postService.getPostByCategory("post-recruitment").subscribe(res => {
-       if(res.status){
-        let arrResult= res.payload.data;
-         this.postRecruitmentFirst = arrResult[0];
-         this.listPostRecruitment = arrResult.filter((res: Post , index: number) => {
-          return index <= 10 && res.id !== arrResult[0].id;
-        });
-       }
-    })
+  // Change screen back top
+  backTop() {
+    $('html , body').animate(
+      {
+        scrollTop: 0,
+      },
+      1000
+    );
   }
 
-  getListPostContest(){
-    this.postService.getPostByCategory("post-contest").subscribe(res => {
-       if(res.status){
-        let arrResult= res.payload.data;
-         this.postContestFirst = arrResult[0];
-         this.listPostContest = arrResult.filter((res: Post , index: number) => {
+  getListPostRecruitment() {
+    this.postService.getPostByCategory('post-recruitment').subscribe((res) => {
+      if (res.status) {
+        let arrResult = res.payload.data;
+        this.postRecruitmentFirst = arrResult[0];
+        this.listPostRecruitment = arrResult.filter(
+          (res: Post, index: number) => {
+            return index <= 10 && res.id !== arrResult[0].id;
+          }
+        );
+      }
+    });
+  }
+
+  getListPostContest() {
+    this.postService.getPostByCategory('post-contest').subscribe((res) => {
+      if (res.status) {
+        let arrResult = res.payload.data;
+        this.postContestFirst = arrResult[0];
+        this.listPostContest = arrResult.filter((res: Post, index: number) => {
           return index <= 2;
         });
-       }
-    })
+      }
+    });
   }
 
-  getListPostCapacity(){
-    this.postService.getPostByCategory("post-capacity").subscribe(res => {
-       if(res.status){
-        let arrResult= res.payload.data;
-         this.postCapacityFirst = arrResult[0];
-         this.listPostCapacity = arrResult.filter((res: Post , index: number) => {
-           return  index <= 2;
+  getListPostCapacity() {
+    this.postService.getPostByCategory('post-capacity').subscribe((res) => {
+      if (res.status) {
+        let arrResult = res.payload.data;
+        this.postCapacityFirst = arrResult[0];
+        this.listPostCapacity = arrResult.filter((res: Post, index: number) => {
+          return index <= 2;
         });
-       }
-    })
+      }
+    });
   }
 
-  clickChangeUrlToCategoryPost(data: string){
+  clickChangeUrlToCategoryPost(data: string) {
     this.router.navigateByUrl(`danh-muc-bai-viet?cate=${data}`);
   }
 
-
   sliderHeaderPost = {
-    "slidesToShow": 2 , infinite: true, autoplay: true, arrows: true, prevArrow: '.prev-arrow', nextArrow: '.next-arrow', slidesToScroll: 1, fadeSpeed: 1000,
-  }
+    slidesToShow: 2,
+    infinite: true,
+    autoplay: true,
+    arrows: true,
+    prevArrow: '.prev-arrow',
+    nextArrow: '.next-arrow',
+    slidesToScroll: 1,
+    fadeSpeed: 1000,
+  };
 }

@@ -69,7 +69,6 @@ export class ContestDeatailComponent implements OnInit {
     public dialog: MatDialog,
     public listPostService: ListPostService,
     private contestService: ContestService,
-
     private roundService: RoundService,
     private userService: UserService,
     private modalService: NgbModal,
@@ -115,13 +114,11 @@ export class ContestDeatailComponent implements OnInit {
       });
   }
 
-  //Cac bai post
+  //List post relate
   getListPost() {
-    this.listPostService.getPostWhereCate('post-contest').subscribe((res) => {
+    this.listPostService.postContestRelate(this.contest_id).subscribe((res) => {
       if (res.status) {
         this.listPostResult = res.payload.data;
-        console.log(this.listPostResult.length);
-        
         if (this.listPostResult.length > 0) {
           this.countPostRelated == true;
         }

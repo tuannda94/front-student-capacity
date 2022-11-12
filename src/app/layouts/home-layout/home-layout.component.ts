@@ -1,18 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
-import { User } from 'src/app/models/user';
-import { ConfigViewService } from 'src/app/services/config-view.service';
-import { GetValueLocalService } from 'src/app/services/get-value-local.service';
-import * as $ from 'jquery';
-import { WishlistService } from 'src/app/services/wishlist.service';
-import { UserService } from 'src/app/services/user.service';
+import { Component, OnInit } from "@angular/core";
+import { User } from "src/app/models/user";
+import * as $ from "jquery";
+import { WishlistService } from "src/app/services/wishlist.service";
+import Echo from "laravel-echo";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
-  selector: 'app-home-layout',
-  templateUrl: './home-layout.component.html',
-  styleUrls: ['./home-layout.component.css'],
+  selector: "app-home-layout",
+  templateUrl: "./home-layout.component.html",
+  styleUrls: ["./home-layout.component.css"],
 })
 export class HomeLayoutComponent implements OnInit {
   user: User;
@@ -20,19 +16,28 @@ export class HomeLayoutComponent implements OnInit {
   statusLogin: boolean = false;
   countContest: number;
   countPost: number;
-  constructor(
-    private wishlist: WishlistService,
-    private userService: UserService,
-  ) {}
+  constructor(private wishlist: WishlistService, private userService: UserService) {}
 
   ngOnInit(): void {
+    // const token = (localStorage.getItem("auth_token") as string)?.split("|")[1];
+    // (window as any).Echo = new Echo({
+    //   broadcaster: "socket.io",
+    //   host: `${window.location.protocol}//${window.location.hostname}:6001`,
+    //   withCredentials: true,
+    //   auth: {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   },
+    // });
+
     this.backTop();
     this.winBackTop();
-    if(this.userService.getUserValue().id){
+    if (this.userService.getUserValue().id) {
       this.getListCount();
     }
 
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
       this.winBackTop();
       this.headerBlockScroll();
     });
@@ -47,33 +52,33 @@ export class HomeLayoutComponent implements OnInit {
     }
   }
 
-  getListCount(){
-    this.wishlist.wishListCount().subscribe((res) => {      
-      if(res.status){
+  getListCount() {
+    this.wishlist.wishListCount().subscribe((res) => {
+      if (res.status) {
         this.countContest = res.payload.count_post;
         this.countPost = res.payload.count_contest;
       }
-    })
+    });
   }
 
   headerBlockScroll() {
-    let header = document.querySelector('.header');
+    let header = document.querySelector(".header");
     if (window.scrollY > 200) {
-      header?.classList.add('fixed');
-      document.querySelector('.overlay')?.classList.add('d-none');
-      document.querySelector('.sidepanel')?.classList.remove('save-info-acive');
-    } else{
-      header?.classList.remove('fixed');
+      header?.classList.add("fixed");
+      document.querySelector(".overlay")?.classList.add("d-none");
+      document.querySelector(".sidepanel")?.classList.remove("save-info-acive");
+    } else {
+      header?.classList.remove("fixed");
     }
   }
 
   // Change screen back top
   backTop() {
-    $('html , body').animate(
+    $("html , body").animate(
       {
         scrollTop: 0,
       },
-      1000
+      1000,
     );
   }
 }

@@ -101,11 +101,11 @@
 
   <!-- pagination -->
   <div class="pagination d-flex justify-content-end mb-3" *ngIf="!isFetchingCapacity">
-    <nz-pagination
-      [nzPageIndex]="params.page"
-      [nzTotal]="totalCapacity"
-      [nzPageSize]="params.limit"
-      (nzPageIndexChange)="handleChangePageNum($event)"
-    ></nz-pagination>
+    <app-pagination
+      [total]="totalCapacity"
+      [currentPage]="params.page"
+      [pageSize]="params.limit"
+      (changePageNumber)="handleChangePageNum($event)"
+    ></app-pagination>
   </div>
 </div>

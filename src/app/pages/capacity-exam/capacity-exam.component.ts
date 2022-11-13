@@ -138,6 +138,15 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
                       result.created_at,
                       result.updated_at,
                     );
+
+                    // tổng số giây làm bài
+                    const secondsExam = (+new Date(result.updated_at) - +new Date(result.created_at)) / 1000;
+
+                    // trạng thái nộp bài muộn
+                    const isLateSubmission =
+                      secondsExam >
+                      this.convertTimeExamToSeconds(this.roundDetail.time_exam, this.roundDetail.time_type_exam);
+
                     this.resultExam = {
                       capacityId: result.id,
                       score: Number.isInteger(result.scores) ? result.scores.toString() : result.scores.toFixed(1),
@@ -149,6 +158,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
                       donotAnswer: result.donot_answer,
                       falseAnswer: result.false_answer,
                       trueAnswer: result.true_answer,
+                      isLateSubmission,
                     };
 
                     // clear data lịch sử làm bài của vòng trước
@@ -334,7 +344,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
           this.examData = {
             ...res.payload,
             exam_at: res.exam_at,
-            time_exam: this.convertTimeExamToSeconds(res.payload.time, res.payload.time_type) / 60,
+            time_exam: this.convertTimeExamToSeconds(this.roundDetail.time_exam, this.roundDetail.time_type_exam) / 60,
           };
 
           this.isFetchingExam = false;
@@ -343,7 +353,10 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
 
           this.createFormControl();
 
-          const durationExam = this.convertTimeExamToSeconds(this.examData.time, this.examData.time_type);
+          const durationExam = this.convertTimeExamToSeconds(
+            this.roundDetail.time_exam,
+            this.roundDetail.time_type_exam,
+          );
           this.handleStartExam(durationExam, this.examData.exam_at);
         }
       });
@@ -619,6 +632,12 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     this.countDownTimeExam.minutes = minutesExam;
     this.countDownTimeExam.seconds = secondsExam;
 
+    console.log(minutesExam, secondsExam);
+    console.log("timeStart", new Date(timeStart));
+    console.log("now", new Date());
+
+    console.log("duration", duration / 60);
+
     let timeStartExam: any = new Date(timeStart).getTime();
     const timeWillEndExam = new Date(timeStartExam + duration * 1000 + 1000);
 
@@ -665,12 +684,14 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
         this.countDownTimeExam.minutes = minutes;
         this.countDownTimeExam.seconds = seconds;
 
+        console.log(minutes, seconds);
+
         // thông báo sắp hết giờ
         if (minutes <= 1 && !this.isNotiExamTimeOut) {
           this.toast.warning({
-            summary: "Sắp hết thời gian làm bài, hãy kiểm tra lại bài làm của bạn",
+            summary: "Hãy kiểm tra lại bài làm của bạn",
             duration: 10000,
-            detail: "Thông báo",
+            detail: "Sắp hết thời gian làm bài",
           });
           this.isNotiExamTimeOut = true;
         }
@@ -876,7 +897,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
         break;
     }
 
-    return timeExam;
+    return +timeExam;
   }
 
   // xử lý đối với câu hỏi có nhiều đáp án
@@ -934,7 +955,8 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
             round: this.roundDetail,
             exam: {
               ...res.exam,
-              time_exam: this.convertTimeExamToSeconds(res.exam.time, res.exam.time_type) / 60,
+              time_exam:
+                this.convertTimeExamToSeconds(this.roundDetail.time_exam, this.roundDetail.time_type_exam) / 60,
             },
           };
 

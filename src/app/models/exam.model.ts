@@ -1,5 +1,3 @@
-import { ResponseCapacityHistory } from "./capacity";
-
 export class Exam {
   id: number;
 }
@@ -25,8 +23,6 @@ export class QuestionCapacity {
 export class ExamCapacity {
   questions: QuestionCapacity[];
   id: number;
-  time: number;
-  time_type: number;
   exam_at: Date;
   name: string;
   time_exam: number; // thời gian làm bài (phút)
@@ -41,6 +37,7 @@ export class ResultExam {
   donotAnswer: number; // tổng số câu chưa làm,
   falseAnswer: number; // tổng số câu làm sai,
   trueAnswer: number; // tổng số câu làm đúng
+  isLateSubmission?: boolean; // nộp muộn
 }
 
 export class TestResultStorage {

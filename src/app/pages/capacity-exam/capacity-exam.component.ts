@@ -632,12 +632,6 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     this.countDownTimeExam.minutes = minutesExam;
     this.countDownTimeExam.seconds = secondsExam;
 
-    console.log(minutesExam, secondsExam);
-    console.log("timeStart", new Date(timeStart));
-    console.log("now", new Date());
-
-    console.log("duration", duration / 60);
-
     let timeStartExam: any = new Date(timeStart).getTime();
     const timeWillEndExam = new Date(timeStartExam + duration * 1000 + 1000);
 
@@ -683,8 +677,6 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
         const { minutes, seconds } = this.convertMsToMinutesAndSecond(distance);
         this.countDownTimeExam.minutes = minutes;
         this.countDownTimeExam.seconds = seconds;
-
-        console.log(minutes, seconds);
 
         // thông báo sắp hết giờ
         if (minutes <= 1 && !this.isNotiExamTimeOut) {

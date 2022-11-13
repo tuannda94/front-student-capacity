@@ -40,35 +40,6 @@
             >{{ convertTimeExamToSeconds(roundDetail.time_exam, roundDetail.time_type_exam) / 60 }} phút</span
           >
         </div>
-
-        <!-- <div *ngIf="statusTakingExam === 1">
-          <p>Phần thi: {{ roundDetail.name }}</p>
-          <div>
-            Câu hỏi: <span class="text-red">{{ examData.questions.length }} câu</span>, thời gian:
-            <span class="text-red">{{ examData.time_exam }} phút</span>
-          </div>
-        </div>
-
-        <div *ngIf="isFetchingExam">
-          <ngx-skeleton-loader [theme]="{ width: '65%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
-          <ngx-skeleton-loader [theme]="{ width: '35%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
-        </div>
-
-        <div *ngIf="statusTakingExam !== 1 && !isFetchingExam">
-          <div>
-            Phần thi: {{ roundDetail.name }} (Bắt đầu:
-            <span class="text-red">{{ roundDetail.start_time | formatDate }}</span
-            >, kết thúc: <span class="text-red">{{ roundDetail.end_time | formatDate }}</span
-            >)
-          </div>
-
-          <div>
-            Câu hỏi: <span class="text-red">{{ roundDetail.max_questions_exam }} câu</span>, thời gian:
-            <span class="text-red"
-              >{{ convertTimeExamToSeconds(roundDetail.time_exam, roundDetail.time_type_exam) / 60 }} phút</span
-            >
-          </div>
-        </div> -->
       </div>
     </div>
 

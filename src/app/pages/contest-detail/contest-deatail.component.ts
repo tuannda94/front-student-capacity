@@ -78,6 +78,7 @@ export class ContestDeatailComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle("Chi tiết cuộc thi");
+    // Các cuộc thi liên quan
 
     // Check user đã đăng nhập hay chưa
     this.userService.getUserValue() ? (this.statusUserLogin = true) : this.statusUserLogin;
@@ -85,21 +86,17 @@ export class ContestDeatailComponent implements OnInit {
     this.routeStateRegister = history.state.registerNow;
 
     this.contest_id = this.route.snapshot.paramMap.get("contest_id");
-    try {
-      this.contestService.getWhereId(this.contest_id).subscribe((res) => {
-        if (res.status) {
-          this.contestDetail = res.payload;
-          this.contestDetail.rounds.length > 0 && this.getResultRank("desc");
-          this.contestDetail ? (this.statusContest = true) : this.statusContest;
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+
+    this.contestService.getWhereId(this.contest_id).subscribe((res) => {
+      if (res.status) {
+        this.contestDetail = res.payload;
+        this.contestDetail.rounds.length > 0 && this.getResultRank("desc");
+        this.contestDetail ? (this.statusContest = true) : this.statusContest;
+      }
+    });
 
     this.getListPost();
 
-    // Các cuộc thi liên quan
     this.contestService.getContestWhereMajor(this.contest_id).subscribe((res) => {
       if (res.status)
         this.contestRelated = res.payload.data.filter((item: Contest) => {
@@ -182,7 +179,7 @@ export class ContestDeatailComponent implements OnInit {
     this.modalService.open(content, { scrollable: true });
   }
 
-  //
+  //c
   isContestRelate(event: any) {
     if (event) {
       window.location.reload();

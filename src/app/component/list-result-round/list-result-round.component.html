@@ -1,12 +1,17 @@
 <div class="table__result-wrapper mt-3">
   <div class="header d-flex justify-content-between algin-items-center mb-3">
     <div class="">
-      <h5 class="my-h5 section__title ">Xếp hạng</h5>
+      <h5 class="my-h5 section__title">Xếp hạng</h5>
     </div>
     <div class="d-flex justify-content-end algin-items-center">
       <form action="" class="my-form-search">
-         <input [attr.disabled]="!resultRoundAll ? true : null" type="text" (keyup)="searchResult($event)"  
-         class="my-input-search" placeholder="Tìm kiếm đội ...">
+        <input
+          [attr.disabled]="!resultRoundAll ? true : null"
+          type="text"
+          (keyup)="searchResult($event)"
+          class="my-input-search"
+          placeholder="Tìm kiếm đội ..."
+        />
         <button type="button" class="my-btn-search-inside">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
@@ -20,21 +25,29 @@
   <table class="rank-table" *ngIf="statusLinks">
     <thead class="rank-thead-table">
       <tr class="rank_head-table">
-        <th  width="80px"  class="rank_title-table">#</th>
+        <th width="80px" class="rank_title-table">#</th>
         <th width="300px" class="rank_title-table">Đội thi</th>
         <th class="rank_title-table">Thành viên</th>
-        <th class="rank_title-table" class="rank_title-table-score" scope="col"><span class="score">Tổng điểm</span> </th>
+        <th class="rank_title-table" class="rank_title-table-score" scope="col">
+          <span class="score">Tổng điểm</span>
+        </th>
       </tr>
     </thead>
-    <tbody  class="tbody">
-      <tr *ngFor="let item of roundResult; let i = index" class="rank_item-list ">
+    <tbody class="tbody">
+      <tr *ngFor="let item of roundResult; let i = index" class="rank_item-list">
         <td class="rank_item text-center">
-          <span class="fw-bold name-team" *ngIf="i > 2 && page == 1 && !isSearch || !statusSort && page == 1 && !isSearch">{{statusSort ?  i + 1  : total - i}}</span>
-          <span class="fw-bold name-team" *ngIf="page > 1 && !isSearch">{{statusSort ? 6 * (page - 1 ) + (i + 1) : total -  (6 * (page -1)) - i}}</span>
-          <span class="fw-bold name-team" *ngIf=" isSearch && resultRoundAll">{{searchCheckIndex(item.id)}}</span>
-         
+          <span
+            class="fw-bold name-team"
+            *ngIf="(i > 2 && page == 1 && !isSearch) || (!statusSort && page == 1 && !isSearch)"
+            >{{ statusSort ? i + 1 : total - i }}</span
+          >
+          <span class="fw-bold name-team" *ngIf="page > 1 && !isSearch">{{
+            statusSort ? 6 * (page - 1) + (i + 1) : total - 6 * (page - 1) - i
+          }}</span>
+          <span class="fw-bold name-team" *ngIf="isSearch && resultRoundAll">{{ searchCheckIndex(item.id) }}</span>
+
           <img
-            *ngIf="i < 3 && page == 1 && !isSearch && statusSort" 
+            *ngIf="i < 3 && page == 1 && !isSearch && statusSort"
             width="35px"
             class="img-avatar"
             [src]="
@@ -49,24 +62,21 @@
         </td>
         <td class="rank_item-name">
           <div class="d-flex justify-content-start align-items-center">
-            <app-avatar avatar="item.team.image"></app-avatar>
+            <app-avatar avatar="item.team.image "></app-avatar>
             <p class="px-3 fw-bold name-team text-collapse">
               {{ item.team.name }}
             </p>
           </div>
         </td>
         <td class="rank_item">
-          <app-list-avatar-user
-            [listTeam]="item.team.users"
-            class="d-flex list-avatar-user"
-          >
-          </app-list-avatar-user>
+          <app-list-avatar-user [listTeam]="item.team.users" class="d-flex list-avatar-user"> </app-list-avatar-user>
         </td>
         <td class="rank_item ponit">{{ item.point }}đ</td>
       </tr>
     </tbody>
   </table>
-  <ul *ngIf="statusLinks && links.length > 1 && !isSearch"
+  <ul
+    *ngIf="statusLinks && links.length > 1 && !isSearch"
     class="list__result-paying mt-3 d-flex justify-content-center algin-items-center"
   >
     <li (click)="payingResultEvent(next)" class="payding-item">
@@ -90,7 +100,7 @@
         'height.px': '40',
         'margin-bottom': '15'
       }"
-      count="8"
+      count="6"
       animation="pulse"
     ></ngx-skeleton-loader>
   </div>

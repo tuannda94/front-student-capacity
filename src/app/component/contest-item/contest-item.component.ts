@@ -155,7 +155,9 @@ export class ContestItemComponent implements OnInit {
       this.router.navigate(["/cuoc-thi/" + itemID]);
       setTimeout(() => {
         this.contestRelated.emit(true);
-      }, 200);
+      }, 50);
+    } else {
+      this.router.navigate(["/cuoc-thi/" + itemID]);
     }
   }
 }

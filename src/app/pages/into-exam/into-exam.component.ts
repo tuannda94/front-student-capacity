@@ -272,18 +272,21 @@ export class IntoExamComponent implements OnInit {
   }
 
   cancelExam() {
-    this.statusClickSubmit = true;
-    const cancelObject = {
-      id: this.infoExam.id,
-    };
+    var check = confirm("Bạn muốn hủy bài thi của mình ?");
+    if (check) {
+      this.statusClickSubmit = true;
+      const cancelObject = {
+        id: this.infoExam.id,
+      };
 
-    this.roundService.submitExam(cancelObject).subscribe((res) => {
-      if (res.status) {
-        this.statusClickSubmit = false;
-        this.checkStatusExam(1);
-        this.resetAllStatus();
-      }
-    });
+      this.roundService.submitExam(cancelObject).subscribe((res) => {
+        if (res.status) {
+          this.statusClickSubmit = false;
+          this.checkStatusExam(1);
+          this.resetAllStatus();
+        }
+      });
+    }
   }
 
   copyLinkUrl() {

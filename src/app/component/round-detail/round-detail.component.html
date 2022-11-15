@@ -1,66 +1,74 @@
 <div class="list-team-box mt-4">
-    <p  *ngIf="statusRoundDetail" class="fw-bold fs-5 my-2 color-blue">Danh sách đội thi</p>
-    <div  *ngIf="statusRoundDetail" class="title-line"></div>
-    <div class="my-3" *ngIf="statusRoundDetail">
-        <div *ngFor="let item of roundDetail.teams" class="list-team-in bg-white mb-2">
-            <div class="team-item d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="img-avatar-round my-2">
-                        <img  [src]="
-                        item.image ||
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
-                      " alt="">
-                    </div>
-                    &nbsp;
-                    &nbsp;
-                    <p class="color-blue">{{item.name}}</p>
-                </div>
-                <div  style="cursor:pointer;" (click)="openVerticallyCentered(content ,item ,  item.members)" ><i class="fa-solid fs-5 fa-eye"></i></div>
-            </div>
+  <p *ngIf="statusRoundDetail" class="my-h5 section__title mb-2">Danh sách đội thi</p>
+  <div class="my-3" *ngIf="statusRoundDetail">
+    <div *ngFor="let item of roundDetail.teams" class="list-team-in bg-white mb-2">
+      <div class="team-item d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="img-avatar-round my-2">
+            <img
+              [src]="
+                item.image ||
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+              "
+              alt=""
+            />
+          </div>
+          &nbsp; &nbsp;
+          <p class="color-blue">{{ item.name }}</p>
         </div>
+        <div style="cursor: pointer" (click)="openVerticallyCentered(content, item, item.members)">
+          <i class="fa-solid fs-5 fa-eye"></i>
+        </div>
+      </div>
+    </div>
 
-        <div *ngIf="roundDetail.teams.length == 0" class="d-flex justify-content-center align-items-center">
-            <div class="text-center">
-                <p class="w-50 " style="margin: 0px auto;"><img
-                        src="https://img.freepik.com/free-vector/isometric-team-success-teamwork-together-miniature-people-climb-up_130740-832.jpg"
-                        alt="" class="w-100">
-                </p>
-                <p class="fs-5 mt-3">Chưa có đội thi nào !!!</p>
-            </div>
-        </div>
+    <div *ngIf="roundDetail.teams.length == 0" class="d-flex justify-content-center align-items-center">
+      <div class="text-center">
+        <p class="w-50" style="margin: 0px auto">
+          <img
+            src="https://img.freepik.com/free-vector/isometric-team-success-teamwork-together-miniature-people-climb-up_130740-832.jpg"
+            alt=""
+            class="w-100"
+          />
+        </p>
+        <p class="fs-5 mt-3">Chưa có đội thi nào !!!</p>
+      </div>
     </div>
-    <div *ngIf="statusRoundDetail == false">
-        <ngx-skeleton-loader count="6" [theme]="{ 'height.px' : 40, 'margin-bottom' : '7px'}" appearance="line">
-        </ngx-skeleton-loader>
-    </div>
+  </div>
+  <div *ngIf="statusRoundDetail == false">
+    <ngx-skeleton-loader count="6" [theme]="{ 'height.px': 40, 'margin-bottom': '7px' }" appearance="line">
+    </ngx-skeleton-loader>
+  </div>
 </div>
 <!-- Modal -->
 <ng-template #content let-modal>
-    <div class="modal-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="img-avatar-round my-2">
-                <img  [src]="
-                team.image ||
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
-              " alt="">
-            </div>
-            &nbsp;
-            <h6 class="modal-title mx-3 mt-3 text-gray fs-6 fw-bold color-primary">{{team.name}}</h6>
-        </div>
-        <a (click)="modal.dismiss('Cross click')"><i class="fa-solid fa-xmark icon-close"></i></a>
+  <div class="modal-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="img-avatar-round my-2">
+        <img
+          [src]="
+            team.image ||
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+          "
+          alt=""
+        />
+      </div>
+      &nbsp;
+      <h6 class="modal-title mx-3 mt-3 text-gray fs-6 fw-bold color-primary">{{ team.name }}</h6>
     </div>
-    <div class="modal-body">
-        <div *ngFor="let item of listMember" class="member-item d-flex justify-content-start  align-items-center">
-            <div class="img-avatar-round my-2">
-                <img [src]="item.avatar" alt="" class="w-100 h-100">
-            </div>
-            &nbsp;
-            &nbsp;
-            <p class="">{{item.name}}</p>
-        </div>
-        <div *ngIf="!listMember.length" class="text-center">
-            <p> <i class="fas fa-user-lock block fs-5 color-blue"></i></p>
-            Chưa có thành viên nào!
-        </div>
+    <a (click)="modal.dismiss('Cross click')"><i class="fa-solid fa-xmark icon-close"></i></a>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let item of listMember" class="member-item d-flex justify-content-start align-items-center">
+      <div class="img-avatar-round my-2">
+        <img [src]="item.avatar" alt="" class="w-100 h-100" />
+      </div>
+      &nbsp; &nbsp;
+      <p class="">{{ item.name }}</p>
     </div>
+    <div *ngIf="!listMember.length" class="text-center">
+      <p><i class="fas fa-user-lock block fs-5 color-blue"></i></p>
+      Chưa có thành viên nào!
+    </div>
+  </div>
 </ng-template>

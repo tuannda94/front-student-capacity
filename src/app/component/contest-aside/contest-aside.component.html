@@ -1,5 +1,5 @@
 <div class=" contest-aside-box">
-    <div class="p-2 text-center" *ngIf="statusContest">
+    <div class="box-inside text-center" *ngIf="statusContest">
         {{ runTime()}}
         <div class="img-detail-box">
             <img [src]="contestDetail.img" class="w-100" alt="">
@@ -33,7 +33,7 @@
                 [ngClass]="classNameWhereStatus(contestDetail)">{{ checkStatusContest(contestDetail) }}</button>
         </div>
     </div>
-    <div class=" p-2" *ngIf="!statusContest">
+    <div class="box-inside" *ngIf="!statusContest">
         <ngx-skeleton-loader
             [theme]="{ 'height.px' : 150, 'margin-bottom' : '7px' , 'border-radius': '3px' }"
             appearance="line">

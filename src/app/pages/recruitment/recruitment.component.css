@@ -54,7 +54,6 @@ ul {
   margin-right: 15px;
   display: inline-block;
 }
-
 .recruitment-list-hot-box {
   border-radius: 10px;
   height: 600px;
@@ -116,8 +115,7 @@ ul {
   bottom: -7px;
   border-width: 0px 20px 7px;
   border-style: solid;
-  border-color: transparent rgba(255, 0, 0, 0.781) transparent
-    rgba(255, 0, 0, 0.781);
+  border-color: transparent rgba(255, 0, 0, 0.781) transparent rgba(255, 0, 0, 0.781);
 }
 
 .recruitment-isNew::before {
@@ -127,8 +125,7 @@ ul {
   bottom: -7px;
   border-width: 0px 20px 7px;
   border-style: solid;
-  border-color: transparent rgba(0, 128, 0, 0.726) transparent
-    rgba(0, 128, 0, 0.726);
+  border-color: transparent rgba(0, 128, 0, 0.726) transparent rgba(0, 128, 0, 0.726);
 }
 
 .recruitment-isHot {

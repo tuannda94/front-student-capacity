@@ -34,7 +34,7 @@
 <div class="recruitment-content">
   <div class="container py-4">
     <form
-      class="my-box-filter my-box-filter-3 ng-untouched ng-pristine ng-valid"
+      class="my-box-filter my-box-filter-3 py-3 rounded row"
       autocomplete="off"
       [formGroup]="formFilter"
       (submit)="filterRecruitments()"
@@ -50,6 +50,19 @@
           (keyup)="filterSelect(keywords, $any($event.target).value, 'keyword')"
           ngbDropdownToggle
         />
+        <div ngbDropdownMenu class="w-100 input__search-keyword--sugg" aria-labelledby="dropdownBasic1">
+          <span class="input__search-keyword-alert"></span>
+          <div *ngIf="!keywords" class="d-flex justify-content-center">
+            <app-loading-item class="py-2"></app-loading-item>
+          </div>
+          <a
+            *ngFor="let item of keywords"
+            (click)="setValueKeyword(item.keyword)"
+            class="text-collapse"
+            ngbDropdownItem
+            >{{ item.keyword }}</a
+          >
+        </div>
       </div>
       <div ngbDropdown class="d-inline-block w-100">
         <input
@@ -189,13 +202,15 @@
       </div>
       <div class="recruitment-list-right col-lg-8 col-xl-8 col-md-12 col-sm-12">
         <h2 class="fw-bold title-list-recruitment">
-          <i class="fa-solid fa-list primary-color fs-4"></i> Danh sách đợt tuyển dụng
+          <i class="fs-4 fa-solid fa-wand-sparkles text-success bg-opacity-50"></i>
+          Danh sách đợt tuyển dụng
         </h2>
         <div *ngIf="statusRecruitments">
           <div
             [routerLink]="['/tuyen-dung/chi-tiet/', item.id]"
             *ngFor="let item of recruitments"
             class="bg-white recruitment-list-item-box"
+            style="border-radius: 10px"
           >
             <div class="px-3 pt-3 recruitment-list-item">
               <div class="recruitment-image-box text-center">
@@ -224,24 +239,12 @@
                     {{ skill.short_name }}
                   </li>
                 </ul>
-
-                <div class="mt-2 text-collapse-row-3" [innerHTML]="item.short_description"></div>
+                <div class="mt-2" [innerHTML]="item.short_description"></div>
               </div>
             </div>
             <div class="px-3 pb-3 recruitment-list-item align-items-center">
-              <p
-                class="recruitment-list-hot-item-text text-center color-text mt-2"
-                *ngIf="checkTimeEndRecrument(item.end_time)"
-              >
-                Hiện còn
-                <span class="fw-bold"> {{ item.end_time | countDate }}</span>
-                ngày nữa
-              </p>
-              <p
-                class="recruitment-list-hot-item-text text-center text-danger mt-2"
-                *ngIf="!checkTimeEndRecrument(item.end_time)"
-              >
-                Đã hết hạn
+              <p class="recruitment-list-hot-item-text text-center color-text mt-2">
+                {{ item.end_time | formatDate }}
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-start align-items-center">
@@ -279,7 +282,7 @@
             </li>
           </ul>
           <div *ngIf="recruitments" class="d-flex justify-content-center" style="margin-top: 100px">
-            <img *ngIf="recruitments.length == 0" src="../../../assets/img/no-result.png" alt="No data" />
+            <img *ngIf="recruitments.length == 0" src="https://homebond.ae/assets/images/no-result.png" alt="" />
           </div>
         </div>
 
@@ -287,7 +290,7 @@
           <ngx-skeleton-loader
             [theme]="{
               'height.px': '200',
-              'margin-bottom': '20'
+              'margin-top': '20'
             }"
             count="6"
             animation="pulse"

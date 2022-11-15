@@ -1,8 +1,18 @@
-h1, h2 , h3 , h4 , h5 , h6 , p , ul{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
   margin-bottom: 0;
 }
 
 /* LIST ROUND */
+.section__title {
+  color: var(--my-secondary)
+}
 
 .round-header {
   box-shadow: 0px 0px 3px var(--gray-200);
@@ -16,11 +26,13 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 
 .img-avatar-round {
   height: 35px;
-  width: 35px;
+  width: 40px;
 }
 
 .img-avatar-round img {
-  border-radius: 50px;
+  height: 35px;
+  width: 35px;
+  border-radius: 100%;
   object-fit: cover;
 }
 

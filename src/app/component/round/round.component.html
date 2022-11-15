@@ -1,6 +1,5 @@
 <div class="list-round-box mt-4">
-  <p  *ngIf="statusContest == true" class="fw-bold my-2 fs-5 color-blue">Danh sách vòng thi</p>
-  <div  *ngIf="statusContest == true" class="title-line margin-0"></div>
+  <h2  *ngIf="statusContest == true" class="mb-2 my-h5 section__title">Danh sách vòng thi</h2>
   <mat-accordion *ngIf="statusContest == true">
     <p hidden *ngFor="let item of contestDetail.rounds">
       {{ checkStatusRound(item.start_time, item.end_time, item.id) }}
@@ -12,17 +11,17 @@
     >
       <mat-expansion-panel-header class="test">
         <mat-panel-title class="row">
-          <div class="d-flex justify-content-start align-items-center col-10">
+          <div class="d-flex justify-content-start align-items-center col-8">
             <div class="img-avatar-round my-2">
-              <img [src]="item.image" class="w-100 h-100" />
+              <img [src]="item.image" class="" />
             </div>
             &nbsp;
-            <p style="margin-left: 15px;" class="text-collapse color-blue">{{ item.name }}</p>
+            <p class="text-collapse color-blue">{{ item.name }}</p>
           </div>
           <p hidden>
             {{ checkStatusRound(item.start_time, item.end_time, item.id) }}
           </p>
-          <div class="col-2 text-center">
+          <div class="col-4 text-center">
             <h3
               [ngStyle]="{ color: statusRound == 1 ? '#c0392b' : '#27ae60' }"
               class="mr-2 "

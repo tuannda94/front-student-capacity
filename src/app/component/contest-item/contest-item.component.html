@@ -1,6 +1,6 @@
 <div class="contest-item">
   <div class="contest-item__img-section">
-    <a [routerLink]="['/cuoc-thi/', item.id]">
+    <a (click)="isContestRelate(item.id)">
       <img class="contest-item__img" [src]="item.img" alt="" />
     </a>
     <div class="contest-item__btn-favorite">
@@ -18,7 +18,7 @@
       <h3 class="contest-item__title">
         <a
           class="contest-item__title-link"
-          [routerLink]="['/cuoc-thi/', item.id]"
+          (click)="isContestRelate(item.id)"
           data-toggle="tooltip"
           data-placement="top"
           title="{{ item.name }}"
@@ -52,19 +52,23 @@
     </div>
     <div class="contest-item-content-row">
       <div class="contest-item__info">
-        <div class="contest-item__info-item">
-          <i class="fa-regular fa-user"></i>&ensp;
-          <span class="info-item__number">
-            {{ item.teams_count }}
-          </span>
-          đội thi
-        </div>
-        <div class="contest-item__info-item">
-          <i class="fa-solid fa-list-ul"></i>&ensp;
-          <span class="info-item__number">
-            {{ item.rounds_count }}
-          </span>
-          vòng thi
+        <div class="contest-item-content-row">
+          <div class="contest-item__info">
+            <div class="contest-item__info-item">
+              <i class="fa-regular fa-user"></i>&ensp;
+              <span class="info-item__number">
+                {{ item.teams_count }}
+              </span>
+              đội thi
+            </div>
+            <div class="contest-item__info-item">
+              <i class="fa-solid fa-list-ul"></i>&ensp;
+              <span class="info-item__number">
+                {{ item.rounds_count }}
+              </span>
+              vòng thi
+            </div>
+          </div>
         </div>
       </div>
       <a

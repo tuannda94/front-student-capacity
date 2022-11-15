@@ -140,6 +140,10 @@ body {
   line-height: var(--lh);
 }
 
+img {
+  object-fit: cover;
+}
+
 .editor-container h1,
 .editor-container h2,
 .editor-container h3,
@@ -321,7 +325,7 @@ img {
   color: var(--primary);
 }
 
-.color-blue{
+.color-blue {
   color: var(--my-secondary);
 }
 

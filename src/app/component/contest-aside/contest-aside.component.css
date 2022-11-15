@@ -1,7 +1,9 @@
 .contest-aside-box {
-  border-radius: 4px;
+  border-radius: var(--my-rounded-2);
 }
-
+.box-inside {
+  padding: 12px
+}
 .h3 {
   font-size: 22px;
   margin: 0px 10px;

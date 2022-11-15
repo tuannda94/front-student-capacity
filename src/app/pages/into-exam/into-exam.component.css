@@ -1,5 +1,6 @@
 /* Phần trang thông tin cuộc thi */
-h3 ,p{
+h3,
+p {
   margin-bottom: 0px;
 }
 
@@ -20,21 +21,20 @@ h3 ,p{
   margin: 0 !important;
 }
 
-.exam-info-box .exam-info-item{
+.exam-info-box .exam-info-item {
   margin-bottom: 10px;
 }
 
 .info-contest-header,
 .team-detail-box {
   background-color: #ffff;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0px 0px 3px var(--gray-200);
 }
 
 .warper-info-contest::-webkit-scrollbar {
   display: none;
 }
-
 
 .info-contest-img {
   border-radius: 50%;
@@ -58,7 +58,7 @@ h3 ,p{
   box-shadow: 0px 0px 3px var(--gray-200);
   height: 270px;
   background-color: #ffff;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .contest-detail-right-countdown {
@@ -81,7 +81,7 @@ h3 ,p{
   background-color: var(--primary);
   width: 100%;
   margin: 0px 5px;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 17px;
   font-weight: 500;
   color: white;
@@ -94,7 +94,7 @@ h3 ,p{
 
 .node-submit-assignment {
   box-shadow: 0px 0px 3px var(--gray-200);
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .node-submit-assignment p {
@@ -117,7 +117,7 @@ h3 ,p{
   background-color: var(--primary);
   font-size: 14px;
   display: inline-block;
-  border-radius: 4px;
+  border-radius: 6px;
   color: var(--white);
 }
 
@@ -135,6 +135,7 @@ h3 ,p{
   border-radius: 50px;
   object-fit: cover;
   margin: auto;
+  border: 2px solid var(--primary);
 }
 
 /* Nút bấm upload file*/
@@ -163,7 +164,6 @@ h3 ,p{
   cursor: no-drop;
 }
 
-
 .btn-upload-assignment.active:hover {
   background-color: var(--primary);
   box-shadow: 0px 15px 20px rgb(243, 165, 113);
@@ -190,8 +190,7 @@ h3 ,p{
 .input-link-submit:focus {
   outline-color: var(--primary);
   background: #ffff;
-  box-shadow: inset 20px 20px 60px #f0eeee,
-    inset -20px -20px 60px #ffffff;
+  box-shadow: inset 20px 20px 60px #f0eeee, inset -20px -20px 60px #ffffff;
   transition: 0.3s;
 }
 
@@ -206,7 +205,7 @@ h3 ,p{
   --tooltip-color: #fff;
   width: var(--width);
   height: var(--height);
-  background: #3CCF4E;
+  background: #3ccf4e;
   position: relative;
   text-align: center;
   border-radius: 0.45em;
@@ -215,8 +214,6 @@ h3 ,p{
   transition: background 0.3s;
   cursor: pointer;
 }
-
-
 
 .button::after,
 .button::before {
@@ -243,7 +240,7 @@ h3 ,p{
 }
 
 .text {
-  top: 0
+  top: 0;
 }
 
 .text,
@@ -284,7 +281,7 @@ h3 ,p{
 .number-files-upload {
   padding: 7px 15px;
   border-radius: 5px;
-  background-color: #EB1D36;
+  background-color: #eb1d36;
   color: var(--white);
 }
 

@@ -8,39 +8,9 @@
           alt=""
         />
       </div>
-      <div class="list-capacity">
-        <div class="d-flex justify-content-between">
-          <h2 class="capacity_title">Danh Sách Test Năng Lực</h2>
-          <div class=""><a class="capacity_view-all" routerLink="/test-nang-luc/list">Xem Tất Cả</a></div>
-        </div>
-        <div class="">
-          <!-- skeleton -->
-          <ul class="capacity__related-list row" *ngIf="!statusCapacity">
-            <div class="col col-lg-3 col-md-4 col-sm-12 col-12" *ngFor="let _ of [].constructor(8)">
-              <div>
-                <ngx-skeleton-loader [theme]="{ height: '150px' }"></ngx-skeleton-loader>
-
-                <ngx-skeleton-loader [theme]="{ margin: '0 0 4px' }"></ngx-skeleton-loader>
-
-                <ngx-skeleton-loader [theme]="{ margin: '0 0 4px', width: '50%', display: 'block' }">
-                </ngx-skeleton-loader>
-                <ngx-skeleton-loader [theme]="{ margin: '0 0 4px', width: '70%', display: 'block' }">
-                </ngx-skeleton-loader>
-
-                <ngx-skeleton-loader [theme]="{ height: '40px', margin: '6px 0 0' }"></ngx-skeleton-loader>
-              </div>
-            </div>
-          </ul>
-          <!-- skeleton -->
-        </div>
-        <div class="test-capacity_list">
-          <app-capacity-item class="test-capacity_item" *ngFor="let capacity of listCapacity" [capacityItem]="capacity">
-          </app-capacity-item>
-        </div>
-      </div>
     </div>
     <form [formGroup]="formFilter" class="rankingCapacity-filter-box py-4 rounded row">
-      <div class="col-3 rank_title">Xếp Hạng</div>
+      <div class="col-3 my-h3">Xếp Hạng</div>
       <div class="col-6"></div>
       <div class="col-3">
         <div ngbDropdown class="d-inline-block w-100">
@@ -84,20 +54,22 @@
             <td class="rank_item" scope="row">
               <ngx-skeleton-loader
                 [theme]="{ width: '100%', display: 'inline-block', height: '50px', margin: '5px 0px 0px 0px' }"
-              ></ngx-skeleton-loader>
+              >
+              </ngx-skeleton-loader>
             </td>
             <td class="rank_item-name">
-              <div class="row">
+              <div class="row g-2">
                 <ngx-skeleton-loader
                   class="col-3"
                   [theme]="{
                     margin: '2px 0px 0px 0px',
-                    width: '70px',
+                    width: '50px',
                     display: 'inline-block',
-                    height: '70px',
+                    height: '50px',
                     'border-radius': '100px'
                   }"
-                ></ngx-skeleton-loader>
+                >
+                </ngx-skeleton-loader>
                 <ngx-skeleton-loader
                   class="col-9"
                   [theme]="{
@@ -107,24 +79,28 @@
                     margin: '20px 0px 0px 2px',
                     'border-radius': '8px'
                   }"
-                ></ngx-skeleton-loader>
+                >
+                </ngx-skeleton-loader>
               </div>
             </td>
             <td class="rank_item">
               <ngx-skeleton-loader
                 [theme]="{ width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
-              ></ngx-skeleton-loader>
+              >
+              </ngx-skeleton-loader>
             </td>
             <td class="rank_item">
               <ngx-skeleton-loader
                 [theme]="{ width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
-              ></ngx-skeleton-loader>
+              >
+              </ngx-skeleton-loader>
             </td>
             <td class="rank-table-none"></td>
             <td class="rank_item_scores">
               <ngx-skeleton-loader
                 [theme]="{ width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
-              ></ngx-skeleton-loader>
+              >
+              </ngx-skeleton-loader>
             </td>
           </tr>
           <!-- End Skeleton-Loadingg -->
@@ -149,7 +125,8 @@
           <li class="pagination-list_box pagination-item" *ngFor="let _ of [].constructor(10)">
             <ngx-skeleton-loader
               [theme]="{ width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
-            ></ngx-skeleton-loader>
+            >
+            </ngx-skeleton-loader>
           </li>
         </ul>
       </div>
@@ -177,6 +154,33 @@
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+  <div class="list-capacity">
+    <div class="d-flex justify-content-between">
+      <h2 class="capacity_title my-h3">Danh Sách Test Năng Lực</h2>
+      <div class=""><a class="capacity_view-all" routerLink="/test-nang-luc/list">Xem Tất Cả</a></div>
+    </div>
+    <div class="">
+      <!-- skeleton -->
+      <ul class="capacity__related-list row" *ngIf="!statusCapacity">
+        <div class="col col-lg-3 col-md-4 col-sm-12 col-12" *ngFor="let _ of [].constructor(8)">
+          <div>
+            <ngx-skeleton-loader [theme]="{ height: '150px' }"></ngx-skeleton-loader>
+
+            <ngx-skeleton-loader [theme]="{ margin: '0 0 4px' }"></ngx-skeleton-loader>
+
+            <ngx-skeleton-loader [theme]="{ margin: '0 0 4px', width: '50%', display: 'block' }"> </ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{ margin: '0 0 4px', width: '70%', display: 'block' }"> </ngx-skeleton-loader>
+
+            <ngx-skeleton-loader [theme]="{ height: '40px', margin: '6px 0 0' }"></ngx-skeleton-loader>
+          </div>
+        </div>
+      </ul>
+      <!-- skeleton -->
+    </div>
+    <div class="test-capacity_list">
+      <app-capacity-item *ngFor="let capacity of listCapacity" [capacityItem]="capacity"> </app-capacity-item>
     </div>
   </div>
 </div>

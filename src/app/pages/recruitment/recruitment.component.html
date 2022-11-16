@@ -50,19 +50,6 @@
           (keyup)="filterSelect(keywords, $any($event.target).value, 'keyword')"
           ngbDropdownToggle
         />
-        <div ngbDropdownMenu class="w-100 input__search-keyword--sugg" aria-labelledby="dropdownBasic1">
-          <span class="input__search-keyword-alert"></span>
-          <div *ngIf="!keywords" class="d-flex justify-content-center">
-            <app-loading-item class="py-2"></app-loading-item>
-          </div>
-          <a
-            *ngFor="let item of keywords"
-            (click)="setValueKeyword(item.keyword)"
-            class="text-collapse"
-            ngbDropdownItem
-            >{{ item.keyword }}</a
-          >
-        </div>
       </div>
       <div ngbDropdown class="d-inline-block w-100">
         <input
@@ -106,10 +93,10 @@
       </div>
     </form>
     <div class="row my-4">
-      <div class="col-2">
+      <div class="col-lg-2 col-lx-2 col-md-2 col-dm-2">
         <h2 class="fw-bold">Đề xuất cho bạn:</h2>
       </div>
-      <div class="col-10">
+      <div class="col-lg-10 col-lx-10 col-md-10 col-dm-10">
         <ul *ngIf="skills" class="d-flex flex-wrap filter-skill-box">
           <li
             *ngFor="let item of skills"

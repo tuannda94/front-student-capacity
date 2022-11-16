@@ -8,28 +8,26 @@
           [ngClass]="statusCurrContest == 0 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a  [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}" class="contest__nav-link">Đang diễn ra</a>
+          <a [ngStyle]="{ cursor: !statusContest ? 'auto' : '' }" class="contest__nav-link">Đang diễn ra</a>
         </li>
         <li
           (click)="updateStatusContest($event, 1)"
-        
           [ngClass]="statusCurrContest == 1 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a   [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}" class="contest__nav-link">Sắp diễn ra</a>
+          <a [ngStyle]="{ cursor: !statusContest ? 'auto' : '' }" class="contest__nav-link">Sắp diễn ra</a>
         </li>
         <li
           (click)="updateStatusContest($event, 2)"
-         
           [ngClass]="statusCurrContest == 2 ? 'active' : ''"
           class="contest__nav-item"
         >
-          <a  [ngStyle]="{'cursor': !statusContest  ? 'auto'  : ''}"  class="contest__nav-link">Đã kết thúc</a>
+          <a [ngStyle]="{ cursor: !statusContest ? 'auto' : '' }" class="contest__nav-link">Đã kết thúc</a>
         </li>
       </ul>
       <div class="btn__search-contest">
         <form
-          class="input-group flex-nowrap"
+          class="input-group form-search-contest flex-nowrap"
           [formGroup]="formSearchContest"
           (submit)="searchContest()"
         >
@@ -42,7 +40,10 @@
             aria-label="Username"
             aria-describedby="addon-wrapping"
           />
-          <button [attr.disabled]="!statusContest ? true : null" class="input-group-text primary-color bg-white border-none">
+          <button
+            [attr.disabled]="!statusContest ? true : null"
+            class="input-group-text primary-color bg-white border-none"
+          >
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
@@ -63,19 +64,15 @@
               <i class="fa-solid fa-rotate-left"></i>
             </div>
           </div>
-          <form
-            class="my-form-search my-2"
-            [formGroup]="formSearchMajor"
-            (submit)="searchMajor()"
-          >
+          <form class="my-form-search my-2" [formGroup]="formSearchMajor" (submit)="searchMajor()">
             <input
-            [attr.disabled]="!statusContest ? true : null"
+              [attr.disabled]="!statusContest ? true : null"
               type="text"
               placeholder="Tìm kiếm chuyên ngành..."
               class="my-input-search"
               formControlName="keywordMajor"
             />
-            <button    [attr.disabled]="!statusContest ? true : null" class="my-btn-search-inside">
+            <button [attr.disabled]="!statusContest ? true : null" class="my-btn-search-inside">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
@@ -92,21 +89,14 @@
             </div>
           </div>
           <div *ngIf="!statusMajor">
-            <ngx-skeleton-loader
-              count="7"
-              [theme]="{ 'height.px': 35, 'margin-bottom': '10px' }"
-              appearance="line"
-            >
+            <ngx-skeleton-loader count="7" [theme]="{ 'height.px': 35, 'margin-bottom': '10px' }" appearance="line">
             </ngx-skeleton-loader>
           </div>
         </div>
       </div>
 
       <!-- ---Main -->
-      <div
-        *ngIf="statusContest && contests.length > 0"
-        class="contest__list col-lg-9 col-lx-9  col-md-12 col-sm-12"
-      >
+      <div *ngIf="statusContest && contests.length > 0" class="contest__list col-lg-9 col-lx-9 col-md-12 col-sm-12">
         <div *ngFor="let item of contests">
           <app-contest-item class="mb-3" [item]="item"></app-contest-item>
         </div>
@@ -114,11 +104,7 @@
 
       <div *ngIf="statusContest" class="col-9">
         <div *ngIf="contests.length == 0" class="d-flex justify-content-center">
-          <img
-            class="d-flex justify-content-center mt-5"
-            src="../../../assets/img/no-result.png"
-            alt="No data"
-          />
+          <img class="d-flex justify-content-center mt-5" src="../../../assets/img/no-result.png" alt="No data" />
         </div>
       </div>
 

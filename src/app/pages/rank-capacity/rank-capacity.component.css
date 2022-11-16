@@ -205,3 +205,30 @@ tr:nth-of-type(even) {
 .capacity_view-all:hover {
   color: var(--blue-900);
 }
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .test-capacity_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rank_title-table-major {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .post-new-latest {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .rank_title-table-major {
+    visibility: hidden;
+  }
+
+  .test-capacity_list {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

@@ -216,13 +216,16 @@ h3:hover > a {
   color: var(--white);
 }
 
-
 @media only screen and (max-width: 740px) {
   .post-new-latest__img-section .post-new-latest__img {
     width: 80%;
   }
- 
-  .post-item-content{
+
+  .post-item {
+    margin-bottom: 20px;
+  }
+
+  .post-item-content {
     top: 70%;
   }
 }

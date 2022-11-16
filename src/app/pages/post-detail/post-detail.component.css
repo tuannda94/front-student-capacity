@@ -1,56 +1,89 @@
 .post-main {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 44px;
-    margin-top: 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 44px;
+  margin-top: 32px;
 }
 
 .post-detail__title {
-    font-weight: bold
+  font-weight: bold;
 }
 
 .post-detail__head-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .post-detail__head-info-item-cate {
-    margin-right: 12px;
-    font-weight: bold;
-    font-size: 16px;
-    color: #8E8E95
+  margin-right: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #8e8e95;
 }
 
 .post-detail__head-info-item-text {
-    color: #8E8E95
+  color: #8e8e95;
 }
 
-.post-detail__head-info-item-text+.post-detail__head-info-item-text {
-    margin-left: 8px;
+.post-detail__content-text p,
+.post-detail__content-text li {
+  text-align: justify;
+}
+
+.post-detail__head-info-item-text + .post-detail__head-info-item-text {
+  margin-left: 8px;
 }
 .post-detail__router-category {
-    cursor: pointer;
-    color: var(--my-secondary)
+  cursor: pointer;
+  color: var(--my-secondary);
 }
 .post-detail__short-desc {
-    text-align: justify;
-    margin: 8px 0;
+  text-align: justify;
+  margin: 8px 0;
 }
 
 .post-detail__img-section {
-    margin: 12px 0;
+  margin: 12px 0;
 }
 
 .post-detail__img {
-    border-radius: 10px;
-    width: 100%;
-    height: 400px;
-    object-fit: cover
+  border-radius: 10px;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
 }
 
 .post-detail__tag-section {
-    border-top: 1px solid #ccc;
-    margin: 16px 0;
-    padding-top: 16px;
+  border-top: 1px solid #ccc;
+  margin: 16px 0;
+  padding-top: 16px;
+}
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .post-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 0px;
+  }
+
+  .post-detail__head-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .post-main {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 0px;
+  }
+
+  .post-detail__head-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
 }

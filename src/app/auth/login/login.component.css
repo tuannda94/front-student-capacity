@@ -11,15 +11,7 @@
 }
 
 .btn_login-google {
-  border: none;
-  padding: 10px 150px;
-  background-color: var(--primary);
-  color: #ffff;
-  border-radius: 6px;
-}
-
-.btn_login-google:hover {
-  opacity: 0.8;
+  min-width: 320px;
 }
 
 /*

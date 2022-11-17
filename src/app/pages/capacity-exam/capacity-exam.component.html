@@ -7,35 +7,38 @@
     >
       <div class="capacity__exam-heading-inner d-flex align-items-center justify-content-center">
         <span class="capacity__exam-heading-line"></span>
-        <h1 class="capacity__exam-heading-title text-center fw-bold">
-          Bài test năng lực:
-          <a class="text-body" [routerLink]="['/test-nang-luc', roundDetail.contest.id]">{{
-            roundDetail.contest.name
-          }}</a>
+        <!-- không gắn link vào tên bài test nếu đang làm bài -->
+        <h1
+          class="capacity__exam-heading-title text-center fw-bold"
+          *ngIf="statusTakingExam === 1 || isFetchingExam; else elseBlock"
+        >
+          Bài test năng lực: {{ roundDetail.contest.name }}
         </h1>
+
+        <ng-template #elseBlock>
+          <h1 class="capacity__exam-heading-title text-center fw-bold" *ngIf="statusTakingExam !== 1">
+            Bài test năng lực:
+            <a class="text-body" [routerLink]="['/test-nang-luc', roundDetail.contest.id]">{{
+              roundDetail.contest.name
+            }}</a>
+          </h1>
+        </ng-template>
         <span class="capacity__exam-heading-line"></span>
       </div>
 
       <div class="text-center">
-        <div *ngIf="statusTakingExam === 1">
-          <p>Phần thi: {{ roundDetail.name }}</p>
-          <div>
-            Câu hỏi: <span class="text-red">{{ examData.questions.length }} câu</span>, thời gian:
-            <span class="text-red">{{ examData.time_exam }} phút</span>
-          </div>
+        <div>
+          Phần thi: {{ roundDetail.name }} (Bắt đầu:
+          <span class="text-red">{{ roundDetail.start_time | formatDate }}</span
+          >, kết thúc: <span class="text-red">{{ roundDetail.end_time | formatDate }}</span
+          >)
         </div>
 
-        <div *ngIf="isFetchingExam">
-          <ngx-skeleton-loader [theme]="{ width: '65%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
-          <ngx-skeleton-loader [theme]="{ width: '35%', margin: 0 }" class="d-block"></ngx-skeleton-loader>
-        </div>
-
-        <div *ngIf="statusTakingExam !== 1 && !isFetchingExam">
-          <p>Phần thi: {{ roundDetail.name }}</p>
-          <div>
-            Bắt đầu: <span class="text-red">{{ roundDetail.start_time | formatDate }}</span
-            >, kết thúc: <span class="text-red">{{ roundDetail.end_time | formatDate }}</span>
-          </div>
+        <div>
+          Câu hỏi: <span class="text-red">{{ roundDetail.max_questions_exam }} câu</span>, thời gian:
+          <span class="text-red"
+            >{{ convertTimeExamToSeconds(roundDetail.time_exam, roundDetail.time_type_exam) / 60 }} phút</span
+          >
         </div>
       </div>
     </div>
@@ -71,7 +74,7 @@
       </button>
     </section>
 
-    <!-- loading khi đàn get dữ liệu vòng thi và check trạng thái làm bài -->
+    <!-- loading khi đang get dữ liệu vòng thi và check trạng thái làm bài -->
     <section>
       <div *ngIf="isFetchingRound" class="text-center">
         <ngx-skeleton-loader [theme]="{ margin: 0 }"></ngx-skeleton-loader>
@@ -102,7 +105,7 @@
                 </div>
 
                 <div class="sidebar__list-item-text">
-                  <strong>{{ examData.questions.length }}</strong> câu hỏi
+                  <strong>{{ roundDetail.max_questions_exam }}</strong> câu hỏi
                 </div>
               </li>
 
@@ -280,7 +283,10 @@
         <tbody>
           <tr>
             <td class="pb-1">Thời gian</td>
-            <td class="pb-1 fw-bold">{{ this.resultExam.examTime }}</td>
+            <td class="pb-1 fw-bold">
+              {{ this.resultExam.examTime }}
+              {{ this.resultExam.isLateSubmission ? "(Nộp muộn)" : "" }}
+            </td>
           </tr>
 
           <tr>
@@ -325,7 +331,7 @@
               </li>
 
               <div class="capacity__exam-result-actions-item my-1 ml-8" *ngIf="!getNextRound().status">
-                <a href="" class="my-btn-primary my-btn-s my-btn--no-bg">Bảng xếp hạng</a>
+                <a routerLink="/test-nang-luc" class="my-btn-primary my-btn-s w-100">Bảng xếp hạng</a>
               </div>
             </td>
           </tr>

@@ -1,9 +1,13 @@
 .contest-item {
   background: var(--my-white);
-  border-radius: var(--my-rounded);
+  border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--my-dark-gray);
   z-index: -1;
+}
+
+.contest-item a {
+  cursor: pointer;
 }
 
 .contest-view {
@@ -24,7 +28,7 @@
   object-fit: cover;
   width: 100%;
   height: 115px;
-  border-radius: var(--my-rounded)
+  border-radius: var(--my-rounded);
 }
 
 /* -------- button favorite --------- */
@@ -66,7 +70,7 @@
   color: var(--my-darkest-gray);
 }
 
-.contest-item__info-item+.contest-item__info-item {
+.contest-item__info-item + .contest-item__info-item {
   margin-left: 8px;
 }
 

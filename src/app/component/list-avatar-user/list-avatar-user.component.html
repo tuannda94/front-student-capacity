@@ -1,4 +1,4 @@
-<div style="margin-left: -10px;" class="avatar-group" *ngIf="avatarTeam.length <= 5">
+<div style="margin-left: -10px" class="avatar-group" *ngIf="avatarTeam.length <= 5">
   <div class="avatar" *ngFor="let item of avatarTeam">
     <span class="avatar-name">{{ item.name }}</span>
     <img
@@ -20,11 +20,11 @@
   </div>
 </div>
 
-<div style="margin-left: -10px;" class="avatar-group" *ngIf="avatarTeam.length > 5">
-    <div class="avatar avatar-hover" *ngFor="let item of avatarTeam; let i = index">
-      <div *ngIf="i < avatarTeam.length - 1; else elseBlock">
-        <span class="avatar-name">{{ item.name }}</span>
-        <img
+<div style="margin-left: -10px" class="avatar-group" *ngIf="avatarTeam.length > 5">
+  <div class="avatar avatar-hover" *ngFor="let item of avatarTeam; let i = index">
+    <div *ngIf="i < avatarTeam.length - 1; else elseBlock">
+      <span class="avatar-name">{{ item.name }}</span>
+      <img
         *ngIf="item.contest_id"
         [src]="
           item.image ||
@@ -40,15 +40,15 @@
         "
         alt="Image"
       />
-      </div>
-
-      <ng-template #elseBlock>
-        <div  *ngIf="item.email" class="avatar__last" [ngStyle]="{ 'background-image': 'url(' + item.avatar + ')' }">
-          <i class="fa-solid fa-ellipsis"></i>
-        </div>
-        <div  *ngIf="item.contest_id" class="avatar__last" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }">
-            <i class="fa-solid fa-ellipsis"></i>
-          </div>
-      </ng-template>
     </div>
+
+    <ng-template #elseBlock>
+      <div *ngIf="item.email" class="avatar__last" [ngStyle]="{ 'background-image': 'url(' + item.avatar + ')' }">
+        <i class="fa-solid fa-ellipsis"></i>
+      </div>
+      <div *ngIf="item.contest_id" class="avatar__last" [ngStyle]="{ 'background-image': 'url(' + item.image + ')' }">
+        <i class="fa-solid fa-ellipsis"></i>
+      </div>
+    </ng-template>
+  </div>
 </div>

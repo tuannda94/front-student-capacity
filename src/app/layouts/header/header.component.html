@@ -69,21 +69,21 @@
           </li>
 
           <li class="nav-item" routerLinkActive="active">
-            <a class="fw-bold nav-link-item text-decoration-none" routerLink="/bai-viet"> Bài viết </a>
+            <a class="fw-bold nav-link-item text-decoration-none" routerLink="/tin-tuc"> Tin tức </a>
           </li>
 
           <li *ngIf="user" (click)="openSaveInfo()" class="open-save-info">
             <i
-              [matBadge]="getCountAll()"
               matBadgePosition="after"
+              [matBadge]="countInfoSaveItem"
               class="fa-solid fs-5 fa-bookmark"
               matBadgeColor="warn"
             ></i>
           </li>
 
           <li *ngIf="!user" class="btn-login-desktop d-none d-lg-block">
-            <a (click)="saveUrlCurrent()" routerLink="/login" class="">
-              <button class="my-btn-primary my-btn-s">Đăng nhập</button>
+            <a (click)="saveUrlCurrent()" class="">
+              <button class="my-btn-primary my-btn-s" routerLink="/login">Đăng nhập</button>
             </a>
           </li>
 
@@ -113,7 +113,7 @@
     <ul class="header__mobile-right d-flex d-lg-none m-0 flex-2 justify-content-end">
       <li *ngIf="user" (click)="openSaveInfo()" class="open-save-info">
         <i
-          [matBadge]="getCountAll()"
+          [matBadge]="countInfoSaveItem"
           matBadgePosition="after"
           class="fa-solid fs-5 fa-bookmark"
           matBadgeColor="warn"
@@ -121,8 +121,8 @@
       </li>
 
       <li *ngIf="!user">
-        <a (click)="saveUrlCurrent()" routerLink="/login">
-          <button class="my-btn my-btn-primary my-btn-xs">Đăng nhập</button>
+        <a (click)="saveUrlCurrent()">
+          <button routerLink="/login" class="my-btn my-btn-primary my-btn-xs">Đăng nhập</button>
         </a>
       </li>
 
@@ -264,8 +264,8 @@
       </li>
 
       <li class="menu-res-item" routerLinkActive="active">
-        <a (click)="handleToggleMenuMobile()" class="fw-bold nav-link-item text-decoration-none" routerLink="/bai-viet">
-          Bài viết
+        <a (click)="handleToggleMenuMobile()" class="fw-bold nav-link-item text-decoration-none" routerLink="/tin-tuc">
+          Tin tức
         </a>
       </li>
     </ul>

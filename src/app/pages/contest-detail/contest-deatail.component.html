@@ -32,7 +32,7 @@
             >
             </ngx-skeleton-loader>
           </div>
-          <div class="" style="margin-left: -10px">
+          <div class="contest-info">
             <div class="py-3 contest-info-box" *ngIf="statusContest == true">
               <p class="fw-bold fs-5 color-blue contest-info-item text-collapse">Cuộc thi : {{ contestDetail.name }}</p>
               <p class="color-gray color-blue contest-info-item fs-text fw-bold">
@@ -208,7 +208,7 @@
         Cuộc thi liên quan
       </p>
       <div class="mt-3 row" *ngIf="countContestRelated">
-        <div *ngFor="let item of contestRelated" class="col-6">
+        <div *ngFor="let item of contestRelated" class="col-lg-6 col-lx-6 col-md-12 col-sm-12">
           <app-contest-item (contestRelated)="isContestRelate($event)" [isRelate]="true" [item]="item">
           </app-contest-item>
         </div>

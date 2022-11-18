@@ -150,7 +150,7 @@ export class HomeComponent implements OnInit {
       }
 
       // Slider đợt tuyển dụng.
-    }, 6000);
+    }, 20000);
 
     setInterval(() => {
       if (this.arrLinkPost) {

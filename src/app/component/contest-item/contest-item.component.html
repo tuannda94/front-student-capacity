@@ -45,9 +45,8 @@
         </li>
       </ul>
       <p *ngIf="checkStatusContest(item, 2) != 0">
-        {{ checkStatusContest(item, 2) == 1 ? "Sắp diễn ra: " : checkStatusContest(item, 2) }}TG:{{
-          checkStatusContest(item, 2) == 1 ? (item.date_start | formatDate) : (item.date_end | formatDate)
-        }}
+        {{ checkStatusContest(item, 2) == 1 ? "Sắp diễn ra: " : checkStatusContest(item, 2)
+        }}{{ checkStatusContest(item, 2) == 1 ? (item.date_start | formatDate) : (item.date_end | formatDate) }}
       </p>
     </div>
     <div class="contest-item-content-row">

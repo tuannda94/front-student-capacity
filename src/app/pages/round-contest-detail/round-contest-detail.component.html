@@ -23,7 +23,7 @@
     <div class="contest-detail-header">
       <div class="contest-detail-left">
         <div class="contest-detail-left-header row">
-          <div class="col-5 contest-detail-left-img-box">
+          <div class="col-lg-5 col-lx-5 col-md-12 col-sm-12 contest-detail-left-img-box">
             <img *ngIf="roundDetail" [src]="roundDetail.image" alt="" class="w-100 contest-detail-left-img" />
             <ngx-skeleton-loader
               *ngIf="!roundDetail"
@@ -37,7 +37,7 @@
             >
             </ngx-skeleton-loader>
           </div>
-          <div class="col-7" style="margin-left: -15px">
+          <div class="col-lg-7 col-lx-7 col-md-12 col-sm-12 contest-info">
             <div class="py-3 round-info-box" *ngIf="roundDetail">
               <p class="fw-bold fs-5 color-blue round-info-item text-collapse">Vòng thi: {{ roundDetail.name }}</p>
               <p class="color-gray color-blue round-info-item fs-text fw-bold">

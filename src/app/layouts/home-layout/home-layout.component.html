@@ -1,5 +1,5 @@
 <div id="main-wrapper">
-  <app-header [countContest]="countContest" [countPost]="countPost"> </app-header>
+  <app-header> </app-header>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
   <div
@@ -24,3 +24,4 @@
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Đóng</button>
   </div>
 </ng-template>
+<app-popup-login></app-popup-login>

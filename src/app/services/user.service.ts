@@ -32,6 +32,8 @@ export class UserService {
     return this.http.post<ResponsePayload>(environment.loginUrl, { token: authToken }).pipe(
       map((response) => {
         if (response.status == true) {
+          console.log(response);
+
           let dataUser = response.payload!.user;
           if (dataUser.avatar == null) {
             dataUser.avatar = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
@@ -62,7 +64,6 @@ export class UserService {
     localStorage.removeItem("test_result");
     this.userSubject.next(JSON.parse("{}"));
     this.jwtToken.next("");
-    this.router.navigate(["/login"]);
   }
 
   listUser(): Observable<Array<User>> {
@@ -76,9 +77,7 @@ export class UserService {
 
   // Lộc cuộc thi đã tham gia theo trạng thái
   getContestByUserStatus(key_word: string, status: any): Observable<ResponsePayload> {
-    const params = new HttpParams()
-    .set('status', status)
-    .set('q', key_word)
+    const params = new HttpParams().set("status", status).set("q", key_word);
     return this.http.get<ResponsePayload>(`${environment.userListUrl}/contest-joined?${params}`);
   }
 

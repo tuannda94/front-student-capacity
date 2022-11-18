@@ -283,3 +283,38 @@ ul {
 .related-contest-info .related-contest-detail {
   padding: 3px 10px;
 }
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .contest-detail-header {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .contest-detail-header {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .contest-detail-left-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 0px;
+    height: 500px;
+  }
+
+  .contest-detail-left-img {
+    width: 100%;
+    border-radius: var(--my-rounded-2);
+  }
+
+  .row {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  .contest-info {
+    padding-left: 30px;
+  }
+}

@@ -60,7 +60,7 @@
     <div class="row" *ngIf="postRecruitmentFirst">
       <div class="col-lg-7">
         <a
-          routerLink="/bai-viet/{{ postRecruitmentFirst.slug }}"
+          routerLink="/tin-tuc/{{ postRecruitmentFirst.slug }}"
           data-toggle="tooltip"
           data-placement="top"
           title="{{ postRecruitmentFirst.title }}"
@@ -76,7 +76,7 @@
             data-placement="top"
             title="{{ postRecruitmentFirst.title }}"
           >
-            <a routerLink="/bai-viet/{{ postRecruitmentFirst.slug }}">{{ postRecruitmentFirst.title }}</a>
+            <a routerLink="/tin-tuc/{{ postRecruitmentFirst.slug }}">{{ postRecruitmentFirst.title }}</a>
           </h3>
           <div class="post-new-latest__info">
             <div class="post-new-latest__info-item">
@@ -92,7 +92,7 @@
               *ngIf="postRecruitmentFirst.description"
               [innerHTML]="postRecruitmentFirst.description"
             ></p>
-            <a routerLink="/bai-viet/{{ postRecruitmentFirst.slug }}">
+            <a routerLink="/tin-tuc/{{ postRecruitmentFirst.slug }}">
               <button class="post-new-latest__btn my-btn-secondary my-btn-ss">Chi tiết</button>
             </a>
           </div>
@@ -100,7 +100,7 @@
         <ngx-slick-carousel [config]="sliderPost" class="row mt-2">
           <div ngxSlickItem class="col-6 post-new-latest_box" *ngFor="let post of listPostRecruitment">
             <a
-              routerLink="/bai-viet/{{ post.slug }}"
+              routerLink="/tin-tuc/{{ post.slug }}"
               data-toggle="tooltip"
               data-placement="top"
               title="{{ post.title }}"
@@ -179,7 +179,7 @@
               <div class="post-in-cate-item" *ngFor="let postCapacity of listPostCapacity">
                 <div class="post-in-cate-item__img-section">
                   <a
-                    routerLink="/bai-viet/{{ postCapacity.slug }}"
+                    routerLink="/tin-tuc/{{ postCapacity.slug }}"
                     data-toggle="tooltip"
                     data-placement="top"
                     title="{{ postCapacity.title }}"
@@ -194,7 +194,7 @@
                     data-placement="top"
                     title="{{ postCapacity.title }}"
                   >
-                    <a routerLink="/bai-viet/{{ postCapacity.slug }}">
+                    <a routerLink="/tin-tuc/{{ postCapacity.slug }}">
                       {{ postCapacity.title }}
                     </a>
                   </h3>
@@ -275,7 +275,7 @@
               <div class="post-in-cate-item" *ngFor="let postContes of listPostContest">
                 <div class="post-in-cate-item__img-section">
                   <a
-                    routerLink="/bai-viet/{{ postContes.slug }}"
+                    routerLink="/tin-tuc/{{ postContes.slug }}"
                     data-toggle="tooltip"
                     data-placement="top"
                     title="{{ postContes.title }}"
@@ -285,7 +285,7 @@
                 </div>
                 <div class="post-in-cate-item-content">
                   <h3 class="post-in-cate-item-content__title" data-toggle="tooltip" title="{{ postContes.title }}">
-                    <a routerLink="/bai-viet/{{ postContes.slug }}">{{ postContes.title }}</a>
+                    <a routerLink="/tin-tuc/{{ postContes.slug }}">{{ postContes.title }}</a>
                   </h3>
                   <div class="post-in-cate-item-content__info">
                     <div class="post-in-cate-item-content__info-item">

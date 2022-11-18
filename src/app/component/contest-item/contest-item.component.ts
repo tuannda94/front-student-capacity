@@ -7,6 +7,8 @@ import { WishlistService } from "src/app/services/wishlist.service";
 import { Post } from "src/app/models/post.model";
 import { NgToastService } from "ng-angular-popup";
 import { Router } from "@angular/router";
+import { LocalStorageService } from "src/app/services/local-storage.service";
+import { GetValueLocalService } from "src/app/services/get-value-local.service";
 
 @Component({
   selector: "app-contest-item",
@@ -37,14 +39,16 @@ export class ContestItemComponent implements OnInit {
   seconds: number;
 
   constructor(
-    private userService: UserService,
+    private userSer: UserService,
     private router: Router,
     private toast: NgToastService,
     private wishlist: WishlistService,
+    private countSave: LocalStorageService,
+    private userService: GetValueLocalService,
   ) {}
 
   ngOnInit(): void {
-    this.userService.getUserValue().id != undefined ? (this.checkUserHasLogin = true) : this.checkUserHasLogin;
+    this.userSer.getUserValue().id != undefined ? (this.checkUserHasLogin = true) : this.checkUserHasLogin;
 
     this.date_start = new Date(moment(this.item.date_start).format("lll")).getTime();
     this.date_end = new Date(moment(this.item.register_deadline).format("lll")).getTime();
@@ -104,20 +108,28 @@ export class ContestItemComponent implements OnInit {
       id: item.id,
     };
 
-    if (!this.userService.getUserValue()) {
-      this.router.navigate(["/login"]);
+    if (!this.userService.getValueLocalUser("user")) {
+      this.countSave.setIsPopup(1);
     } else {
       this.requestFavorite.emit(item);
-      if (item.user_wishlist) {
+      if (event.currentTarget.className.includes("primary-color")) {
         event.currentTarget.classList.remove("primary-color");
         event.currentTarget.parentElement.classList.remove("opacity-100");
         event.currentTarget.parentElement.classList.add("my-add-favorite__icon");
-        this.wishlist.wishListRemove(data).subscribe();
+        this.wishlist.wishListRemove(data).subscribe((res) => {
+          if (res.status) {
+            this.countSave.setCurrentSave(1, false);
+          }
+        });
       } else {
         event.currentTarget.classList.add("primary-color");
         event.currentTarget.parentElement.classList.add("opacity-100");
         event.currentTarget.parentElement.classList.remove("my-add-favorite__icon");
-        this.wishlist.wishListAdd(data).subscribe();
+        this.wishlist.wishListAdd(data).subscribe((res) => {
+          if (res.status) {
+            this.countSave.setCurrentSave(1, true);
+          }
+        });
       }
     }
   }

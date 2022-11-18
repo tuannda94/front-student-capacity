@@ -146,14 +146,14 @@
               <div *ngFor="let item of listPostResult" class="recruitment-list-hot-item-box">
                 <div class="w-100">
                   <img
-                    routerLink="/bai-viet/{{ item.slug }}"
+                    routerLink="/tin-tuc/{{ item.slug }}"
                     [src]="item.thumbnail_url"
                     alt=""
                     class="recruitment-list-hot-item-box-img"
                   />
                 </div>
                 <h3 class="post-item__title mt-2">
-                  <a class="text-dark" routerLink="/bai-viet/{{ item.slug }}">{{ item.title }}</a>
+                  <a class="text-dark" routerLink="/tin-tuc/{{ item.slug }}">{{ item.title }}</a>
                 </h3>
                 <div class="post-item__info">
                   <div
@@ -170,7 +170,7 @@
                 </div>
                 <div class="post-item-bottom">
                   <p class="short-desc" *ngIf="item.description" [innerHTML]="item.description"></p>
-                  <a class="btn btn-detail" routerLink="/bai-viet/{{ item.slug }}">Chi tiết</a>
+                  <a class="btn btn-detail" routerLink="/tin-tuc/{{ item.slug }}">Chi tiết</a>
                 </div>
               </div>
             </div>

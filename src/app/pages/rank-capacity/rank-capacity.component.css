@@ -1,59 +1,51 @@
-.btn-search-rankingCapacity{
-    background-color: var(--primary);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    padding-top: 3px;
-  }
-  
-  .btn-search-rankingCapacity:hover{
-    opacity: 0.8;
-  }
-
-  .rankingCapacity-filter-box{
-  }
-  .banner {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
+.btn-search-rankingCapacity {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  padding-top: 3px;
 }
-.rank_image{
+
+.btn-search-rankingCapacity:hover {
+  opacity: 0.8;
+}
+
+.rankingCapacity-filter-box {
+}
+
+.banner {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.rank_image {
   border-radius: 100px;
   object-fit: cover;
   display: inline-block;
   height: 50px;
   width: 50px;
 }
-.rank_title{
-  color: #0E0759;
-  font-size: 24px;
-  line-height: 28.8px;
-  font-weight: 700;
-}
 
-.test-capacity_item{
-  display: flex;
-  flex: 1
-}
-
-
-.rank_name{
+.rank_name {
   display: inline-block;
-  color: #0E0759;
+  color: #0e0759;
   margin: 0px 0px 0px 10px;
   font-size: 16px;
   line-height: 22.4px;
   font-weight: 400;
 }
-.rank_item-list{
+
+.rank_item-list {
   width: 100%;
   height: 75px;
   border-radius: 8px;
 }
-.rank_item{
-  color: #0E0759;
+
+.rank_item {
+  color: #0e0759;
   font-size: 16px;
   line-height: 22.4px;
   font-weight: 400;
@@ -61,17 +53,19 @@
   height: 60px;
   padding: 10px;
 }
-.rank_item-name{
-  color: #0E0759;
+
+.rank_item-name {
+  color: #0e0759;
   font-size: 16px;
   line-height: 22.4px;
   font-weight: 400;
   height: 60px;
   padding: 10px;
-  vertical-align: middle
+  vertical-align: middle;
 }
-.rank_item_scores{
-  color: var(--my-primary) !important;
+
+.rank_item_scores {
+  color: var(--my-primary);
   font-size: 16px;
   line-height: 22.4px;
   font-weight: 400;
@@ -80,20 +74,24 @@
   height: 60px;
   padding: 10px;
 }
-.tbody{
+
+.tbody {
   border: 0px;
 }
 
-.rank_head-table{
+.rank_head-table {
   width: 100%;
   background: var(--my-light-gray);
   border-radius: 4.76625px;
 }
-.rank-thead-table{
+
+.rank-thead-table {
   height: 75px;
 }
-
-.rank_title-table{
+.rank_title {
+  color: var(--my-secondary);
+}
+.rank_title-table {
   height: 60px;
   padding: 10px;
   vertical-align: middle;
@@ -103,7 +101,8 @@
   font-weight: 400;
   background-color: var(--my-light-gray);
 }
-.rank_title-table-score{
+
+.rank_title-table-score {
   height: 60px;
   padding: 10px;
   vertical-align: middle;
@@ -113,17 +112,18 @@
   font-weight: 400;
   text-align: center;
 }
-.rank-table-none{
+
+.rank-table-none {
   width: 300px;
 }
 
-.pagination{
+.pagination {
   width: 100%;
-  text-align: center;;
-  display: block
+  text-align: center;
+  display: block;
 }
 
-.pagination-list{
+.pagination-list {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,7 +132,8 @@
   text-align: center;
   list-style: none;
 }
-.pagination-list_box{
+
+.pagination-list_box {
   background: var(--my-gray);
   border-radius: 5px;
   text-align: center;
@@ -144,16 +145,16 @@
   width: 30px;
   height: 30px;
   padding: 5px 5px;
-  color: black
+  color: black;
 }
 
-.pagination-list_box:hover{
-  background: #FF6638;
-  color: #FFFFFF;
+.pagination-list_box:hover {
+  background: #ff6638;
+  color: #ffffff;
   cursor: pointer;
 }
 
-.pagination-list_dot{
+.pagination-list_dot {
   text-align: center;
   font-size: 16px;
   line-height: 22.4px;
@@ -165,23 +166,24 @@
   padding: 5px 5px;
 }
 
-.rank-table{
+.rank-table {
   width: 100%;
-  border-collapse: collapse; 
-  background: white; 
+  border-collapse: collapse;
+  background: white;
 }
 
-tr:nth-of-type(even) { 
-  background: #F9F9F9; 
+tr:nth-of-type(even) {
+  background: #f9f9f9;
 }
 
-.pagination-item.active{
-  background: #FF6638;
-  color: #FFFFFF;
+.pagination-item.active {
+  background: #ff6638;
+  color: #ffffff;
 }
+
 /* CSS Danh sách capacity */
 
-.list-capacity{
+.list-capacity {
   margin: 20px 0px 0px 0px;
 }
 
@@ -191,17 +193,42 @@ tr:nth-of-type(even) {
   gap: 24px;
   margin-top: 32px;
 }
-
-.capacity_title{
-  color: #0E0759;
-  font-size: 24px;
-  line-height: 28.8px;
-  font-weight: 700;
+.capacity_title {
+  color: var(--my-secondary);
+}
+.capacity_view-all {
+  color: var(--my-secondary);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 140%;
+}
+.capacity_view-all:hover {
+  color: var(--blue-900);
 }
 
-.capacity_view-all{
-  color: #0E0759;
-  font-size: 20px;
-  line-height: 24.4px;
-  font-weight: 400;
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .test-capacity_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rank_title-table-major {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .post-new-latest {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .rank_title-table-major {
+    visibility: hidden;
+  }
+
+  .test-capacity_list {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }

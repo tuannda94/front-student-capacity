@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Post } from 'src/app/models/post.model';
+import { Component, Input, OnInit } from "@angular/core";
+import { Post } from "src/app/models/post.model";
 
 @Component({
-  selector: 'app-list-post',
-  templateUrl: './list-post.component.html',
-  styleUrls: ['./list-post.component.css']
+  selector: "app-list-post",
+  templateUrl: "./list-post.component.html",
+  styleUrls: ["./list-post.component.css"],
 })
 export class ListPostComponent implements OnInit {
   @Input() countColumn: number;
-  @Input() listPost : Array<Post>;
+  @Input() listPost: Array<Post>;
 
   sliderPostColFour = {
     slidesToShow: 4,
@@ -28,9 +28,7 @@ export class ListPostComponent implements OnInit {
     fadeSpeed: 1000,
   };
 
-  constructor() { }
-  
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
 }

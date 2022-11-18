@@ -2,27 +2,17 @@
   <div class="container">
     <div class="header-section--first">
       <h2 class="header-section__title">Bài viết tuyển dụng</h2>
-      <a
-        (click)="clickChangeUrlToCategoryPost('post-recruitment')"
-        class="header-section__link"
-        >Tất cả</a
-      >
+      <a (click)="clickChangeUrlToCategoryPost('post-recruitment')" class="header-section__link">Tất cả</a>
     </div>
     <div class="post-new-latest" *ngIf="!postRecruitmentFirst">
       <div class="post-new-latest__img-section">
-        <ngx-skeleton-loader
-          [theme]="{ 'height.px': 400, 'border-radius': '8px' }"
-          appearance="line"
-        >
+        <ngx-skeleton-loader [theme]="{ 'height.px': 400, 'border-radius': '8px' }" appearance="line">
         </ngx-skeleton-loader>
       </div>
       <div class="post-new-latest-content">
         <div class="">
           <h3 class="post-new-latest__title">
-            <ngx-skeleton-loader
-              [theme]="{ 'height.px': 60, 'border-radius': '8px' }"
-              appearance="line"
-            >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 60, 'border-radius': '8px' }" appearance="line">
             </ngx-skeleton-loader>
           </h3>
           <div class="post-new-latest__info">
@@ -46,10 +36,7 @@
             </ngx-skeleton-loader>
           </div>
           <div class="post-new-latest__bottom">
-            <ngx-skeleton-loader
-              [theme]="{ 'height.px': 70, 'border-radius': '8px' }"
-              appearance="line"
-            >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 70, 'border-radius': '8px' }" appearance="line">
             </ngx-skeleton-loader>
             <ngx-skeleton-loader
               [theme]="{
@@ -64,52 +51,39 @@
         </div>
         <div class="row">
           <div class="col-6" *ngFor="let _ of [].constructor(2)">
-            <ngx-skeleton-loader
-              [theme]="{ 'height.px': 132, 'border-radius': '8px' }"
-              appearance="line"
-            >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 132, 'border-radius': '8px' }" appearance="line">
             </ngx-skeleton-loader>
           </div>
         </div>
       </div>
     </div>
     <div class="row" *ngIf="postRecruitmentFirst">
-      <div class="col-7">
+      <div class="col-lg-7">
         <a
-          routerLink="/bai-viet/{{ postRecruitmentFirst.slug }}"
+          routerLink="/tin-tuc/{{ postRecruitmentFirst.slug }}"
           data-toggle="tooltip"
           data-placement="top"
           title="{{ postRecruitmentFirst.title }}"
         >
-          <img
-            src="{{ postRecruitmentFirst.thumbnail_url }}"
-            alt=""
-            class="post-new-latest__img"
-          />
+          <img src="{{ postRecruitmentFirst.thumbnail_url }}" alt="" class="post-new-latest__img" />
         </a>
       </div>
-      <div class="col-5 post-new-latest_right">
-        <div class="">
+      <div class="col-lg-5 col-lx-5 col-md-10 col-md-12 post-new-latest_right">
+        <div class="post-new-latest__left">
           <h3
             class="post-new-latest__title my-h3"
             data-toggle="tooltip"
             data-placement="top"
             title="{{ postRecruitmentFirst.title }}"
           >
-            <a routerLink="/bai-viet/{{ postRecruitmentFirst.slug }}">{{
-              postRecruitmentFirst.title
-            }}</a>
+            <a routerLink="/tin-tuc/{{ postRecruitmentFirst.slug }}">{{ postRecruitmentFirst.title }}</a>
           </h3>
           <div class="post-new-latest__info">
             <div class="post-new-latest__info-item">
-              <i class="fa-solid fa-user"></i>&ensp;{{
-                postRecruitmentFirst.user.name
-              }}
+              <i class="fa-solid fa-user"></i>&ensp;{{ postRecruitmentFirst.user.name }}
             </div>
             <div class="post-new-latest__info-item">
-              <i class="fa-solid fa-clock"></i>&ensp;{{
-                postRecruitmentFirst.published_at | formatDatePost
-              }}
+              <i class="fa-solid fa-clock"></i>&ensp;{{ postRecruitmentFirst.published_at | formatDatePost }}
             </div>
           </div>
           <div class="post-new-latest__bottom">
@@ -118,34 +92,23 @@
               *ngIf="postRecruitmentFirst.description"
               [innerHTML]="postRecruitmentFirst.description"
             ></p>
-            <a routerLink="/bai-viet/{{ postRecruitmentFirst.slug }}">
-              <button class="post-new-latest__btn my-btn-secondary my-btn-ss">
-                Chi tiết
-              </button>
+            <a routerLink="/tin-tuc/{{ postRecruitmentFirst.slug }}">
+              <button class="post-new-latest__btn my-btn-secondary my-btn-ss">Chi tiết</button>
             </a>
           </div>
-        
         </div>
-        <ngx-slick-carousel [config]="sliderPost" class="row">
-            <div
-              ngxSlickItem
-              class="col-6 post-new-latest_box"
-              *ngFor="let post of listPostRecruitment"
+        <ngx-slick-carousel [config]="sliderPost" class="row mt-2">
+          <div ngxSlickItem class="col-6 post-new-latest_box" *ngFor="let post of listPostRecruitment">
+            <a
+              routerLink="/tin-tuc/{{ post.slug }}"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="{{ post.title }}"
             >
-              <a
-                routerLink="/bai-viet/{{ post.slug }}"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="{{ post.title }}"
-              >
-                <img
-                  src="{{ post.thumbnail_url }}"
-                  alt=""
-                  class="post-new-latest_img"
-                />
-              </a>
-            </div>
-          </ngx-slick-carousel>
+              <img src="{{ post.thumbnail_url }}" alt="" class="post-new-latest_img" />
+            </a>
+          </div>
+        </ngx-slick-carousel>
       </div>
     </div>
 
@@ -154,91 +117,58 @@
         <div class="post-main-content-section">
           <div class="header-section">
             <h2 class="header-section__title">Bài viết test năng lực</h2>
-            <a
-              (click)="clickChangeUrlToCategoryPost('post-capacity')"
-              class="header-section__link"
-              >Tất cả</a
-            >
+            <a (click)="clickChangeUrlToCategoryPost('post-capacity')" class="header-section__link">Tất cả</a>
           </div>
           <!------------------------------- loading test capacity  -->
-          <div class="main-section">
-            <div class="" *ngIf="!postCapacityFirst">
+          <div class="main-section mb-3">
+            <div class="post-item-loading" *ngIf="!postCapacityFirst">
               <app-post-load-item></app-post-load-item>
             </div>
             <div class="post-item" *ngIf="postCapacityFirst">
-              <app-post-related-item
-                [postItem]="postCapacityFirst"
-              ></app-post-related-item>
+              <app-post-related-item [postItem]="postCapacityFirst"></app-post-related-item>
             </div>
             <div class="post-in-cate-list" *ngIf="!listPostCapacity">
               <div class="post-in-cate-item">
                 <div class="post-in-cate-item__img-section">
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 100, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 100, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="post-in-cate-item-content">
                   <h3 class="post-in-cate-item-content__title">
-                    <ngx-skeleton-loader
-                      [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                      appearance="line"
-                    >
+                    <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                     </ngx-skeleton-loader>
                   </h3>
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                   <div class=""></div>
                 </div>
               </div>
               <div class="post-in-cate-item">
                 <div class="post-in-cate-item__img-section">
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 100, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 100, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="post-in-cate-item-content">
                   <h3 class="post-in-cate-item-content__title">
-                    <ngx-skeleton-loader
-                      [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                      appearance="line"
-                    >
+                    <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                     </ngx-skeleton-loader>
                   </h3>
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                   <div class=""></div>
                 </div>
               </div>
               <div class="post-in-cate-item">
                 <div class="post-in-cate-item__img-section">
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 100, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 100, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="post-in-cate-item-content">
                   <h3 class="post-in-cate-item-content__title">
-                    <ngx-skeleton-loader
-                      [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                      appearance="line"
-                    >
+                    <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                     </ngx-skeleton-loader>
                   </h3>
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                   <div class=""></div>
                 </div>
@@ -246,22 +176,15 @@
             </div>
             <!-------------------------------  test capacity  -->
             <div class="post-in-cate-list">
-              <div
-                class="post-in-cate-item"
-                *ngFor="let postCapacity of listPostCapacity"
-              >
+              <div class="post-in-cate-item" *ngFor="let postCapacity of listPostCapacity">
                 <div class="post-in-cate-item__img-section">
                   <a
-                    routerLink="/bai-viet/{{ postCapacity.slug }}"
+                    routerLink="/tin-tuc/{{ postCapacity.slug }}"
                     data-toggle="tooltip"
                     data-placement="top"
                     title="{{ postCapacity.title }}"
                   >
-                    <img
-                      src="{{ postCapacity.thumbnail_url }}"
-                      alt=""
-                      class="post-in-cate-item__img"
-                    />
+                    <img src="{{ postCapacity.thumbnail_url }}" alt="" class="post-in-cate-item__img" />
                   </a>
                 </div>
                 <div class="post-in-cate-item-content">
@@ -271,15 +194,13 @@
                     data-placement="top"
                     title="{{ postCapacity.title }}"
                   >
-                    <a routerLink="/bai-viet/{{ postCapacity.slug }}">
+                    <a routerLink="/tin-tuc/{{ postCapacity.slug }}">
                       {{ postCapacity.title }}
                     </a>
                   </h3>
                   <div class="post-in-cate-item-content__info">
                     <div class="post-in-cate-item-content__info-item">
-                      <i class="fa-solid fa-clock"></i>&ensp;{{
-                        postCapacity.published_at | formatDatePost
-                      }}
+                      <i class="fa-solid fa-clock"></i>&ensp;{{ postCapacity.published_at | formatDatePost }}
                     </div>
                   </div>
                   <div class=""></div>
@@ -292,91 +213,58 @@
         <div class="post-main-content-section">
           <div class="header-section">
             <h2 class="header-section__title">Bài viết cuộc thi</h2>
-            <a
-              (click)="clickChangeUrlToCategoryPost('post-contest')"
-              class="header-section__link"
-              >Tất cả</a
-            >
+            <a (click)="clickChangeUrlToCategoryPost('post-contest')" class="header-section__link">Tất cả</a>
           </div>
           <div class="main-section">
-            <div class="" *ngIf="!postContestFirst">
+            <div class="post-item-loading" *ngIf="!postContestFirst">
               <app-post-load-item></app-post-load-item>
             </div>
             <div class="post-item" *ngIf="postContestFirst">
-              <app-post-related-item
-                [postItem]="postContestFirst"
-              ></app-post-related-item>
+              <app-post-related-item [postItem]="postContestFirst"></app-post-related-item>
             </div>
             <!------------------------------- loading contest  -->
             <div class="post-in-cate-list" *ngIf="!listPostContest">
               <div class="post-in-cate-item">
                 <div class="post-in-cate-item__img-section">
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 100, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 100, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="post-in-cate-item-content">
                   <h3 class="post-in-cate-item-content__title">
-                    <ngx-skeleton-loader
-                      [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                      appearance="line"
-                    >
+                    <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                     </ngx-skeleton-loader>
                   </h3>
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                   <div class=""></div>
                 </div>
               </div>
               <div class="post-in-cate-item">
                 <div class="post-in-cate-item__img-section">
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 100, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 100, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="post-in-cate-item-content">
                   <h3 class="post-in-cate-item-content__title">
-                    <ngx-skeleton-loader
-                      [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                      appearance="line"
-                    >
+                    <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                     </ngx-skeleton-loader>
                   </h3>
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                   <div class=""></div>
                 </div>
               </div>
               <div class="post-in-cate-item">
                 <div class="post-in-cate-item__img-section">
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 100, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 100, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                 </div>
                 <div class="post-in-cate-item-content">
                   <h3 class="post-in-cate-item-content__title">
-                    <ngx-skeleton-loader
-                      [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                      appearance="line"
-                    >
+                    <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                     </ngx-skeleton-loader>
                   </h3>
-                  <ngx-skeleton-loader
-                    [theme]="{ 'height.px': 20, 'border-radius': '8px' }"
-                    appearance="line"
-                  >
+                  <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'border-radius': '8px' }" appearance="line">
                   </ngx-skeleton-loader>
                   <div class=""></div>
                 </div>
@@ -384,39 +272,24 @@
             </div>
             <!-------------------------------  contest  -->
             <div class="post-in-cate-list">
-              <div
-                class="post-in-cate-item"
-                *ngFor="let postContes of listPostContest"
-              >
+              <div class="post-in-cate-item" *ngFor="let postContes of listPostContest">
                 <div class="post-in-cate-item__img-section">
                   <a
-                    routerLink="/bai-viet/{{ postContes.slug }}"
+                    routerLink="/tin-tuc/{{ postContes.slug }}"
                     data-toggle="tooltip"
                     data-placement="top"
                     title="{{ postContes.title }}"
                   >
-                    <img
-                      src="{{ postContes.thumbnail_url }}"
-                      alt=""
-                      class="post-in-cate-item__img"
-                    />
+                    <img src="{{ postContes.thumbnail_url }}" alt="" class="post-in-cate-item__img" />
                   </a>
                 </div>
                 <div class="post-in-cate-item-content">
-                  <h3
-                    class="post-in-cate-item-content__title"
-                    data-toggle="tooltip"
-                    title="{{ postContes.title }}"
-                  >
-                    <a routerLink="/bai-viet/{{ postContes.slug }}">{{
-                      postContes.title
-                    }}</a>
+                  <h3 class="post-in-cate-item-content__title" data-toggle="tooltip" title="{{ postContes.title }}">
+                    <a routerLink="/tin-tuc/{{ postContes.slug }}">{{ postContes.title }}</a>
                   </h3>
                   <div class="post-in-cate-item-content__info">
                     <div class="post-in-cate-item-content__info-item">
-                      <i class="fa-solid fa-clock"></i>&ensp;{{
-                        postContes.published_at | formatDatePost
-                      }}
+                      <i class="fa-solid fa-clock"></i>&ensp;{{ postContes.published_at | formatDatePost }}
                     </div>
                   </div>
                   <div class=""></div>

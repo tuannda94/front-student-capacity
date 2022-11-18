@@ -62,6 +62,7 @@ h6 {
   margin-right: 30px;
   cursor: pointer;
   padding-top: 5px;
+  position: relative;
 }
 
 .menu-res-item .menu-res-link {
@@ -146,7 +147,7 @@ h6 {
   color: var(--blue);
   position: relative;
   font-size: 16px;
-  padding-bottom: 5px;
+  padding-bottom: 2px;
 }
 
 .menu_login-box .nav-link-item::before {
@@ -496,6 +497,10 @@ h6 {
 @media only screen and (max-width: 740px) {
   .avatar-user-desktop {
     display: block;
+  }
+
+  .sidepanel {
+    width: 90%;
   }
 
   .menu-desktop {

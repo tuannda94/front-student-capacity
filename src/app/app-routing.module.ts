@@ -40,12 +40,12 @@ const routes: Routes = [
         component: ContestComponent,
       },
       {
-        path: "bai-viet",
+        path: "tin-tuc",
         data: { title: "Bài viết" },
         component: PostsComponent,
       },
       {
-        path: "bai-viet/:slug",
+        path: "tin-tuc/:slug",
         component: PostDetailComponent,
       },
       {

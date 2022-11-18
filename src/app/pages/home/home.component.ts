@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user.service';
-import { Contest } from 'src/app/models/contest';
-import { ContestService } from 'src/app/services/contest.service';
-import { Major } from 'src/app/models/major';
-import { ResultMajor } from 'src/app/models/result-major.model';
-import { CompanyService } from 'src/app/services/company.service';
-import { Company } from 'src/app/models/company.models';
-import { Post } from 'src/app/models/post.model';
-import { ListPostService } from 'src/app/services/list-post.service';
-import { ResponsePayload } from 'src/app/models/response-payload';
-import { Title } from '@angular/platform-browser';
+import { Component, OnInit } from "@angular/core";
+import { User } from "src/app/models/user";
+import { UserService } from "src/app/services/user.service";
+import { Contest } from "src/app/models/contest";
+import { ContestService } from "src/app/services/contest.service";
+import { Major } from "src/app/models/major";
+import { ResultMajor } from "src/app/models/result-major.model";
+import { CompanyService } from "src/app/services/company.service";
+import { Company } from "src/app/models/company.models";
+import { Post } from "src/app/models/post.model";
+import { ListPostService } from "src/app/services/list-post.service";
+import { ResponsePayload } from "src/app/models/response-payload";
+import { Title } from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
   listPostEvent: Post[] | null;
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
   sliderFeature = {
     slidesToShow: 1,
     infinite: true,
-    cssEase: 'linear',
+    cssEase: "linear",
     autoplay: true,
     slidesToScroll: 1,
     fadeSpeed: 4000,
@@ -96,13 +96,13 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private companyService: CompanyService,
     private postService: ListPostService,
-    private titleService: Title
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
     this.titleService.setTitle("Trang chủ");
     this.getRecruitmentPosition();
-    this.contestService.getWhereStatus(1, 'desc').subscribe((res) => {
+    this.contestService.getWhereStatus(1, "desc").subscribe((res) => {
       if (res.status == true) {
         this.contests = res.payload.filter((res: Contest, index: number) => {
           return index > -1 && index < 4;
@@ -113,62 +113,60 @@ export class HomeComponent implements OnInit {
     this.getAllCompany();
     // Slider tính năng
 
-    const advantageFrist = document.querySelector('.advantage__tag--1');
-    const advantageImage = document.querySelector('.advantage-show__img');
-    const advantageDots = document.querySelector('.advantage-show__dots-item');
-    advantageDots?.classList.add('advantage-show__dots-red');
-    advantageFrist?.classList.add('active');
-    advantageImage?.classList.add('d-block');
+    const advantageFrist = document.querySelector(".advantage__tag--1");
+    const advantageImage = document.querySelector(".advantage-show__img");
+    const advantageDots = document.querySelector(".advantage-show__dots-item");
+    advantageDots?.classList.add("advantage-show__dots-red");
+    advantageFrist?.classList.add("active");
+    advantageImage?.classList.add("d-block");
 
     setInterval(() => {
       // Slider đợt giới thiệu chức năng code online.
       this.advanIndex++;
 
-      const advantageEleImage = document.querySelectorAll(
-        '.advantage-show__img'
-      );
+      const advantageEleImage = document.querySelectorAll(".advantage-show__img");
       advantageEleImage.forEach((element, index) => {
-        element.classList.add('d-none');
+        element.classList.add("d-none");
         if (this.advanIndex == index + 1) {
-          element.classList.remove('d-none');
-          element.classList.add('d-block');
+          element.classList.remove("d-none");
+          element.classList.add("d-block");
         }
       });
 
-      const advantage = document.querySelectorAll('.advantage__tag');
+      const advantage = document.querySelectorAll(".advantage__tag");
       advantage.forEach((element, index) => {
-        element.classList.remove('active');
+        element.classList.remove("active");
         if (this.advanIndex == index + 1) {
-          element.classList.add('active');
+          element.classList.add("active");
         }
       });
 
-      if(advantage){
+      if (advantage) {
         if (this.advanIndex == advantage.length + 1) {
           this.advanIndex = 0;
-          advantage[0].classList.add('active');
-          advantageEleImage[0].classList.remove('d-none');
+          advantage[0].classList.add("active");
+          advantageEleImage[0].classList.remove("d-none");
         }
       }
 
       // Slider đợt tuyển dụng.
-    }, 6000);
+    }, 20000);
 
-      setInterval(() => {
-        if (this.arrLinkPost) {
-          if (this.currentIndex == this.arrLinkPost.length) {
-            this.payingRecruitmentPositionSlider(1);
-          } else if (this.currentIndex < this.arrLinkPost.length) {
-            let index = this.currentIndex + 1;
-            this.payingRecruitmentPositionSlider(index);
-          }
+    setInterval(() => {
+      if (this.arrLinkPost) {
+        if (this.currentIndex == this.arrLinkPost.length) {
+          this.payingRecruitmentPositionSlider(1);
+        } else if (this.currentIndex < this.arrLinkPost.length) {
+          let index = this.currentIndex + 1;
+          this.payingRecruitmentPositionSlider(index);
         }
-      }, 10000);
+      }
+    }, 10000);
   }
 
   // Get api list contest after login
   getListHasAfterLogin() {
-    this.userService.getListContestHasJoin(1, 'desc').subscribe((res) => {
+    this.userService.getListContestHasJoin(1, "desc").subscribe((res) => {
       res.status ? (this.contests = res.payload) : this.contests;
     });
   }
@@ -242,7 +240,7 @@ export class HomeComponent implements OnInit {
 
   //-----------------------  Danh sách các 3 bài viết
   getListPost() {
-    this.postService.getAllListPost().subscribe((res) => {
+    this.postService.getPostByCategory("post-contest").subscribe((res) => {
       if (res.status == true) {
         let arrResult = res.payload.data;
         this.listPostEvent = arrResult.filter((res: Post, index: number) => {

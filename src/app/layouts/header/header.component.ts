@@ -5,6 +5,7 @@ import { UserService } from "src/app/services/user.service";
 import { Contest } from "src/app/models/contest";
 import { Post } from "src/app/models/post.model";
 import { WishlistService } from "src/app/services/wishlist.service";
+import { LocalStorageService } from "src/app/services/local-storage.service";
 
 @Component({
   selector: "app-header",
@@ -18,15 +19,19 @@ export class HeaderComponent implements OnInit {
   posts: Array<Post> = [];
   statusPage: boolean = false;
   typeTab: number = 0;
-  @Input() countContest: number;
-  @Input() countPost: number;
+  countContest: number;
+  countPost: number;
   totalSave: number = 0;
   isOpenMenuMobile = false;
+  isLogin: boolean = false;
+  countInfoSaveItem: number = 0;
+  isChangeSave: boolean = false;
 
   constructor(
     private userInfo: GetValueLocalService,
     private userService: UserService,
     private wishlist: WishlistService,
+    private countSave: LocalStorageService,
   ) {}
 
   ngOnInit(): void {
@@ -34,18 +39,28 @@ export class HeaderComponent implements OnInit {
       this.user = data!;
     });
 
+    if (this.userService.getUserValue().id) {
+      this.getListCount();
+    }
+
     this.user = this.userInfo.getValueLocalUser("user");
-    this.saveUrlCurrent();
+    this.countSave.watchStorage().subscribe((data) => {
+      if (data) {
+        this.isChangeSave = true;
+        this.countInfoSaveItem = data;
+      }
+    });
   }
 
-  getCountAll() {
-    let result;
-    if (this.countContest && this.countPost) {
-      result = this.countContest + this.countPost;
-    } else {
-      result = 0;
-    }
-    return result;
+  getListCount() {
+    this.wishlist.wishListCount().subscribe((res) => {
+      if (res.status) {
+        this.countContest = res.payload.count_post;
+        this.countPost = res.payload.count_contest;
+        this.countInfoSaveItem = this.countContest + this.countPost;
+        localStorage.setItem("info-save", JSON.stringify(this.countInfoSaveItem));
+      }
+    });
   }
 
   getContest() {
@@ -109,6 +124,7 @@ export class HeaderComponent implements OnInit {
 
   openSaveInfo() {
     this.statusPage = false;
+    this.getListCount();
     this.getContest();
     document.querySelector(".sidepanel")?.classList.add("save-info-acive");
     document.querySelector(".overlay")?.classList.remove("d-none");
@@ -135,12 +151,15 @@ export class HeaderComponent implements OnInit {
 
   // Save url login
   saveUrlCurrent() {
-    const urlCurrent = window.location.pathname;
-    localStorage.setItem("url-current", urlCurrent);
+    this.countSave.saveUrlCurrent();
   }
 
   // toggle menu mobile
   handleToggleMenuMobile() {
     this.isOpenMenuMobile = !this.isOpenMenuMobile;
+  }
+
+  backStatusPopup(event: any) {
+    this.isLogin = event;
   }
 }

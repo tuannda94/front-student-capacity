@@ -1,10 +1,27 @@
 <div id="main-wrapper">
-    <app-header [countContest]="countContest"  [countPost]="countPost">
-    </app-header>
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-    <div id="back-top" [ngStyle]="{ visibility: statusWindow == false ?  'hidden' : 'visible'}"
-    class="back-top d-flex justify-content-center align-items-center position-fixed" (click)="backTop()">
+  <app-header> </app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+  <div
+    id="back-top"
+    [ngStyle]="{ visibility: statusWindow == false ? 'hidden' : 'visible' }"
+    class="back-top d-flex justify-content-center align-items-center position-fixed"
+    (click)="backTop()"
+  >
     <i class="fas fa-angle-up text-white fs-4"></i>
+  </div>
 </div>
-</div>
+{{ openVerticallyCentered(content) }}
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Cảnh báo</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Mở cái wifi hoặc yếu quá thì tắt nó đi thi thố cái gì :)))</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Đóng</button>
+  </div>
+</ng-template>
+<app-popup-login></app-popup-login>

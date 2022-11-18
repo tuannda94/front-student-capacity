@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Round } from 'src/app/models/round.model';
-import { Team } from 'src/app/models/team';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Round } from "src/app/models/round.model";
+import { Team } from "src/app/models/team";
 
 @Component({
-  selector: 'app-round',
-  templateUrl: './round.component.html',
-  styleUrls: ['./round.component.css']
+  selector: "app-round",
+  templateUrl: "./round.component.html",
+  styleUrls: ["./round.component.css"],
 })
 export class RoundComponent implements OnInit {
   listTeam: any = [];
@@ -16,37 +16,18 @@ export class RoundComponent implements OnInit {
   @Input() contestDetail: any;
   @Input() statusContest: boolean;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   setStep(index: number) {
     this.step = index;
   }
 
-  // Lấy image ban giám khảo
-  getImageJudges(judges: any): Array<any> {
-    
-    let arrayImage: any = [];
-    let imageItem = {
-      avatar: '',
-      name: '', 
-      email: '',
-    }
-    judges.forEach((res: any) => {
-      imageItem.avatar = res.user.avatar;
-      imageItem.name = res.user.name;
-      imageItem.email = res.user.email;
-      arrayImage.push(imageItem);
-    })
-    return arrayImage;
-  }
-
-  //  Điếm số thành viên tham gia vòng thi 
+  //  Điếm số thành viên tham gia vòng thi
   getMembers(teams: Array<Team> = []): number {
     let totalMember = 0;
-    teams.forEach(t => {
+    teams.forEach((t) => {
       if (t.members != undefined) {
         totalMember += t.members.length;
       }
@@ -63,17 +44,16 @@ export class RoundComponent implements OnInit {
 
     if (todayTime > endTime) {
       this.statusRound = 1;
-      result = 'Đã hết bạn';
+      result = "Đã hết bạn";
     } else if (startTime < todayTime && todayTime < endTime) {
       this.statusRound = 2;
-      result = 'Đang mở';
+      result = "Đang mở";
       this.setStep(id_round);
     } else if (todayTime < endTime) {
       this.statusRound = 3;
-      result = 'Sắp mở';
+      result = "Sắp mở";
     }
 
     return result;
   }
-
 }

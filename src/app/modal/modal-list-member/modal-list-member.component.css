@@ -9,6 +9,7 @@
 .item-member-img {
   height: 30px;
   object-fit: cover;
+  width: 30px;
 }
 
 .member-item-img {
@@ -20,7 +21,6 @@
 
 .member-item-name {
   margin-top: 3px;
-
 }
 
 .btn__search-major {
@@ -43,4 +43,3 @@ th {
 .btn-add-member {
   border: 1px solid var(--primary-color);
 }
-

@@ -34,6 +34,9 @@ export class CapacityRound {
   teams: Array<Team>;
   judges: Array<Judges>;
   exams: Array<exams>;
+  max_questions_exam: number;
+  time_exam: number;
+  time_type_exam: number;
 }
 
 class exams {

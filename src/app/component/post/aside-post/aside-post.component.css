@@ -1,64 +1,76 @@
-h3>a {
-    color: var(--my-black);
-    transition-duration: .3s;
+h3 > a {
+  color: var(--my-black);
+  transition-duration: 0.3s;
 }
 
-h3:hover>a {
-    color: var(--my-primary)
+h3:hover > a {
+  color: var(--my-primary);
 }
 
 .header-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #D9D9D9;
-    margin: 8px 0 0px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d9d9d9;
+  margin: 8px 0 0px 0;
 }
 
 .header-section .header-section__title {
-    color: var(--my-primary);
-    margin: 0;
+  color: var(--my-primary);
+  margin: 0;
 }
 
 .header-section .header-section__link {
-    color: #8E8E95
+  color: #8e8e95;
 }
 
 /* ------------------------------------- */
 .post-hot-item {
-    display: grid;
-    grid-template-columns: 1fr 2.5fr;
-    grid-gap: 8px;
-    margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  grid-gap: 8px;
+  margin-top: 16px;
 }
 
 .post-hot-item .post-hot-item__img-section .post-hot-item__img {
-    border-radius: 5px;
-    height: 72px;
-    width: 100%;
-    object-fit: cover;
+  border-radius: 5px;
+  height: 72px;
+  width: 100%;
+  object-fit: cover;
 }
 
 .post-hot-item .post-hot-item-content .post-hot-item-content__title {
-    line-height: 1;
+  line-height: 1;
 }
 
 .post-hot-item-content__info {
-    color: #8E8E95;
-    display: flex;
-    margin-top: 12px;
-    font-size: 12px
+  color: #8e8e95;
+  display: flex;
+  margin-top: 12px;
+  font-size: 12px;
 }
 
 .post-hot-item-content__info-item {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 120px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
 }
 
-.post-hot-item-content__info-item+.post-hot-item-content__info-item {
-    margin-left: 8px;
+.post-hot-item-content__info-item + .post-hot-item-content__info-item {
+  margin-left: 8px;
+}
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .post-hot-item .post-hot-item__img-section .post-hot-item__img {
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .post-hot-item .post-hot-item__img-section .post-hot-item__img {
+    height: 100px;
+  }
 }

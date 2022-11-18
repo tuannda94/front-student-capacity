@@ -88,6 +88,7 @@ import { AlertErrorIntroExamComponent } from "./component/alert-error-intro-exam
 import { CountDatePipe } from "./helper/pipe/count-date.pipe";
 import { PaginationComponent } from "./component/pagination/pagination.component";
 import { LoadingOverlayComponent } from "./component/loading-overlay/loading-overlay.component";
+import { PopupLoginComponent } from './component/popup-login/popup-login.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ import { LoadingOverlayComponent } from "./component/loading-overlay/loading-ove
     CountDatePipe,
     PaginationComponent,
     LoadingOverlayComponent,
+    PopupLoginComponent,
   ],
   imports: [
     BrowserModule,

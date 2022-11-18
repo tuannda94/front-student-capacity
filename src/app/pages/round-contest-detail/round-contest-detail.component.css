@@ -1,5 +1,12 @@
 /* COMMOM */
-h1, h2 , h3 , h4 , h5 , h6 , p , ul{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
   margin-bottom: 0;
 }
 
@@ -7,12 +14,12 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   text-align: justify;
 }
 
-.round-info-box .round-info-item{
+.round-info-box .round-info-item {
   margin-bottom: 15px;
 }
 
 .contest-detail-box {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
 }
 
 .new-page-img img {
@@ -58,7 +65,6 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   margin: 0 0 !important;
 }
 
-
 .contest-detail-left-header,
 .list-team-in,
 .contest-detail-right-in,
@@ -67,7 +73,6 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   border-radius: 4px;
   background-color: #ffff;
 }
-
 
 /*  */
 
@@ -84,7 +89,6 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   padding-right: 10px;
 }
 
-
 /* Danh sánh các nhà tài trợ */
 .arrow-list-supporter {
   position: absolute;
@@ -95,7 +99,6 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   color: var(--primary);
   transition: 0.3s;
 }
-
 
 .supporters-arrow-left {
   left: 5%;
@@ -113,11 +116,11 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   z-index: -1;
 }
 
-.btn-join-exam-box{
+.btn-join-exam-box {
   margin-bottom: 10px;
 }
 
-.btn-join-exam{
+.btn-join-exam {
   padding: 10px 20px;
   background-color: var(--primary);
   color: var(--white);
@@ -126,7 +129,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   cursor: pointer;
 }
 
-.btn-join-exam:hover{
+.btn-join-exam:hover {
   opacity: 0.9;
   transition: 0.6s;
 }
@@ -134,7 +137,6 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 .name-company {
   font-size: 1rem;
   color: var(--midnight-blue);
-
 }
 
 /* Idea contest */
@@ -151,7 +153,6 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 /* List student point rank */
 .list-student-rank-title {
   font-style: 22px;
-
 }
 
 .form-input {
@@ -238,7 +239,6 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   opacity: 0.7;
 }
 
-
 /* List  */
 .related-contest-item {
   margin-top: 30px;
@@ -286,10 +286,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   padding: 3px 10px;
 }
 
-
-
 /* COUNT DOWN */
-
 
 .contest-detail-right-name {
   display: -webkit-box;
@@ -336,7 +333,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 
 .contest-detail-right-in {
   position: sticky;
-  top: 100px
+  top: 100px;
 }
 
 .contest-detail-right-countdown-box p {
@@ -344,8 +341,7 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
   margin-left: 10px;
 }
 
-
-.example-button-item{
+.example-button-item {
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -355,4 +351,34 @@ h1, h2 , h3 , h4 , h5 , h6 , p , ul{
 .example-button-item:hover {
   background-color: var(--primary);
   color: var(--white);
+}
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .contest-detail-header {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .contest-detail-header {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .contest-detail-left-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 0px;
+    height: 500px;
+  }
+
+  .contest-detail-left-img {
+    width: 100%;
+    border-radius: var(--my-rounded-2);
+  }
+
+  .contest-info {
+    padding-left: 30px;
+  }
 }

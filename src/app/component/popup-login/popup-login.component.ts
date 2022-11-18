@@ -29,8 +29,6 @@ export class PopupLoginComponent implements OnInit {
     this.openPopup.setIsPopup(0);
 
     this.openPopup.watchStoragePopup().subscribe((data) => {
-      console.log(data);
-
       if (data == 1) {
         const popup = document.querySelector(".popup-content-box");
         const overLay = document.querySelector(".over-lay");

@@ -2,11 +2,7 @@
   <div class="ranking-capacity">
     <div class="">
       <div class="">
-        <img
-          class="banner"
-          src={{urlBanner}}
-          alt=""
-        />
+        <img class="banner" src="{{ urlBanner }}" alt="" />
       </div>
     </div>
     <div class="list-capacity">
@@ -35,7 +31,8 @@
         <!-- skeleton -->
       </div>
       <div class="test-capacity_list">
-        <app-capacity-item *ngFor="let capacity of listCapacity" [capacityItem]="capacity"> </app-capacity-item>
+        <app-capacity-item *ngFor="let capacity of listCapacity" [capacityItem]="capacity" class="capacity-item">
+        </app-capacity-item>
       </div>
     </div>
 

@@ -11,7 +11,9 @@
   opacity: 0.8;
 }
 
-.rankingCapacity-filter-box {
+.capacity-item {
+  display: flex;
+  flex: 1;
 }
 
 .banner {

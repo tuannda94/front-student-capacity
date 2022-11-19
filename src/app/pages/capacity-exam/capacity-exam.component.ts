@@ -1,3 +1,4 @@
+import { LocalStorageService } from "./../../services/local-storage.service";
 import { Component, ElementRef, Inject, OnInit, QueryList, ViewChildren, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -79,6 +80,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     private router: Router,
     private capacityService: CapacityService,
     private titleService: Title,
+    private localstorageService: LocalStorageService,
     @Inject(DOCUMENT) private document: any,
   ) {}
 
@@ -227,10 +229,8 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     confimExamRef.afterClosed().subscribe((res) => {
       if (res === "true") {
         // check user logged
-
         if (!this.isLoggin) {
-          this.toast.warning({ summary: "Vui lòng đăng nhập trước khi làm bài!", duration: 3000, detail: "Thông báo" });
-          this.router.navigate(["/login"]);
+          this.localstorageService.setIsPopup(1);
           return;
         }
 

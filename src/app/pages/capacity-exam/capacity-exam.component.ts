@@ -48,6 +48,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
   isTimeOut = false;
   // trạng thái get ls bài làm
   isFetchingHistoryExam = false;
+  isLoggin!: boolean;
   timerId!: any;
   element!: any;
 
@@ -117,9 +118,12 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
           this.roundDetail = responseRound.payload;
 
           // check login
-          this.userLogged = this.userService.getUserValue();
+          const user = this.userService.getUserValue();
+          const jwtToken = this.userService.getJwtToken();
+          this.isLoggin = !!(user && jwtToken);
           // nếu đã login ? check trạng thái làm bài : hiển thị màn hình chờ làm bài
-          if (this.userLogged.id) {
+          if (this.isLoggin) {
+            this.userLogged = this.userService.getUserValue();
             this.roundService
               .getInfoCapacityExamRound({
                 round_id: responseRound.payload.id,
@@ -223,8 +227,8 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     confimExamRef.afterClosed().subscribe((res) => {
       if (res === "true") {
         // check user logged
-        const userLogged = this.userService.getUserValue();
-        if (!userLogged.id) {
+
+        if (!this.isLoggin) {
           this.toast.warning({ summary: "Vui lòng đăng nhập trước khi làm bài!", duration: 3000, detail: "Thông báo" });
           this.router.navigate(["/login"]);
           return;
@@ -339,27 +343,33 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
         this.handleDisableCopy(e);
       };
 
-      this.roundService.takeExam({ round_id: this.roundDetail.id }).subscribe((res) => {
-        if (res.status) {
-          this.examData = {
-            ...res.payload,
-            exam_at: res.exam_at,
-            time_exam: this.convertTimeExamToSeconds(this.roundDetail.time_exam, this.roundDetail.time_type_exam) / 60,
-          };
+      this.roundService.takeExam({ round_id: this.roundDetail.id }).subscribe(
+        (res) => {
+          if (res.status) {
+            this.examData = {
+              ...res.payload,
+              exam_at: res.exam_at,
+              time_exam:
+                this.convertTimeExamToSeconds(this.roundDetail.time_exam, this.roundDetail.time_type_exam) / 60,
+            };
 
-          this.isFetchingExam = false;
-          // cập nhật trạng thái đang làm bài
-          this.statusTakingExam = 1;
+            this.isFetchingExam = false;
+            // cập nhật trạng thái đang làm bài
+            this.statusTakingExam = 1;
 
-          this.createFormControl();
+            this.createFormControl();
 
-          const durationExam = this.convertTimeExamToSeconds(
-            this.roundDetail.time_exam,
-            this.roundDetail.time_type_exam,
-          );
-          this.handleStartExam(durationExam, this.examData.exam_at);
-        }
-      });
+            const durationExam = this.convertTimeExamToSeconds(
+              this.roundDetail.time_exam,
+              this.roundDetail.time_type_exam,
+            );
+            this.handleStartExam(durationExam, this.examData.exam_at);
+          }
+        },
+        () => {
+          this.toast.warning({ detail: "Lỗi", summary: "Đã có lỗi xảy ra, vui lòng thử lại" });
+        },
+      );
     }, 100);
   }
 
@@ -443,6 +453,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
           this.isNotiExamTimeOut = false;
           this.isSubmitingExam = false;
           this.isTimeOut = false;
+          this.isLoggin = false;
 
           // remove event listener
           window.onresize = () => {};

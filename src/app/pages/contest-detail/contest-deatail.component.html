@@ -58,14 +58,16 @@
                 </div>
               </ng-template>
 
-              <div class="d-flex contest-info-item justify-content-start align-items-center">
+              <div
+                *ngIf="contestDetail.teams.length > 0"
+                class="d-flex contest-info-item justify-content-start align-items-center"
+              >
                 <p class="fw-bold fs-text color-gray">Tổng số đội:</p>
                 &nbsp;&nbsp;
                 <div class="" style="margin-left: 10px">
                   <app-list-avatar-user [listTeam]="contestDetail.teams" [titleModelName]="'Danh sách các đội'">
                   </app-list-avatar-user>
                 </div>
-                <div class="" *ngIf="contestDetail.teams.length > 0"></div>
               </div>
               <div
                 *ngIf="contestDetail.judges.length > 0"

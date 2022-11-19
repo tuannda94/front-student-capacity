@@ -240,7 +240,7 @@ export class HomeComponent implements OnInit {
 
   //-----------------------  Danh sách các 3 bài viết
   getListPost() {
-    this.postService.getPostByCategory("post-contest").subscribe((res) => {
+    this.postService.getPostByCategory("post-contest", "1").subscribe((res) => {
       if (res.status == true) {
         let arrResult = res.payload.data;
         this.listPostEvent = arrResult.filter((res: Post, index: number) => {

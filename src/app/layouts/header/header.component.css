@@ -179,7 +179,8 @@ h6 {
   border-bottom: 1px solid #f8f8f8;
 }
 
-.menu-res-item:hover a {
+.menu-res-item:hover a,
+.menu-mobile__item.active .menu-mobile__item-link {
   background-color: var(--my-primary);
   color: #ffff;
   transition: all ease 0.3s;

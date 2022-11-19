@@ -29,8 +29,6 @@ export class PopupLoginComponent implements OnInit {
     this.openPopup.setIsPopup(0);
 
     this.openPopup.watchStoragePopup().subscribe((data) => {
-      console.log(data);
-
       if (data == 1) {
         const popup = document.querySelector(".popup-content-box");
         const overLay = document.querySelector(".over-lay");
@@ -47,7 +45,7 @@ export class PopupLoginComponent implements OnInit {
     overLay?.classList.add("d-none");
     this.backStatusLogin.emit(false);
     if (status) {
-      this.router.navigate(["./login"]);
+      this.router.navigate(["/login"]);
     }
   }
 }

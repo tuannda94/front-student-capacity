@@ -11,7 +11,9 @@
   opacity: 0.8;
 }
 
-.rankingCapacity-filter-box {
+.capacity-item {
+  display: flex;
+  flex: 1;
 }
 
 .banner {
@@ -166,6 +168,11 @@
   padding: 5px 5px;
 }
 
+.pagination-item.active {
+  background: #ff6638;
+  color: #ffffff;
+}
+
 .rank-table {
   width: 100%;
   border-collapse: collapse;
@@ -174,11 +181,6 @@
 
 tr:nth-of-type(even) {
   background: #f9f9f9;
-}
-
-.pagination-item.active {
-  background: #ff6638;
-  color: #ffffff;
 }
 
 /* CSS Danh sách capacity */

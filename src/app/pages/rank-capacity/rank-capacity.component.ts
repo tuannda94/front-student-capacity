@@ -100,7 +100,6 @@ export class RankCapacityComponent implements OnInit {
         });
         this.listCapacity.length > 0 ? (this.statusCapacity = true) : this.statusCapacity;
       }
-      console.log(this.listCapacity);
     });
   }
 
@@ -237,7 +236,6 @@ export class RankCapacityComponent implements OnInit {
           this.links = res.payload.links.slice(1, totalItemPages - 1);
           this.statusRanking = true;
           this.statusNotResultReturn = false;
-          console.log(this.listRanking);
         }
       });
     }

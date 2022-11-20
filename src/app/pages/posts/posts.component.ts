@@ -49,7 +49,7 @@ export class PostsComponent implements OnInit {
   }
 
   getListPostRecruitment() {
-    this.postService.getPostByCategory("post-recruitment").subscribe((res) => {
+    this.postService.getPostByCategory("post-recruitment", "1").subscribe((res) => {
       if (res.status) {
         let arrResult = res.payload.data;
         this.postRecruitmentFirst = arrResult[0];
@@ -61,7 +61,7 @@ export class PostsComponent implements OnInit {
   }
 
   getListPostContest() {
-    this.postService.getPostByCategory("post-contest").subscribe((res) => {
+    this.postService.getPostByCategory("post-contest", "1").subscribe((res) => {
       if (res.status) {
         let arrResult = res.payload.data;
         this.postContestFirst = arrResult[0];
@@ -73,7 +73,7 @@ export class PostsComponent implements OnInit {
   }
 
   getListPostCapacity() {
-    this.postService.getPostByCategory("post-capacity").subscribe((res) => {
+    this.postService.getPostByCategory("post-capacity", "1").subscribe((res) => {
       if (res.status) {
         let arrResult = res.payload.data;
         this.postCapacityFirst = arrResult[0];

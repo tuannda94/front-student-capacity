@@ -45,7 +45,7 @@ export class PopupLoginComponent implements OnInit {
     overLay?.classList.add("d-none");
     this.backStatusLogin.emit(false);
     if (status) {
-      this.router.navigate(["./login"]);
+      this.router.navigate(["/login"]);
     }
   }
 }

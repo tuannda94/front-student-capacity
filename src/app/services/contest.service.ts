@@ -1,15 +1,14 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { ResponsePayload } from '../models/response-payload';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+import { ResponsePayload } from "../models/response-payload";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ContestService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Gọi tất cả các cuộc thi
   getAll(): Observable<ResponsePayload> {
@@ -22,7 +21,7 @@ export class ContestService {
   }
 
   // Gọi cuộc thi theo trạng thái
-  getWhereStatus(status: number , sort: string): Observable<ResponsePayload> {
+  getWhereStatus(status: number, sort: string): Observable<ResponsePayload> {
     return this.http.get<ResponsePayload>(`${environment.contestListUrl}?status=${status}&sort=${sort}`);
   }
 
@@ -32,7 +31,9 @@ export class ContestService {
   }
 
   getWhereStatusAndMajor(status: number, major_id: number): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.contestListUrl}?status=${status}&major_id=${major_id}&sort='desc'`);
+    return this.http.get<ResponsePayload>(
+      `${environment.contestListUrl}?status=${status}&major_id=${major_id}&sort='desc'`,
+    );
   }
 
   // Tìm kiếm cuộc thi
@@ -51,16 +52,12 @@ export class ContestService {
   }
 
   // Bộ lọc cuộc thi
-  filterContest(keyword: string = '', major_id: number , status: number = 1 ): Observable<ResponsePayload> {
+  filterContest(keyword: string = "", major_id: number, status: number = 1): Observable<ResponsePayload> {
     let majorValue;
-    let statusValue; 
-    majorValue = major_id == undefined ? '' : major_id;
+    let statusValue;
+    majorValue = major_id == undefined ? "" : major_id;
     statusValue = status == 0 ? 1 : status;
-    const params = new HttpParams()
-    .set('q', keyword)
-    .set('status', statusValue)
-    .set('major_id', majorValue)
+    const params = new HttpParams().set("q", keyword).set("status", statusValue).set("major_id", majorValue);
     return this.http.get<ResponsePayload>(`${environment.contestListUrl}?${params}`);
   }
-
 }

@@ -24,8 +24,8 @@
         >
           <a [ngStyle]="{ cursor: !statusContest ? 'auto' : '' }" class="contest__nav-link">Đã kết thúc</a>
         </li>
-        <li class="contest__nav-item">
-          <a class="contest__nav-rank">Xếp hạng</a>
+        <li *ngIf="statusContest && contests.length > 0" class="contest__nav-item">
+          <a class="contest__nav-rank" routerLink="/xep-hang-cuoc-thi">Xếp hạng</a>
         </li>
       </ul>
       <div class="btn__search-contest">

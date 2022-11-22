@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
@@ -14,7 +13,7 @@ export class UserService {
   private userSubject: BehaviorSubject<User>;
   private jwtToken: BehaviorSubject<string>;
   public user: Observable<User | null>;
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem("user") || "{}"));
     this.jwtToken = new BehaviorSubject<string>(localStorage.getItem("auth_token") || "");
     this.user = this.userSubject.asObservable();
@@ -32,8 +31,6 @@ export class UserService {
     return this.http.post<ResponsePayload>(environment.loginUrl, { token: authToken }).pipe(
       map((response) => {
         if (response.status == true) {
-          console.log(response);
-
           let dataUser = response.payload!.user;
           if (dataUser.avatar == null) {
             dataUser.avatar = "https://cdn-icons-png.flaticon.com/512/149/149071.png";

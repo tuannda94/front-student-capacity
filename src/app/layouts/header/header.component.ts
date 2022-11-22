@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { User } from "src/app/models/user";
-import { GetValueLocalService } from "src/app/services/get-value-local.service";
 import { UserService } from "src/app/services/user.service";
 import { Contest } from "src/app/models/contest";
 import { Post } from "src/app/models/post.model";
 import { WishlistService } from "src/app/services/wishlist.service";
 import { LocalStorageService } from "src/app/services/local-storage.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-header",
@@ -28,10 +28,10 @@ export class HeaderComponent implements OnInit {
   isChangeSave: boolean = false;
 
   constructor(
-    private userInfo: GetValueLocalService,
     private userService: UserService,
     private wishlist: WishlistService,
     private countSave: LocalStorageService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +43,6 @@ export class HeaderComponent implements OnInit {
       this.getListCount();
     }
 
-    this.user = this.userInfo.getValueLocalUser("user");
     this.countSave.watchStorage().subscribe((data) => {
       if (data) {
         this.isChangeSave = true;
@@ -146,12 +145,7 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     this.ngOnInit();
     this.userService.logout();
-    window.location.reload();
-  }
-
-  // Save url login
-  saveUrlCurrent() {
-    this.countSave.saveUrlCurrent();
+    this.router.navigate(["/"]);
   }
 
   // toggle menu mobile
@@ -161,5 +155,10 @@ export class HeaderComponent implements OnInit {
 
   backStatusPopup(event: any) {
     this.isLogin = event;
+  }
+
+  // check empty object
+  checkEmpty(obj: {}) {
+    return Object.keys(obj).length > 0;
   }
 }

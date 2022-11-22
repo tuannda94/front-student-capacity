@@ -91,7 +91,7 @@
           </li>
 
           <li *ngIf="!user || !checkEmpty(user)" class="btn-login-desktop d-none d-lg-block">
-            <a routerLink="/login">
+            <a (click)="handleLogin()">
               <button class="my-btn-primary my-btn-s">Đăng nhập</button>
             </a>
           </li>
@@ -130,7 +130,7 @@
       </li>
 
       <li *ngIf="!user || !checkEmpty(user)">
-        <a routerLink="/login">
+        <a (click)="handleLogin()">
           <button class="my-btn my-btn-primary my-btn-xs">Đăng nhập</button>
         </a>
       </li>

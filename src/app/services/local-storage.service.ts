@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { Router } from "@angular/router";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -8,7 +9,7 @@ export class LocalStorageService {
   private getInfoSave = new BehaviorSubject<number>(JSON.parse(localStorage.getItem("info-save") || "0"));
   private openPopup = new BehaviorSubject<number>(JSON.parse(localStorage.getItem("is-popup") || "0"));
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   watchStorage(): Observable<any> {
     return this.getInfoSave.asObservable();
@@ -43,8 +44,17 @@ export class LocalStorageService {
     this.getInfoSave.next(currentSave);
   }
 
-  saveUrlCurrent() {
-    const urlCurrent = window.location.pathname;
-    localStorage.setItem("url-current", urlCurrent);
+  saveCurrentRoute() {
+    const currentRoute = this.router.url;
+    localStorage.setItem("back-route", currentRoute);
+  }
+
+  getBackRoute() {
+    const backRoute = localStorage.getItem("back-route");
+    return backRoute;
+  }
+
+  removeBackRoute() {
+    localStorage.removeItem("back-route");
   }
 }

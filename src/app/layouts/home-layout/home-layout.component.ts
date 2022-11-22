@@ -5,6 +5,7 @@ import { WishlistService } from "src/app/services/wishlist.service";
 import Echo from "laravel-echo";
 import { UserService } from "src/app/services/user.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { LocalStorageService } from "src/app/services/local-storage.service";
 
 @Component({
   selector: "app-home-layout",
@@ -17,9 +18,29 @@ export class HomeLayoutComponent implements OnInit {
   statusLogin: boolean = false;
   countContest: number;
   countPost: number;
-  constructor(private modalService: NgbModal, private wishlist: WishlistService, private userService: UserService) {}
+  constructor(
+    private modalService: NgbModal,
+    private wishlist: WishlistService,
+    private userService: UserService,
+    private localStorageService: LocalStorageService,
+  ) {}
 
   ngOnInit(): void {
+    // const token = (localStorage.getItem("auth_token") as string)?.split("|")[1];
+    // (window as any).Echo = new Echo({
+    //   broadcaster: "socket.io",
+    //   host: `${window.location.protocol}//${window.location.hostname}:6001`,
+    //   withCredentials: true,
+    //   auth: {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   },
+    // });
+
+    const isHasBackRoute = this.localStorageService.getBackRoute();
+    isHasBackRoute && this.localStorageService.removeBackRoute();
+
     this.backTop();
     this.winBackTop();
     if (this.userService.getUserValue().id) {

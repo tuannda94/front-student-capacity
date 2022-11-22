@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private wishlist: WishlistService,
-    private countSave: LocalStorageService,
+    private localStorageService: LocalStorageService,
     private router: Router,
   ) {}
 
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
       this.getListCount();
     }
 
-    this.countSave.watchStorage().subscribe((data) => {
+    this.localStorageService.watchStorage().subscribe((data) => {
       if (data) {
         this.isChangeSave = true;
         this.countInfoSaveItem = data;
@@ -160,5 +160,10 @@ export class HeaderComponent implements OnInit {
   // check empty object
   checkEmpty(obj: {}) {
     return Object.keys(obj).length > 0;
+  }
+
+  handleLogin() {
+    this.localStorageService.saveCurrentRoute();
+    this.router.navigate(["/login"]);
   }
 }

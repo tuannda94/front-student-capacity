@@ -4,6 +4,7 @@ import { GoogleLoginProvider, SocialAuthService, SocialUser } from "angularx-soc
 import { UserService } from "src/app/services/user.service";
 import { NgToastService } from "ng-angular-popup";
 import { Title } from "@angular/platform-browser";
+import { LocalStorageService } from "src/app/services/local-storage.service";
 
 @Component({
   selector: "app-login",
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private toast: NgToastService,
     private titleService: Title,
+    private localStorageService: LocalStorageService,
   ) {}
 
   ngOnInit(): void {
@@ -39,11 +41,30 @@ export class LoginComponent implements OnInit {
           this.statusLogin = false;
           setTimeout(() => {
             this.toast.success({ summary: "Đăng nhập thành công", detail: "Thông báo", duration: 5000 });
-            const backUrl = localStorage.getItem("url-current");
-            if (!backUrl) {
+            const backRoute = this.localStorageService.getBackRoute();
+            if (!backRoute) {
               this.router.navigate(["/"]);
             } else {
-              this.router.navigate([backUrl]);
+              if (backRoute.includes("?")) {
+                const backRouteArr = backRoute.split("?");
+                const queryArr = backRouteArr[1].split("&");
+
+                let queryParams = {};
+                queryArr.forEach((item) => {
+                  const strToArr = item.split("=");
+
+                  Object.assign(queryParams, {
+                    [strToArr[0]]: decodeURI(strToArr[1]),
+                  });
+                });
+
+                this.router.navigate([backRouteArr[0]], {
+                  queryParams,
+                  queryParamsHandling: "merge",
+                });
+              } else {
+                this.router.navigate([backRoute]);
+              }
             }
           }, 1000);
         } else {

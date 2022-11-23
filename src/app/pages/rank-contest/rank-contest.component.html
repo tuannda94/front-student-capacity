@@ -9,6 +9,7 @@
             formControlName="filterContest"
             class="my-input-search my-input"
             placeholder="Cuộc thi"
+            [attr.disabled]="!statusRankContest ? true : null"
             id="dropdownBasic1"
             ngbDropdownToggle
           />
@@ -34,15 +35,16 @@
             type="text"
             class="my-input-search my-input"
             placeholder="Vòng thi"
+            [attr.disabled]="!statusRankContest ? true : null"
             id="dropdownBasic1"
             formControlName="filterRound"
             ngbDropdownToggle
           />
           <div ngbDropdownMenu class="w-100" [ngClass]="!contests ? '' : 'select-all'" aria-labelledby="dropdownBasic1">
-            <div *ngIf="!rounds || rounds.length == 0" class="d-flex justify-content-center">
+            <div *ngIf="!statusRounds || rounds.length == 0" class="d-flex justify-content-center">
               <app-loading-item class="py-2"></app-loading-item>
             </div>
-            <div *ngIf="rounds">
+            <div *ngIf="statusRounds">
               <a
                 *ngFor="let item of rounds"
                 (click)="getRankRoundContest(item.id, 'desc', item.name)"
@@ -60,6 +62,7 @@
           formControlName="filterName"
           class="my-input-search my-input"
           placeholder="Tên nhóm"
+          [attr.disabled]="!statusRankContest ? true : null"
           id="dropdownBasic1"
           (keyup)="searchNameTeam($event)"
         />

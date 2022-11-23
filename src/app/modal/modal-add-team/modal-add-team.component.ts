@@ -116,7 +116,7 @@ export class ModalAddTeamComponent implements OnInit {
         } else {
           this.statusRegister = true;
           this.onNoClick();
-          this.toast.success({ summary: "Thêm thành công", detail: "Cảnh báo", duration: 2000 });
+          this.toast.success({ summary: "Thêm thành công", detail: "Thông báo", duration: 2000 });
         }
       });
     } else {

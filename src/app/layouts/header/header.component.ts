@@ -47,6 +47,7 @@ export class HeaderComponent implements OnInit {
     this.countSave.watchStorage().subscribe((data) => {
       if (data) {
         this.isChangeSave = true;
+        this.getListCount();
         this.countInfoSaveItem = data;
       }
     });

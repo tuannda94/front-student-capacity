@@ -166,10 +166,10 @@
       </header>
       <ul class="sidepanel__nav-list my-3">
         <li class="sidepanel__nav-item contest active" (click)="getContestStatus($event)">
-          <a class="sidepanel__nav-link">Cuộc Thi ({{ countPost }})</a>
+          <a class="sidepanel__nav-link">Cuộc Thi ({{ countPost || 0 }})</a>
         </li>
         <li class="sidepanel__nav-item post" (click)="getPostStatus($event)">
-          <a [attr.disabled]="!statusPage" class="sidepanel__nav-link">Tuyển dụng ({{ countContest }})</a>
+          <a [attr.disabled]="!statusPage" class="sidepanel__nav-link">Tuyển dụng ({{ countContest || 0 }})</a>
         </li>
       </ul>
       <div *ngIf="statusPage" class="sidepanel__nav-content">

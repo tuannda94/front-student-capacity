@@ -60,4 +60,9 @@ export class ContestService {
     const params = new HttpParams().set("q", keyword).set("status", statusValue).set("major_id", majorValue);
     return this.http.get<ResponsePayload>(`${environment.contestListUrl}?${params}`);
   }
+
+  // getAllContest Rank
+  getAllContestRank() {
+    return this.http.get<ResponsePayload>(`${environment.contestListUrl}/demo`);
+  }
 }

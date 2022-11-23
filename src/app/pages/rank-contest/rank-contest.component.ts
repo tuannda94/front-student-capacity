@@ -27,6 +27,7 @@ export class RankContestComponent implements OnInit {
   statusRankContest: boolean = false;
   roundId: number;
   roundName: string;
+  statusRounds: boolean = false;
 
   ngOnInit(): void {
     this.title.setTitle("Xếp hạng cuộc thi");
@@ -40,9 +41,11 @@ export class RankContestComponent implements OnInit {
   });
 
   getAllContest() {
-    this.contestService.getAll().subscribe((res) => {
+    this.contestService.getAllContestRank().subscribe((res) => {
       if (res.status) {
         this.contests = res.payload;
+        console.log(this.contests);
+
         this.getRoundWhereContestId(
           this.contests[this.contests.length - 1].id,
           this.contests[this.contests.length - 1].name,
@@ -52,23 +55,25 @@ export class RankContestComponent implements OnInit {
   }
 
   getRoundWhereContestId(contestId: number, contestName: string) {
-    this.rounds = [];
     this.statusRankContest = false;
     this.formFilter.controls["filterContest"].setValue(contestName);
     this.contestService.getWhereId(contestId).subscribe((res) => {
       if (res.status) {
         this.rounds = res.payload.rounds;
+        this.statusRounds = true;
         this.getRankRoundContest(this.rounds[0].id, "desc", this.rounds[0].name);
       }
     });
   }
 
   getRankRoundContest(roundId: number, sort: string, roundName: string) {
+    this.statusRounds = false;
     this.roundId = roundId;
     this.roundName = roundName;
     this.formFilter.controls["filterRound"].setValue(roundName);
     this.roundService.getResultRound(roundId, sort, 100).subscribe((res) => {
       if (res.status) {
+        this.statusRounds = true;
         this.statusRankContest = true;
         this.rankContest = res.payload.data;
       }

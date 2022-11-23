@@ -81,7 +81,7 @@
             </a>
           </li>
 
-          <li *ngIf="user" (click)="openSaveInfo()" class="open-save-info">
+          <li *ngIf="user && checkEmpty(user)" (click)="openSaveInfo()" class="open-save-info">
             <i
               matBadgePosition="after"
               [matBadge]="countInfoSaveItem"
@@ -90,13 +90,13 @@
             ></i>
           </li>
 
-          <li *ngIf="!user" class="btn-login-desktop d-none d-lg-block">
-            <a (click)="saveUrlCurrent()" class="">
-              <button class="my-btn-primary my-btn-s" routerLink="/login">Đăng nhập</button>
+          <li *ngIf="!user || !checkEmpty(user)" class="btn-login-desktop d-none d-lg-block">
+            <a (click)="handleLogin()">
+              <button class="my-btn-primary my-btn-s">Đăng nhập</button>
             </a>
           </li>
 
-          <li *ngIf="user">
+          <li *ngIf="user && checkEmpty(user)">
             <img
               *ngIf="user.avatar"
               mat-icon-button
@@ -120,7 +120,7 @@
 
     <!-- icon right mobile -->
     <ul class="header__mobile-right d-flex d-lg-none m-0 flex-2 justify-content-end">
-      <li *ngIf="user" (click)="openSaveInfo()" class="open-save-info">
+      <li *ngIf="user && checkEmpty(user)" (click)="openSaveInfo()" class="open-save-info">
         <i
           [matBadge]="countInfoSaveItem"
           matBadgePosition="after"
@@ -129,13 +129,13 @@
         ></i>
       </li>
 
-      <li *ngIf="!user">
-        <a (click)="saveUrlCurrent()">
-          <button routerLink="/login" class="my-btn my-btn-primary my-btn-xs">Đăng nhập</button>
+      <li *ngIf="!user || !checkEmpty(user)">
+        <a (click)="handleLogin()">
+          <button class="my-btn my-btn-primary my-btn-xs">Đăng nhập</button>
         </a>
       </li>
 
-      <li *ngIf="user">
+      <li *ngIf="user && checkEmpty(user)">
         <img
           *ngIf="user.avatar"
           mat-icon-button

@@ -26,13 +26,13 @@ export class PaginationComponent implements OnInit {
     let liElementStr = "";
 
     // prev button
-    if (currentPage > 1) {
-      liElementStr += `
-      <li title="Previous Page" class="pagination-list_box pagination-list_first">
+    liElementStr += `
+      <li title="Previous Page" class="pagination-list_box ${
+        currentPage <= 1 && "pagination-list_box--disabled"
+      } pagination-list_first">
         <i class="fa-solid fa-angle-left"></i>
       </li>
     `;
-    }
 
     for (let page = 1; page <= totalPages; page++) {
       liElementStr += `<li title="${page}" class="pagination-list_box pagination-item pagination-item__page ${
@@ -41,14 +41,13 @@ export class PaginationComponent implements OnInit {
     }
 
     // next button
-    if (currentPage < totalPages) {
-      //show the next button if the page value is less than totalPage(20)
-      liElementStr += `
-        <li title="Next Page" class="pagination-list_box pagination-list_last">
+    liElementStr += `
+        <li title="Next Page" class="pagination-list_box ${
+          currentPage >= totalPages && "pagination-list_box--disabled"
+        } pagination-list_last">
           <i class="fa-solid fa-angle-right"></i>
         </li>
       `;
-    }
     this.paginationHtmlStr = liElementStr;
   }
 
@@ -64,6 +63,7 @@ export class PaginationComponent implements OnInit {
     // handle prev
     if (prevElement) {
       prevElement.onclick = () => {
+        if (this.currentPage <= 1) return;
         this.createPagination(this.totalPages, --this.currentPage);
         this.handleChangePageNumber(this.currentPage);
       };
@@ -72,6 +72,8 @@ export class PaginationComponent implements OnInit {
     // handle next
     if (nextElement) {
       nextElement.onclick = () => {
+        if (this.currentPage >= this.totalPages) return;
+
         this.createPagination(this.totalPages, ++this.currentPage);
         this.handleChangePageNumber(this.currentPage);
       };

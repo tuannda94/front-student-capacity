@@ -71,6 +71,14 @@
                     Trò chơi trực tiếp
                   </a>
                 </li>
+                <li class="sub-menu__item" routerLinkActive="active">
+                  <a
+                    class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+                    [routerLink]="['/challenge']"
+                  >
+                    Thử thách
+                  </a>
+                </li>
               </ul>
             </div>
           </li>
@@ -263,6 +271,15 @@
           class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
           [routerLink]="['/capacity-join']"
           >Trò chơi trực tiếp</a
+        >
+      </li>
+
+      <li class="menu-res-item menu-mobile__item" routerLinkActive="active">
+        <a
+          (click)="handleToggleMenuMobile()"
+          class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+          [routerLink]="['/challenge']"
+          >Thử thách</a
         >
       </li>
 

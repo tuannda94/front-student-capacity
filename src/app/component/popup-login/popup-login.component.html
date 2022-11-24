@@ -1,0 +1,13 @@
+<div class="popup-content-box" id="popup">
+  <div class="text-end">
+    <button (click)="closePopup(false)" class="btn-close-popup mt-3 mb-2">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+  <div class="text-center">
+    <h3 class="popup-content-message">Chưa đăng nhập!</h3>
+    <p class="popup-content-content">Vui lòng đăng nhập để tiếp tục</p>
+    <button class="my-btn my-btn-primary my-btn-xs popup-content-close" (click)="closePopup(true)">Đăng nhập</button>
+  </div>
+</div>
+<div class="over-lay d-none" (click)="closePopup(false)"></div>

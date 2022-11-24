@@ -2,11 +2,15 @@
   padding: 0px 0px !important;
 }
 
-h3, h1,h2 ,h4 , h5{
+h3,
+h1,
+h2,
+h4,
+h5 {
   margin-bottom: 0px;
 }
 
-p{
+p {
   margin-top: 0px;
 }
 
@@ -56,8 +60,8 @@ p{
   transition: 0.25s ease;
 }
 
-.register-input-text:not(:placeholder-shown)+.register-label,
-.register-input-text:focus+.register-label {
+.register-input-text:not(:placeholder-shown) + .register-label,
+.register-input-text:focus + .register-label {
   top: 0;
   padding: 0px 10px;
   display: inline-block;
@@ -84,7 +88,7 @@ p{
   display: none;
 }
 
-.avatar-upload .avatar-edit input+label {
+.avatar-upload .avatar-edit input + label {
   display: inline-block;
   width: 34px;
   height: 34px;
@@ -104,12 +108,12 @@ p{
   object-fit: cover;
 }
 
-.avatar-upload .avatar-edit input+label:hover {
+.avatar-upload .avatar-edit input + label:hover {
   background: #f1f1f1;
   border-color: #d6d6d6;
 }
 
-.avatar-upload .avatar-edit input+label:after {
+.avatar-upload .avatar-edit input + label:after {
   content: "\f040";
   font-family: "FontAwesome";
   color: #757575;
@@ -130,7 +134,7 @@ p{
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
-.avatar-upload .avatar-preview>img {
+.avatar-upload .avatar-preview > img {
   width: 100%;
   height: 100%;
   border-radius: 100%;
@@ -152,10 +156,13 @@ p{
   opacity: 0.9;
 }
 
-
 .info-team-list-avatar {
   width: 50px;
   max-height: 50px;
+  border-radius: 50%;
+}
+
+.info-team-list-avatar img {
   border-radius: 50%;
 }
 

@@ -24,6 +24,7 @@ import { PostCategoryComponent } from "./pages/post-category/post-category.compo
 import { JoinCapacityComponent } from "./pages/join-capacity/join-capacity.component";
 import { CapacityPlayComponent } from "./pages/capacity-play/capacity-play.component";
 import { RankCapacityComponent } from "./pages/rank-capacity/rank-capacity.component";
+import { RankContestComponent } from "./pages/rank-contest/rank-contest.component";
 
 const routes: Routes = [
   {
@@ -40,12 +41,17 @@ const routes: Routes = [
         component: ContestComponent,
       },
       {
-        path: "bai-viet",
+        path: "tin-tuc",
         data: { title: "Bài viết" },
         component: PostsComponent,
       },
       {
-        path: "bai-viet/:slug",
+        path: "xep-hang-cuoc-thi",
+        data: { title: "Bài viết" },
+        component: RankContestComponent,
+      },
+      {
+        path: "tin-tuc/:slug",
         component: PostDetailComponent,
       },
       {

@@ -1,96 +1,179 @@
 <aside>
-    <div class="post-search">
-        <form action="" class="my-form-search" [formGroup]="validateForm" (ngSubmit)="searchPost()">
-            <input type="text" class="my-input-search" [(ngModel)]="inputKeyword" name="keyword" formControlName="keyword"
-                placeholder="Tìm kiếm tag, tên bài viết...">
-            <button class="my-btn-search-inside">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </form>
+  <div class="post-search">
+    <form action="" class="my-form-search" [formGroup]="validateForm" (ngSubmit)="searchPost()">
+      <input
+        type="text"
+        class="my-input-search"
+        [(ngModel)]="inputKeyword"
+        name="keyword"
+        formControlName="keyword"
+        placeholder="Tìm kiếm tag, tên bài viết..."
+      />
+      <button class="my-btn-search-inside">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+  <div class="post-hot">
+    <div class="header-section">
+      <h2 class="header-section__title my-body-1">Bài viết nổi bật</h2>
     </div>
-    <div class="post-hot">
-        <div class="header-section">
-            <h2 class="header-section__title my-body-1">Bài viết nổi bật</h2>
+    <div class="post-hot-list" *ngIf="!statusPost">
+      <div class="post-hot-item">
+        <div class="post-hot-item__img-section">
+          <ngx-skeleton-loader [theme]="{ 'height.px': 72, 'border-radius': '8px' }" appearance="line">
+          </ngx-skeleton-loader>
         </div>
-        <div class="post-hot-list" *ngIf="!statusPost">
-            <div class="post-hot-item">
-                <div class="post-hot-item__img-section">
-                    <ngx-skeleton-loader [theme]="{ 'height.px' : 72, 'border-radius': '8px' }" appearance="line">
-                    </ngx-skeleton-loader>
-                </div>
-                <div class="post-hot-item-content">
-                    <h3 class="post-hot-item-content__title text-collapse" data-toggle="tooltip" data-placement="top"
-                        title="Art is the way to express it to abc idw alsji">
-                        <ngx-skeleton-loader [theme]="{ 'height.px' : 15, 'border-radius': '8px' }" appearance="line">
-                        </ngx-skeleton-loader>
-                    </h3>
-                    <div>
-                        <ngx-skeleton-loader [theme]="{ 'height.px' : 15, 'border-radius': '8px' }" appearance="line">
-                        </ngx-skeleton-loader>
-                    </div>
-                </div>
-            </div>
-            <div class="post-hot-item">
-                <div class="post-hot-item__img-section">
-                    <ngx-skeleton-loader [theme]="{ 'height.px' : 72, 'border-radius': '8px' }" appearance="line">
-                    </ngx-skeleton-loader>
-                </div>
-                <div class="post-hot-item-content">
-                    <h3 class="post-hot-item-content__title text-collapse" data-toggle="tooltip" data-placement="top"
-                        title="Art is the way to express it to abc idw alsji">
-                        <ngx-skeleton-loader [theme]="{ 'height.px' : 15, 'border-radius': '8px' }" appearance="line">
-                        </ngx-skeleton-loader>
-                    </h3>
-                    <div>
-                        <ngx-skeleton-loader [theme]="{ 'height.px' : 15, 'border-radius': '8px' }" appearance="line">
-                        </ngx-skeleton-loader>
-                    </div>
-                </div>
-            </div>
-            <div class="post-hot-item">
-                <div class="post-hot-item__img-section">
-                    <ngx-skeleton-loader [theme]="{ 'height.px' : 72, 'border-radius': '8px' }" appearance="line">
-                    </ngx-skeleton-loader>
-                </div>
-                <div class="post-hot-item-content">
-                    <h3 class="post-hot-item-content__title text-collapse" data-toggle="tooltip" data-placement="top"
-                        title="Art is the way to express it to abc idw alsji">
-                        <ngx-skeleton-loader [theme]="{ 'height.px' : 15, 'border-radius': '8px' }" appearance="line">
-                        </ngx-skeleton-loader>
-                    </h3>
-                    <div>
-                        <ngx-skeleton-loader [theme]="{ 'height.px' : 15, 'border-radius': '8px' }" appearance="line">
-                        </ngx-skeleton-loader>
-                    </div>
-                </div>
-            </div>
+        <div class="post-hot-item-content">
+          <h3
+            class="post-hot-item-content__title text-collapse"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Art is the way to express it to abc idw alsji"
+          >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </h3>
+          <div>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
         </div>
-        <div class="post-hot-list" *ngIf="statusPost">
-            <div class="post-hot-item" *ngFor="let item of listHotPost">
-                <div class="post-hot-item__img-section">
-                    <a routerLink="/bai-viet/{{item.slug}}" data-toggle="tooltip"
-                                        data-placement="top" title={{item.title}}>
-                        <img [src]="item.thumbnail_url" alt="" class="post-hot-item__img">
-                    </a>
-                </div>
-                <div class="post-hot-item-content">
-                    <h3 class="post-hot-item-content__title text-collapse-row-2" data-toggle="tooltip" data-placement="top"
-                        title={{item.title}}>
-                        <a routerLink="/bai-viet/{{item.slug}}">
-                            {{item.title}}
-                        </a>
-                    </h3>
-                    <div class="post-hot-item-content__info">
-                        <div class="post-hot-item-content__info-item">
-                            <i class="fa-solid fa-user"></i>&ensp; {{item.user.name}}
-                        </div>
-                        <div class="post-hot-item-content__info-item">
-                            <i class="fa-solid fa-clock"></i>&ensp; {{item.published_at |
-                            formatDatePost }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="post-hot-item">
+        <div class="post-hot-item__img-section">
+          <ngx-skeleton-loader [theme]="{ 'height.px': 72, 'border-radius': '8px' }" appearance="line">
+          </ngx-skeleton-loader>
         </div>
+        <div class="post-hot-item-content">
+          <h3
+            class="post-hot-item-content__title text-collapse"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Art is the way to express it to abc idw alsji"
+          >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </h3>
+          <div>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+      <div class="post-hot-item">
+        <div class="post-hot-item__img-section">
+          <ngx-skeleton-loader [theme]="{ 'height.px': 72, 'border-radius': '8px' }" appearance="line">
+          </ngx-skeleton-loader>
+        </div>
+        <div class="post-hot-item-content">
+          <h3
+            class="post-hot-item-content__title text-collapse"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Art is the way to express it to abc idw alsji"
+          >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </h3>
+          <div>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+      <div class="post-hot-item">
+        <div class="post-hot-item__img-section">
+          <ngx-skeleton-loader [theme]="{ 'height.px': 72, 'border-radius': '8px' }" appearance="line">
+          </ngx-skeleton-loader>
+        </div>
+        <div class="post-hot-item-content">
+          <h3
+            class="post-hot-item-content__title text-collapse"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Art is the way to express it to abc idw alsji"
+          >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </h3>
+          <div>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+      <div class="post-hot-item">
+        <div class="post-hot-item__img-section">
+          <ngx-skeleton-loader [theme]="{ 'height.px': 72, 'border-radius': '8px' }" appearance="line">
+          </ngx-skeleton-loader>
+        </div>
+        <div class="post-hot-item-content">
+          <h3
+            class="post-hot-item-content__title text-collapse"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Art is the way to express it to abc idw alsji"
+          >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </h3>
+          <div>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
+      <div class="post-hot-item">
+        <div class="post-hot-item__img-section">
+          <ngx-skeleton-loader [theme]="{ 'height.px': 72, 'border-radius': '8px' }" appearance="line">
+          </ngx-skeleton-loader>
+        </div>
+        <div class="post-hot-item-content">
+          <h3
+            class="post-hot-item-content__title text-collapse"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Art is the way to express it to abc idw alsji"
+          >
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </h3>
+          <div>
+            <ngx-skeleton-loader [theme]="{ 'height.px': 15, 'border-radius': '8px' }" appearance="line">
+            </ngx-skeleton-loader>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="post-hot-list" *ngIf="statusPost">
+      <div class="post-hot-item" *ngFor="let item of listHotPost">
+        <div class="post-hot-item__img-section">
+          <a routerLink="/tin-tuc/{{ item.slug }}" data-toggle="tooltip" data-placement="top" title="{{ item.title }}">
+            <img [src]="item.thumbnail_url" alt="" class="post-hot-item__img" />
+          </a>
+        </div>
+        <div class="post-hot-item-content">
+          <h3
+            class="post-hot-item-content__title text-collapse-row-2"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="{{ item.title }}"
+          >
+            <a routerLink="/tin-tuc/{{ item.slug }}">
+              {{ item.title }}
+            </a>
+          </h3>
+          <div class="post-hot-item-content__info">
+            <div class="post-hot-item-content__info-item">
+              <i class="fa-solid fa-user"></i>&ensp; {{ item.user.name }}
+            </div>
+            <div class="post-hot-item-content__info-item">
+              <i class="fa-solid fa-clock"></i>&ensp; {{ item.published_at | formatDatePost }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </aside>

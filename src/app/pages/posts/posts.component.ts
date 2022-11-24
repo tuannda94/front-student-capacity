@@ -1,13 +1,13 @@
-import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { Post } from 'src/app/models/post.model';
-import { ListPostService } from 'src/app/services/list-post.service';
-import { Title } from '@angular/platform-browser';
+import { Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { Post } from "src/app/models/post.model";
+import { ListPostService } from "src/app/services/list-post.service";
+import { Title } from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css'],
+  selector: "app-posts",
+  templateUrl: "./posts.component.html",
+  styleUrls: ["./posts.component.css"],
 })
 export class PostsComponent implements OnInit {
   postRecruitmentFirst: Post;
@@ -25,18 +25,14 @@ export class PostsComponent implements OnInit {
     slidesToScroll: 1,
     fadeSpeed: 3000,
     arrows: false,
-    cssEase: 'linear',
+    cssEase: "linear",
   };
 
-  constructor(
-    private postService: ListPostService,
-    private router: Router,
-    private titleService: Title
-  ) {}
+  constructor(private postService: ListPostService, private router: Router, private titleService: Title) {}
 
   ngOnInit(): void {
     this.backTop();
-    this.titleService.setTitle('Danh Sách Bài Viết');
+    this.titleService.setTitle("Danh Sách tin tức");
     this.getListPostRecruitment();
     this.getListPostCapacity();
     this.getListPostContest();
@@ -44,30 +40,28 @@ export class PostsComponent implements OnInit {
 
   // Change screen back top
   backTop() {
-    $('html , body').animate(
+    $("html , body").animate(
       {
         scrollTop: 0,
       },
-      1000
+      1000,
     );
   }
 
   getListPostRecruitment() {
-    this.postService.getPostByCategory('post-recruitment').subscribe((res) => {
+    this.postService.getPostByCategory("post-recruitment", "1").subscribe((res) => {
       if (res.status) {
         let arrResult = res.payload.data;
         this.postRecruitmentFirst = arrResult[0];
-        this.listPostRecruitment = arrResult.filter(
-          (res: Post, index: number) => {
-            return index <= 10 && res.id !== arrResult[0].id;
-          }
-        );
+        this.listPostRecruitment = arrResult.filter((res: Post, index: number) => {
+          return index <= 10 && res.id !== arrResult[0].id;
+        });
       }
     });
   }
 
   getListPostContest() {
-    this.postService.getPostByCategory('post-contest').subscribe((res) => {
+    this.postService.getPostByCategory("post-contest", "1").subscribe((res) => {
       if (res.status) {
         let arrResult = res.payload.data;
         this.postContestFirst = arrResult[0];
@@ -79,7 +73,7 @@ export class PostsComponent implements OnInit {
   }
 
   getListPostCapacity() {
-    this.postService.getPostByCategory('post-capacity').subscribe((res) => {
+    this.postService.getPostByCategory("post-capacity", "1").subscribe((res) => {
       if (res.status) {
         let arrResult = res.payload.data;
         this.postCapacityFirst = arrResult[0];
@@ -99,8 +93,8 @@ export class PostsComponent implements OnInit {
     infinite: true,
     autoplay: true,
     arrows: true,
-    prevArrow: '.prev-arrow',
-    nextArrow: '.next-arrow',
+    prevArrow: ".prev-arrow",
+    nextArrow: ".next-arrow",
     slidesToScroll: 1,
     fadeSpeed: 1000,
   };

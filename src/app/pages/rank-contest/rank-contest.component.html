@@ -1,0 +1,199 @@
+<div class="container container-rank">
+  <form class="rankingCapacity-filter-box py-4 rounded row" [formGroup]="formFilter">
+    <div class="row filter-rank-contest">
+      <div class="col-lx-3 col-lg-3 col-md-12 col-sm-12 mt-2 my-h4">Xếp hạng cuộc thi</div>
+      <div class="col-lx-4 col-lg-4 col-md-12 col-sm-12">
+        <div ngbDropdown class="d-inline-block w-100">
+          <input
+            type="text"
+            formControlName="filterContest"
+            class="my-input-search my-input"
+            placeholder="Cuộc thi"
+            [attr.disabled]="!statusRankContest ? true : null"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          />
+          <div ngbDropdownMenu class="w-100" [ngClass]="!contests ? '' : 'select-all'" aria-labelledby="dropdownBasic1">
+            <div class="d-flex justify-content-center" *ngIf="!contests">
+              <app-loading-item class="py-2"></app-loading-item>
+            </div>
+            <div *ngIf="contests">
+              <a
+                *ngFor="let item of contests"
+                (click)="getRoundWhereContestId(item.id, item.name)"
+                class="text-collapse"
+                ngbDropdownItem
+                >{{ item.name }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lx-3 col-lg-3 col-md-12 col-sm-12" style="padding-right: 0px !important">
+        <div ngbDropdown class="d-inline-block w-100">
+          <input
+            type="text"
+            class="my-input-search my-input"
+            placeholder="Vòng thi"
+            [attr.disabled]="!statusRankContest ? true : null"
+            id="dropdownBasic1"
+            formControlName="filterRound"
+            ngbDropdownToggle
+          />
+          <div ngbDropdownMenu class="w-100" [ngClass]="!contests ? '' : 'select-all'" aria-labelledby="dropdownBasic1">
+            <div *ngIf="!statusRounds || rounds.length == 0" class="d-flex justify-content-center">
+              <app-loading-item class="py-2"></app-loading-item>
+            </div>
+            <div *ngIf="statusRounds">
+              <a
+                *ngFor="let item of rounds"
+                (click)="getRankRoundContest(item.id, 'desc', item.name)"
+                class="text-collapse"
+                ngbDropdownItem
+                >{{ item.name }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lx-2 col-lg-2 col-md-12 col-sm-12">
+        <input
+          type="text"
+          formControlName="filterName"
+          class="my-input-search my-input"
+          placeholder="Tên nhóm"
+          [attr.disabled]="!statusRankContest ? true : null"
+          id="dropdownBasic1"
+          (keyup)="searchNameTeam($event)"
+        />
+      </div>
+    </div>
+  </form>
+  <div *ngIf="statusRankContest && rankContest.length > 0" class="mb-5">
+    <table class="rank-table">
+      <thead class="rank-thead-table">
+        <tr class="rank_head-table">
+          <th class="rank_title-table text-center" width="100px" scope="col">#</th>
+          <th class="rank_title-table" width="100px" scope="col">Ảnh nhóm</th>
+          <th class="rank_title-table" width="400px" scope="col">Tên nhóm</th>
+          <th class="rank_title-table" scope="col">Thành viên</th>
+          <th class="rank_title-table-score" scope="col"><span class="score">Tổng điểm</span></th>
+        </tr>
+      </thead>
+      <tbody class="tbody">
+        <tr *ngFor="let item of rankContest; let i = index" class="rank_item-list">
+          <th class="rank_item text-center" scope="row">
+            <span *ngIf="i > 2">{{ i + 1 }}</span>
+            <img
+              width="40px"
+              *ngIf="i < 3"
+              [src]="
+                i == 0
+                  ? './../../../assets/img/4.png'
+                  : i == 1
+                  ? './../../../assets/img/5.png'
+                  : './../../../assets/img/6.png'
+              "
+              alt=""
+            />
+          </th>
+          <td class="rank_item-name">
+            <img
+              class="rank_image"
+              [src]="
+                item.team.image ||
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+              "
+              alt=""
+              width="70"
+            />
+          </td>
+          <td class="rank_item">
+            <p class="text-collapse fw-bold" style="color: #0e0759">{{ item.team.name }}</p>
+          </td>
+          <td class="rank_item">
+            <app-list-avatar-user [listTeam]="item.team.users" class="d-flex list-avatar-user"> </app-list-avatar-user>
+          </td>
+          <td class="rank_item ponit text-center">{{ item.point }}đ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!statusRankContest" class="mb-5">
+    <table class="rank-table">
+      <thead class="rank-thead-table">
+        <tr class="rank_head-table">
+          <th class="rank_title-table" scope="col">#</th>
+          <th class="rank_title-table" scope="col">Ảnh nhóm</th>
+          <th class="rank_title-table" scope="col">Tên nhóm</th>
+          <th class="rank_title-table" scope="col">Thành viên</th>
+          <th class="rank-table-none"></th>
+          <th class="rank_title-table-score" scope="col"><span class="score">Tổng điểm</span></th>
+        </tr>
+      </thead>
+      <tbody class="tbody">
+        <!-- Skeleton-Loadingg -->
+        <tr class="rank_item-list" *ngFor="let _ of [].constructor(10)">
+          <td class="rank_item" scope="row">
+            <ngx-skeleton-loader
+              [theme]="{ width: '100%', display: 'inline-block', height: '50px', margin: '5px 0px 0px 0px' }"
+            >
+            </ngx-skeleton-loader>
+          </td>
+          <td class="rank_item-name">
+            <div class="row g-2">
+              <ngx-skeleton-loader
+                class="col-3"
+                [theme]="{
+                  margin: '2px 0px 0px 0px',
+                  width: '50px',
+                  display: 'inline-block',
+                  height: '50px',
+                  'border-radius': '100px'
+                }"
+              >
+              </ngx-skeleton-loader>
+              <ngx-skeleton-loader
+                class="col-9"
+                [theme]="{
+                  width: '100%',
+                  display: 'inline-block',
+                  height: '25px',
+                  margin: '20px 0px 0px 2px',
+                  'border-radius': '8px'
+                }"
+              >
+              </ngx-skeleton-loader>
+            </div>
+          </td>
+          <td class="rank_item">
+            <ngx-skeleton-loader
+              [theme]="{ width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
+            >
+            </ngx-skeleton-loader>
+          </td>
+          <td class="rank_item">
+            <ngx-skeleton-loader
+              [theme]="{ width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
+            >
+            </ngx-skeleton-loader>
+          </td>
+          <td class="rank-table-none"></td>
+          <td class="rank_item_scores">
+            <ngx-skeleton-loader
+              [theme]="{ width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
+            >
+            </ngx-skeleton-loader>
+          </td>
+        </tr>
+        <!-- End Skeleton-Loadingg -->
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="statusRankContest && rankContest.length == 0" class="img-not-result">
+    <img
+      src="https://png.pngtree.com/png-vector/20190804/ourlarge/pngtree-file-text-data-report-abstract-circle-background-flat-color-i-png-image_1649337.jpg"
+      alt=""
+    />
+  </div>
+</div>

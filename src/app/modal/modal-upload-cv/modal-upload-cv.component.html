@@ -42,7 +42,11 @@
         formControlName="file_link"
         class="form-control"
         id="modalUploadCv"
+        accept=".pdf,.doc,.docx,.xls"
       />
+      <div class="my-error">
+        <span id="error-link" class="d-none"> Link của bạn không đúng định dạng.</span>
+      </div>
     </div>
     <mat-dialog-actions align="end">
       <a mat-button (click)="confirmClose()">Huỷ</a>

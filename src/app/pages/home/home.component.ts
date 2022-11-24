@@ -65,14 +65,7 @@ export class HomeComponent implements OnInit {
         },
       },
       {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 586,
+        breakpoint: 749,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
@@ -150,7 +143,7 @@ export class HomeComponent implements OnInit {
       }
 
       // Slider đợt tuyển dụng.
-    }, 6000);
+    }, 20000);
 
     setInterval(() => {
       if (this.arrLinkPost) {
@@ -240,7 +233,7 @@ export class HomeComponent implements OnInit {
 
   //-----------------------  Danh sách các 3 bài viết
   getListPost() {
-    this.postService.getPostByCategory("post-contest").subscribe((res) => {
+    this.postService.getPostByCategory("post-contest", "1").subscribe((res) => {
       if (res.status == true) {
         let arrResult = res.payload.data;
         this.listPostEvent = arrResult.filter((res: Post, index: number) => {

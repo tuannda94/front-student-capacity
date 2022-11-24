@@ -1,36 +1,70 @@
-<div class="page-post-box  py-3">
-    <div class="container ">
-        <div class="header-post-category">
-            <ul class="post__nav-list">
-                <li (click)="onChangeDataPost($event,'post-contest')" class="post__nav-item contest active">
-                  <a class="post__nav-link">Cuộc Thi</a>
-                </li>
-                <li (click)="onChangeDataPost($event, 'post-capacity')" class="post__nav-item capacity ">
-                  <a class="post__nav-link">Test Năng Lực</a>
-                </li>
-                <li (click)="onChangeDataPost($event, 'post-recruitment')" class="post__nav-item recruitment">
-                  <a class="post__nav-link">Tuyển Dụng</a>
-                </li>
-              </ul>
-        </div>
-        <div class="post-main">
-            <div class="post-main-content">
-                <div class="post-main-content-section">
-                    <div class="main-section" *ngIf="!ListPost">
-                      <app-post-load-item></app-post-load-item>
-                      <app-post-load-item></app-post-load-item>
-                      <app-post-load-item></app-post-load-item>
-                      <app-post-load-item></app-post-load-item>
-                      <app-post-load-item></app-post-load-item>
-                    </div>
-                    <div class="main-section">
-                        <div class="post-item" *ngFor="let post of ListPost">
-                            <app-post-related-item [postItem]="post"></app-post-related-item>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           <app-aside-post></app-aside-post>
-        </div>
+<div class="page-post-box py-3">
+  <div class="container">
+    <div class="header-post-category">
+      <ul class="post__nav-list">
+        <li (click)="onChangeDataPost($event, 'post-contest')" class="post__nav-item contest active">
+          <a class="post__nav-link">Cuộc Thi</a>
+        </li>
+        <li (click)="onChangeDataPost($event, 'post-capacity')" class="post__nav-item capacity">
+          <a class="post__nav-link">Test Năng Lực</a>
+        </li>
+        <li (click)="onChangeDataPost($event, 'post-recruitment')" class="post__nav-item recruitment">
+          <a class="post__nav-link">Tuyển Dụng</a>
+        </li>
+      </ul>
     </div>
+    <div class="post-main">
+      <div class="post-main-content">
+        <div class="post-main-content-section">
+          <div class="main-section" *ngIf="!statusListPost">
+            <app-post-load-item></app-post-load-item>
+            <app-post-load-item></app-post-load-item>
+            <app-post-load-item></app-post-load-item>
+            <app-post-load-item></app-post-load-item>
+            <app-post-load-item></app-post-load-item>
+          </div>
+          <div class="main-section">
+            <div class="post-item" *ngFor="let post of ListPost">
+              <app-post-related-item [postItem]="post"></app-post-related-item>
+            </div>
+          </div>
+        </div>
+        <div class="pagination" *ngIf="!statusListPost">
+          <ul class="pagination-list">
+            <li class="pagination-list_box pagination-item" *ngFor="let _ of [].constructor(10)">
+              <ngx-skeleton-loader
+                [theme]="{ width: '100%', display: 'inline-block', height: '25px', 'border-radius': '8px' }"
+              >
+              </ngx-skeleton-loader>
+            </li>
+          </ul>
+        </div>
+        <div class="pagination" *ngIf="statusListPost">
+          <ul class="pagination-list">
+            <li
+              class="pagination-list_box pagination-list_first"
+              (click)="paginationPages(first_page_url, false, '1', $event)"
+            >
+              <i class="fa-solid fa-angles-left"></i>
+            </li>
+            <li
+              class="pagination-list_box pagination-item"
+              *ngFor="let page of links"
+              [ngClass]="page.active ? 'active' : ''"
+              (click)="paginationPages(page.url, page.active, page.label, $event)"
+            >
+              {{ page.label }}
+            </li>
+            <li
+              class="pagination-list_box pagination-list_last"
+              (click)="paginationPages(last_page_url, false, last_page, $event)"
+            >
+              <i class="fa-solid fa-angles-right"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <app-aside-post></app-aside-post>
+    </div>
+  </div>
 </div>

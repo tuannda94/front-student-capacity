@@ -29,6 +29,14 @@ h5 {
   line-height: 45px;
 }
 
+.contest__nav-rank {
+  padding: 8px;
+  color: var(--black);
+  background-color: var(--my-bg-white);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .contest__nav-list {
   display: flex;
   justify-content: start;
@@ -146,7 +154,7 @@ h5 {
   background-color: var(--primary);
 }
 
-@media only screen and (max-width: 740px) {
+@media only screen and (max-width: 749px) {
   .contest__nav-list {
     visibility: hidden;
   }

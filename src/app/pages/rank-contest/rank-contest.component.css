@@ -7,6 +7,10 @@
   padding-top: 3px;
 }
 
+.filter-rank-contest {
+  padding-right: 0px !important;
+}
+
 .btn-search-rankingCapacity:hover {
   opacity: 0.8;
 }
@@ -119,58 +123,8 @@
   width: 300px;
 }
 
-.pagination {
-  width: 100%;
-  text-align: center;
-  display: block;
-}
-
-.pagination-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 0;
-  margin: 30px 0;
-  text-align: center;
-  list-style: none;
-}
-
-.pagination-list_box {
-  background: var(--my-gray);
-  border-radius: 5px;
-  text-align: center;
-  font-size: 16px;
-  line-height: 22.4px;
-  font-weight: 400;
-  display: inline-block;
-  margin: 0px 3px;
-  width: 30px;
-  height: 30px;
-  padding: 5px 5px;
-  color: black;
-}
-
-.pagination-list_box:hover {
-  background: #ff6638;
-  color: #ffffff;
+.select-all a {
   cursor: pointer;
-}
-
-.pagination-list_dot {
-  text-align: center;
-  font-size: 16px;
-  line-height: 22.4px;
-  font-weight: 400;
-  display: inline-block;
-  margin: 0px 3px;
-  width: 30px;
-  height: 30px;
-  padding: 5px 5px;
-}
-
-.pagination-item.active {
-  background: #ff6638;
-  color: #ffffff;
 }
 
 .rank-table {
@@ -183,54 +137,32 @@ tr:nth-of-type(even) {
   background: #f9f9f9;
 }
 
-/* CSS Danh sách capacity */
-
-.list-capacity {
-  margin: 20px 0px 0px 0px;
+.select-all {
+  max-height: 260px;
+  overflow-y: auto;
 }
 
-.test-capacity_list {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 32px;
+.select-all::-webkit-scrollbar {
+  width: 4px;
 }
-.capacity_title {
-  color: var(--my-secondary);
+
+.img-not-result {
+  margin: 0 auto;
+  width: 450px;
 }
-.capacity_view-all {
-  color: var(--my-secondary);
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 140%;
-}
-.capacity_view-all:hover {
-  color: var(--blue-900);
+
+.container-rank {
+  min-height: 700px;
 }
 
 @media only screen and (min-width: 740px) and (max-width: 1023px) {
-  .test-capacity_list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .rank_title-table-major {
-    visibility: hidden;
+  .my-input-search {
+    margin-bottom: 15px;
   }
 }
 
 @media only screen and (max-width: 740px) {
-  .post-new-latest {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .rank_title-table-major {
-    visibility: hidden;
-  }
-
-  .test-capacity_list {
-    display: grid;
-    grid-template-columns: 1fr;
+  .my-input-search {
+    margin-bottom: 15px;
   }
 }

@@ -88,8 +88,11 @@ import { AlertErrorIntroExamComponent } from "./component/alert-error-intro-exam
 import { CountDatePipe } from "./helper/pipe/count-date.pipe";
 import { PaginationComponent } from "./component/pagination/pagination.component";
 import { LoadingOverlayComponent } from "./component/loading-overlay/loading-overlay.component";
-import { PopupLoginComponent } from './component/popup-login/popup-login.component';
-import { RankContestComponent } from './pages/rank-contest/rank-contest.component';
+import { PopupLoginComponent } from "./component/popup-login/popup-login.component";
+import { RankContestComponent } from "./pages/rank-contest/rank-contest.component";
+import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
+import { ChallengeComponent } from "./pages/challenge/challenge.component";
+import { ModalSubmitChallengeSuccessComponent } from "./modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
 
 @NgModule({
   declarations: [
@@ -163,6 +166,9 @@ import { RankContestComponent } from './pages/rank-contest/rank-contest.componen
     LoadingOverlayComponent,
     PopupLoginComponent,
     RankContestComponent,
+    ChallengeExamComponent,
+    ChallengeComponent,
+    ModalSubmitChallengeSuccessComponent,
   ],
   imports: [
     BrowserModule,

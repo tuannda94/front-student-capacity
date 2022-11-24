@@ -23,7 +23,13 @@
   cursor: pointer;
 }
 
-.pagination-list_box:hover {
+.pagination-list_box--disabled {
+  cursor: not-allowed;
+  color: rgba(0, 0, 0, 0.5);
+  opacity: 0.25;
+}
+
+.pagination-list_box:not(.pagination-list_box--disabled):hover {
   background: var(--my-primary);
   color: #ffffff;
 }

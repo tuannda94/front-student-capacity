@@ -57,9 +57,9 @@ export class RankContestComponent implements OnInit {
   getRoundWhereContestId(contestId: number, contestName: string) {
     this.statusRankContest = false;
     this.formFilter.controls["filterContest"].setValue(contestName);
-    this.contestService.getWhereId(contestId).subscribe((res) => {
+    this.contestService.getDetailContest(contestId).subscribe((res) => {
       if (res.status) {
-        this.rounds = res.payload.rounds;
+        this.rounds = res.payload;
         this.statusRounds = true;
         this.getRankRoundContest(this.rounds[0].id, "desc", this.rounds[0].name);
       }

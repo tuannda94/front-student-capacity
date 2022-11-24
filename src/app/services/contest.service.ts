@@ -65,4 +65,8 @@ export class ContestService {
   getAllContestRank() {
     return this.http.get<ResponsePayload>(`${environment.contestListUrl}/demo`);
   }
+
+  getDetailContest(contestId: number) {
+    return this.http.get<ResponsePayload>(`${environment.contestListUrl}/${contestId}/demo`);
+  }
 }

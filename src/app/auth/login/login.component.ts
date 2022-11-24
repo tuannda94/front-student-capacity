@@ -68,7 +68,8 @@ export class LoginComponent implements OnInit {
             }
           }, 1000);
         } else {
-          this.toast.error({ summary: "Không thể đăng nhập", detail: "Thông báo", duration: 5000 });
+          this.statusLogin = false;
+          this.toast.error({ summary: "Tài khoản không hợp lệ", detail: "Thông báo", duration: 5000 });
         }
       });
     });

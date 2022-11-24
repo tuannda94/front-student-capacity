@@ -152,11 +152,8 @@
       <div class="col-lg-3 col-lx-3 col-md-12 col-sm-12 recruitment__capacity-list">
         <p *ngIf="recruitmentDetail" class="color-text mb-2">Danh sách bài test ({{ recruitmentCapacity.length }})</p>
         <div *ngIf="recruitmentDetail">
-          <div class="recruitment-related">
-            <app-capacity-item
-              *ngFor="let capacity of recruitmentCapacity"
-              [capacityItem]="capacity"
-            ></app-capacity-item>
+          <div class="recruitment-related mb-3" *ngFor="let capacity of recruitmentCapacity">
+            <app-capacity-item [capacityItem]="capacity"></app-capacity-item>
           </div>
         </div>
         <ngx-skeleton-loader

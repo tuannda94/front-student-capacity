@@ -47,7 +47,7 @@
           placeholder="Tìm kiếm ..."
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
-          (keyup)="filterSelect(keywords, $any($event.target).value, 'keyword')"
+          (keyup)="setValueKeyword($event)"
           ngbDropdownToggle
         />
       </div>

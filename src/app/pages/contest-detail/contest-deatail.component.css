@@ -284,14 +284,14 @@ ul {
   padding: 3px 10px;
 }
 
-@media only screen and (min-width: 740px) and (max-width: 1023px) {
+@media only screen and (min-width: 750px) and (max-width: 1023px) {
   .contest-detail-header {
     display: grid;
     grid-template-columns: 1fr;
   }
 }
 
-@media only screen and (max-width: 740px) {
+@media only screen and (max-width: 750px) {
   .contest-detail-header {
     display: grid;
     grid-template-columns: 1fr;

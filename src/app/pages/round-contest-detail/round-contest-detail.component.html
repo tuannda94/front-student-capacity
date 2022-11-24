@@ -17,7 +17,7 @@
         </li>
       </ol>
     </nav>
-    <div *ngIf="!roundDetail">
+    <div *ngIf="!roundDetail" class="loading-image">
       <ngx-skeleton-loader [theme]="{ 'height.px': 20, 'width.px': 400 }"> </ngx-skeleton-loader>
     </div>
     <div class="contest-detail-header">

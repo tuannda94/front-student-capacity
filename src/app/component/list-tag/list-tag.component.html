@@ -1,6 +1,4 @@
 <div class="tag-list">
-    <span>Tags: </span>
-    <a routerLink="" class="tag-item">Tuyển dụng</a>
-    <a routerLink="" class="tag-item">CNTT</a>
-    <a routerLink="" class="tag-item">IT</a>
+  <span>Tags: </span>
+  <a *ngFor="let item of tags" (click)="redirectTagname(item.short_name)" class="tag-item">{{ item.short_name }}</a>
 </div>

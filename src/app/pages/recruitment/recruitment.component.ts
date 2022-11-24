@@ -133,9 +133,9 @@ export class RecruitmentComponent implements OnInit {
   }
 
   // Set keyword recruitments
-  setValueKeyword(keyword: string) {
-    this.statusSubmit = true;
-    this.formFilter.controls["filterName"].setValue(keyword);
+  setValueKeyword($event: any) {
+    this.formFilter.controls["filterName"].setValue($event.target.value);
+    this.checkBtnSubmit();
   }
 
   // Get All keyword trending;
@@ -162,7 +162,6 @@ export class RecruitmentComponent implements OnInit {
   // Fillter comom recruitments
   filterSelect(arr: Array<any> | null, value: string, input: string) {
     if (arr) {
-      console.log(input);
       switch (input) {
         case "major":
           console.log(value);
@@ -180,8 +179,6 @@ export class RecruitmentComponent implements OnInit {
 
           break;
         case "keyword":
-          console.log(value);
-
           this.checkBtnSubmit();
           if (!value) {
             this.keywords = null;
@@ -266,8 +263,6 @@ export class RecruitmentComponent implements OnInit {
     }
 
     this.listPostService.searchPostRecruitment(this.keyword).subscribe((res) => {
-      console.log(res.payload);
-
       if (res.status && res.payload.data.length > 0) {
         this.statusPostSearch = true;
         this.listPostResult = res.payload.data;

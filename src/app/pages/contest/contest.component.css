@@ -154,9 +154,8 @@ h5 {
   background-color: var(--primary);
 }
 
-@media only screen and (max-width: 740px) {
+@media only screen and (max-width: 749px) {
   .contest__nav-list {
     visibility: hidden;
   }
-  
 }

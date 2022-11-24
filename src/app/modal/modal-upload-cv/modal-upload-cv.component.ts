@@ -17,6 +17,7 @@ export class ModalUploadCvComponent implements OnInit {
   postDetail: Post;
   validateForm!: FormGroup;
   statusRegister: boolean = true;
+  statusLinkCv: boolean = false;
   fileUpload: any;
 
   // set up form control
@@ -55,9 +56,23 @@ export class ModalUploadCvComponent implements OnInit {
 
   // review file upload
   preview(files: any) {
-    if (files.length === 0) return;
+    var errorLink = document.querySelector("#error-link");
+    let countTrue: number = 0;
+    const validFileExtensions = ["docx", "pdf", "doc", "xls"];
+    validFileExtensions.forEach((ext) => {
+      if (files[0].name.endsWith(ext)) {
+        countTrue++;
+      }
+    });
 
-    this.fileUpload = files[0];
+    if (countTrue !== 0) {
+      this.statusLinkCv = true;
+      if (files.length === 0) return;
+      this.fileUpload = files[0];
+      errorLink?.classList.add("d-none");
+    } else {
+      errorLink?.classList.remove("d-none");
+    }
   }
 
   //Send information Upload cv
@@ -79,13 +94,14 @@ export class ModalUploadCvComponent implements OnInit {
           this.toast.warning({ summary: res.message.file_link[0], duration: 2000, detail: "Cảnh báo" });
         } else {
           this.statusRegister = true;
-          this.dialogRef.close();
           this.toast.success({ summary: "Upload CV thành công", duration: 2000, detail: "Thông báo" });
+          this.dialogRef.close();
         }
         return "Ok";
       });
     }, 1000);
   }
+
   confirmClose() {
     const confirm = window.confirm("Bạn có muốn hủy không?");
     if (confirm) {

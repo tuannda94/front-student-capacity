@@ -6,6 +6,8 @@ import { Post } from "src/app/models/post.model";
 import { ModalUploadCvComponent } from "src/app/modal/modal-upload-cv/modal-upload-cv.component";
 import { MatDialog } from "@angular/material/dialog";
 import { Title } from "@angular/platform-browser";
+import { KeywordService } from "src/app/services/keyword.service";
+import { Keyword } from "src/app/models/keyword";
 
 @Component({
   selector: "app-post-detail",
@@ -16,6 +18,7 @@ export class PostDetailComponent implements OnInit {
   postDetail!: Post;
   statusPost: boolean = false;
   routeCategoryPost: string = "";
+  listTag: Array<Keyword>;
 
   constructor(
     private postService: ListPostService,
@@ -23,6 +26,7 @@ export class PostDetailComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     public title: Title,
+    private keywordService: KeywordService,
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,8 @@ export class PostDetailComponent implements OnInit {
           this.postDetail ? (this.statusPost = true) : this.statusPost;
         }
       });
+
+    this.getAllKeywordPost();
   }
 
   // Change screen back top
@@ -70,7 +76,18 @@ export class PostDetailComponent implements OnInit {
       console.log("result", result);
     });
   }
+
+  // Chuyển đến trang danh mục bài viết
   clickChangeUrlToCategoryPost(data: string) {
     this.router.navigateByUrl(`danh-muc-bai-viet?cate=${data}`);
+  }
+
+  // Get all key word bài viết
+  getAllKeywordPost() {
+    this.keywordService.getKeywordWhereType(0).subscribe((res) => {
+      if (res.status) {
+        this.listTag = res.payload;
+      }
+    });
   }
 }

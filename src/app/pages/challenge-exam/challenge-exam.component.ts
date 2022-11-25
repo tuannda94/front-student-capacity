@@ -136,9 +136,8 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
       this.isFetchingChallenge = true;
 
       this.challengeService.getChallenge(id).subscribe(({ status, payload }) => {
-        this.isFetchingChallenge = false;
-
-        if (status) {
+        if (status && payload) {
+          this.isFetchingChallenge = false;
           // update title
           this.titleService.setTitle(`THỬ THÁCH #${payload.id}: ${payload.name}`);
 
@@ -187,6 +186,8 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
               this.statusTakeChallenge = 0;
             }
           }
+        } else {
+          this.toastService.warning({ detail: "Lỗi", summary: "Đã có lỗi xảy ra, vui lòng thử lại" });
         }
       });
     });

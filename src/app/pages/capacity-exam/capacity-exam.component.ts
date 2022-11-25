@@ -431,6 +431,14 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
         if (status) {
           // kết quả bài làm
           const { minutes, seconds } = this.getMinutesAndSecondBetweenTwoDate(payload.created_at, payload.updated_at);
+
+          // tổng số giây làm bài
+          const secondsExam = (+new Date(payload.updated_at) - +new Date(payload.created_at)) / 1000;
+
+          // trạng thái nộp bài muộn
+          const isLateSubmission =
+            secondsExam > this.convertTimeExamToSeconds(this.roundDetail.time_exam, this.roundDetail.time_type_exam);
+
           this.resultExam = {
             capacityId: payload.id,
             score: Number.isInteger(payload.scores) ? payload.scores.toString() : payload.scores.toFixed(1),
@@ -439,6 +447,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
             donotAnswer: payload.donot_answer,
             falseAnswer: payload.false_answer,
             trueAnswer: payload.true_answer,
+            isLateSubmission,
           };
 
           this.dialog.closeAll();
@@ -644,7 +653,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     this.countDownTimeExam.seconds = secondsExam;
 
     let timeStartExam: any = new Date(timeStart).getTime();
-    const timeWillEndExam = new Date(timeStartExam + duration * 1000 + 1000);
+    const timeWillEndExam = new Date(timeStartExam + duration * 1000 + 3000);
 
     this.timerId = setInterval(() => {
       let futureDate = new Date(timeWillEndExam).getTime();
@@ -699,7 +708,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
           this.isNotiExamTimeOut = true;
         }
       }
-    }, 500);
+    }, 1000);
   }
 
   // convert milisecond to minus

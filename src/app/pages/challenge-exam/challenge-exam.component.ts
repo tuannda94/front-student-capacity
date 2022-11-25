@@ -4,6 +4,7 @@ import { UserService } from "./../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ChallengeService } from "src/app/services/challenge.service";
+import { LocalStorageService } from "src/app/services/local-storage.service";
 import {
   Challenge,
   CurrentTestCase,
@@ -114,6 +115,7 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
     private toastService: NgToastService,
     private router: Router,
     private titleService: Title,
+    private localStorageService: LocalStorageService,
   ) {}
 
   ngOnInit(): void {
@@ -527,5 +529,11 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
   // lắng nghe code thay đổi
   handleChangeCode() {
     if (this.isActiveSubmitCode) this.isActiveSubmitCode = false;
+  }
+
+  // save current route name
+  handleGoToLoginPage() {
+    this.localStorageService.saveCurrentRoute();
+    this.router.navigate(["/login"]);
   }
 }

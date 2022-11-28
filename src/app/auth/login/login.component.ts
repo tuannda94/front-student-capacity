@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     private titleService: Title,
     private localStorageService: LocalStorageService,
   ) {}
-
+                
   ngOnInit(): void {
     this.titleService.setTitle("Đăng nhập");
   }

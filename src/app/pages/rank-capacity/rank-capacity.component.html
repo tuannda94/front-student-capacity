@@ -1,8 +1,11 @@
 <div class="container py-4">
   <div class="ranking-capacity">
     <div class="">
-      <div class="">
+      <div class="" *ngIf="urlBanner">
         <img class="banner" src="{{ urlBanner }}" alt="" />
+      </div>
+      <div class="" *ngIf="!urlBanner">
+        <ngx-skeleton-loader [theme]="{ width: '100%', height: '400px' }"></ngx-skeleton-loader>
       </div>
     </div>
     <div class="list-capacity">

@@ -118,27 +118,32 @@ export class PostResultSearchComponent implements OnInit {
 
     this.formFilter.controls["filterName"].setValue(this.keywordQuery);
 
-    if (typePost.length > 0) this.formFilter.controls["filterTypePost"].setValue(typePost[0].name);
-    if (statusHotPost.length > 0) this.formFilter.controls["filterTypePost"].setValue(statusHotPost[0].name);
+    typePost.length > 0 ? this.formFilter.controls["filterTypePost"].setValue(typePost[0].name) : (typePost = null);
+    statusHotPost.length > 0
+      ? this.formFilter.controls["filterTypePost"].setValue(statusHotPost[0].name)
+      : (statusHotPost = null);
 
     // check nếu có 1 trong 3 dữ liệu thì chạy search
-    console.log("Chưa vào if", this.keywordQuery);
     if (this.keywordQuery != null || typePost != null || statusHotPost != null) {
-      console.log("Join");
-      console.log(this.keywordQuery);
       this.results = [];
       this.statusResultPost = false;
-      this.listPostService.filterPost(this.keywordQuery, typePost[0].param, statusHotPost[0].param).subscribe((res) => {
-        if (res.status) {
-          if (res.payload.data.length <= 0) {
-            this.statusResultPost = true;
-            this.statusNotResultReturn = true;
-          } else {
-            this.statusResultPost = true;
-            this.results = res.payload.data;
+      this.listPostService
+        .filterPost(
+          this.keywordQuery,
+          typePost == null ? "" : typePost[0].param,
+          statusHotPost == null ? "" : statusHotPost[0].param,
+        )
+        .subscribe((res) => {
+          if (res.status) {
+            if (res.payload.data.length <= 0) {
+              this.statusResultPost = true;
+              this.statusNotResultReturn = true;
+            } else {
+              this.statusResultPost = true;
+              this.results = res.payload.data;
+            }
           }
-        }
-      });
+        });
     } else {
       this.getListPost();
     }
@@ -197,8 +202,8 @@ export class PostResultSearchComponent implements OnInit {
     this.statusNotResultReturn = false;
     this.statusResultPost = false;
     this.keywordQuery = this.route.snapshot.queryParamMap.get("keyword");
-    let typePost = "";
-    let status = "";
+    let typePost: any = "";
+    let status: any = "";
     let keyword = "";
 
     if (this.formFilter.controls["filterName"].value) {
@@ -206,16 +211,15 @@ export class PostResultSearchComponent implements OnInit {
     }
 
     if (this.formFilter.controls["filterTypePost"].value) {
-      typePost = this.typePosts.filter((item) => item.name === this.formFilter.controls["filterTypePost"].value)[0]
-        .param;
+      typePost = this.typePosts.filter((item) => item.name === this.formFilter.controls["filterTypePost"].value);
     }
 
     if (this.formFilter.controls["filterStatus"].value) {
-      status = this.statusHotPosts.filter((item) => item.name === this.formFilter.controls["filterStatus"].value)[0]
-        .param;
+      status = this.statusHotPosts.filter((item) => item.name === this.formFilter.controls["filterStatus"].value);
     }
-
-    this.router.navigateByUrl(`/tim-kiem/bai-viet?keyword=${keyword}&post=${typePost}&postHot=${status}`);
+    this.router.navigateByUrl(
+      `/tim-kiem/bai-viet?keyword=${keyword}&post=${typePost[0].name}&postHot=${status[0].name}`,
+    );
 
     this.listPostService.filterPost(keyword, typePost, status).subscribe((res) => {
       if (res.status) {

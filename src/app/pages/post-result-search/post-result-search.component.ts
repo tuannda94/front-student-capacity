@@ -122,7 +122,10 @@ export class PostResultSearchComponent implements OnInit {
     if (statusHotPost.length > 0) this.formFilter.controls["filterTypePost"].setValue(statusHotPost[0].name);
 
     // check nếu có 1 trong 3 dữ liệu thì chạy search
+    console.log("Chưa vào if", this.keywordQuery);
     if (this.keywordQuery != null || typePost != null || statusHotPost != null) {
+      console.log("Join");
+      console.log(this.keywordQuery);
       this.results = [];
       this.statusResultPost = false;
       this.listPostService.filterPost(this.keywordQuery, typePost[0].param, statusHotPost[0].param).subscribe((res) => {
@@ -226,5 +229,14 @@ export class PostResultSearchComponent implements OnInit {
         }
       }
     });
+  }
+
+  resetFormFilter() {
+    this.formFilter.controls["filterTypePost"].setValue("");
+    this.formFilter.controls["filterStatus"].setValue("");
+    this.formFilter.controls["filterName"].setValue("");
+    this.statusResultPost = false;
+    this.getListPost();
+    this.router.navigateByUrl(`/tim-kiem/bai-viet`);
   }
 }

@@ -1,51 +1,79 @@
 <div class="page-post-box py-3">
-    <div class="container">
-        <div class="result-post">
-            <span class="result-search__text">Kết quả tìm kiếm bài viết</span>
-            <form class="my-box-filter my-box-filter-3" [formGroup]="formFilter" (submit)="filterRecruitments()">
-                <div class="">
-                    <input type="text" class="my-input" formControlName="filterName" (keyup)="setValueKeyword($event)"
-                        placeholder="Tìm kiếm ...">
-                </div>
-                <div ngbDropdown class="d-inline-block w-100">
-                    <input type="text" formControlName="filterTypePost" class="my-input" placeholder="Bài Viết Thuộc Danh Mục"
-                        id="dropdownBasic1" ngbDropdownToggle>
-                    <div ngbDropdownMenu class="" aria-labelledby="dropdownBasic1">
-                        <a *ngFor="let item of typePosts" (click)="setValueFilterPost(item)" class="text-collapse"
-                            ngbDropdownItem>{{item.name}}</a>
-                    </div>
-                </div>
-                <div ngbDropdown class="d-inline-block w-100">
-                    <input type="text" formControlName="filterStatus" class="my-input" placeholder="Trạng thái" id="dropdownBasic1"
-                        ngbDropdownToggle>
-                    <div class="" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <a ngbDropdownItem *ngFor="let item of statusHotPosts" (click)="setValueStatus(item.name)">{{item.name}}</a>
-                    </div>
-                </div>
-                <button [disabled]="!statusSubmit" class="post-search__btn my-btn-primary my-btn-s">
-                    Tìm kiếm
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
-            <ngx-skeleton-loader *ngIf="!results"
-                [theme]="{ 'height.px' : 30, 'width.px' :200, 'margin' : '12px 0 8px 0' , 'border-radius': '10px' }"
-                appearance="line">
-            </ngx-skeleton-loader>
-            <p class="result-post__length" *ngIf="results"> Kết quả tìm kiếm: <span
-                    class="result-post__number">{{results?.length}}</span></p>
-            <div class="result-post__empty" *ngIf="statusNotResultReturn">
-                <span>Không tìm thấy kết quả!</span>
-                <span>Hãy thử tìm kiếm với từ khóa khác</span>
-            </div>
-
-            <div class="result-post-list" *ngIf="!statusResultPost">
-                <app-post-load-item *ngFor="let item of [].constructor(6); let i = index"></app-post-load-item>
-            </div>
-            <div class="result-post-list">
-                <div class="post-item" *ngFor="let item of results">
-                    <app-post-related-item [postItem]="item"></app-post-related-item>
-                </div>
-            </div>
+  <div class="container">
+    <div class="result-post">
+      <span class="result-search__text">Kết quả tìm kiếm bài viết</span>
+      <form class="my-box-filter my-box-filter-3" [formGroup]="formFilter" (submit)="filterRecruitments()">
+        <div class="">
+          <input
+            type="text"
+            class="my-input"
+            formControlName="filterName"
+            (keyup)="setValueKeyword($event)"
+            placeholder="Tìm kiếm ..."
+          />
         </div>
+        <div ngbDropdown class="d-inline-block w-100">
+          <input
+            type="text"
+            formControlName="filterTypePost"
+            class="my-input"
+            placeholder="Bài Viết Thuộc Danh Mục"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          />
+          <div ngbDropdownMenu class="" aria-labelledby="dropdownBasic1">
+            <a
+              *ngFor="let item of typePosts"
+              (click)="setValueFilterPost(item)"
+              class="text-collapse"
+              ngbDropdownItem
+              >{{ item.name }}</a
+            >
+          </div>
+        </div>
+        <div ngbDropdown class="d-inline-block w-100">
+          <input
+            type="text"
+            formControlName="filterStatus"
+            class="my-input"
+            placeholder="Trạng thái"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          />
+          <div class="" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a ngbDropdownItem *ngFor="let item of statusHotPosts" (click)="setValueStatus(item.name)">{{
+              item.name
+            }}</a>
+          </div>
+        </div>
+        <a class="post-search__btn my-btn-primary my-btn-s" (click)="resetFormFilter()">Làm Mới</a>
+        <button [disabled]="!statusSubmit" class="post-search__btn my-btn-primary my-btn-s">
+          Tìm kiếm
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+      <ngx-skeleton-loader
+        *ngIf="!results"
+        [theme]="{ 'height.px': 30, 'width.px': 200, margin: '12px 0 8px 0', 'border-radius': '10px' }"
+        appearance="line"
+      >
+      </ngx-skeleton-loader>
+      <p class="result-post__length" *ngIf="results">
+        Kết quả tìm kiếm: <span class="result-post__number">{{ results?.length }}</span>
+      </p>
+      <div class="result-post__empty" *ngIf="statusNotResultReturn">
+        <span>Không tìm thấy kết quả!</span>
+        <span>Hãy thử tìm kiếm với từ khóa khác</span>
+      </div>
+
+      <div class="result-post-list" *ngIf="!statusResultPost">
+        <app-post-load-item *ngFor="let item of [].constructor(6); let i = index"></app-post-load-item>
+      </div>
+      <div class="result-post-list">
+        <div class="post-item" *ngFor="let item of results">
+          <app-post-related-item [postItem]="item"></app-post-related-item>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

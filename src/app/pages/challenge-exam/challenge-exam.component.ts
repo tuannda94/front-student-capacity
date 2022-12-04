@@ -43,6 +43,7 @@ export class ChallengeExamComponent implements OnInit, OnDestroy {
     },
     automaticLayout: true,
     renderWhitespace: false,
+    renderIndentGuides: false,
   };
   code!: string;
   // id ngôn ngữ code

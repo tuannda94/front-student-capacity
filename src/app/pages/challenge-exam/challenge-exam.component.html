@@ -148,6 +148,16 @@
                 <p *ngIf="!isLogged">Vui lòng đăng nhập để xem lịch sử nộp bài!</p>
                 <p *ngIf="isLogged && statusTakeChallenge === 0">Không có lịch sử nộp bài!</p>
               </div>
+
+              <!-- tab bình luận -->
+              <div class="challenge__content-comment" *ngIf="tabActive === 'comment'">
+                <p>Tính năng đang phát triển...</p>
+              </div>
+
+              <!-- tab câu hỏi -->
+              <div class="challenge__content-question" *ngIf="tabActive === 'question'">
+                <p>Tính năng đang phát triển...</p>
+              </div>
             </div>
           </div>
 

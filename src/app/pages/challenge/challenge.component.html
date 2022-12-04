@@ -6,7 +6,7 @@
     title="Banner"
     class="challenge__banner d-block"
     [ngStyle]="{ 'background-image': 'url(' + slider.image_url + ')' }"
-    *ngIf="!isFetchingSlider"
+    *ngIf="!isFetchingSlider && slider"
   ></a>
 
   <!-- skeleton banner -->

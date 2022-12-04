@@ -46,7 +46,10 @@ export class HeaderComponent implements OnInit {
     this.localStorageService.watchStorage().subscribe((data) => {
       if (data) {
         this.isChangeSave = true;
-        this.getListCount();
+        if (this.userService.getUserValue().id) {
+          this.getListCount();
+        }
+
         this.countInfoSaveItem = data;
       }
     });

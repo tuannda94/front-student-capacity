@@ -5,6 +5,7 @@ import { Component, OnInit } from "@angular/core";
 import { CapacityService } from "src/app/services/capacity.service";
 import { Router } from "@angular/router";
 import { Title } from "@angular/platform-browser";
+import { LocalStorageService } from "src/app/services/local-storage.service";
 
 @Component({
   selector: "app-join-capacity",
@@ -21,6 +22,7 @@ export class JoinCapacityComponent implements OnInit {
     private toastService: NgToastService,
     private userService: UserService,
     private titleService: Title,
+    private localStorageService: LocalStorageService,
   ) {}
 
   ngOnInit(): void {
@@ -36,8 +38,8 @@ export class JoinCapacityComponent implements OnInit {
     const jwtToken = this.userService.getJwtToken();
     const isLogged = user && jwtToken;
     if (!isLogged) {
-      this.toastService.info({ summary: "Vui lòng đăng nhập trước khi tham gia trò chơi!" });
-      return this.router.navigate(["/login"]);
+      this.localStorageService.setIsPopup(1);
+      return;
     }
 
     const { code } = this.formCheckCode.value;

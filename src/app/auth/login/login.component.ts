@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             this.toast.success({ summary: "Đăng nhập thành công", detail: "Thông báo", duration: 5000 });
             const backRoute = this.localStorageService.getBackRoute();
-            if (!backRoute) {
+            if (!backRoute || backRoute === "/login") {
               this.router.navigate(["/"]);
             } else {
               if (backRoute.includes("?")) {

@@ -1,0 +1,397 @@
+<div class="container__challenge" *ngIf="!isFetchingChallenge">
+  <header class="challenge__header d-flex align-items-center">
+    <a routerLink="/challenge" class="challenge__header-icon">
+      <i class="fa-solid fa-angle-left"></i>
+    </a>
+
+    <div class="challenge__header-right">
+      <p class="challenge__header-task-name">{{ challenge.name }}</p>
+
+      <!-- <ul class="challenge__header-tasks">
+        <li class="challenge__header-task active">1</li>
+        <li class="challenge__header-task">2</li>
+        <li class="challenge__header-task">3</li>
+        <li class="challenge__header-task">4</li>
+        <li class="challenge__header-task">5</li>
+      </ul> -->
+    </div>
+  </header>
+
+  <div style="height: 100%">
+    <as-split direction="horizontal" [restrictMove]="true" [gutterSize]="1" [useTransition]="true">
+      <as-split-area [size]="40" [visible]="isFullScreen ? false : true" [order]="1">
+        <div class="challenge__split-left">
+          <div style="display: flex; height: 100%">
+            <aside class="challenge__sidebar">
+              <ul class="challenge__sidebar-icon-list m-0 p-0">
+                <div
+                  *ngFor="let sidebar of sidebarList"
+                  class="challenge__sidebar-icon"
+                  [ngClass]="{ active: tabActive === sidebar.name }"
+                  title="{{ sidebar.title }}"
+                  (click)="handleChangeTab(sidebar.name)"
+                >
+                  <i class="{{ sidebar.icon }}"></i>
+                </div>
+              </ul>
+            </aside>
+
+            <div class="challenge__content">
+              <!-- tab đề bài -->
+              <div class="challenge__content-question" *ngIf="tabActive === 'issue'">
+                <header class="challenge__content-header d-flex align-items-center flex-wrap">
+                  <div class="challenge__content-header-user d-flex align-items-center mb-2" *ngIf="isLogged">
+                    <img src="{{ userLogged.avatar }}" alt="" class="challenge__content-header-user-avt" />
+                    <a routerLink="/tai-khoan" class="challenge__content-header-user-name">{{ userLogged.name }}</a>
+                  </div>
+
+                  <div class="challenge__content-header-tag mb-2">{{ getTypeChallenge(challenge.type) }}</div>
+
+                  <!-- <div class="challenge__content-header-point d-flex align-items-center mb-2">
+                    <div class="challenge__content-header-point-icon d-flex align-items-center justify-content-center">
+                      <i class="fa-solid fa-heart"></i>
+                    </div>
+    
+                    <span class="challenge__content-header-point-text">100 Điểm</span>
+                  </div> -->
+                </header>
+
+                <!-- content question -->
+                <main class="challenge__content-main" [innerHTML]="challenge.content"></main>
+              </div>
+
+              <!-- tab rank -->
+              <div class="challenge__content-rank" *ngIf="tabActive === 'rank'">
+                <div *ngIf="ranks && !isFetchingRank">
+                  <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <h2 class="my-h5 m-0 mb-4">Bảng xếp hạng</h2>
+                    <select name="" id="" class="mb-4 text" (change)="handleChangeCodeLanguageRank($event)">
+                      <option
+                        value="{{ sample.code_language.id }}"
+                        [selected]="sample.code_language.id === codeLanguageIdRank"
+                        *ngFor="let sample of samplesCode"
+                      >
+                        {{ sample.code_language.name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <table class="table" *ngIf="ranks.length">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="align-middle">STT</th>
+                        <th scope="col" class="align-middle">Tên</th>
+                        <th scope="col" class="align-middle">Ngôn ngữ</th>
+                        <th scope="col" class="align-middle">Điểm</th>
+                        <th scope="col" class="align-middle">Thời gian nộp</th>
+                      </tr>
+                    </thead>
+                    <tbody class="challenge__content-rank-taboe-body">
+                      <tr *ngFor="let rank of ranks; let i = index" [attr.data-page]="paginateRank.page">
+                        <th scope="row" class="py-4 align-middle">
+                          {{ (paginateRank.page - 1) * paginateRank.limit + 1 + i }}
+                        </th>
+                        <td class="text-primary py-4 align-middle">{{ rank.user.name }}</td>
+                        <td class="py-4 align-middle">{{ rank.code_language.name }}</td>
+                        <td class="py-4 align-middle">{{ rank.point }}</td>
+                        <td class="py-4 align-middle">{{ rank.updated_at | formatDate }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <p *ngIf="!ranks.length">Không có dữ liệu!</p>
+                  <!-- pagination -->
+                  <div
+                    class="pagination d-flex justify-content-center mb-3"
+                    *ngIf="ranks.length && paginateRank.total > paginateRank.limit"
+                  >
+                    <app-pagination
+                      [currentPage]="paginateRank.page"
+                      [total]="paginateRank.total"
+                      [pageSize]="paginateRank.limit"
+                      (changePageNumber)="handleChangePageNum($event)"
+                    ></app-pagination>
+                  </div>
+                </div>
+              </div>
+
+              <!-- tab lịch sử nộp bài -->
+              <div class="challenge__content-history" *ngIf="tabActive === 'history'">
+                <table class="table" *ngIf="isLogged && statusTakeChallenge === 1">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="align-middle">Thời gian nộp</th>
+                      <th scope="col" class="align-middle">Ngôn ngữ</th>
+                      <th scope="col" class="align-middle">Điểm</th>
+                      <th scope="col" class="align-middle">Số lần chạy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      role="button"
+                      (click)="
+                        handleSetDataEditor(
+                          resultChallenge.code_result,
+                          resultChallenge.code_language.language,
+                          resultChallenge.code_language_id
+                        )
+                      "
+                    >
+                      <td class="py-4 align-middle text-primary">{{ resultChallenge.updated_at | formatDate }}</td>
+                      <td class="py-4 align-middle">{{ resultChallenge.code_language.name }}</td>
+                      <td class="py-4 align-middle">{{ resultChallenge.point }}</td>
+                      <td class="py-4 align-middle">{{ resultChallenge.flag_run_code }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <p *ngIf="!isLogged">Vui lòng đăng nhập để xem lịch sử nộp bài!</p>
+                <p *ngIf="isLogged && statusTakeChallenge === 0">Không có lịch sử nộp bài!</p>
+              </div>
+
+              <!-- tab bình luận -->
+              <div class="challenge__content-comment" *ngIf="tabActive === 'comment'">
+                <p>Tính năng đang phát triển...</p>
+              </div>
+
+              <!-- tab câu hỏi -->
+              <div class="challenge__content-question" *ngIf="tabActive === 'question'">
+                <p>Tính năng đang phát triển...</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <!-- overlay -->
+            <div class="challenge__split-right-overlay" [ngClass]="{ active: isActiveOverlayLeft }"></div>
+
+            <!-- spinner -->
+            <div
+              class="challenge__split-right-spinner d-flex flex-column align-items-center"
+              [ngClass]="{ active: isActiveOverlayLeft }"
+            >
+              <app-loading-item></app-loading-item>
+              <p class="container__challenge-spinner-text mt-2 text-white">Đang lấy dữ liệu...</p>
+            </div>
+          </div>
+        </div>
+      </as-split-area>
+
+      <as-split-area [size]="60" [order]="2">
+        <div class="challenge__split-right">
+          <as-split direction="vertical" [gutterSize]="1" [restrictMove]="true">
+            <as-split-area [size]="65" style="overflow: hidden">
+              <div style="height: 100%">
+                <header class="editor-header d-flex align-items-center justify-content-between">
+                  <ul class="editor-header__actions">
+                    <li class="editor-header__action" (click)="toggleFullScreen()">
+                      <div class="editor-header__action-icon">
+                        <i class="fa-solid fa-expand" *ngIf="!isFullScreen"></i>
+                        <i class="fa-solid fa-compress" *ngIf="isFullScreen"></i>
+                      </div>
+                    </li>
+                    <li>
+                      <select
+                        name=""
+                        id=""
+                        class="editor-header__action-lang text-uppercase"
+                        (change)="handleChangeLanguage($event)"
+                      >
+                        <option
+                          value="{{ sample.id }}"
+                          [selected]="sample.code_language_id === codeLangId"
+                          class="text-uppercase"
+                          *ngFor="let sample of samplesCode"
+                        >
+                          {{ sample.code_language.language }}
+                        </option>
+                      </select>
+                    </li>
+                  </ul>
+                  <ul class="editor-header__actions">
+                    <li class="editor-header__action" (click)="handleResetCode()">
+                      <div class="editor-header__action-icon">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                      </div>
+                      <span class="editor-header__action-text">Làm mới</span>
+                    </li>
+                  </ul>
+                </header>
+                <ngx-monaco-editor
+                  style="height: 102%; width: 100%"
+                  [options]="editorOptions"
+                  [(ngModel)]="code"
+                  (ngModelChange)="handleChangeCode()"
+                ></ngx-monaco-editor>
+              </div>
+            </as-split-area>
+            <as-split-area [size]="29.5" class="test-case__wrap">
+              <header class="test-case__wrap-header text-uppercase">Test case</header>
+              <div class="test-case__content">
+                <!-- message test case -->
+                <div
+                  class="test-case__message-wrap test-case__message-wrap--error d-flex align-items-center"
+                  *ngIf="statusRunTestCase && !statusRunTestCase.status"
+                >
+                  <div class="test-case__message-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </div>
+                  <p>{{ statusRunTestCase.message }}</p>
+                </div>
+                <div
+                  class="test-case__message-wrap test-case__message-wrap--success"
+                  *ngIf="statusRunTestCase && statusRunTestCase.status"
+                  [innerHTML]="statusRunTestCase.message"
+                ></div>
+                <main class="d-flex test-case__content-inner">
+                  <ul class="test-cases">
+                    <li
+                      *ngFor="let test of testCases; let i = index"
+                      class="test-case d-flex justify-content-between align-items-center"
+                      [ngClass]="{ active: currentTestCase.id === test.id }"
+                      (click)="handleChangeTestCase(test.id)"
+                    >
+                      <span>Kiểm thử {{ i + 1 }}</span>
+                      <div class="test-case-icon" *ngIf="test.status === 0">
+                        <i class="fa-solid fa-lock"></i>
+                      </div>
+                      <!-- chưa pass test case -->
+                      <div
+                        class="test-case-icon test-case-icon--error"
+                        *ngIf="test.statusRunCode && !test.passed && test.status === 1"
+                      >
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                      </div>
+                      <!-- pass test case -->
+                      <div
+                        class="test-case-icon test-case-icon--success"
+                        *ngIf="test.statusRunCode && test.passed && test.status === 1"
+                      >
+                        <i class="fa-regular fa-circle-check"></i>
+                      </div>
+                    </li>
+                    <!-- <li class="test-case d-flex justify-content-between align-items-center">
+                      <span>Kiểm thử 5</span>
+                      <div class="test-case-icon test-case-icon--error">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                      </div>
+                    </li>
+                    <li class="test-case d-flex justify-content-between align-items-center">
+                      <span>Kiểm thử 6</span>
+                      <div class="test-case-icon">
+                        <i class="fa-solid fa-lock"></i>
+                      </div>
+                    </li> -->
+                  </ul>
+                  <div class="test-case__panel-wrap">
+                    <div class="test-case__panel" *ngIf="!currentTestCase.isPrivate">
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Đầu vào:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.input }}</div>
+                      </div>
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Đầu ra thực tế:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.result }}</div>
+                      </div>
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Đầu ra mong muốn:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.output }}</div>
+                      </div>
+                      <!-- <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Giới hạn thời gian:</label>
+                        </div>
+                        <div class="col col-8">0</div>
+                      </div> -->
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Thời gian thực hiện:</label>
+                        </div>
+                        <div class="col col-8">{{ +currentTestCase.panel.time }} s</div>
+                      </div>
+                      <!-- <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Tin nhắn:</label>
+                        </div>
+                        <div class="col col-8">{{ currentTestCase.panel.message }}</div>
+                      </div> -->
+                    </div>
+                    <!-- test case ẩn -->
+                    <div class="test-case__panel" *ngIf="currentTestCase.isPrivate">
+                      <div class="row mb-2">
+                        <div class="col col-4">
+                          <label for="" class="test-case__panel-label">Test case ẩn</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </main>
+              </div>
+            </as-split-area>
+            <as-split-area [size]="5.5" [lockSize]="true">
+              <footer class="test-case__footer d-flex align-items-center justify-content-end">
+                <button
+                  (click)="handleRunCode()"
+                  class="test-case__footer-btn test-case__footer-btn--play d-flex align-items-center justify-content-center"
+                >
+                  <div class="test-case__footer-btn-icon">
+                    <i class="fa-solid fa-play"></i>
+                  </div>
+                  <span class="test-case__footer-btn-text">Chạy thử</span>
+                </button>
+                <button
+                  [attr.disabled]="!isActiveSubmitCode ? true : null"
+                  (click)="handleSubmitCode()"
+                  class="test-case__footer-btn test-case__footer-btn--submit d-flex align-items-center justify-content-center"
+                >
+                  <div class="test-case__footer-btn-icon">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                  </div>
+                  <span class="test-case__footer-btn-text">Nộp bài</span>
+                </button>
+              </footer>
+            </as-split-area>
+          </as-split>
+
+          <div>
+            <!-- overlay -->
+            <div class="challenge__split-right-overlay" [ngClass]="{ active: isRunningCode || !isLogged }"></div>
+
+            <!-- check login -->
+            <div
+              *ngIf="!isLogged"
+              class="challenge__split-right-actions d-flex align-items-center justify-content-center"
+            >
+              <span>Vui lòng</span>
+              <button class="my-btn my-btn-s my-btn-primary mx-2" (click)="handleGoToLoginPage()">đăng nhập</button>
+              <span>để tiếp tục!</span>
+            </div>
+
+            <!-- spinner -->
+            <div class="challenge__split-right-spinner" [ngClass]="{ active: isRunningCode }">
+              <app-loading-item></app-loading-item>
+            </div>
+          </div>
+        </div>
+      </as-split-area>
+    </as-split>
+  </div>
+</div>
+
+<div
+  class="container__challenge container__challenge-wrap d-flex align-items-center justify-content-center"
+  *ngIf="isFetchingChallenge"
+>
+  <div class="container__challenge-overlay"></div>
+
+  <div class="d-flex flex-column align-items-center container__challenge-spinner">
+    <app-loading-item></app-loading-item>
+    <p class="container__challenge-spinner-text mt-2">Đang lấy dữ liệu...</p>
+  </div>
+</div>

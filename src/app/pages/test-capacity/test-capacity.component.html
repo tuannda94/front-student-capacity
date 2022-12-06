@@ -59,13 +59,11 @@
               >
             </div>
           </div>
-          <div class="btn-wrapper">
-            <button type="button" class="my-btn-secondary my-btn-s" (click)="resetFilterCapacity()">Làm mới</button>
-            <button [disabled]="!statusSubmit" class="my-btn-primary my-btn-s">
-              Tìm kiếm
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </div>
+          <a class="my-btn-secondary my-btn-ss" (click)="resetFilterCapacity()">Làm Mới</a>
+          <button [disabled]="!statusSubmit" class="my-btn-primary my-btn-s">
+            Tìm kiếm
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </form>
         <ul class="d-flex flex-wrap filter-skill-box">
           <li class="test-capacity__keyword my-h5">Đề xuất cho bạn:</li>

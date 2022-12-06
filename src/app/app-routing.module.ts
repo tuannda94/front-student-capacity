@@ -25,6 +25,8 @@ import { JoinCapacityComponent } from "./pages/join-capacity/join-capacity.compo
 import { CapacityPlayComponent } from "./pages/capacity-play/capacity-play.component";
 import { RankCapacityComponent } from "./pages/rank-capacity/rank-capacity.component";
 import { RankContestComponent } from "./pages/rank-contest/rank-contest.component";
+import { ChallengeComponent } from "./pages/challenge/challenge.component";
+import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
 
 const routes: Routes = [
   {
@@ -136,6 +138,14 @@ const routes: Routes = [
       {
         path: "test-nang-luc",
         component: RankCapacityComponent,
+      },
+      {
+        path: "challenge",
+        component: ChallengeComponent,
+      },
+      {
+        path: "challenge/:id",
+        component: ChallengeExamComponent,
       },
     ],
   },

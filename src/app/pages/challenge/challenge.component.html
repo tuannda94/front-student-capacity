@@ -1,0 +1,245 @@
+<div class="container">
+  <!-- banner -->
+  <a
+    href="{{ slider.link_to }}"
+    target="_blank"
+    title="Banner"
+    class="challenge__banner d-block"
+    [ngStyle]="{ 'background-image': 'url(' + slider.image_url + ')' }"
+    *ngIf="!isFetchingSlider && slider"
+  ></a>
+
+  <!-- skeleton banner -->
+  <ngx-skeleton-loader
+    [theme]="{ 'padding-top': '25%', margin: '12px 0 -4px', 'border-radius': '8px' }"
+    *ngIf="isFetchingSlider"
+  ></ngx-skeleton-loader>
+
+  <!-- filter -->
+  <form
+    class="my-box-filter my-box-filter-3 mt-3 challenge__filter"
+    [formGroup]="formSearch"
+    (ngSubmit)="handleSearch()"
+  >
+    <input
+      type="text"
+      class="my-input"
+      [attr.disabled]="isFetchingChallenge ? true : null"
+      placeholder="Tên thử thách..."
+      formControlName="keyword"
+    />
+
+    <div ngbDropdown class="d-inline-block w-100">
+      <input
+        type="text"
+        readonly
+        class="my-input"
+        [attr.disabled]="isFetchingChallenge ? true : null"
+        placeholder="Độ khó"
+        id="dropdownBasic1"
+        formControlName="typeName"
+        ngbDropdownToggle
+      />
+
+      <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic1">
+        <span
+          (click)="handleSetFieldValue('typeName', item.type !== undefined ? item.name : '', item.type)"
+          *ngFor="let item of challengeType"
+          class="challenge__filter-text"
+          ngbDropdownItem
+          >{{ item.name }}</span
+        >
+      </div>
+    </div>
+
+    <div ngbDropdown class="d-inline-block w-100">
+      <input
+        type="text"
+        readonly
+        class="my-input w-100"
+        [attr.disabled]="isFetchingChallenge || isFetchingCodeLang ? true : null"
+        placeholder="Ngôn ngữ"
+        id="dropdownBasic2"
+        formControlName="languageName"
+        ngbDropdownToggle
+      />
+
+      <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic2">
+        <!-- <div *ngIf="isFetchingCodeLang" class="d-flex justify-content-center">
+          <app-loading-item class="py-2"></app-loading-item>
+        </div> -->
+
+        <span
+          (click)="handleSetFieldValue('languageName', language.id === 0 ? '' : language.name, language.id)"
+          *ngFor="let language of challengeLangs"
+          class="challenge__filter-text"
+          ngbDropdownItem
+          >{{ language.name }}</span
+        >
+      </div>
+    </div>
+
+    <div>
+      <button
+        (click)="handleResetFormSearch()"
+        type="button"
+        class="my-btn-secondary my-btn-s btn-reset"
+        [ngClass]="{ 'challenge__filter-btn--disabled': isFetchingChallenge }"
+      >
+        <i class="fa-sharp fa-solid fa-rotate-right"></i>
+        <span>Khôi phục</span>
+      </button>
+
+      <button class="my-btn-primary my-btn-s" [ngClass]="{ 'challenge__filter-btn--disabled': isFetchingChallenge }">
+        Tìm kiếm
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+  </form>
+
+  <!-- danh sách thử thách -->
+  <div class="challenge__list mt-4" *ngIf="!isFetchingChallenge">
+    <div *ngIf="challenges.length">
+      <div
+        *ngFor="let challenge of challenges"
+        class="challenge__list-item d-flex align-items-center justify-content-between p-3 my-shadow-2-hover mb-3"
+      >
+        <div class="challenge__list-item-left">
+          <div class="mb-2">
+            <span
+              class="challenge__type"
+              [ngClass]="{
+                'challenge__type--normal': challenge.type === 0,
+                'challenge__type--medium': challenge.type === 1,
+                'challenge__type--max': challenge.type === 2
+              }"
+              (click)="handleSearchByField('type', challenge.type)"
+              >{{ getTypeChallenge(challenge.type) }}</span
+            >
+          </div>
+
+          <a
+            [routerLink]="['/challenge', challenge.id]"
+            title="THỬ THÁCH #{{ challenge.id }}: {{ challenge.name }}"
+            class="challenge__list-item-link d-inline-block"
+          >
+            <h2 class="challenge__list-item-name m-0 my-h5">THỬ THÁCH #{{ challenge.id }}: {{ challenge.name }}</h2>
+          </a>
+
+          <ul class="challenge__langs d-flex align-items-center m-0" *ngIf="challenge.codeLangs.length <= limitLangs">
+            <li
+              class="mt-2 challenge__lang text-uppercase"
+              *ngFor="let code of challenge.codeLangs"
+              (click)="handleSearchByField('language', code.id)"
+            >
+              {{ code.ex }}
+            </li>
+          </ul>
+
+          <ul class="challenge__langs d-flex align-items-center m-0" *ngIf="challenge.codeLangs.length > limitLangs">
+            <li
+              class="mt-2 challenge__lang text-uppercase"
+              *ngFor="let code of challenge.codeLangs.slice(0, limitLangs)"
+              (click)="handleSearchByField('language', code.id)"
+            >
+              {{ code.ex }}
+            </li>
+            <li class="mt-2 challenge__lang text-uppercase" ngbTooltip="{{ challenge.tooltipLang }}">
+              +{{ challenge.codeLangs.length - limitLangs }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <div class="mx-3 challenge__submission">
+            <div class="d-flex align-items-center justify-content-between">
+              <span>Hoàn thành</span>
+
+              <div class="d-flex align-items-center">
+                <div
+                  class="challenge__submission-right d-flex align-items-center mx-4"
+                  role="button"
+                  ngbTooltip="Số SV tham gia"
+                >
+                  <div class="challenge__submission-icon">
+                    <i class="fa-regular fa-user"></i>
+                  </div>
+                  <span>{{ challenge.result.length }}</span>
+                </div>
+
+                <div
+                  class="challenge__submission-right d-flex align-items-center"
+                  role="button"
+                  ngbTooltip="Số SV vượt qua thử thách"
+                >
+                  <div class="challenge__submission-icon">
+                    <i class="fa-regular fa-file"></i>
+                  </div>
+                  <span>{{ challenge.userPassed }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="progress-bar">
+              <div class="progress-bar__inner" [ngStyle]="{ width: challenge.successRef + '%' }"></div>
+            </div>
+          </div>
+
+          <a [routerLink]="['/challenge', challenge.id]">
+            <button class="my-btn my-btn-primary my-btn-xs">Code ngay</button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- empty result -->
+    <div class="challenge__list-empty" *ngIf="!challenges.length">
+      <div class="challenge__list-empty-img-wrap">
+        <img src="../../../assets/img/no-result.png" alt="" class="challenge__list-empty-img" />
+      </div>
+    </div>
+  </div>
+
+  <!-- skeleton -->
+  <div class="challenge__list mt-4" *ngIf="isFetchingChallenge">
+    <div
+      *ngFor="let _ of [].constructor(10)"
+      class="challenge__list-item d-flex align-items-center justify-content-between mb-3"
+    >
+      <div class="challenge__list-item-left p-3">
+        <div>
+          <ngx-skeleton-loader [theme]="{ margin: 0, height: '16px', width: '35%' }"></ngx-skeleton-loader>
+        </div>
+
+        <div>
+          <ngx-skeleton-loader [theme]="{ margin: 0, height: '16px', width: '70%' }"></ngx-skeleton-loader>
+        </div>
+
+        <div>
+          <ngx-skeleton-loader [theme]="{ margin: 0, height: '16px', width: '55%' }"></ngx-skeleton-loader>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center mx-3">
+        <div class="mx-3 challenge__submission">
+          <ngx-skeleton-loader [theme]="{ margin: 0, height: '16px', width: '35%' }"></ngx-skeleton-loader>
+          <ngx-skeleton-loader [theme]="{ margin: 0, height: '12px' }"></ngx-skeleton-loader>
+        </div>
+
+        <div class="flex-1">
+          <ngx-skeleton-loader [theme]="{ height: '35px', margin: 0, width: '120px' }"></ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- pagination -->
+  <div class="pagination d-flex justify-content-end mb-3" *ngIf="!isFetchingChallenge && challenges.length">
+    <app-pagination
+      [currentPage]="params.page"
+      [total]="totalChallenge"
+      [pageSize]="params.limit"
+      (changePageNumber)="handleChangePageNum($event)"
+    ></app-pagination>
+  </div>
+</div>

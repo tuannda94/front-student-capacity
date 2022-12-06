@@ -194,11 +194,14 @@ img {
 }
 
 .my-box-filter-3 {
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 120px auto;
+  gap: 16px;
+}
+
+.my-box-filter-3-sub {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
   gap: 16px;
 }
 

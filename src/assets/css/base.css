@@ -198,7 +198,7 @@ img {
   justify-content: space-between;
   align-items: center; */
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr 120px auto;
   gap: 16px;
 }
 

@@ -34,7 +34,7 @@
 <div class="recruitment-content">
   <div class="container py-4">
     <form
-      class="my-box-filter my-box-filter-3 py-3 rounded row"
+      class="my-box-filter my-box-filter-3"
       autocomplete="off"
       [formGroup]="formFilter"
       (submit)="filterRecruitments()"
@@ -84,13 +84,11 @@
           <a ngbDropdownItem *ngFor="let item of statusFilter" (click)="setValueStatus(item.name)">{{ item.name }}</a>
         </div>
       </div>
-      <div class="btn-wrapper">
-        <button type="button" class="my-btn-secondary my-btn-s" (click)="resetFilter()">Làm mới</button>
-        <button class="my-btn-primary my-btn-s" [disabled]="!statusSubmit" [ngClass]="statusSubmit ? '' : 'opacity-75'">
-          Tìm kiếm
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </div>
+      <a class="my-btn-secondary my-btn-ss" (click)="resetFilter()">Làm Mới</a>
+      <button class="my-btn-primary my-btn-s" [disabled]="!statusSubmit" [ngClass]="statusSubmit ? '' : 'opacity-75'">
+        Tìm kiếm
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
     </form>
     <div class="row my-4">
       <div class="col-lg-2 col-lx-2 col-md-2 col-dm-2">

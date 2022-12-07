@@ -374,7 +374,12 @@
             {{ statusExam.status === 1 ? "Tham gia ngay" : statusExam.statustext }}
           </button>
 
-          <button *ngIf="isDoneExam" class="sidebar__content-btn my-btn my-btn-disabled my-btn-s">Đã hoàn thành</button>
+          <button *ngIf="isDoneExam && rounds.length" class="sidebar__content-btn my-btn my-btn-disabled my-btn-s">
+            Đã hoàn thành
+          </button>
+          <button *ngIf="isDoneExam && !rounds.length" class="sidebar__content-btn my-btn my-btn-disabled my-btn-s">
+            Chưa có bài thi
+          </button>
         </div>
 
         <!-- skeleton -->

@@ -1,7 +1,7 @@
 <div class="contest-item">
   <div class="contest-item__img-section">
     <a (click)="isContestRelate(item.id)">
-      <img class="contest-item__img" [src]="item.img" alt="" />
+      <img class="contest-item__img" [src]="item.image_banner" alt="" />
     </a>
     <div class="contest-item__btn-favorite">
       <button class="my-btn my-add-favorite__btn" [ngClass]="item.user_wishlist ? 'opacity-100' : ''">

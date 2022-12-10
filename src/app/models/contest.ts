@@ -16,6 +16,7 @@ export class Contest {
   description: string;
   major_id: number;
   rounds_count: number;
+  image_banner: string;
   status: number;
   teams: Array<Team>;
   rounds: Array<Round>;

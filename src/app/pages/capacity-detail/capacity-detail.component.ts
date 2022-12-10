@@ -142,6 +142,7 @@ export class CapacityDetailComponent implements OnInit {
 
       // get vòng thi tiếp theo khi click btn tham gia ngay nếu đã đăng nhập
       this.isLogged = !!(this.userService.getJwtToken() && this.userService.getUserValue());
+      this.isDoneExam = false;
       if (this.isLogged) {
         this.isFetchingNextRound = true;
         this.roundService.getNextRound(capacity_id).subscribe(

@@ -13,7 +13,7 @@ export class Challenge {
   codeLangs: CodeLang[];
   tooltipLang: string;
   result: ResultChallenge[];
-  userPassed: number; // số user vượt qua bài test
+  userPassed: number; // số user vượt qua bài thử thách
 }
 
 export class CodeLang {

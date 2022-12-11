@@ -12,12 +12,12 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 export class CapacityService {
   constructor(private http: HttpClient) {}
 
-  // test năng lực theo id
+  // đánh giá năng lực theo id
   getWhereId(id: number): Observable<ResponsePayload> {
     return this.http.get<ResponsePayload>(`${environment.capacityListUrl}/${id}`);
   }
 
-  // bài test liên quan
+  // bài đánh giá liên quan
   getRelated({ capacity_id, ...args }: any): Observable<ResponsePayload> {
     const params = new HttpParams({
       fromObject: {

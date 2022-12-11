@@ -91,7 +91,7 @@ export class UserService {
     );
   }
 
-  // ds test năng lực đã tham gia
+  // ds đánh giá năng lực đã tham gia
   getListCapacityUserHasDone(paramsArgs?: {}): Observable<ResponsePayload> {
     const params = new HttpParams({
       fromObject: {

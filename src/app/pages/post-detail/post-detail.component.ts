@@ -45,7 +45,7 @@ export class PostDetailComponent implements OnInit {
             ? ((this.postDetail.postable_type = "Cuộc thi"), (this.routeCategoryPost = "post-contest"))
             : this.postDetail.postable_type === "App\\Models\\Recruitment"
             ? ((this.postDetail.postable_type = "Tuyển dụng"), (this.routeCategoryPost = "post-recruitment"))
-            : ((this.postDetail.postable_type = "Test năng lực"), (this.routeCategoryPost = "post-capacity"));
+            : ((this.postDetail.postable_type = "Đánh giá năng lực"), (this.routeCategoryPost = "post-capacity"));
           this.postDetail ? (this.statusPost = true) : this.statusPost;
         }
       });

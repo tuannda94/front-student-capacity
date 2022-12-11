@@ -53,7 +53,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
   timerId!: any;
   element!: any;
 
-  // kết quả bài test
+  // kết quả bài đánh giá
   resultExam!: ResultExam;
 
   // lịch sử làm bài
@@ -86,7 +86,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // initial title
-    this.titleService.setTitle("Test năng lực");
+    this.titleService.setTitle("Đánh giá năng lực");
 
     window.scrollTo({
       top: 0,
@@ -786,7 +786,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     this.statusTakingExam = 0;
     this.isSubmitingExam = false;
     this.isFetchingRound = true;
-    this.router.navigate(["/test-nang-luc/vao-thi", this.roundDetail.contest.id, "bai-thi", round_id]);
+    this.router.navigate(["/danh-gia-nang-luc/vao-thi", this.roundDetail.contest.id, "bai-thi", round_id]);
   }
 
   // open full screen

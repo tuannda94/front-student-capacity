@@ -50,7 +50,7 @@ export class RankCapacityComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.titleService.setTitle("Xếp Hạng Test Năng Lực");
+    this.titleService.setTitle("Xếp Hạng Đánh Giá Năng Lực");
     this.getUrlBannerCapacity();
     // khi không có param trên web thì sẽ lấy chuyên ngành lập trình web
     this.slugMajor = this.route.snapshot.queryParamMap.get("major")!;
@@ -90,7 +90,7 @@ export class RankCapacityComponent implements OnInit {
     });
   }
 
-  // lấy danh sách test năng lực trả về 8 bài bài test mới nhất
+  // lấy danh sách đánh giá năng lực trả về 8 bài bài đánh giá mới nhất
   getListTestCapacity() {
     this.testCapacityService.getAllTestCapacity().subscribe((res) => {
       if (res.status) {
@@ -123,7 +123,7 @@ export class RankCapacityComponent implements OnInit {
       )[0].name;
     }
 
-    this.router.navigateByUrl(`test-nang-luc?major=${this.slugMajor}`);
+    this.router.navigateByUrl(`danh-gia-nang-luc?major=${this.slugMajor}`);
 
     this.testCapacityService.getRankingByMajor(this.slugMajor, this.currentPage).subscribe((res) => {
       if (res.status) {
@@ -219,7 +219,7 @@ export class RankCapacityComponent implements OnInit {
       }
       event.currentTarget.classList.add("active");
 
-      this.router.navigateByUrl(`test-nang-luc?major=${this.slugMajor}&page=${pageNumber}`);
+      this.router.navigateByUrl(`danh-gia-nang-luc?major=${this.slugMajor}&page=${pageNumber}`);
 
       this.testCapacityService.paginationCapacity(url).subscribe((res) => {
         if (res.payload.error || res.payload.data.length == 0) {

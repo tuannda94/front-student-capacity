@@ -34,10 +34,10 @@ export class CapacityItemComponent implements OnInit {
     const listSkill = this.capacityItem.skills.map((skill) => skill.short_name);
     this.skillsName = listSkill.length ? listSkill.join(", ") : "Không có!";
 
-    // trạng thái bài test
+    // trạng thái bài đánh giá
     this.getStatusCapacity();
 
-    // nếu bài test sắp diễn ra ? đếm ngược thời gian bắt đầu mở bài test
+    // nếu bài đánh giá sắp diễn ra ? đếm ngược thời gian bắt đầu mở bài đánh giá
     if (this.statusExam.status !== 0) return;
     this.timerId = setInterval(() => {
       let futureDate = new Date(this.capacityItem.date_start).getTime();
@@ -67,10 +67,10 @@ export class CapacityItemComponent implements OnInit {
   handleGoToExam(capacity_id: number) {
     if (this.statusExam.status === 2) return;
 
-    this.router.navigate(["/test-nang-luc", capacity_id]);
+    this.router.navigate(["/danh-gia-nang-luc", capacity_id]);
   }
 
-  // get trạng thái bài test
+  // get trạng thái bài đánh giá
   getStatusCapacity() {
     const today = new Date().getTime();
     const timeDateStart = new Date(this.capacityItem.date_start).getTime();

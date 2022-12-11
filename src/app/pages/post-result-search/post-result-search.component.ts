@@ -62,7 +62,7 @@ export class PostResultSearchComponent implements OnInit {
     },
     {
       param: "post-capacity",
-      name: "Bài Viết Thuộc Test Năng Lực",
+      name: "Bài Viết Thuộc Đánh Giá Năng Lực",
     },
     {
       param: "post-round",

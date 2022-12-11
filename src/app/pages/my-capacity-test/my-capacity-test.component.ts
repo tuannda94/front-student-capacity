@@ -24,7 +24,7 @@ export class MyCapacityTestComponent implements OnInit {
   constructor(private userService: UserService, private titleService: Title) {}
 
   ngOnInit(): void {
-    this.titleService.setTitle("Danh sách bài test năng lực đã làm");
+    this.titleService.setTitle("Danh sách bài đánh giá năng lực đã làm");
 
     this.formSearch = new FormGroup({
       name: new FormControl("", Validators.required),

@@ -150,7 +150,7 @@
         </div>
       </div>
       <div class="col-lg-3 col-lx-3 col-md-12 col-sm-12 recruitment__capacity-list">
-        <p *ngIf="recruitmentDetail" class="color-text mb-2">Danh sách bài test ({{ recruitmentCapacity.length }})</p>
+        <p *ngIf="recruitmentDetail" class="color-text mb-2">Danh sách bài đánh giá ({{ recruitmentCapacity.length }})</p>
         <div *ngIf="recruitmentDetail">
           <div class="recruitment-related mb-3" *ngFor="let capacity of recruitmentCapacity">
             <app-capacity-item [capacityItem]="capacity"></app-capacity-item>

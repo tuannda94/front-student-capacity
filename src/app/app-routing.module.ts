@@ -108,7 +108,7 @@ const routes: Routes = [
         component: RecruitmentComponent,
       },
       {
-        path: "test-nang-luc/list",
+        path: "danh-gia-nang-luc/list",
         component: TestCapacityComponent,
       },
       {
@@ -120,11 +120,11 @@ const routes: Routes = [
         component: RoundContestDetailComponent,
       },
       {
-        path: "test-nang-luc/:capacity_id",
+        path: "danh-gia-nang-luc/:capacity_id",
         component: CapacityDetailComponent,
       },
       {
-        path: "test-nang-luc/vao-thi/:capacity_id/bai-thi/:round_id",
+        path: "danh-gia-nang-luc/vao-thi/:capacity_id/bai-thi/:round_id",
         component: CapacityExamComponent,
       },
       {
@@ -136,7 +136,7 @@ const routes: Routes = [
         component: CapacityPlayComponent,
       },
       {
-        path: "test-nang-luc",
+        path: "danh-gia-nang-luc",
         component: RankCapacityComponent,
       },
       {

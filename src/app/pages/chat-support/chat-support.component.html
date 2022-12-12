@@ -2,10 +2,86 @@
   <h1 class="text-center pt-3 my-h3">Hỗ trợ trực tuyến</h1>
 
   <main class="content">
-    <div class="row">
-      <div class="col col-3">sidebar</div>
+    <div class="container clearfix">
+      <div class="people-list" id="people-list">
+        <!-- <div class="search">
+          <input type="text" placeholder="Tìm kiếm " />
+          <i class="fa fa-search"></i>
+        </div> -->
+        <ul class="list">
 
-      <div class="col col-9">chat</div>
-    </div>
+
+          <ng-container *ngIf="data_chat.length > 0; else elseTemplate">
+            <li *ngFor="let item of data_chat" role="button" (click)="showChat(item.user.id)" class="clearfix">
+              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
+              <div class="about">
+                <div class="name">{{ item.user.name }}</div>
+                <div class="status">
+                  <i class="fa fa-circle online"></i> Online
+                </div>
+              </div>
+            </li>
+          </ng-container>
+
+          <ng-template #elseTemplate>
+            Không có quản trị viên nào đang online
+          </ng-template>
+
+        </ul>
+      </div>
+
+      <div class="chat">
+        <div class="chat-header clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+
+          <div class="chat-about">
+            <div class="chat-with">Poly support box</div>
+            <div class="chat-num-messages">{{ chatActive.length > 0 ? chatActive[0].user.name : 'POLY BOX' }}</div>
+          </div>
+          <i class="fa fa-star"></i>
+        </div> <!-- end chat-header -->
+        <ng-container *ngIf="chatActive.length > 0; else elseTemplate2">
+          <div style=" transform: rotate(180deg);" class="chat-history">
+            <ul style=" transform: rotate(180deg);">
+              <li *ngFor="let data of chatActive[0].data" class="clearfix">
+                <div class="message-data align-{{ data.id == authId ? 'right' : '' }}">
+                  <span class="message-data-time">{{ data.time }}</span> &nbsp; &nbsp;
+                  <!-- <span class="message-data-name">Olia</span> <i class="fa fa-circle me"></i> -->
+                </div>
+                <div class="message  float-{{ data.id == authId ? 'right other-message ' : ' my-message' }}">
+                  {{ data.message }}
+                </div>
+              </li>
+
+            </ul>
+          </div> <!-- end chat-history -->
+
+          <div class="chat-message clearfix">
+            <textarea name="message-to-send" id="message-to-send" [(ngModel)]="dataChatValue"
+              placeholder="Type your message" rows="3"></textarea>
+
+            <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+            <i class="fa fa-file-image-o"></i>
+
+            <button (click)="sendDataChat()">Gửi </button>
+
+          </div> <!-- end chat-message -->
+        </ng-container>
+        <ng-template #elseTemplate2>
+          <div style="padding : 20px">
+            <h2>Chào mừng bạn đến với hệ thống hỗ trợ POLY </h2>
+            <h2>Chúc bạn có một ngày học tập hiệu quả ❤️</h2>
+            <img style="width: 100%" src="https://jobsgo.vn/blog/wp-content/uploads/2022/03/Support-la-gi-4.jpg" alt="">
+          </div>
+        </ng-template>
+
+
+
+      </div> <!-- end chat -->
+
+    </div> <!-- end container -->
+
+
   </main>
+
 </div>

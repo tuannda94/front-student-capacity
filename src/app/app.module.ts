@@ -94,6 +94,7 @@ import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.co
 import { ChallengeComponent } from "./pages/challenge/challenge.component";
 import { ModalSubmitChallengeSuccessComponent } from "./modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
 import { ChatSupportComponent } from './pages/chat-support/chat-support.component';
+import { UserChatMessageComponent } from './component/user-chat-message/user-chat-message.component';
 
 @NgModule({
   declarations: [
@@ -171,6 +172,7 @@ import { ChatSupportComponent } from './pages/chat-support/chat-support.componen
     ChallengeComponent,
     ModalSubmitChallengeSuccessComponent,
     ChatSupportComponent,
+    UserChatMessageComponent,
   ],
   imports: [
     BrowserModule,

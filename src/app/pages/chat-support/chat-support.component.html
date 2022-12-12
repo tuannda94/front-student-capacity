@@ -1,11 +1,139 @@
-<div class="container">
-  <h1 class="text-center pt-3 my-h3">Hỗ trợ trực tuyến</h1>
-
-  <main class="content">
-    <div class="row">
-      <div class="col col-3">sidebar</div>
-
-      <div class="col col-9">chat</div>
+<div class="container-wrap">
+  <div class="container">
+    <h1 class="text-center pt-3 my-h3 m-0">Hỗ trợ trực tuyến</h1>
+    <div class="text-center mb-3 mt-1">
+      <p>Chào mừng bạn đến với hệ thống quản lý và hỗ trợ sinh viên Poly</p>
+      <p>Chúc bạn một ngày làm việc hiệu quả ❤️</p>
     </div>
-  </main>
+
+    <main class="content">
+      <div class="row">
+        <div class="col col-3">
+          <div class="sidebar">
+            <!-- search -->
+            <form action="" class="my-form-search sidebar__form-search">
+              <input type="text" class="my-input-search" name="keyword" placeholder="Tìm kiếm" />
+              <button class="sidebar__form-search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+
+            <!-- chat user -->
+            <ul class="sidebar__chat-users mt-3">
+              <app-user-chat-message
+                [isHasNewMsg]="true"
+                [userInfo]="users[0]"
+                message="Đây là tin nhắn mới, Đây là tin nhắn mới, Đây là tin nhắn mới, Đây là tin nhắn mới"
+              ></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[0]" message="Hello 1" [isActive]="true"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2" [isOnline]="true"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[1]" message="Hello 2"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2" [isOnline]="true"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2"></app-user-chat-message>
+              <app-user-chat-message [userInfo]="users[2]" message="Hello 2"></app-user-chat-message>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col col-9">
+          <div class="chat">
+            <div class="chat-user d-flex align-items-center p-2">
+              <div class="d-flex align-items-center">
+                <div class="chat-user-avatar my-shadow-2">
+                  <div class="chat-user-avatar-online"></div>
+                  <img src="https://picsum.photos/200/200" alt="" class="d-block" />
+                </div>
+
+                <div class="flex-1">
+                  <div class="chat-user-name fw-bold">Tuân Oke</div>
+                  <p class="chat-user-message">tuanlv@gmail.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat__content">
+              <div class="chat__content-messages p-3">
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">hehe</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">Tuân okela</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">hehe</p>
+                </div>
+
+                <div class="chat__content-message-wrap my-message d-flex">
+                  <p class="chat__content-message d-inline-block">Tuân oke nhé nhé</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">hehe</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">Tuân okela</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">hehe</p>
+                </div>
+
+                <div class="chat__content-message-wrap my-message d-flex">
+                  <p class="chat__content-message d-inline-block">Tuân oke nhé nhé</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">hehe</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">Tuân okela</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">hehe</p>
+                </div>
+
+                <div class="chat__content-message-wrap my-message d-flex">
+                  <p class="chat__content-message d-inline-block">Tuân oke nhé nhé</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">hehe</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">Tuân okela</p>
+                </div>
+
+                <div class="chat__content-message-wrap d-flex">
+                  <p class="chat__content-message d-inline-block">hehe</p>
+                </div>
+
+                <div class="chat__content-message-wrap my-message d-flex">
+                  <p class="chat__content-message d-inline-block">Tuân oke nhé nhé</p>
+                </div>
+              </div>
+
+              <form action="" class="chat__content-form-send-msg d-flex align-items-center px-3">
+                <input type="text" class="chat__content-form-send-msg-control px-3 flex-1" placeholder="Aa" />
+                <button class="chat__content-form-send-msg-btn">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-wrap">
   <h1 class="text-center pt-3 my-h3">Hỗ trợ trực tuyến</h1>
 
   <main class="content">
@@ -48,8 +48,8 @@
                   <span class="message-data-time">{{ data.time }}</span> &nbsp; &nbsp;
                   <!-- <span class="message-data-name">Olia</span> <i class="fa fa-circle me"></i> -->
                 </div>
-                <div class="message  float-{{ data.id == authId ? 'right other-message ' : ' my-message' }}">
-                  {{ data.message }}
+                <div [innerHTML]="data.message"
+                  class="message  float-{{ data.id == authId ? 'right other-message ' : ' my-message' }}">
                 </div>
               </li>
 
@@ -69,8 +69,8 @@
         </ng-container>
         <ng-template #elseTemplate2>
           <div style="padding : 20px">
-            <h2>Chào mừng bạn đến với hệ thống hỗ trợ POLY </h2>
-            <h2>Chúc bạn có một ngày học tập hiệu quả ❤️</h2>
+            <h1>Chào mừng bạn đến với hệ thống quản lý và hỗ trợ sinh viên </h1>
+            <h2> Poly chúc bạn một ngày làm việc hiệu quả ❤️</h2>
             <img style="width: 100%" src="https://jobsgo.vn/blog/wp-content/uploads/2022/03/Support-la-gi-4.jpg" alt="">
           </div>
         </ng-template>

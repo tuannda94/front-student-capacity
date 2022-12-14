@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { ChatSupportService } from "src/app/services/chat-support.service";
 import { UserService } from "src/app/services/user.service";
@@ -8,6 +8,7 @@ import { UserService } from "src/app/services/user.service";
   styleUrls: ["./chat-support.component.css"],
 })
 export class ChatSupportComponent implements OnInit {
+  @ViewChild("formControlSendMsg") formControlSendMsg: ElementRef<HTMLInputElement>;
   constructor(
     private titleService: Title,
     private userService: UserService,
@@ -20,6 +21,7 @@ export class ChatSupportComponent implements OnInit {
   dataChatValue = "";
   roomCode = "";
   chatActive: any = [];
+  isSendingChat = false;
 
   ngOnInit(): void {
     const user = this.userService.getUserValue();
@@ -30,17 +32,29 @@ export class ChatSupportComponent implements OnInit {
   }
 
   sendDataChat() {
-    var that = this;
+    if (this.isSendingChat) return;
+
+    this.isSendingChat = true;
     this.chatSPService
       .sendDataChat({
         room: this.roomCode,
         message: this.dataChatValue,
       })
       .subscribe(
-        (res: any) => {},
-        (err: any) => {},
+        () => {
+          this.dataChatValue = "";
+          this.isSendingChat = false;
+        },
+        () => {
+          this.dataChatValue = "";
+          this.isSendingChat = false;
+        },
+        () => {
+          setTimeout(() => {
+            this.formControlSendMsg.nativeElement.focus();
+          }, 0);
+        },
       );
-    this.dataChatValue = "";
   }
 
   showChat(authFr: any) {

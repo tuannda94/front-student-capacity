@@ -11,6 +11,10 @@
   padding-bottom: 32px;
 }
 
+.content-no-logged {
+  height: 72vh;
+}
+
 .sidebar__form-search {
   border-radius: 15px;
   height: 45px;
@@ -25,7 +29,8 @@
 }
 
 .sidebar__chat-users {
-  height: calc(76vh - 45px - 32px);
+  height: calc(76vh - 32px);
+  /* height: calc(76vh - 45px - 32px); */
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -149,7 +154,7 @@
 
 .chat__content-message {
   background-color: #e4e6eb;
-  border-radius: 50px;
+  border-radius: 18px;
   padding: 8px 12px;
 }
 

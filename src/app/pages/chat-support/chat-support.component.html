@@ -7,19 +7,19 @@
     </div>
 
     <main class="content">
-      <div class="row">
+      <div class="row" *ngIf="isLogged; else elseBlock">
         <div class="col col-3">
           <div class="sidebar">
             <!-- search -->
-            <form action="" class="my-form-search sidebar__form-search">
+            <!-- <form action="" class="my-form-search sidebar__form-search">
               <input type="text" class="my-input-search" name="keyword" placeholder="Tìm kiếm" />
               <button class="sidebar__form-search-btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
-            </form>
+            </form> -->
 
             <!-- chat user -->
-            <div class="sidebar__chat-users mt-3">
+            <div class="sidebar__chat-users">
               <div *ngIf="data_chat.length > 0; else elseTemplate">
                 <ul>
                   <app-user-chat-message
@@ -57,14 +57,16 @@
 
             <div class="chat__content">
               <div class="chat__content-messages p-3">
-                <div
-                  class="chat__content-message-wrap d-flex"
-                  *ngFor="let data of chatActive[0].data"
-                  [ngClass]="{ 'my-message': data.id == authId }"
-                >
-                  <p class="chat__content-message d-inline-block" ngbTooltip="{{ data.time }}" placement="left">
-                    {{ data.message }}
-                  </p>
+                <div class="chat__content-messages-inner" #chatContent>
+                  <div
+                    class="chat__content-message-wrap d-flex"
+                    *ngFor="let data of chatActive[0].data"
+                    [ngClass]="{ 'my-message': data.id == authId }"
+                  >
+                    <p class="chat__content-message d-inline-block" ngbTooltip="{{ data.time }}" placement="left">
+                      {{ data.message }}
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -95,6 +97,14 @@
           </ng-template>
         </div>
       </div>
+
+      <ng-template #elseBlock>
+        <div class="content-no-logged d-flex align-items-center justify-content-center bg-white rounded-2">
+          <span>Vui lòng</span>
+          <button class="my-btn my-btn-s my-btn-primary mx-2" (click)="handleGoToLoginPage()">đăng nhập</button>
+          <span>để tiếp tục!</span>
+        </div>
+      </ng-template>
     </main>
   </div>
 </div>

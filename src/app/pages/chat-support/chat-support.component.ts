@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Title } from "@angular/platform-browser";
+import { Router } from "@angular/router";
 import { ChatSupportService } from "src/app/services/chat-support.service";
+import { LocalStorageService } from "src/app/services/local-storage.service";
 import { UserService } from "src/app/services/user.service";
 @Component({
   selector: "app-chat-support",
@@ -9,10 +11,14 @@ import { UserService } from "src/app/services/user.service";
 })
 export class ChatSupportComponent implements OnInit {
   @ViewChild("formControlSendMsg") formControlSendMsg: ElementRef<HTMLInputElement>;
+  // @ViewChild("chatContent") chatContent: ElementRef<HTMLInputElement>;
+
   constructor(
     private titleService: Title,
     private userService: UserService,
     private chatSPService: ChatSupportService,
+    private router: Router,
+    private localStorageService: LocalStorageService,
   ) {}
   users: any = [];
   data_chat: any = [];
@@ -22,13 +28,18 @@ export class ChatSupportComponent implements OnInit {
   roomCode = "";
   chatActive: any = [];
   isSendingChat = false;
+  isLogged = false;
 
   ngOnInit(): void {
-    const user = this.userService.getUserValue();
-    this.authId = user.id;
-
     this.titleService.setTitle("Hỗ trợ trực tuyến");
-    this.chanel();
+    const user = this.userService.getUserValue();
+    const jwtToken = this.userService.getJwtToken();
+    this.isLogged = !!(user && jwtToken);
+
+    if (this.isLogged) {
+      this.authId = user.id;
+      this.chanel();
+    }
   }
 
   sendDataChat() {
@@ -137,9 +148,13 @@ export class ChatSupportComponent implements OnInit {
       });
   }
 
-  ngOnDestroy(): void {
-    console.log("ThoaT");
+  // save current route name
+  handleGoToLoginPage() {
+    this.localStorageService.saveCurrentRoute();
+    this.router.navigate(["/login"]);
+  }
 
+  ngOnDestroy(): void {
     (window as any).Echo.leave(this.roomCode);
     (window as any).Echo.leave("support.poly");
   }

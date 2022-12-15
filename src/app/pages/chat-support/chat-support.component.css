@@ -106,6 +106,7 @@
 .chat__content-messages {
   height: calc(76vh - 80px - 28px - 60px);
   overflow-y: auto;
+  transform: rotate(180deg);
 }
 
 .chat__content-form-send-msg {

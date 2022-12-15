@@ -22,13 +22,9 @@
             <div class="sidebar__chat-users">
               <div *ngIf="data_chat.length > 0; else elseTemplate">
                 <ul>
-                  <app-user-chat-message
-                    *ngFor="let item of data_chat"
-                    [userInfo]="item.user"
-                    [isOnline]="true"
+                  <app-user-chat-message *ngFor="let item of data_chat" [userInfo]="item.user" [isOnline]="true"
                     (click)="showChat(item.user.id)"
-                    [isActive]="chatActive.length && item.user.id === chatActive[0].user.id"
-                  ></app-user-chat-message>
+                    [isActive]="chatActive.length && item.user.id === chatActive[0].user.id"></app-user-chat-message>
                 </ul>
               </div>
 
@@ -57,12 +53,9 @@
 
             <div class="chat__content">
               <div class="chat__content-messages p-3">
-                <div class="chat__content-messages-inner" #chatContent>
-                  <div
-                    class="chat__content-message-wrap d-flex"
-                    *ngFor="let data of chatActive[0].data"
-                    [ngClass]="{ 'my-message': data.id == authId }"
-                  >
+                <div class="chat__content-messages-inner" style="    transform: rotate(180deg);" #chatContent>
+                  <div class="chat__content-message-wrap d-flex" *ngFor="let data of chatActive[0].data"
+                    [ngClass]="{ 'my-message': data.id == authId }">
                     <p class="chat__content-message d-inline-block" ngbTooltip="{{ data.time }}" placement="left">
                       {{ data.message }}
                     </p>
@@ -71,17 +64,9 @@
               </div>
 
               <form (ngSubmit)="sendDataChat()" class="chat__content-form-send-msg d-flex align-items-center px-3">
-                <input
-                  #formControlSendMsg
-                  type="text"
-                  [disabled]="isSendingChat"
-                  autocomplete="off"
-                  autofocus
-                  name="message-to-send"
-                  [(ngModel)]="dataChatValue"
-                  class="chat__content-form-send-msg-control px-3 flex-1"
-                  placeholder="Aa"
-                />
+                <input #formControlSendMsg type="text" [disabled]="isSendingChat" autocomplete="off" autofocus
+                  name="message-to-send" [(ngModel)]="dataChatValue"
+                  class="chat__content-form-send-msg-control px-3 flex-1" placeholder="Aa" />
                 <button class="chat__content-form-send-msg-btn">
                   <i class="fa-solid fa-paper-plane" *ngIf="!isSendingChat"></i>
                   <i class="fa-solid fa-spinner" *ngIf="isSendingChat"></i>

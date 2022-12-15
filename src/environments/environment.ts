@@ -8,7 +8,6 @@ export const environment = {
   GG_CLIENT_SECRET: "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",
   loginUrl: authApi + "/login-token",
   publicApiUrl: `${baseApiUrl}/public`,
-  v1ApiUrl: `${baseApiUrl}/v1`,
   sponsorListUrl: `${publicApiUrl}/sponsors`,
   contestListUrl: `${publicApiUrl}/contests`,
   majorListUrl: `${publicApiUrl}/majors`,

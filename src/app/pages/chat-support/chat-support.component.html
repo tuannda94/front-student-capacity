@@ -63,8 +63,10 @@
                     *ngFor="let data of chatActive[0].data"
                     [ngClass]="{ 'my-message': data.id == authId }"
                   >
-                    <p class="chat__content-message d-inline-block" ngbTooltip="{{ data.time }}" placement="left">
+                    <p class="chat__content-message d-inline-block">
                       {{ data.message }}
+
+                      <span class="chat__content-message-time my-xs">{{ data.time.slice(0, -3) }}</span>
                     </p>
                   </div>
                 </div>

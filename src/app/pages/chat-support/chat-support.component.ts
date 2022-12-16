@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { Router } from "@angular/router";
 import { ChatSupportService } from "src/app/services/chat-support.service";
@@ -9,17 +9,10 @@ import { UserService } from "src/app/services/user.service";
   templateUrl: "./chat-support.component.html",
   styleUrls: ["./chat-support.component.css"],
 })
-export class ChatSupportComponent implements OnInit {
+export class ChatSupportComponent implements OnInit, AfterViewChecked {
   @ViewChild("formControlSendMsg") formControlSendMsg: ElementRef<HTMLInputElement>;
-  // @ViewChild("chatContent") chatContent: ElementRef<HTMLInputElement>;
+  @ViewChild("chatContent") chatContent: ElementRef<HTMLInputElement>;
 
-  constructor(
-    private titleService: Title,
-    private userService: UserService,
-    private chatSPService: ChatSupportService,
-    private router: Router,
-    private localStorageService: LocalStorageService,
-  ) {}
   users: any = [];
   data_chat: any = [];
   authId = 0;
@@ -29,9 +22,29 @@ export class ChatSupportComponent implements OnInit {
   chatActive: any = [];
   isSendingChat = false;
   isLogged = false;
+  isEnableAutoScroll = false;
+  isTabHidden = false;
+  isHasNewMessage = false;
+  defaultTitle = "Hỗ trợ trực tuyến";
+  timerId: any;
+
+  constructor(
+    private titleService: Title,
+    private userService: UserService,
+    private chatSPService: ChatSupportService,
+    private router: Router,
+    private localStorageService: LocalStorageService,
+  ) {}
+
+  ngAfterViewChecked(): void {
+    if (this.chatContent && this.isEnableAutoScroll) {
+      this.chatContent.nativeElement.scrollTop = this.chatContent.nativeElement.scrollHeight;
+      this.isEnableAutoScroll = false;
+    }
+  }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Hỗ trợ trực tuyến");
+    this.titleService.setTitle(this.defaultTitle);
     const user = this.userService.getUserValue();
     const jwtToken = this.userService.getJwtToken();
     this.isLogged = !!(user && jwtToken);
@@ -39,6 +52,7 @@ export class ChatSupportComponent implements OnInit {
     if (this.isLogged) {
       this.authId = user.id;
       this.chanel();
+      this.handleChangeTabWindow();
     }
   }
 
@@ -90,6 +104,11 @@ export class ChatSupportComponent implements OnInit {
     (window as any).Echo.private(`support.poly.${code ?? this.roomCode}`).listen("ChatSupportEvent", (e: any) => {
       var k: any = that.checkUserGetKey(e.data.room);
       that.data_chat[k].data.push(e.data);
+      this.isEnableAutoScroll = true;
+
+      // check has new message
+      const isHasNewMessage = this.authId !== e.data.id;
+      isHasNewMessage && this.isTabHidden && this.handleToggleTitle();
 
       var dataFist = that.data_chat[0];
       that.data_chat[0] = that.data_chat[k];
@@ -101,7 +120,6 @@ export class ChatSupportComponent implements OnInit {
     (window as any).Echo.join("support.poly")
       .here((users: any) => {
         that.users = users;
-        // console.log(users);
 
         that.users.map(function (user: any) {
           const checkHasExits = that.data_chat.filter(function (data: any) {
@@ -154,8 +172,30 @@ export class ChatSupportComponent implements OnInit {
     this.router.navigate(["/login"]);
   }
 
+  // xử lý sự kiện đổi tab
+  handleChangeTabWindow() {
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        this.isTabHidden = true;
+      } else {
+        this.isTabHidden = false;
+        this.titleService.setTitle(this.defaultTitle);
+        clearInterval(this.timerId);
+      }
+    });
+  }
+
+  handleToggleTitle() {
+    this.timerId = setInterval(() => {
+      const currentTitle = this.titleService.getTitle();
+      this.titleService.setTitle(currentTitle === this.defaultTitle ? "1 tin nhắn mới" : this.defaultTitle);
+    }, 1000);
+  }
+
   ngOnDestroy(): void {
     (window as any).Echo.leave(this.roomCode);
     (window as any).Echo.leave("support.poly");
+    document.addEventListener("visibilitychange", () => {});
+    clearInterval(this.timerId);
   }
 }

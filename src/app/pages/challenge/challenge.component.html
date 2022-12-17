@@ -65,10 +65,6 @@
       />
 
       <div ngbDropdownMenu class="w-100" aria-labelledby="dropdownBasic2">
-        <!-- <div *ngIf="isFetchingCodeLang" class="d-flex justify-content-center">
-          <app-loading-item class="py-2"></app-loading-item>
-        </div> -->
-
         <span
           (click)="handleSetFieldValue('languageName', language.id === 0 ? '' : language.name, language.id)"
           *ngFor="let language of challengeLangs"
@@ -79,7 +75,7 @@
       </div>
     </div>
 
-    <div>
+    <div class="filter-actions">
       <button
         (click)="handleResetFormSearch()"
         type="button"
@@ -102,9 +98,9 @@
     <div *ngIf="challenges.length">
       <div
         *ngFor="let challenge of challenges"
-        class="challenge__list-item d-flex align-items-center justify-content-between p-3 my-shadow-2-hover mb-3"
+        class="challenge__list-item d-flex flex-column flex-lg-row align-items-center justify-content-between p-3 my-shadow-2-hover mb-3"
       >
-        <div class="challenge__list-item-left">
+        <div class="challenge__list-item-left w-100 mb-3 mb-lg-0">
           <div class="mb-2">
             <span
               class="challenge__type"
@@ -150,8 +146,8 @@
           </ul>
         </div>
 
-        <div class="d-flex align-items-center">
-          <div class="mx-3 challenge__submission">
+        <div class="d-flex align-items-center width-md-full">
+          <div class="mx-0 mx-lg-3 flex-1 mr-md-12 challenge__submission">
             <div class="d-flex align-items-center justify-content-between">
               <span>Hoàn thành</span>
 
@@ -204,9 +200,9 @@
   <div class="challenge__list mt-4" *ngIf="isFetchingChallenge">
     <div
       *ngFor="let _ of [].constructor(10)"
-      class="challenge__list-item d-flex align-items-center justify-content-between mb-3"
+      class="challenge__list-item d-flex align-items-center justify-content-between mb-3 flex-column flex-lg-row"
     >
-      <div class="challenge__list-item-left p-3">
+      <div class="challenge__list-item-left p-3 w-100">
         <div>
           <ngx-skeleton-loader [theme]="{ margin: 0, height: '16px', width: '35%' }"></ngx-skeleton-loader>
         </div>
@@ -220,13 +216,13 @@
         </div>
       </div>
 
-      <div class="d-flex align-items-center mx-3">
-        <div class="mx-3 challenge__submission">
+      <div class="d-flex align-items-center px-3 width-md-full mb-2 mb-lg-0">
+        <div class="mx-0 mx-lg-3 flex-1 mr-md-12 challenge__submission width-md-full">
           <ngx-skeleton-loader [theme]="{ margin: 0, height: '16px', width: '35%' }"></ngx-skeleton-loader>
           <ngx-skeleton-loader [theme]="{ margin: 0, height: '12px' }"></ngx-skeleton-loader>
         </div>
 
-        <div class="flex-1">
+        <div>
           <ngx-skeleton-loader [theme]="{ height: '35px', margin: 0, width: '120px' }"></ngx-skeleton-loader>
         </div>
       </div>

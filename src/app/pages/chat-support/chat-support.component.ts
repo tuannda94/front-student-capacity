@@ -45,6 +45,8 @@ export class ChatSupportComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.titleService.setTitle(this.defaultTitle);
+    this.scrollToTop();
+
     const user = this.userService.getUserValue();
     const jwtToken = this.userService.getJwtToken();
     this.isLogged = !!(user && jwtToken);
@@ -190,6 +192,14 @@ export class ChatSupportComponent implements OnInit, AfterViewChecked {
       const currentTitle = this.titleService.getTitle();
       this.titleService.setTitle(currentTitle === this.defaultTitle ? "1 tin nhắn mới" : this.defaultTitle);
     }, 1000);
+  }
+
+  // scroll top
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   ngOnDestroy(): void {

@@ -149,7 +149,7 @@ const routes: Routes = [
         component: ChallengeExamComponent,
       },
       {
-        path: "support",
+        path: "ho-tro",
         component: ChatSupportComponent,
       },
     ],

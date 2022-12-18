@@ -216,9 +216,13 @@ h3:hover > a {
   color: var(--white);
 }
 
-@media only screen and (max-width: 740px) {
+@media only screen and (max-width: 750px) {
   .post-new-latest__img-section .post-new-latest__img {
     width: 80%;
+  }
+
+  .post-in-cate-item-content__info {
+    flex-direction: column;
   }
 
   .post-item {
@@ -227,5 +231,6 @@ h3:hover > a {
 
   .post-item-content {
     top: 70%;
+    width: 270px;
   }
 }

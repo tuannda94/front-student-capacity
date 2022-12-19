@@ -106,7 +106,7 @@ export class TestCapacityComponent implements OnInit {
     this.formFilter.controls["filterMajor"].setValue("");
     this.formFilter.controls["filterSkill"].setValue("");
     this.formFilter.controls["filterName"].setValue("");
-    this.router.navigateByUrl(`danh-gia-nang-luc`);
+    this.router.navigateByUrl(`danh-gia-nang-luc/list`);
     this.statusSubmit = false;
     this.statusMajor = false;
     this.statusSkill = false;
@@ -171,7 +171,7 @@ export class TestCapacityComponent implements OnInit {
     let major_id = 0;
     let skill_id = 0;
     this.formFilter.controls["filterName"].setValue(keyword);
-    this.router.navigateByUrl(`danh-gia-nang-luc?q=${keyword}`);
+    this.router.navigateByUrl(`danh-gia-nang-luc/list?q=${keyword}`);
     this.testCapacityService.filterCapacity(keyword, major_id, skill_id).subscribe((res) => {
       if (res.status) {
         if (res.payload.data.length <= 0) {
@@ -218,7 +218,7 @@ export class TestCapacityComponent implements OnInit {
 
   // ScrollWin
   scrollWin() {
-    window.scrollTo({ top: 500, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   // Filter Capacity
@@ -242,7 +242,7 @@ export class TestCapacityComponent implements OnInit {
     }
 
     // đẩy param search lên URL
-    this.router.navigateByUrl(`danh-gia-nang-luc?q=${keyword}&major_id=${major_id}&skill_id=${this.skill_id}`);
+    this.router.navigateByUrl(`danh-gia-nang-luc/list?q=${keyword}&major_id=${major_id}&skill_id=${this.skill_id}`);
 
     this.testCapacityService.filterCapacity(keyword, major_id, this.skill_id).subscribe((res) => {
       if (res.status) {

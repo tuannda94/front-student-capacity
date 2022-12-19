@@ -5,7 +5,7 @@
       <ol class="breadcrumb" *ngIf="!isFetchingCapacity">
         <li class="breadcrumb-item"><a routerLink="/" class="breadcrumb-item__link">Trang chủ</a></li>
         <li class="breadcrumb-item">
-          <a routerLink="/test-nang-luc" class="breadcrumb-item__link">Test năng lực</a>
+          <a routerLink="/danh-gia-nang-luc" class="breadcrumb-item__link">Đánh giá năng lực</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">{{ capacity.name }}</li>
       </ol>
@@ -27,7 +27,7 @@
             </div>
 
             <h1 class="capacity__info-name">
-              <span>Bài test năng lực: </span>
+              <span>Bài đánh giá năng lực: </span>
               {{ capacity.name }}
             </h1>
 
@@ -124,7 +124,7 @@
             [ngClass]="{ active: tabActive === 'testRelated' }"
             (click)="scrollToElement(testRelated, 'testRelated')"
           >
-            Bài test liên quan
+            Bài đánh giá liên quan
           </li>
           <li
             class="capacity__tab-item"
@@ -199,7 +199,7 @@
 
                 <div *ngIf="getStatusButtonJoinExam(round.status, round.user_status_join).isShowBtn">
                   <a
-                    [routerLink]="['/test-nang-luc/vao-thi', capacity.id, 'bai-thi', round.id]"
+                    [routerLink]="['/danh-gia-nang-luc/vao-thi', capacity.id, 'bai-thi', round.id]"
                     class="my-btn my-btn-primary my-btn-s my-btn--no-bg capacity__test-detail-btn"
                   >
                     {{ getStatusButtonJoinExam(round.status, round.user_status_join).buttonText }}
@@ -224,9 +224,9 @@
           <!-- skeleton -->
         </div>
 
-        <!-- bài test liên quan -->
+        <!-- bài đánh giá liên quan -->
         <div class="capacity__related" #testRelated>
-          <h2 class="capacity__test-title capacity__related-title fw-bold fs-5 color-blue">Bài test liên quan</h2>
+          <h2 class="capacity__test-title capacity__related-title fw-bold fs-5 color-blue">Bài đánh giá liên quan</h2>
           <ul
             class="capacity__related-list row"
             *ngIf="!isFetchingCapacityRelated"
@@ -346,7 +346,7 @@
             </li>
           </ul>
 
-          <h2 class="sidebar__content-title">Chi tiết bài test</h2>
+          <h2 class="sidebar__content-title">Chi tiết bài đánh giá</h2>
 
           <ul class="sidebar__content-list">
             <li class="sidebar__content-list-item">
@@ -398,7 +398,7 @@
 
 <ng-template #description let-modal>
   <div class="modal-header">
-    <h4 class="modal-title m-0 fw-bold">Nội dung bài Test năng lực</h4>
+    <h4 class="modal-title m-0 fw-bold">Nội dung bài Đánh giá năng lực</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body" [innerHTML]="capacity.description"></div>

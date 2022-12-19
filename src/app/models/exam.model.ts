@@ -28,7 +28,7 @@ export class ExamCapacity {
   time_exam: number; // thời gian làm bài (phút)
 }
 
-// kết quả bài test năng lực
+// kết quả bài đánh giá năng lực
 export class ResultExam {
   capacityId: number;
   score: string; // điểm

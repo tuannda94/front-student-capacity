@@ -249,3 +249,17 @@ h5 {
   background: #ff6638;
   color: #ffffff;
 }
+
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+  .post-main {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .post-main {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

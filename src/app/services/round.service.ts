@@ -37,7 +37,7 @@ export class RoundService {
     return this.http.post<{status: boolean, payload: any, exam_at: Date}>(`${environment.takeExamUrl}/student-capacity`, round);
   }
 
-  // nộp bài test năng lực
+  // nộp bài đánh giá năng lực
   capacitySubmitExam(data: DataExam): Observable<ResponseSubmitExam> {
     return this.http.post<ResponseSubmitExam>(`${environment.takeExamUrl}/student-capacity-submit`, data)
   }

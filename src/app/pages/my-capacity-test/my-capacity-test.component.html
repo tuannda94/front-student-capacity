@@ -1,7 +1,7 @@
 <div class="p-2">
   <header class="border-bottom">
-    <h3 class="fs-5 primary-color m-0">Danh sách bài test năng lực</h3>
-    <p class="color-gray mb-2">Tổng hợp các bài test năng lực đã làm</p>
+    <h3 class="fs-5 primary-color m-0">Danh sách bài đánh giá năng lực</h3>
+    <p class="color-gray mb-2">Tổng hợp các bài đánh giá năng lực đã làm</p>
   </header>
 
   <!-- search -->
@@ -12,19 +12,19 @@
       [attr.disabled]="isFetchingCapacity ? true : null"
       formControlName="name"
       type="text"
-      placeholder="Tên bài test năng lực"
+      placeholder="Tên bài đánh giá năng lực"
     />
     <button [attr.disabled]="isFetchingCapacity ? true : null" class="capacity__search-btn input-group-text">
       <i class="fa-solid fa-magnifying-glass"></i>
     </button>
   </form>
 
-  <!-- ds test năng lực -->
+  <!-- ds đánh giá năng lực -->
   <div class="row mt-3" *ngIf="!isFetchingCapacity && totalCapacity >= 1">
     <div class="col-12 col-md-6 col-lg-4" *ngFor="let capacity of listCapacity; let i = index">
       <div class="capacity__item my-shadow-3-hover">
         <a
-          [routerLink]="['/test-nang-luc', capacity.id]"
+          [routerLink]="['/danh-gia-nang-luc', capacity.id]"
           class="capacity__item-image"
           [ngStyle]="{ 'background-image': 'url(' + capacity.img }"
           title="{{ capacity.name }}"
@@ -35,7 +35,7 @@
             {{ capacity.date_start | formatDatePost }} - {{ capacity.register_deadline | formatDatePost }}
           </p>
           <a
-            [routerLink]="['/test-nang-luc', capacity.id]"
+            [routerLink]="['/danh-gia-nang-luc', capacity.id]"
             class="capacity__content-title-link"
             title="{{ capacity.name }}"
           >

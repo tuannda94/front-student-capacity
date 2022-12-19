@@ -7,18 +7,18 @@
     >
       <div class="capacity__exam-heading-inner d-flex align-items-center justify-content-center">
         <span class="capacity__exam-heading-line"></span>
-        <!-- không gắn link vào tên bài test nếu đang làm bài -->
+        <!-- không gắn link vào tên bài đánh giá nếu đang làm bài -->
         <h1
           class="capacity__exam-heading-title text-center fw-bold"
           *ngIf="statusTakingExam === 1 || isFetchingExam; else elseBlock"
         >
-          Bài test năng lực: {{ roundDetail.contest.name }}
+          Bài đánh giá năng lực: {{ roundDetail.contest.name }}
         </h1>
 
         <ng-template #elseBlock>
           <h1 class="capacity__exam-heading-title text-center fw-bold" *ngIf="statusTakingExam !== 1">
-            Bài test năng lực:
-            <a class="text-body" [routerLink]="['/test-nang-luc', roundDetail.contest.id]">{{
+            Bài đánh giá năng lực:
+            <a class="text-body" [routerLink]="['/danh-gia-nang-luc', roundDetail.contest.id]">{{
               roundDetail.contest.name
             }}</a>
           </h1>
@@ -331,7 +331,7 @@
               </li>
 
               <div class="capacity__exam-result-actions-item my-1 ml-8" *ngIf="!getNextRound().status">
-                <a routerLink="/test-nang-luc" class="my-btn-primary my-btn-s w-100">Bảng xếp hạng</a>
+                <a routerLink="/danh-gia-nang-luc" class="my-btn-primary my-btn-s w-100">Bảng xếp hạng</a>
               </div>
             </td>
           </tr>

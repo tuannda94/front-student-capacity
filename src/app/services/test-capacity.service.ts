@@ -10,7 +10,7 @@ import { ResponsePayload } from "../models/response-payload";
 export class TestCapacityService {
   constructor(private http: HttpClient) {}
 
-  // List test năng lực
+  // List đánh giá năng lực
   getAllTestCapacity(): Observable<ResponsePayload> {
     return this.http.get<ResponsePayload>(`${environment.capacityListUrl}`);
   }

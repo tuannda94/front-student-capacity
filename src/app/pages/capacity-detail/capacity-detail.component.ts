@@ -20,7 +20,7 @@ import { Title } from "@angular/platform-browser";
 export class CapacityDetailComponent implements OnInit {
   tabActive!: string;
   capacity!: Capacity;
-  // bài test liên quan
+  // bài đánh giá liên quan
   capacityRelated!: Capacity[];
   posts!: Post[];
   isFetchingCapacity = false;
@@ -28,7 +28,7 @@ export class CapacityDetailComponent implements OnInit {
   isFetchingNextRound = false;
   isFetchingPost = false;
   isLogged = false;
-  isDoneExam = false; // trạng thái hoàn thành bài test
+  isDoneExam = false; // trạng thái hoàn thành bài đánh giá
   rounds!: Round[];
   countDown: {
     days: number;
@@ -63,7 +63,7 @@ export class CapacityDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       // initital title
-      this.titleService.setTitle("Test năng lực");
+      this.titleService.setTitle("Đánh giá năng lực");
 
       this.scrollToTop();
       this.isFetchingCapacity = true;
@@ -107,7 +107,7 @@ export class CapacityDetailComponent implements OnInit {
             return result;
           }, []);
 
-          // bài test liên quan
+          // bài đánh giá liên quan
           this.capacityService.getRelated({ capacity_id: this.capacity.id, limit: 3 }).subscribe((response) => {
             this.isFetchingCapacityRelated = false;
 
@@ -131,11 +131,11 @@ export class CapacityDetailComponent implements OnInit {
               () => (this.isFetchingPost = false),
             );
 
-          // đếm ngược thời gian khi bài test sắp diễn ra
+          // đếm ngược thời gian khi bài đánh giá sắp diễn ra
           const status = new Date().getTime() < new Date(this.capacity.date_start).getTime();
           status && this.countDownTimer();
 
-          // get trạng thái bài test
+          // get trạng thái bài đánh giá
           this.getStatusCapacity();
         }
       });
@@ -175,7 +175,7 @@ export class CapacityDetailComponent implements OnInit {
     });
   }
 
-  // get trạng thái bài test
+  // get trạng thái bài đánh giá
   getStatusCapacity() {
     const today = new Date().getTime();
     const timeDateStart = new Date(this.capacity.date_start).getTime();
@@ -236,11 +236,11 @@ export class CapacityDetailComponent implements OnInit {
       }
 
       if (this.isLogged && !this.isDoneExam) {
-        this.router.navigate(["/test-nang-luc/vao-thi", this.capacity.id, "bai-thi", this.nextRoundId]);
+        this.router.navigate(["/danh-gia-nang-luc/vao-thi", this.capacity.id, "bai-thi", this.nextRoundId]);
         return;
       }
 
-      this.router.navigate(["/test-nang-luc/vao-thi", this.capacity.id, "bai-thi", this.rounds[0].id]);
+      this.router.navigate(["/danh-gia-nang-luc/vao-thi", this.capacity.id, "bai-thi", this.rounds[0].id]);
     }
   }
 

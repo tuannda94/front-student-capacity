@@ -176,7 +176,7 @@ export class ChatSupportComponent implements OnInit, AfterViewChecked {
 
   // xử lý sự kiện đổi tab
   handleChangeTabWindow() {
-    document.addEventListener("visibilitychange", () => {
+    document.onvisibilitychange = () => {
       if (document.hidden) {
         this.isTabHidden = true;
       } else {
@@ -184,7 +184,7 @@ export class ChatSupportComponent implements OnInit, AfterViewChecked {
         this.titleService.setTitle(this.defaultTitle);
         clearInterval(this.timerId);
       }
-    });
+    };
   }
 
   handleToggleTitle() {
@@ -205,7 +205,7 @@ export class ChatSupportComponent implements OnInit, AfterViewChecked {
   ngOnDestroy(): void {
     (window as any).Echo.leave(this.roomCode);
     (window as any).Echo.leave("support.poly");
-    document.addEventListener("visibilitychange", () => {});
+    document.onvisibilitychange = () => {};
     clearInterval(this.timerId);
   }
 }

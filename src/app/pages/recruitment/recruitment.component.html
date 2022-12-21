@@ -84,7 +84,7 @@
           <a ngbDropdownItem *ngFor="let item of statusFilter" (click)="setValueStatus(item.name)">{{ item.name }}</a>
         </div>
       </div>
-      <a class="my-btn-secondary my-btn-ss" (click)="resetFilter()">Làm Mới</a>
+      <a class="my-btn-secondary my-btn-ss" style="cursor: pointer" (click)="resetFilter()">Làm Mới</a>
       <button class="my-btn-primary my-btn-s" [disabled]="!statusSubmit" [ngClass]="statusSubmit ? '' : 'opacity-75'">
         Tìm kiếm
         <i class="fa-solid fa-magnifying-glass"></i>

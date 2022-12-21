@@ -127,6 +127,12 @@ ul {
   width: 100%;
 }
 
+.recruitment-content-loading {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
 @media only screen and (min-width: 740px) and (max-width: 1023px) {
   .content {
     margin-top: 150px;

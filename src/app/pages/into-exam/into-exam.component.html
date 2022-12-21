@@ -103,7 +103,14 @@
           <div *ngIf="statusTeamDetail == true" style="border-radius: 10px">
             <div class="info-your-team text-center">
               <div class="p-3 bg-white">
-                <img class="info-your-team-avatar" [src]="teamDetail.image" alt="" />
+                <img
+                  class="info-your-team-avatar"
+                  [src]="
+                    teamDetail.image ||
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU'
+                  "
+                  alt=""
+                />
                 <h3 class="fw-bold mt-2 color-blue">{{ teamDetail.name }}</h3>
                 <p>Tổng số : {{ teamDetail.members.length }} thành viên</p>
               </div>
@@ -274,7 +281,7 @@
                     <mat-tab label="Link" [disabled]="assignmentFiles" color="warn">
                       <div class="submit-assignment-box">
                         <input
-                          (keyup)="submitExamByLink($event)"
+                          (blur)="submitExamByLink($event)"
                           [disabled]="assignmentLinks"
                           type="text"
                           value=""
@@ -285,7 +292,8 @@
 
                         <p class="pt-3 text-center color-gray fst-italic">
                           Lưu ý: Thả link đúng định dạng rồi <br />
-                          click ra ngoài.
+                          click vào
+                          <span class="text-primary text-decoration-underline" style="cursor: pointer">Xác nhận</span>.
                         </p>
                       </div>
                     </mat-tab>

@@ -57,7 +57,7 @@
             allowfullscreen
           ></iframe>
         </div>
-        <div *ngIf="!recruitmentDetail" class="">
+        <div *ngIf="!recruitmentDetail" class="recruitment-content-loading">
           <ngx-skeleton-loader [theme]="{ 'height.px': 25, margin: '15px 0px' }" appearance="line">
           </ngx-skeleton-loader>
           <div class="d-flex">
@@ -150,19 +150,44 @@
         </div>
       </div>
       <div class="col-lg-3 col-lx-3 col-md-12 col-sm-12 recruitment__capacity-list">
-        <p *ngIf="recruitmentDetail" class="color-text mb-2">Danh sách bài đánh giá ({{ recruitmentCapacity.length }})</p>
+        <p *ngIf="recruitmentDetail" class="color-text mb-2">
+          Danh sách bài đánh giá ({{ recruitmentCapacity.length }})
+        </p>
         <div *ngIf="recruitmentDetail">
           <div class="recruitment-related mb-3" *ngFor="let capacity of recruitmentCapacity">
             <app-capacity-item [capacityItem]="capacity"></app-capacity-item>
           </div>
         </div>
-        <ngx-skeleton-loader
-          *ngIf="!recruitmentDetail"
-          count="4"
-          [theme]="{ 'height.px': 300, margin: '10px 0px' }"
-          appearance="line"
-        >
-        </ngx-skeleton-loader>
+        <div class="" *ngIf="!recruitmentDetail">
+          <div class="bg-white p-3 rounded mt-3" *ngFor="let _ of [].constructor(6)">
+            <div class="mb-4 mb-lg-0 capacity__related-item">
+              <ngx-skeleton-loader [theme]="{ height: '150px' }"></ngx-skeleton-loader>
+
+              <ngx-skeleton-loader [theme]="{ margin: '0 0 4px' }"></ngx-skeleton-loader>
+
+              <ngx-skeleton-loader
+                [theme]="{ margin: '0 0 4px', width: '50%', display: 'block' }"
+              ></ngx-skeleton-loader>
+              <ngx-skeleton-loader
+                [theme]="{ margin: '0 0 4px', width: '70%', display: 'block' }"
+              ></ngx-skeleton-loader>
+
+              <!-- skeleton user top 1 -->
+              <div class="capacity__related-top-1 d-flex align-items-center">
+                <ngx-skeleton-loader
+                  [theme]="{ width: '32px', height: '32px', margin: '0 8px 0 0' }"
+                  appearance="circle"
+                ></ngx-skeleton-loader>
+
+                <div class="flex-1">
+                  <ngx-skeleton-loader [theme]="{ margin: 0 }"></ngx-skeleton-loader>
+                </div>
+              </div>
+
+              <ngx-skeleton-loader [theme]="{ height: '40px', margin: '6px 0 0' }"></ngx-skeleton-loader>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="listPostResult" class="list-post-box mt-3">

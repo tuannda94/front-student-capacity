@@ -34,7 +34,7 @@ export class TestCapacityService {
     let majorChange = major_id == null ? "" : major_id;
     let skillChange = skill == null ? "" : skill;
     return this.http.get<ResponsePayload>(
-      `${environment.capacityListUrl}?q=${keyword}&major_id=${majorChange}&skill_id=${skillChange}`,
+      `${environment.capacityListUrl}?q=${keywordQuery}&major_id=${majorChange}&skill_id=${skillChange}`,
     );
   }
 

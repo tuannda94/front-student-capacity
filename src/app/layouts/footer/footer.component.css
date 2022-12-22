@@ -1,4 +1,3 @@
-
 #footer {
   background-image: linear-gradient(to bottom, #081327, #122035);
   color: #fff;
@@ -25,7 +24,7 @@
   font-size: 15px;
 }
 
-#footer .fa-icon-phone {
+#footer .fa-square-phone {
   font-size: 16px;
-  color: var(--primary)
+  color: var(--primary);
 }

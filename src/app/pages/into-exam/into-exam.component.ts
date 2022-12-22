@@ -223,6 +223,12 @@ export class IntoExamComponent implements OnInit {
           this.saveLinkSubmitAfter = link;
         }, 1000);
       }
+    } else if (link.target.value == "") {
+      this.toast.warning({
+        summary: "Bạn chưa nhập gì cả !!!",
+        duration: 5000,
+        detail: "Cảnh báo",
+      });
     } else {
       this.toast.warning({
         summary: "Link sai định dạng !!!",

@@ -17,40 +17,26 @@
           <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             <a class="fw-bold menu-mobile__item-link text-decoration-none nav-link-item" routerLink="/">Trang chủ</a>
           </li>
+
+          <li class="nav-item" routerLinkActive="active">
+            <a
+              class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+              [routerLink]="['/danh-gia-nang-luc']"
+            >
+              Đánh giá năng lực
+            </a>
+          </li>
+
           <li class="nav-item" routerLinkActive="active">
             <a class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none" [routerLink]="['/cuoc-thi']">
               Cuộc thi
             </a>
           </li>
 
-          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
-            <div
-              class="position-relative fw-bold menu-mobile__item-link nav-link-item text-decoration-none d-flex align-items-center"
-            >
-              <span [routerLink]="['/tuyen-dung']">Tuyển dụng</span>
-              <div class="nav-item__icon">
-                <i class="fa-solid fa-caret-down"></i>
-              </div>
-
-              <ul class="sub-menu position-absolute">
-                <li class="sub-menu__item" routerLinkActive="active">
-                  <a
-                    class="sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
-                    [routerLink]="['/tuyen-dung']"
-                  >
-                    Tin tuyển dụng
-                  </a>
-                </li>
-                <li class="sub-menu__item" routerLinkActive="active">
-                  <a
-                    class="sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
-                    routerLink="/danh-gia-nang-luc"
-                  >
-                    Đánh giá năng lực
-                  </a>
-                </li>
-              </ul>
-            </div>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none" [routerLink]="['/tuyen-dung']">
+              Tuyển dụng
+            </a>
           </li>
 
           <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">

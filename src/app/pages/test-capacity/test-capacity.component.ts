@@ -168,8 +168,8 @@ export class TestCapacityComponent implements OnInit {
 
   // Set keywordTrending to input search when click
   setValueKeywordTrending(keyword: string) {
-    let major_id = 0;
-    let skill_id = 0;
+    let major_id = null;
+    let skill_id = null;
     this.formFilter.controls["filterName"].setValue(keyword);
     this.router.navigateByUrl(`danh-gia-nang-luc/list?q=${keyword}`);
     this.testCapacityService.filterCapacity(keyword, major_id, skill_id).subscribe((res) => {

@@ -1,4 +1,4 @@
-import { ExamCapacity } from "./exam.model";
+import { Exam, ExamCapacity } from "./exam.model";
 import { CapacityRound, Round } from "./round.model";
 import { Skill } from "./skill.models";
 import { User } from "./user";
@@ -20,8 +20,8 @@ export class Capacity {
   rounds_count: number;
   user_capacity_done_count: number;
   user_top: null | {
-    user: User
-  }
+    user: User;
+  };
 }
 
 class ResultExam {
@@ -32,11 +32,13 @@ class ResultExam {
   true_answer: number;
   created_at: Date;
   updated_at: Date;
+  exam: Exam[];
 }
 
 export class ResponseSubmitExam {
   status: boolean;
   payload: ResultExam;
+  exam: Exam;
 }
 
 export class DataExam {

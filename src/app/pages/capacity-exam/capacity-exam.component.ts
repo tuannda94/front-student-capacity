@@ -85,14 +85,6 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // initial title
-    this.titleService.setTitle("Đánh giá năng lực");
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-
     // chặn f12, f11
     window.onkeydown = (e: any) => {
       this.handleDisableKeydown(e);
@@ -105,12 +97,17 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     this.element = this.document.documentElement;
 
     this.isFetchingRound = true;
-    this.route.paramMap
-      .pipe(
-        map((params) => params.get("round_id")),
-        switchMap((id) => this.roundService.getRoundWhereId(id)),
-      )
-      .subscribe((responseRound) => {
+    this.route.params.subscribe((params) => {
+      // initial title
+      this.titleService.setTitle("Đánh giá năng lực");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      const { round_id } = params;
+      this.roundService.getRoundWhereId(round_id).subscribe((responseRound) => {
         if (responseRound.status) {
           // update title
           this.titleService.setTitle(`Phần thi: ${responseRound.payload.name} - ${responseRound.payload.contest.name}`);
@@ -165,6 +162,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
                       falseAnswer: result.false_answer,
                       trueAnswer: result.true_answer,
                       isLateSubmission,
+                      maxPointExam: result.exam[0].max_ponit,
                     };
 
                     // clear data lịch sử làm bài của vòng trước
@@ -207,6 +205,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
           }
         }
       });
+    });
   }
 
   ngOnDestroy(): void {
@@ -427,7 +426,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
         exam_id: this.examData.id,
         data: answersData,
       })
-      .subscribe(({ status, payload }) => {
+      .subscribe(({ status, payload, exam }) => {
         if (status) {
           // kết quả bài làm
           const { minutes, seconds } = this.getMinutesAndSecondBetweenTwoDate(payload.created_at, payload.updated_at);
@@ -448,6 +447,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
             falseAnswer: payload.false_answer,
             trueAnswer: payload.true_answer,
             isLateSubmission,
+            maxPointExam: exam.max_ponit,
           };
 
           this.dialog.closeAll();
@@ -653,7 +653,7 @@ export class CapacityExamComponent implements OnInit, OnDestroy {
     this.countDownTimeExam.seconds = secondsExam;
 
     let timeStartExam: any = new Date(timeStart).getTime();
-    const timeWillEndExam = new Date(timeStartExam + duration * 1000 + 3000);
+    const timeWillEndExam = new Date(timeStartExam + duration * 1000 + 2000);
 
     this.timerId = setInterval(() => {
       let futureDate = new Date(timeWillEndExam).getTime();

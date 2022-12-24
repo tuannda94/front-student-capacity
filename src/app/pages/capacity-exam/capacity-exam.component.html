@@ -277,36 +277,38 @@
     <!-- kết quả bài làm-->
     <div class="capacity__exam-result text-center" *ngIf="statusTakingExam === 2">
       <h2>Kết quả bài làm</h2>
-      <span class="text-uppercase text-red capacity__exam-result-point">{{ this.resultExam.score }}/10</span>
+      <span class="text-uppercase text-red capacity__exam-result-point"
+        >{{ resultExam.score }}/{{ resultExam.maxPointExam }}</span
+      >
 
       <table class="capacity__exam-result-table mx-auto mt-3">
         <tbody>
           <tr>
             <td class="pb-1">Thời gian</td>
             <td class="pb-1 fw-bold">
-              {{ this.resultExam.examTime }}
-              {{ this.resultExam.isLateSubmission ? "(Nộp muộn)" : "" }}
+              {{ resultExam.examTime }}
+              {{ resultExam.isLateSubmission ? "(Nộp muộn)" : "" }}
             </td>
           </tr>
 
           <tr>
             <td class="pb-1">Nộp lúc</td>
-            <td class="pb-1 fw-bold">{{ this.resultExam.submitAt }}</td>
+            <td class="pb-1 fw-bold">{{ resultExam.submitAt }}</td>
           </tr>
 
           <tr>
             <td class="pb-1">Số câu đúng</td>
-            <td class="pb-1 fw-bold">{{ this.resultExam.trueAnswer }}</td>
+            <td class="pb-1 fw-bold">{{ resultExam.trueAnswer }}</td>
           </tr>
 
           <tr>
             <td class="pb-1">Số câu sai</td>
-            <td class="pb-1 fw-bold">{{ this.resultExam.falseAnswer }}</td>
+            <td class="pb-1 fw-bold">{{ resultExam.falseAnswer }}</td>
           </tr>
 
           <tr>
             <td class="pb-1">Chưa làm</td>
-            <td class="pb-1 fw-bold">{{ this.resultExam.donotAnswer }}</td>
+            <td class="pb-1 fw-bold">{{ resultExam.donotAnswer }}</td>
           </tr>
 
           <tr>

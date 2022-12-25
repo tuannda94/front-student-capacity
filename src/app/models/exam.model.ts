@@ -1,5 +1,6 @@
 export class Exam {
   id: number;
+  max_ponit: number;
 }
 
 export class QuestionCapacity {
@@ -38,6 +39,7 @@ export class ResultExam {
   falseAnswer: number; // tổng số câu làm sai,
   trueAnswer: number; // tổng số câu làm đúng
   isLateSubmission?: boolean; // nộp muộn
+  maxPointExam: number; // thang điểm đề thi
 }
 
 export class TestResultStorage {

@@ -15,6 +15,7 @@ import { AuthGuard } from "./guard/auth.guard";
 import { IntoExamComponent } from "./pages/into-exam/into-exam.component";
 import { RoundContestDetailComponent } from "./pages/round-contest-detail/round-contest-detail.component";
 import { RecruitmentComponent } from "./pages/recruitment/recruitment.component";
+import { RecruitmentPostComponent } from "./pages/recruitment-post/recruitment-post.component";
 import { CapacityDetailComponent } from "./pages/capacity-detail/capacity-detail.component";
 import { CapacityExamComponent } from "./pages/capacity-exam/capacity-exam.component";
 import { PostsComponent } from "./pages/posts/posts.component";
@@ -104,7 +105,11 @@ const routes: Routes = [
         component: RoundContestDetailComponent,
       },
       {
-        path: "tuyen-dung",
+        path: "tin-tuc-tuyen-dung",
+        component: RecruitmentPostComponent,
+      },
+      {
+        path: "dot-tuyen-dung-doanh-nghiep",
         component: RecruitmentComponent,
       },
       {

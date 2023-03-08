@@ -45,6 +45,7 @@ import en from "@angular/common/locales/en";
 import { HeaderComponent } from "./layouts/header/header.component";
 import { FooterComponent } from "./layouts/footer/footer.component";
 import { RecruitmentComponent } from "./pages/recruitment/recruitment.component";
+import { RecruitmentPostComponent } from "./pages/recruitment-post/recruitment-post.component";
 import { ModalInfoTeamComponent } from "./modal/modal-info-team/modal-info-team.component";
 
 registerLocaleData(en);
@@ -125,6 +126,7 @@ import { ModalSubmitChallengeSuccessComponent } from "./modal/modal-submit-chall
     HeaderComponent,
     FooterComponent,
     RecruitmentComponent,
+    RecruitmentPostComponent,
     ModalInfoTeamComponent,
     CapacityExamComponent,
     DialogConfirmComponent,

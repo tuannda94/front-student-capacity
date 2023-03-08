@@ -1,15 +1,27 @@
 <div class="form-upload">
   <h2 class="fw-bold">Ứng tuyển vị trí:</h2>
   <form [formGroup]="formUploadCv" (ngSubmit)="onSubmit()">
-    <div class="mb-3 col">
-      <label class="form-label">Tên của bạn <span class="input-required">*</span></label>
-      <input type="text" placeholder="Vd: Nguyễn Văn Anh" formControlName="name" class="my-input" minlength="2" />
-      <!-- Validate Name -->
-      <div class="my-error" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-        <span *ngIf="name?.errors?.['required']"> Vui lòng nhập thông tin! </span>
-        <span *ngIf="name?.errors?.['minlength']"> Tối thiểu 2 ký tự </span>
+    <div class="row">
+      <div class="mb-3 col">
+        <label class="form-label">Tên của bạn <span class="input-required">*</span></label>
+        <input type="text" placeholder="Vd: Nguyễn Văn Anh" formControlName="name" class="my-input" minlength="2" />
+        <!-- Validate Name -->
+        <div class="my-error" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+          <span *ngIf="name?.errors?.['required']"> Vui lòng nhập thông tin! </span>
+          <span *ngIf="name?.errors?.['minlength']"> Tối thiểu 2 ký tự </span>
+        </div>
+        <!-- End Validate Name -->
       </div>
-      <!-- End Validate Name -->
+      <div class="mb-3 col">
+        <label class="form-label">Mã sinh viên <span class="input-required">*</span></label>
+        <input type="text" placeholder="Vd: PH12345" formControlName="studentCode" class="my-input" minlength="2" />
+        <!-- Validate Name -->
+        <div class="my-error" *ngIf="studentCode?.invalid && (studentCode?.dirty || studentCode?.touched)">
+          <span *ngIf="studentCode?.errors?.['required']"> Vui lòng nhập thông tin! </span>
+          <span *ngIf="studentCode?.errors?.['pattern']"> Nhập đúng định dạng mã sinh viên! </span>
+        </div>
+        <!-- End Validate Name -->
+      </div>
     </div>
     <div class="row">
       <div class="mb-3 col">

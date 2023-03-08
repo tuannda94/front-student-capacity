@@ -33,13 +33,42 @@
             </a>
           </li>
 
-          <li class="nav-item" routerLinkActive="active">
+          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
+            <div
+              class="fw-bold menu-mobile__item-link position-relative text-decoration-none nav-link-item p-0 d-flex align-items-center"
+            >
+              <span>Tuyển dụng</span>
+              <div class="nav-item__icon">
+                <i class="fa-solid fa-caret-down"></i>
+              </div>
+
+              <ul class="sub-menu position-absolute">
+                <li class="sub-menu__item" routerLinkActive="active">
+                  <a
+                    class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+                    [routerLink]="['/tin-tuc-tuyen-dung']"
+                  >
+                    Tin tức tuyển dụng
+                  </a>
+                </li>
+                <li class="sub-menu__item" routerLinkActive="active">
+                  <a
+                    class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+                    [routerLink]="['/dot-tuyen-dung-doanh-nghiep']"
+                  >
+                    Đợt tuyển dụng với doanh nghiệp
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <!-- <li class="nav-item" routerLinkActive="active">
             <a class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none" [routerLink]="['/tuyen-dung']">
               Tuyển dụng
             </a>
-          </li>
+          </li> -->
 
-          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
+          <!-- <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
             <div
               class="fw-bold menu-mobile__item-link position-relative text-decoration-none nav-link-item p-0 d-flex align-items-center"
             >
@@ -67,7 +96,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> -->
 
           <li class="nav-item" routerLinkActive="active">
             <a class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none" routerLink="/tin-tuc">

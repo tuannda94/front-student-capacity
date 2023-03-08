@@ -23,11 +23,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 
 @Component({
-  selector: "app-recruitment",
-  templateUrl: "./recruitment.component.html",
-  styleUrls: ["./recruitment.component.css"],
+  selector: "app-recruitment-post",
+  templateUrl: "./recruitment-post.component.html",
+  styleUrls: ["./recruitment-post.component.css"],
 })
-export class RecruitmentComponent implements OnInit {
+export class RecruitmentPostComponent implements OnInit {
   companys: Array<Enterprise>;
   recruitments: Array<Recruitments> = [];
   recruitmentsHot: Array<Recruitments> = [];
@@ -262,29 +262,29 @@ export class RecruitmentComponent implements OnInit {
       });
     }
 
-    // this.listPostService.searchPostRecruitment(this.keyword).subscribe((res) => {
-    //   if (res.status && res.payload.data.length > 0) {
-    //     this.statusPostSearch = true;
-    //     this.listPostResult = res.payload.data;
-    //     this.statusPost = true;
-    //   } else {
-    //     this.statusPostSearch = false;
-    //     this.getListPost();
-    //   }
-    // });
+    this.listPostService.searchPostRecruitment(this.keyword).subscribe((res) => {
+      if (res.status && res.payload.data.length > 0) {
+        this.statusPostSearch = true;
+        this.listPostResult = res.payload.data;
+        this.statusPost = true;
+      } else {
+        this.statusPostSearch = false;
+        this.getListPost();
+      }
+    });
 
-    this.recruitmentService
-      .filterRecruitment(this.keyword, this.major_id, this.status, this.skill_id, this.page)
-      .subscribe((res) => {
-        if (res.status) {
-          this.statusRecruitments = true;
-          this.recruitments = res.payload.data;
-          this.links = res.payload.links;
-          this.links.pop();
-          this.links.shift();
-          this.scrollWin();
-        }
-      });
+    // this.recruitmentService
+    //   .filterRecruitment(this.keyword, this.major_id, this.status, this.skill_id, this.page)
+    //   .subscribe((res) => {
+    //     if (res.status) {
+    //       this.statusRecruitments = true;
+    //       this.recruitments = res.payload.data;
+    //       this.links = res.payload.links;
+    //       this.links.pop();
+    //       this.links.shift();
+    //       this.scrollWin();
+    //     }
+    //   });
   }
 
   nextPage() {

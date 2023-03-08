@@ -1,4 +1,4 @@
-const baseApiUrl = "https://adminpolytest.online/api";
+const baseApiUrl = "http://localhost:8000/api";
 const authApi = `${baseApiUrl}/auth`;
 export const jwtApiUrl = `${baseApiUrl}/v1`;
 export const publicApiUrl = `${baseApiUrl}/public`;

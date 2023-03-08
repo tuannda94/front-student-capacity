@@ -23,6 +23,7 @@ export class ModalUploadCvComponent implements OnInit {
   // set up form control
   formUploadCv = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(2)]),
+    studentCode: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z0-9]{7}")]),
     email: new FormControl("", [Validators.required, Validators.email]),
     phone: new FormControl("", [Validators.required, Validators.pattern("[0-9]{10}")]),
     file_link: new FormControl(""),
@@ -30,6 +31,10 @@ export class ModalUploadCvComponent implements OnInit {
 
   get name() {
     return this.formUploadCv.get("name");
+  }
+
+  get studentCode() {
+    return this.formUploadCv.get("studentCode");
   }
   get email() {
     return this.formUploadCv.get("email");
@@ -82,6 +87,7 @@ export class ModalUploadCvComponent implements OnInit {
     var formDataInput = new FormData();
 
     formDataInput.append("name", dataInput.name);
+    formDataInput.append("student_code", dataInput.studentCode);
     formDataInput.append("email", dataInput.email);
     formDataInput.append("phone", dataInput.phone);
     formDataInput.append("file_link", this.fileUpload);

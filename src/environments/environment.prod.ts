@@ -11,6 +11,7 @@ export const environment = {
   sponsorListUrl: `${publicApiUrl}/sponsors`,
   contestListUrl: `${publicApiUrl}/contests`,
   majorListUrl: `${publicApiUrl}/majors`,
+  branchesListUrl: `${publicApiUrl}/branches`,
   roundListUrl: `${publicApiUrl}/rounds`,
   sliderListUrl: `${publicApiUrl}/sliders`,
   companyListUrl: `${publicApiUrl}/enterprise`,

@@ -4,6 +4,7 @@ import { CompanyService } from "src/app/services/company.service";
 import { Enterprise } from "src/app/models/enterprise.model";
 import { RecruitmentsService } from "src/app/services/recruitments.service";
 import { Recruitments } from "src/app/models/recruitments.models";
+import { Branch } from "src/app/models/branch.model";
 import { Slider } from "src/app/models/slider.model";
 import { Contest } from "src/app/models/contest";
 import { PayingLinks } from "src/app/models/paying-links";
@@ -12,6 +13,7 @@ import { Skill } from "src/app/models/skill.models";
 import { ListPostService } from "src/app/services/list-post.service";
 import { Post } from "src/app/models/post.model";
 import { MajorService } from "src/app/services/major.service";
+import { BranchService } from "src/app/services/branch.service";
 import { Major } from "src/app/models/major";
 import { FormGroup, FormControl } from "@angular/forms";
 import { ConfigFunctionService } from "src/app/services/config-function.service";
@@ -35,9 +37,11 @@ export class RecruitmentPostComponent implements OnInit {
   cinfigData: TransmitToPost;
   listPostResult: Array<Post>;
   majors: Array<Major> | null;
+  branches: Array<Branch> = [];
   skills: Array<Skill>;
   skill_id: any;
   major_id: any;
+  branch_id: any;
   keywords: Array<Keyword> | null;
   orderObj: any;
   status: any;
@@ -61,6 +65,7 @@ export class RecruitmentPostComponent implements OnInit {
     public recruitmentService: RecruitmentsService,
     public listPostService: ListPostService,
     public majorService: MajorService,
+    public branchService: BranchService,
     public configService: ConfigFunctionService,
     public skillService: SkillServiceService,
     public titleService: Title,
@@ -85,6 +90,7 @@ export class RecruitmentPostComponent implements OnInit {
     filterSkill: new FormControl(""),
     filterName: new FormControl(""),
     filterMajor: new FormControl(""),
+    filterBranch: new FormControl(""),
     filterStatus: new FormControl(""),
   });
 
@@ -98,6 +104,7 @@ export class RecruitmentPostComponent implements OnInit {
     if (this.orderObj.params) {
       this.keyword = this.orderObj.params.keyword ? this.orderObj.params.keyword : "";
       this.major_id = this.orderObj.params.major_id ? this.orderObj.params.major_id : "";
+      this.branch_id = this.orderObj.params.branch_id ? this.orderObj.params.branch_id : "";
       this.skill_id = this.orderObj.params.skill_id ? this.orderObj.params.skill_id : "";
       this.status = this.orderObj.params.status ? this.orderObj.params.status : "";
 
@@ -108,6 +115,7 @@ export class RecruitmentPostComponent implements OnInit {
     }
 
     this.getListMajor();
+    this.getBranches();
     this.getAllSkill();
 
     window.addEventListener("scroll", this.noneSuggestFilter);
@@ -121,6 +129,11 @@ export class RecruitmentPostComponent implements OnInit {
   }
 
   // Set filter value
+  setValueFilterBranch(item: Branch) {
+    this.statusSubmit = true;
+    this.formFilter.controls["filterBranch"].setValue(item.name);
+  }
+
   setValueFilterMajor(item: Major) {
     this.statusSubmit = true;
     this.formFilter.controls["filterMajor"].setValue(item.name);
@@ -151,7 +164,8 @@ export class RecruitmentPostComponent implements OnInit {
     if (
       this.formFilter.controls["filterStatus"].value ||
       this.formFilter.controls["filterName"].value ||
-      this.formFilter.controls["filterMajor"].value
+      this.formFilter.controls["filterMajor"].value ||
+      this.formFilter.controls["filterBranch"].value
     ) {
       this.statusSubmit = true;
     } else {
@@ -175,6 +189,21 @@ export class RecruitmentPostComponent implements OnInit {
               return this.configService.changeString(item.name).includes(this.configService.changeString(value));
             });
             this.majors.length > 0 && this.noneSuggestFilter();
+          }
+
+          break;
+        case "branch":
+          console.log(value);
+          this.checkBtnSubmit();
+          if (!value) {
+            this.branches = [];
+            this.branch_id = "";
+            this.getBranches();
+          } else {
+            this.branches = arr.filter((item) => {
+              return this.configService.changeString(item.name).includes(this.configService.changeString(value));
+            });
+            this.branches.length > 0 && this.noneSuggestFilter();
           }
 
           break;
@@ -215,6 +244,14 @@ export class RecruitmentPostComponent implements OnInit {
     });
   }
 
+  getBranches() {
+    this.branchService.getAll().subscribe((res) => {
+      if (res.status) {
+        this.branches = res.payload;
+      }
+    });
+  }
+
   // ScrollWin
   scrollWin() {
     window.scrollTo({ top: 500, behavior: "smooth" });
@@ -239,6 +276,10 @@ export class RecruitmentPostComponent implements OnInit {
       this.keyword = this.formFilter.controls["filterName"].value;
     }
 
+    if (this.formFilter.controls["filterBranch"].value && this.branches) {
+      this.branch_id = this.branches.filter((item) => item.name === this.formFilter.controls["filterBranch"].value)[0].id;
+    }
+
     if (this.formFilter.controls["filterMajor"].value && this.majors) {
       this.major_id = this.majors.filter((item) => item.name === this.formFilter.controls["filterMajor"].value)[0].id;
     }
@@ -249,12 +290,13 @@ export class RecruitmentPostComponent implements OnInit {
       )[0].prams;
     }
 
-    if (this.status || this.keyword || this.major_id || this.skill_id || this.page) {
+    if (this.status || this.keyword || this.major_id || this.branch_id || this.skill_id || this.page) {
       this.router.navigate(["/tuyen-dung"], {
         queryParams: {
           status: this.status,
           keyword: this.keyword,
           major_id: this.major_id,
+          branch_id: this.branch_id,
           skill_id: this.skill_id,
           page: this.page,
         },
@@ -262,7 +304,7 @@ export class RecruitmentPostComponent implements OnInit {
       });
     }
 
-    this.listPostService.searchPostRecruitment(this.keyword).subscribe((res) => {
+    this.listPostService.searchPostRecruitment(this.keyword, this.branch_id).subscribe((res) => {
       if (res.status && res.payload.data.length > 0) {
         this.statusPostSearch = true;
         this.listPostResult = res.payload.data;
@@ -342,6 +384,7 @@ export class RecruitmentPostComponent implements OnInit {
 
   // Cập nhất tất cả trạng thái về more
   resetFilter() {
+    this.formFilter.controls["filterBranch"].setValue("");
     this.formFilter.controls["filterMajor"].setValue("");
     this.formFilter.controls["filterStatus"].setValue("");
     this.formFilter.controls["filterName"].setValue("");

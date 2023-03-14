@@ -54,6 +54,26 @@
       <div ngbDropdown class="d-inline-block w-100">
         <input
           type="text"
+          (keyup)="filterSelect(branches, $any($event.target).value, 'branch')"
+          formControlName="filterBranch"
+          class="my-input w-100"
+          placeholder="Cơ sở"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        />
+        <div ngbDropdownMenu class="w-100 input__search-keyword--sugg" aria-labelledby="dropdownBasic1">
+          <span class="input__search-branch-alert"></span>
+          <div *ngIf="!branches" class="d-flex justify-content-center">
+            <app-loading-item class="py-2"></app-loading-item>
+          </div>
+          <a *ngFor="let item of branches" (click)="setValueFilterBranch(item)" class="text-collapse" ngbDropdownItem>{{
+            item.name
+          }}</a>
+        </div>
+      </div>
+      <div ngbDropdown class="d-inline-block w-100">
+        <input
+          type="text"
           (keyup)="filterSelect(majors, $any($event.target).value, 'major')"
           formControlName="filterMajor"
           class="my-input w-100"
@@ -128,7 +148,7 @@
             Tin tức tuyển dụng
           </h2>
           <div class="d-flex justify-content-between algin-items-center">
-            <p *ngIf="!statusPostSearch && statusPost">Gợi ý</p>
+            <p *ngIf="!statusPostSearch && statusPost">Không tìm thấy bài viết theo kết quả tìm kiếm. Gợi ý nội dung:</p>
             <p *ngIf="statusPostSearch && statusPost">Kết quả tìm kiếm ({{ listPostResult.length }})</p>
             <p
               *ngIf="statusPost"

@@ -15,42 +15,42 @@
           <ngx-skeleton-loader [theme]="{width: '50%'}"></ngx-skeleton-loader>
         </div>
         <!-- breadcrumb -->
-  
+
         <div class="capacity__info">
           <div *ngIf="!isFetchingCapacity">
             <div class="capacity__info-time-start">
               <div class="capacity__info-time-start-icon">
                 <i class="fa-solid fa-clock"></i>
               </div>
-              
+
               <div>
                 {{ capacity.date_start | formatDate }} - {{ capacity.register_deadline | formatDate }}
               </div>
             </div>
-  
+
             <h1 class="capacity__info-name">
               <span>Bài test năng lực: </span>
               {{ capacity.name }}
             </h1>
-  
+
             <div class="capacity__info-desc">
               <strong>Nội dung: </strong>
-  
+
               <button class="capacity__info-desc-btn btn-base-type-bg fw-normal rounded p-1 px-2" (click)="openModalDesc(description)">Chi tiết</button>
             </div>
-  
+
             <div class="capacity__info-footer">
               <div class="capacity__info-enterprise">
                 <div class="capacity__info-enterprise-icon">
                   <i class="fa-solid fa-building"></i>
                 </div>
-                
+
                 <div>
                   <strong>Doanh nghiệp: </strong>
                   <span class="capacity__info-enterprise-name">FPT Software</span>
                 </div>
               </div>
-  
+
               <button class="btn capacity__info-footer-btn btn-register btn-base-type-bg">{{ statusExam.statustext }}</button>
             </div>
           </div>
@@ -60,18 +60,18 @@
             <div class="capacity__info-time-start">
               <ngx-skeleton-loader class="flex-fill" [theme]="{width: '50%', margin: 0}"></ngx-skeleton-loader>
             </div>
-  
+
             <h1 class="capacity__info-name d-flex">
               <ngx-skeleton-loader class="flex-fill" [theme]="{width: '100%', margin: 0}"></ngx-skeleton-loader>
             </h1>
-  
+
             <div class="capacity__info-desc">
               <ngx-skeleton-loader [theme]="{width: '200px', margin: 0}"></ngx-skeleton-loader>
             </div>
-  
+
             <div class="capacity__info-footer">
               <ngx-skeleton-loader class="flex-fill" [theme]="{width: '70%'}"></ngx-skeleton-loader>
-  
+
               <ngx-skeleton-loader class="flex-fill text-end" [theme]="{width: '30%', height: '35px'}"></ngx-skeleton-loader>
             </div>
           </div>
@@ -106,12 +106,12 @@
                   <div class="capacity__test-list-item-icon--plus">
                     <i class="fa-solid fa-plus"></i>
                   </div>
-  
+
                   <div class="capacity__test-list-item-icon--minus">
                     <i class="fa-solid fa-minus"></i>
                   </div>
                 </div>
-  
+
                 <h2 class="capacity__test-name">{{ i + 1 }}. {{ round.name }}</h2>
               </div>
 
@@ -160,7 +160,7 @@
             <div class="col col-lg-4 col-md-6 col-sm-12 col-12" *ngFor="let _ of [].constructor(3)">
               <div class="capacity__related-item">
                 <ngx-skeleton-loader [theme]="{height: '150px'}"></ngx-skeleton-loader>
-            
+
                 <ngx-skeleton-loader [theme]="{margin: '0 0 4px'}"></ngx-skeleton-loader>
 
                 <ngx-skeleton-loader [theme]="{margin: '0 0 4px', width: '30%', display: 'block'}"></ngx-skeleton-loader>
@@ -174,11 +174,11 @@
           <!-- skeleton -->
         </div>
       </div>
-  
+
       <!-- sidebar -->
       <div class="col col-lg-3 col-md-12 col-sm-12 col-12">
         <div class="sidebar" *ngIf="!isFetchingCapacity">
-          <div class="sidebar__image" [ngStyle]="{'background-image': 'url(' + capacity.img + ')'}"></div>
+          <div class="sidebar__image" [ngStyle]="{ 'background-image': 'url(' + capacity.img + ')' }"></div>
 
           <ul class="sidebar__countdown" *ngIf="statusExam.status === 0">
             <li class="sidebar__countdown-item text-center">

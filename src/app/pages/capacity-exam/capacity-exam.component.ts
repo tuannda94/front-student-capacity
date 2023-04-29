@@ -1,30 +1,31 @@
-import { DialogConfirmComponent } from './../../modal/dialog-confirm/dialog-confirm.component';
-import { NgToastService } from 'ng-angular-popup';
-import { RoundService } from 'src/app/services/round.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap } from 'rxjs';
-import { Round } from 'src/app/models/round.model';
-import { MatDialog } from '@angular/material/dialog';
-import { UserService } from 'src/app/services/user.service';
+import {DialogConfirmComponent} from './../../modal/dialog-confirm/dialog-confirm.component';
+import {NgToastService} from 'ng-angular-popup';
+import {RoundService} from 'src/app/services/round.service';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {map, switchMap} from 'rxjs';
+import {Round} from 'src/app/models/round.model';
+import {MatDialog} from '@angular/material/dialog';
+import {UserService} from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-capacity-exam',
   templateUrl: './capacity-exam.component.html',
   styleUrls: ['./capacity-exam.component.css']
-})
-export class CapacityExamComponent implements OnInit {
+})export class CapacityExamComponent implements OnInit {
 
   @ViewChildren("questions") questions: QueryList<ElementRef>;
   formAnswers!: FormGroup;
+  data: any;
   fakeQuestionData!: any;
   // DS id câu hỏi đã trả lời
   questionListId: { questionId: number }[] = [];
+  round_id: number;
   isTakingExam = false;
   roundDetail!: Round;
   isFetchingRound = false;
-  countDownTimeExam: {minutes: number | string, seconds: number | string} = {
+  countDownTimeExam: { minutes: number | string, seconds: number | string } = {
     minutes: "00",
     seconds: "00"
   }
@@ -38,21 +39,24 @@ export class CapacityExamComponent implements OnInit {
     private userService: UserService,
     private toast: NgToastService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.isFetchingRound = true;
-    this.route.paramMap.pipe(
-      map(params => params.get('round_id')),
-      switchMap(id => this.roundService.getRoundWhereId(id))
-    ).subscribe(res => {
-      if (res.status) {
-        this.isFetchingRound = false;
-        this.roundDetail = res.payload;
-        this.roundDetail.start_time = new Date("2022-06-25 15:25:54")
-        console.log(res.payload)
-      }
-    })
+    this.route.paramMap
+      .pipe(
+        map(params => params.get('round_id')),
+        switchMap(id => this.roundService.getRoundWhereId(id))
+      )
+      .subscribe(res => {
+        if (res.status) {
+          this.isFetchingRound = false;
+          this.roundDetail = res.payload;
+          this.roundDetail.start_time = new Date("2022-06-25 15:25:54");
+          this.round_id = res.payload.id;
+        }
+      })
   }
 
   // làm bài
@@ -72,7 +76,7 @@ export class CapacityExamComponent implements OnInit {
         // check user logged
         const userLogged = this.userService.getUserValue();
         if (!userLogged.id) {
-          this.toast.warning({ summary: "Vui lòng đăng nhập trước khi làm bài", duration: 3000 });
+          this.toast.warning({summary: "Vui lòng đăng nhập trước khi làm bài", duration: 3000});
           this.router.navigate(['/login']);
           return;
         }
@@ -82,23 +86,24 @@ export class CapacityExamComponent implements OnInit {
         const timeStart = new Date(this.roundDetail.start_time).getTime();
 
         if (todayTime < timeStart) {
-          this.toast.warning({ summary: "Chưa đến thời gian làm bài"});
+          this.toast.warning({summary: "Chưa đến thời gian làm bài"});
           return;
         }
 
         // fake api tạo bản nháp
-        const res = this.roundService.getInfoCapacityExamRound();
-        if (res.status) {
-          const data = res.payload;
+        this.roundService.getInfoCapacityExamRound(this.round_id).subscribe(res => {
+          if (res.status) {
+            console.log(res);
+            this.data = res.payload;
 
-          this.isTakingExam = true;
+            this.isTakingExam = true;
 
-          this.fakeQuestionData = data.questions;
-          this.createFormControl();
-
-          const durationExam = data.time_type === 1 ? (data.time * 60) : data.time;
-          this.handleStartExam(durationExam, data.created_at);
-        }
+            this.fakeQuestionData = this.data.questions;
+            this.createFormControl();
+            const durationExam = this.roundDetail.time_type_exam == 1 ? (this.roundDetail.time_exam * 60 * 60) : this.roundDetail.time_exam * 60;
+            this.handleStartExam(durationExam, this.data.created_at);
+          }
+        });
       }
     })
   }
@@ -123,10 +128,10 @@ export class CapacityExamComponent implements OnInit {
       confirmSubmitExam.afterClosed().subscribe(result => {
         // xác nhận nộp bài
         if (result === "true") {
-          this.openDialogSubmitExam();
+          // this.openDialogSubmitExam();
+          this.handleSubmitExamPost();
         }
       })
-      console.log(answersData)
     } else {
       const listQuesNum = this.getFormValidationErrors();
 
@@ -144,7 +149,8 @@ export class CapacityExamComponent implements OnInit {
       confirmSubmitExam.afterClosed().subscribe(result => {
         // xác nhận nộp bài
         if (result === "true") {
-          this.openDialogSubmitExam();
+          // this.openDialogSubmitExam();
+          this.handleSubmitExamPost();
         }
       })
     }
@@ -152,14 +158,16 @@ export class CapacityExamComponent implements OnInit {
 
   getAnswersData() {
     const answerFormData = this.formAnswers.value;
-  
+
     // danh sách id câu hỏi và câu trả lời
-    const answersData: {questionId: number, answerId: number}[] = [];
+    const answersData: { questionId: number, type: number, answerId: number }[] = [];
     for (const key in answerFormData) {
-      const questionId = key.split("-")[2];
-      
+      // const questionId = key.split("-")[2];
+      const [, , questionId, questionType] = key.split("-");
+
       answersData.push({
         questionId: +questionId,
+        type: Number(questionType),
         answerId: answerFormData[key]
       })
     }
@@ -168,9 +176,9 @@ export class CapacityExamComponent implements OnInit {
   }
 
   createFormControl() {
-    const ctrls: { [name: string ]: FormControl } = {};
+    const ctrls: { [name: string]: FormControl } = {};
     this.fakeQuestionData.forEach((question: any, index: number) => {
-      const fieldName = `question-${++index}-${question.id}`;
+      const fieldName = `question-${++index}-${question.id}-${question.type}`;
       ctrls[fieldName] = new FormControl('', Validators.required)
     })
 
@@ -195,7 +203,7 @@ export class CapacityExamComponent implements OnInit {
   // lưu các câu hỏi đã trả lời
   handleChooseAnswer(questionId: number) {
     const exitsId = this.questionListId.some(item => item.questionId === questionId);
-    
+
     // nếu trong chưa có questionId
     if (!exitsId) {
       this.questionListId.push({
@@ -223,17 +231,22 @@ export class CapacityExamComponent implements OnInit {
   // bắt đầu làm bài
   handleStartExam(duration: number, timeStart: any) {
     // tính thời gian làm bài ban đầu
-    const minutesExam = Math.floor(((duration % (60 * 60 * 24)) % (60 * 60)) / 60 );
-    const secondsExam = Math.floor(((duration % (60 * 60 * 24)) % (60 * 60)) % 60 );
+    const minutesExam = Math.floor(((duration % (60 * 60 * 24)) % (60 * 60)) / 60);
+    const secondsExam = Math.floor(((duration % (60 * 60 * 24)) % (60 * 60)) % 60);
+    // console.log(minutesExam, secondsExam);
     this.countDownTimeExam.minutes = minutesExam;
     this.countDownTimeExam.seconds = secondsExam;
 
-    let timeStartExam: any = new Date(timeStart).getTime();
+    // let timeStartExam: any = new Date(timeStart).getTime();
+    let timeStartExam: any = new Date().getTime();
+    // console.log(timeStartExam);
     const timeWillEndExam = new Date(timeStartExam + duration * 1000 + 1000);
+    // console.log(timeWillEndExam);
 
     let timerId: any;
+    let futureDate = new Date(timeWillEndExam).getTime();
+    console.log(futureDate);
     timerId = setInterval(() => {
-      let futureDate = new Date(timeWillEndExam).getTime();
       let today = new Date().getTime();
 
       let distance = futureDate - today;
@@ -259,24 +272,25 @@ export class CapacityExamComponent implements OnInit {
 
         submitExamRef.afterClosed().subscribe(result => {
           if (result === "true") {
-            this.openDialogSubmitExam();
+            // this.openDialogSubmitExam();
+            this.handleSubmitExamPost();
           }
         })
       } else {
-        const minutes: string | number = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const minutes: string | number = Math.floor((distance % (60 * 60 * 1000)) / (60 * 1000));
         this.countDownTimeExam.minutes = minutes < 10 ? `0${minutes}` : minutes;
 
-        const seconds: number | string = Math.floor((distance % (1000 * 60)) / 1000);
+        const seconds: number | string = Math.floor((distance % (60 * 1000)) / 1000);
         this.countDownTimeExam.seconds = seconds < 10 ? `0${seconds}` : seconds;
 
         // thông báo sắp hết giờ
         if (minutes <= 1 && !this.isNotiExamTimeOut) {
-          this.toast.warning({ summary: "Sắp hết thời gian làm bài, hãy kiểm tra lại bài làm của bạn", duration: 10000 });
+          this.toast.warning({summary: "Sắp hết thời gian làm bài, hãy kiểm tra lại bài làm của bạn", duration: 10000});
           this.isNotiExamTimeOut = true;
         }
       }
 
-      console.log(this.countDownTimeExam.minutes, this.countDownTimeExam.seconds)
+      // console.log(this.countDownTimeExam.minutes, this.countDownTimeExam.seconds)
     }, 1000);
   }
 
@@ -290,6 +304,23 @@ export class CapacityExamComponent implements OnInit {
         title: "Đang nộp bài...",
         isShowLoading: true
       }
+    })
+
+  }
+
+  getResultExam() {
+    const data = this.getAnswersData();
+    return {
+      exam_id: this.data.id,
+      data,
+    }
+  }
+
+  handleSubmitExamPost() {
+    this.openDialogSubmitExam();
+    this.roundService.submitExam(this.getResultExam()).subscribe(res => {
+      console.log(res);
+      this.dialog.closeAll();
     })
   }
 

@@ -1,6 +1,5 @@
 <div class="capacity__related-item">
   <div class="capacity__related-item-image" [ngStyle]="{'background-image': 'url('+ capacityItem.img +')'}"></div>
-
   <div class="capacity__related-content">
     <p class="capacity__related-content-time">{{ formatDate(capacityItem.date_start) }} - {{ formatDate(capacityItem.register_deadline) }}</p>
     <a [routerLink]="['/test-nang-luc', capacityItem.id]" class="capacity__related-content-title-link">
@@ -13,13 +12,13 @@
           <i class="fa-solid fa-file-pen"></i>
         </div>
 
-        {{ capacityItem.rounds.length }} bài thi
+        {{ capacityItem.rounds_count}} bài thi
       </li>
       <li class="capacity__related-content-list-item">
         <div class="capacity__related-content-list-item-icon">
           <i class="fa-solid fa-user-group"></i>
         </div>
-        {{capacityItem.users}} lượt làm bài
+        {{capacityItem.user_capacity_done_count}} lượt làm bài
       </li>
 
       <li class="capacity__related-content-list-item">

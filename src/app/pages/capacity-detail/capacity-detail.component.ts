@@ -49,27 +49,27 @@ export class CapacityDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.isFetchingCapacity = true;
       this.scrollToTop();
-      
+
       const { capacity_id } = params;
 
       this.capacityService.getWhereId(capacity_id).subscribe(res => {
         if (res.status) {
           this.capacity = res.payload;
           this.rounds = res.payload.rounds;
-  
+
           // bài test liên quan
           this.capacityService.getRelated(this.capacity.id).subscribe(response => {
             this.isFetchingCapacity = false;
-  
+
             if (response.status) {
-              this.capacityRelated = response.payload.slice(0, 3);
+              this.capacityRelated = response.payload.data.slice(0, 3);
             }
           })
-          
+
           // đếm ngược thời gian khi bài test sắp diễn ra
           const status = new Date().getTime() < new Date(this.capacity.date_start).getTime();
           status && this.countDownTimer();
-          
+
           // get trạng thái bài test
           this.getStatusCapacity();
         }
@@ -122,7 +122,7 @@ export class CapacityDetailComponent implements OnInit {
   // đếm ngược thời gian
   countDownTimer() {
     let timerId: any;
-    
+
     timerId = setInterval(() => {
       let futureDate = new Date(this.capacity.date_start).getTime();
 
@@ -150,6 +150,7 @@ export class CapacityDetailComponent implements OnInit {
 
   // vào bài thi đầu tiên
   handleGoToFirstTest() {
+    console.log(this.rounds);
     if (this.statusExam.status === 1) {
       if (!this.rounds.length) {
         this.toast.warning({ summary: "Chưa có bài thi nào", duration: 3000 });

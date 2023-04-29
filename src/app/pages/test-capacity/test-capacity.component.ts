@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Capacity } from 'src/app/models/capacity';
-import { TestCapacityService } from 'src/app/services/test-capacity.service';
+import {Component, OnInit} from '@angular/core';
+import {Capacity} from 'src/app/models/capacity';
+import {TestCapacityService} from 'src/app/services/test-capacity.service';
 
 @Component({
   selector: 'app-test-capacity',
@@ -16,15 +16,15 @@ export class TestCapacityComponent implements OnInit {
   constructor(
     private testCapacityService: TestCapacityService
   ) {
-    this.getListTestCapacity()
-   }
+    this.getListTestCapacity();
+  }
 
   ngOnInit(): void {
   }
 
-  getListTestCapacity(){
-    this.testCapacityService.getAllTestCapacity().subscribe(data=>{
-        this.listCapacity = data.payload.data;
+  getListTestCapacity() {
+    this.testCapacityService.getAllTestCapacity().subscribe(data => {
+      this.listCapacity = data.payload.data;
     })
   }
 

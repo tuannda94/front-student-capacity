@@ -1,8 +1,8 @@
-import { Router } from '@angular/router';
-import { Component, Input, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {Component, Input, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import { Capacity } from 'src/app/models/capacity';
-import { Skill } from 'src/app/models/skill.models';
+import {Capacity} from 'src/app/models/capacity';
+import {Skill} from 'src/app/models/skill.models';
 
 @Component({
   selector: 'app-capacity-related-item',
@@ -20,11 +20,11 @@ export class CapacityRelatedItemComponent implements OnInit {
     minutes: number,
     seconds: number
   } = {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    };
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  };
   timerId!: any;
   statusExam!: {
     status: number,
@@ -33,14 +33,15 @@ export class CapacityRelatedItemComponent implements OnInit {
 
   constructor(
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     // đếm ngược thời gian bắt đầu mở bài test
+    let futureDate = new Date(this.capacityItem.date_start).getTime();
     this.timerId = setInterval(() => {
-      let futureDate = new Date(this.capacityItem.date_start).getTime();
-
       let today = new Date().getTime();
+
       let distance = futureDate - today;
 
       if (distance < 0) {
@@ -102,12 +103,12 @@ export class CapacityRelatedItemComponent implements OnInit {
   }
 
   // Chuyển skill sang chuỗi
-  changeSkillString(arrSkill: Array<Skill>): string{
+  changeSkillString(arrSkill: Array<Skill>): string {
     let stringSkill: string;
-     stringSkill =  arrSkill.map(res => {
+    stringSkill = arrSkill.map(res => {
       //  arr.push(res.name);
-       return  res.name;
-    }).join(',');
+      return res.name;
+    }).join(', ');
     return stringSkill;
   }
 }

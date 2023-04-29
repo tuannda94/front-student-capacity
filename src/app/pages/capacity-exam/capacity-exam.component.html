@@ -7,7 +7,8 @@
     </div>
 
     <div class="text-center">
-      <p *ngIf="isTakingExam">Câu hỏi: <span class="text-red">45 câu</span>, thời gian: <span class="text-red">60 phút</span></p>
+      <p *ngIf="isTakingExam">Câu hỏi: <span class="text-red">{{ roundDetail.max_questions_exam }} câu</span>, thời gian: <span
+        class="text-red">{{ roundDetail.time_exam }} phút</span></p>
 
       <div *ngIf="!isTakingExam">
         <span>Phần thi: {{ roundDetail.name }}</span>,
@@ -33,70 +34,74 @@
     <div class="row">
       <div class="col col-12 col-md-3">
         <div class="sidebar">
-          <h2 class="sidebar__title">Đề thi kiểm tra số 1</h2>
-  
+          <h2 class="sidebar__title">{{ data.name }}</h2>
+
           <ul class="sidebar__list m-0 p-0">
             <li class="sidebar__list-item d-flex align-items-center">
               <div class="sidebar__list-item-icon">
                 <i class="fa-solid fa-list"></i>
               </div>
-  
+
               <div class="sidebar__list-item-text">
-                <strong>45</strong> câu hỏi
+                <strong>{{ roundDetail.max_questions_exam }}</strong> câu hỏi
               </div>
             </li>
-  
+
             <li class="sidebar__list-item d-flex align-items-center">
               <div class="sidebar__list-item-icon">
                 <i class="fa-solid fa-clock"></i>
               </div>
-  
+
               <div class="sidebar__list-item-text">
-                <strong>60</strong> phút làm bài
+                <strong>{{ roundDetail.time_exam }}</strong> phút làm bài
               </div>
             </li>
-  
+
             <li class="sidebar__list-item d-flex align-items-center primary-color">
               <div class="sidebar__list-item-icon primary-color">
                 <i class="fa-solid fa-hourglass"></i>
               </div>
-  
+
               <div class="sidebar__list-item-text">
                 Thời gian còn lại
               </div>
             </li>
           </ul>
-  
+
           <ul class="sidebar__countdown d-flex justify-content-center p-0">
             <li class="sidebar__countdown-item text-center">
-              <strong class="sidebar__countdown-item-time d-block primary-color">{{ countDownTimeExam.minutes }}</strong>
+              <strong
+                class="sidebar__countdown-item-time d-block primary-color">{{ countDownTimeExam.minutes }}</strong>
               Phút
             </li>
-  
+
             <li class="primary-color sidebar__countdown-item-time">:</li>
-  
+
             <li class="sidebar__countdown-item text-center">
-              <strong class="sidebar__countdown-item-time d-block primary-color">{{ countDownTimeExam.seconds }}</strong>
+              <strong
+                class="sidebar__countdown-item-time d-block primary-color">{{ countDownTimeExam.seconds }}</strong>
               Giây
             </li>
           </ul>
-  
+
           <button class="btn btn-register sidebar__countdown-btn">Nộp bài</button>
-  
+
           <section class="question">
             <span class="question__title">Câu hỏi</span>
-  
+
             <div class="question__list">
               <!-- active câu hỏi đã làm -->
-              <div class="question__list-item" (click)="scrollToQuestion(i)" [ngClass]="{active: checkQuesAnswered(ques.id)}" *ngFor="let ques of fakeQuestionData; let i = index">
+              <div class="question__list-item" (click)="scrollToQuestion(i)"
+                   [ngClass]="{active: checkQuesAnswered(ques.id)}"
+                   *ngFor="let ques of fakeQuestionData; let i = index">
                 <div class="question__list-item-inner">{{ i + 1 }}</div>
               </div>
             </div>
           </section>
-  
+
           <section class="sidebar__note">
             <span class="sidebar__note-title primary-color">* Lưu ý</span>
-  
+
             <ul class="sidebar__note-list">
               <li class="sidebar__note-list-item">1. Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
               <li class="sidebar__note-list-item">2. Lorem, ipsum dolor sit amet consectetur adipisicing elit.</li>
@@ -104,19 +109,22 @@
           </section>
         </div>
       </div>
-  
+
       <div class="col col-12 col-md-9 question__content">
         <ul class="question__content-list">
           <li class="question__content-item" *ngFor="let question of fakeQuestionData; let i = index" #questions>
             <span class="question__content-item-num d-block">Câu {{ i + 1 }}:</span>
-  
+
             <p class="question__content-item-content" [innerHTML]="question.content"></p>
-  
+
             <ul class="answers">
-              <li class="answers__item" *ngFor="let answer of question.answers; let j = index" (click)="handleChooseAnswer(question.id)">
-                <input class="answers__input" type="radio" hidden [id]="'answer-' + answer.id" [formControlName]="'question-' + (i + 1) + '-' + question.id" [value]="answer.id">
+              <li class="answers__item" *ngFor="let answer of question.answers; let j = index"
+                  (click)="handleChooseAnswer(question.id)">
+                <input class="answers__input" type="radio" hidden [id]="'answer-' + answer.id"
+                       [formControlName]="'question-' + (i + 1) + '-' + question.id + '-' + question.type" [value]="answer.id">
                 <label [for]="'answer-' + answer.id" class="answer d-flex align-items-center">
-                  <span class="answer__num d-flex justify-content-center align-items-center">{{ (j + 10).toString(36).toUpperCase() }}</span>
+                  <span
+                    class="answer__num d-flex justify-content-center align-items-center">{{ (j + 10).toString(36).toUpperCase() }}</span>
                   <p class="answer__content m-0">{{ answer.content }}</p>
                 </label>
               </li>

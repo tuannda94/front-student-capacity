@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Sponsor } from 'src/app/models/sponsor';
 import { User } from 'src/app/models/user';
-import { SponsorService } from 'src/app/services/sponsor.service';
 import { UserService } from 'src/app/services/user.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
@@ -10,7 +9,6 @@ import { Team } from 'src/app/models/team';
 import { ContestService } from 'src/app/services/contest.service';
 import { ConfigViewService } from 'src/app/services/config-view.service';
 import { Major } from 'src/app/models/major';
-import { MajorService } from 'src/app/services/major.service';
 import { ResultRound } from 'src/app/models/result-round.model';
 import { ResultMajor } from 'src/app/models/result-major.model';
 import { catchError, map, Observable, of } from 'rxjs';
@@ -77,7 +75,6 @@ export class HomeComponent implements OnInit {
 
     constructor(private contestService: ContestService,
         private configView: ConfigViewService,
-        private majorService: MajorService,
         private UserService: UserService,
         private http: HttpClient) { }
 
@@ -107,34 +104,6 @@ export class HomeComponent implements OnInit {
         this.configView.runStatisticHome(yearStatistic, 4000);
         this.configView.runStatisticHome(passStatistic, 2000);
 
-
-        // Get All Major
-        this.getAllMajor();
-    }
-
-    //Lấy ra tất cả các chuyên ngành
-    getAllMajor() {
-        this.majorService.getAll().subscribe(res => {
-            if (res.status) {
-                this.majors = res.payload;
-                this.nameSelectMajor = this.majors[0].name;
-                this.getResultWhereMajor(this.majors[0].slug);
-            }
-        })
-    }
-
-    // Gọi kết quả theo chuyên ngành.
-    getResultWhereMajor(majorSlug: any) {
-        this.loadingResultContest = false;
-        this.statusResult = false;
-        this.majorService.getResultWhereMajor(majorSlug).subscribe(res => {
-            if (res.status) {
-                this.resultMajor = res.payload;
-                console.log(this.resultMajor);
-                this.resultMajor ? this.loadingResultContest = true : this.loadingResultContest;
-                this.resultMajor.length == 0 ? this.statusResult : this.statusResult = true;
-            }
-        })
     }
 
     // get list contest after login
@@ -145,18 +114,4 @@ export class HomeComponent implements OnInit {
     }
 
 
-
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    loadMore(): void {
-        this.isLoading = true;
-        this.majorService.getAll().subscribe(res => {
-            if (res.status) {
-                this.isLoading = false;
-                this.majors = res.payload;
-                let majorRandom = Math.floor(Math.random() * this.majors.length);
-                this.selectedMajor = this.majors[majorRandom].name;
-                this.getResultWhereMajor(this.majors[majorRandom].slug);
-            }
-        })
-    }
 }

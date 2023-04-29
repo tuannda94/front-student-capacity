@@ -22,17 +22,9 @@
                             class="menu-res-link text-decoration-none text-uppercase fw-bold">
                             Trang chủ
                         </a></li>
-                    <li class="menu-res-item "><a routerLink="/cuoc-thi"
-                            class="menu-res-link text-decoration-none text-uppercase fw-bold">
-                            Cuộc thi
-                        </a></li>
-                    <li class="menu-res-item "><a href=""
+                    <li class="menu-res-item "><a routerLink="/test-nang-luc"
                             class="menu-res-link text-decoration-none text-uppercase fw-bold">
                             Test năng lực
-                        </a></li>
-                    <li class="menu-res-item "><a href=""
-                            class="menu-res-link text-decoration-none text-uppercase fw-bold">
-                            Tuyển dụng
                         </a></li>
                 </ul>
 
@@ -49,18 +41,9 @@
                         routerLink="">Trang
                         Chủ</a>
                 </li>
-                <li class="nav-item active"><a class="  fw-bold nav-link-item  text-uppercase  text-decoration-none"
-                        [routerLink]="['/cuoc-thi']">Các
-                        cuộc
-                        thi</a>
-                </li>
-                <li class="nav-item active"><a class=" fw-bold nav-link-item  text-uppercase  text-decoration-none "
-                        href="">Test
+                <li class="nav-item active"><a class=" fw-bold nav-link-item  text-uppercase  text-decoration-none " [routerLink]="['/test-nang-luc']">Test
                         năng
                         lực</a></li>
-                <li class="nav-item active"><a routerLink="/tuyen-dung"
-                        class=" fw-bold nav-link-item  text-uppercase  text-decoration-none " href="">Tuyển dụng</a>
-                </li>
                 <li *ngIf="statusLogin == true"><i matBadge="4" matBadgePosition="after"
                         class="fas fa-bell header-icon-message  color-blue" matBadgeColor="warn"></i>
                 </li>

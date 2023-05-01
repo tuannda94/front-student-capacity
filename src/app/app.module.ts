@@ -50,7 +50,6 @@ import {DialogConfirmComponent} from './modal/dialog-confirm/dialog-confirm.comp
 import {CapacityDetailComponent} from './pages/capacity-detail/capacity-detail.component';
 import {CapacityRelatedItemComponent} from './component/capacity-related-item/capacity-related-item.component';
 import {TestCapacityComponent} from "./pages/test-capacity/test-capacity.component";
-import {InfoTeamComponent} from "./pages/info-team/info-team.component";
 
 
 @NgModule({
@@ -74,7 +73,6 @@ import {InfoTeamComponent} from "./pages/info-team/info-team.component";
     CapacityDetailComponent,
     CapacityRelatedItemComponent,
     TestCapacityComponent,
-    InfoTeamComponent,
   ],
   imports: [
     BrowserModule,

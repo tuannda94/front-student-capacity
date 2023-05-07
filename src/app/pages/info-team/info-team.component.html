@@ -1,0 +1,21 @@
+<div class="container-fluid box-info-team">
+    <div class="container">
+        <div class="row pb-4">
+            <div class="col-3 nav-bar-info-user">
+                <div class="d-flex  justify-content-start align-items-center border-bottom">
+                    <img [src]="user.avatar" class="info-team-user" alt="">
+                    <div class="mx-2 mt-3">
+                        <h4 class="info-name-user color-blue fw-bold">{{user.name}}</h4>
+                        <p class="color-gray mt-2" routerLink="/component-one" style="cursor: pointer;">
+                            <i class="fas fa-pen"></i>
+                            Sửa thông tin
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9 box-component-right mb-2">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

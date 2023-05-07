@@ -1,0 +1,70 @@
+.box-info-team {
+  min-height: 500px;
+  background-color: #f5f5f5;
+  padding-top: 30px;
+}
+
+/* Css tab Info team  */
+
+.info-team-user {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
+.info-name-user {
+  margin-bottom: -2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-size: 17px;
+}
+
+.box-component-right {
+  background-color: #ffff;
+  border-radius: 10px;
+  box-shadow: 0 0 2px #ccc;
+}
+
+.info-team-tab-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-team-tab-item {
+  margin: 10px 0px;
+  background-color: #ffff;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-blue);
+  box-shadow: 0px 0px 3px #ccc;
+  transition: all ease-in 0.3s;
+}
+
+.info-team-tab-item:hover,
+.active {
+  background-color: var(--warning);
+  color: var(--white);
+  transition: all ease-in-out 0.3s;
+}
+
+
+.info-team-tab-item i {
+  min-width: 30px;
+  font-size: 16px;
+}
+
+.info-team-tab-item span {
+  flex: 1;
+  font-size: 16px;
+  margin-top: 2px;
+}

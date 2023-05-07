@@ -25,6 +25,12 @@
                 <label for="" class="register-label">Tên của bạn</label>
             </div>
         </div>
+        <div class="pt-4 d-flex justify-content-center">
+            <div class="register-input-box">
+                <input type="text" [value]=" userInfo.campus.name" class="register-input-text" disabled>
+                <label for="" class="register-label">Cơ sở</label>
+            </div>
+        </div>
         <button class="mt-4 btn btn-base-type-bg" (click)="EditInFoUser()">Sửa thông
             tin</button>
     </form>
@@ -46,7 +52,7 @@
                     Self aware panel
                 </mat-panel-title>
                 <mat-panel-description>
-                    
+
                 </mat-panel-description>
             </mat-expansion-panel-header>
             <p>I'm visible because I am open</p>

@@ -7,6 +7,7 @@ import {ProfileUserComponent} from './component/profile-user/profile-user.compon
 import {CapacityDetailComponent} from './pages/capacity-detail/capacity-detail.component';
 import {TestCapacityComponent} from './pages/test-capacity/test-capacity.component';
 import {CapacityExamComponent} from "./pages/capacity-exam/capacity-exam.component";
+import {InfoTeamComponent} from "./pages/info-team/info-team.component";
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'thong-tin',
-        // component: InfoTeamComponent,
+        component: InfoTeamComponent,
         children: [
           {
             path: 'ca-nhan',

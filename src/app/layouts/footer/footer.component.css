@@ -24,7 +24,11 @@
   font-size: 15px;
 }
 
-#footer .fa-square-phone {
+#footer .fa-square-phone,.fa-square-envelope,.fa-facebook-square {
   font-size: 16px;
   color: var(--primary);
+}
+
+#footer a {
+  color: white;
 }

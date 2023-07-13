@@ -18,6 +18,7 @@ export const environment = {
   recruitment: `${publicApiUrl}/recruitments`,
   capacityListUrl: `${publicApiUrl}/capacity`,
   postListUrl: `${publicApiUrl}/posts`,
+  updateViews: `${publicApiUrl}/posts/view`,
   candidateUrl: `${publicApiUrl}/candidate`,
   skillListUrl: `${publicApiUrl}/skill`,
   keywordListUrl: `${publicApiUrl}/keywords`,

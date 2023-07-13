@@ -12,4 +12,5 @@ export class Post {
     postable_type: string;
     postable?: any;
     user_wishlist: boolean;
+    view : number;
 }

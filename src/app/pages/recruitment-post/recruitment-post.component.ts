@@ -73,6 +73,7 @@ export class RecruitmentPostComponent implements OnInit {
     private router: Router,
     private location: Location,
     private route: ActivatedRoute,
+    private postService: ListPostService,
   ) {}
 
   statusFilter: Array<any> = [
@@ -236,6 +237,16 @@ export class RecruitmentPostComponent implements OnInit {
     });
   }
 
+  increaseViewCount(item: Post) {
+    // this.job.luotView++;
+    const idPost = item.id;
+    
+    // console.log(idPost);
+    this.postService.increaseViews(idPost).subscribe((res) => {
+        // console.log(res);
+    });
+    
+  }
   getListMajor() {
     this.majorService.getAll().subscribe((res) => {
       if (res.status) {

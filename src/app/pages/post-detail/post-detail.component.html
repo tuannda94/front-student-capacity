@@ -2,9 +2,14 @@
   <div class="container">
     <div class="post-main">
       <div class="post-main-content">
-        <h1 class="post-detail__title" *ngIf="statusPost">
-          {{ postDetail?.title }}
-        </h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h1 class="post-detail__title m-0" *ngIf="statusPost">
+            {{ postDetail?.title }}
+          </h1>
+          <div class="d-flex align-items-center">
+            <i class="fa-regular fa-eye ms-2 me-2"></i> <span>{{ postDetail.view }}</span>
+          </div>
+        </div>
         <ngx-skeleton-loader
           *ngIf="!statusPost"
           [theme]="{

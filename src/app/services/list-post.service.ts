@@ -79,6 +79,14 @@ export class ListPostService {
     return this.http.get<ResponsePayload>(`${environment.postListUrl}?post=post-recruitment&limit=6`);
   }
 
+    // count view
+  increaseViews(id: number): Observable<ResponsePayload> {
+    const body = {
+      id: id,
+      view: 1
+    };
+    return this.http.post<ResponsePayload>(`${environment.updateViews}`,body);
+  }
   // Post  recruitment  page trang chủ.
   paydingRecruitmentPosition(index: number): Observable<ResponsePayload> {
     return this.http.get<ResponsePayload>(`${environment.postListUrl}?page=${index}&post=post-recruitment&limit=6`);

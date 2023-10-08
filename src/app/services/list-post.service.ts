@@ -70,8 +70,8 @@ export class ListPostService {
     );
   }
 
-  searchPostRecruitment(keyword: string, branch_id: string): Observable<ResponsePayload> {
-    return this.http.get<ResponsePayload>(`${environment.postListUrl}?keyword=${keyword}&branch_id=${branch_id}&post=post-recruitment`);
+  searchPostRecruitment(keyword: string, branch_id: string, major_id: string = '', postHot: string = ''): Observable<ResponsePayload> {
+    return this.http.get<ResponsePayload>(`${environment.postListUrl}?keyword=${keyword}&branch_id=${branch_id}&major_id=${major_id}&postHot=${postHot}&post=post-recruitment`);
   }
 
   // Post  recruitment  page trang chủ.

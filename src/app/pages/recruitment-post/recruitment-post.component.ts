@@ -240,12 +240,12 @@ export class RecruitmentPostComponent implements OnInit {
   increaseViewCount(item: Post) {
     // this.job.luotView++;
     const idPost = item.id;
-    
+
     // console.log(idPost);
     this.postService.increaseViews(idPost).subscribe((res) => {
         // console.log(res);
     });
-    
+
   }
   getListMajor() {
     this.majorService.getAll().subscribe((res) => {
@@ -315,7 +315,7 @@ export class RecruitmentPostComponent implements OnInit {
       });
     }
 
-    this.listPostService.searchPostRecruitment(this.keyword, this.branch_id).subscribe((res) => {
+    this.listPostService.searchPostRecruitment(this.keyword, this.branch_id, this.major_id, this.status).subscribe((res) => {
       if (res.status && res.payload.data.length > 0) {
         this.statusPostSearch = true;
         this.listPostResult = res.payload.data;

@@ -7,6 +7,7 @@ import { map, switchMap } from "rxjs";
 import { Post } from "src/app/models/post.model";
 import { ResponsePayload } from "src/app/models/response-payload";
 import { ListPostService } from "src/app/services/list-post.service";
+import { MajorService } from "src/app/services/major.service";
 
 @Component({
   selector: "app-modal-upload-cv",
@@ -20,6 +21,8 @@ export class ModalUploadCvComponent implements OnInit {
   statusLinkCv: boolean = false;
   fileUpload: any;
 
+  majors: any[] = [];
+
   // set up form control
   formUploadCv = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(2)]),
@@ -27,6 +30,7 @@ export class ModalUploadCvComponent implements OnInit {
     email: new FormControl("", [Validators.required, Validators.email]),
     phone: new FormControl("", [Validators.required, Validators.pattern("[0-9]{10}")]),
     file_link: new FormControl(""),
+    major_id: new FormControl("", [Validators.required]),
   });
 
   get name() {
@@ -36,25 +40,39 @@ export class ModalUploadCvComponent implements OnInit {
   get studentCode() {
     return this.formUploadCv.get("studentCode");
   }
+
   get email() {
     return this.formUploadCv.get("email");
   }
+
   get phone() {
     return this.formUploadCv.get("phone");
   }
+
   get file_link() {
     return this.formUploadCv.get("file_link");
+  }
+
+  get major_id() {
+    return this.formUploadCv.get("major_id");
   }
 
   constructor(
     public dialogRef: MatDialogRef<ModalUploadCvComponent>,
     private postService: ListPostService,
     private toast: NgToastService,
+    private majorService: MajorService,
     @Inject(MAT_DIALOG_DATA)
     public dataPostDetail: { postDetail: Post },
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.majorService.getAll().subscribe((res: ResponsePayload) => {
+      this.majors = res.payload;
+    });
+  }
+
   closeDialog() {
     this.dialogRef.close("Pizza!");
   }
@@ -90,6 +108,7 @@ export class ModalUploadCvComponent implements OnInit {
     formDataInput.append("student_code", dataInput.studentCode);
     formDataInput.append("email", dataInput.email);
     formDataInput.append("phone", dataInput.phone);
+    formDataInput.append("major_id", dataInput.major_id);
     formDataInput.append("file_link", this.fileUpload);
     if (this.dataPostDetail.postDetail) formDataInput.append("post_id", this.dataPostDetail.postDetail.id);
 

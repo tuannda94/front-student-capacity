@@ -8,6 +8,8 @@ import { Post } from "src/app/models/post.model";
 import { ResponsePayload } from "src/app/models/response-payload";
 import { ListPostService } from "src/app/services/list-post.service";
 import { MajorService } from "src/app/services/major.service";
+import { MatDialog } from "@angular/material/dialog";
+import { DialogConfirmComponent } from "../dialog-confirm/dialog-confirm.component";
 
 @Component({
   selector: "app-modal-upload-cv",
@@ -62,13 +64,14 @@ export class ModalUploadCvComponent implements OnInit {
     private postService: ListPostService,
     private toast: NgToastService,
     private majorService: MajorService,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
     public dataPostDetail: { postDetail: Post },
   ) {
   }
 
   ngOnInit(): void {
-    this.majorService.getAll().subscribe((res: ResponsePayload) => {
+    this.majorService.getAllForRecruitment().subscribe((res: ResponsePayload) => {
       this.majors = res.payload;
     });
   }
@@ -81,7 +84,7 @@ export class ModalUploadCvComponent implements OnInit {
   preview(files: any) {
     var errorLink = document.querySelector("#error-link");
     let countTrue: number = 0;
-    const validFileExtensions = ["docx", "pdf", "doc", "xls"];
+    const validFileExtensions = ["pdf"];
     validFileExtensions.forEach((ext) => {
       if (files[0].name.endsWith(ext)) {
         countTrue++;
@@ -112,16 +115,43 @@ export class ModalUploadCvComponent implements OnInit {
     formDataInput.append("file_link", this.fileUpload);
     if (this.dataPostDetail.postDetail) formDataInput.append("post_id", this.dataPostDetail.postDetail.id);
 
+    this.dialog.open(DialogConfirmComponent, {
+      width: "500px",
+      disableClose: true,
+      data: {
+        description:
+          "Vui lòng không thoát ứng dụng.",
+        isNotShowBtn: true,
+        title: "Đang gửi thông tin ứng tuyển...",
+        isShowLoading: true,
+      },
+    });
+
     setTimeout(() => {
       this.postService.uploadCV(formDataInput).subscribe((res: any) => {
         console.log(res);
+        this.dialog.closeAll();
+        let msg = "";
+        let title = "";
         if (res.status == false) {
           this.toast.warning({ summary: res.message.file_link[0], duration: 2000, detail: "Cảnh báo" });
+          title = "Cảnh báo";
+          msg = res.message.file_link[0];
         } else {
           this.statusRegister = true;
-          this.toast.success({ summary: "Upload CV thành công", duration: 2000, detail: "Thông báo" });
+          title = "Thông báo";
+          msg = "Upload CV thành công!";
           this.dialogRef.close();
         }
+        this.dialog.open(DialogConfirmComponent, {
+          width: "500px",
+          disableClose: false,
+          data: {
+            isNotShowBtnCancel: true,
+            title: title,
+            description: msg,
+          },
+        });
         return "Ok";
       });
     }, 1000);

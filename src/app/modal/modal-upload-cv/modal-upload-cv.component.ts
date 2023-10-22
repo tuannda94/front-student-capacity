@@ -134,7 +134,6 @@ export class ModalUploadCvComponent implements OnInit {
         let msg = "";
         let title = "";
         if (res.status == false) {
-          this.toast.warning({ summary: res.message.file_link[0], duration: 2000, detail: "Cảnh báo" });
           title = "Cảnh báo";
           msg = res.message.file_link[0];
         } else {

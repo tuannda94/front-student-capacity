@@ -101,7 +101,9 @@ export class RecruitmentPostComponent implements OnInit {
     this.route.queryParamMap.subscribe((params) => {
       this.orderObj = { ...params };
     });
+    this.getListMajor();
 
+    console.log(this.orderObj.params);
     if (this.orderObj.params) {
       this.keyword = this.orderObj.params.keyword ? this.orderObj.params.keyword : "";
       this.major_id = this.orderObj.params.major_id ? this.orderObj.params.major_id : "";
@@ -115,9 +117,9 @@ export class RecruitmentPostComponent implements OnInit {
       this.filterRecruitments();
     }
 
-    this.getListMajor();
     this.getBranches();
     this.getAllSkill();
+
 
     window.addEventListener("scroll", this.noneSuggestFilter);
 
@@ -248,7 +250,7 @@ export class RecruitmentPostComponent implements OnInit {
 
   }
   getListMajor() {
-    this.majorService.getAll().subscribe((res) => {
+    this.majorService.getAllForRecruitment().subscribe((res) => {
       if (res.status) {
         this.majors = res.payload;
       }

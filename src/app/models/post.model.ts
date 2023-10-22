@@ -13,4 +13,7 @@ export class Post {
     postable?: any;
     user_wishlist: boolean;
     view : number;
+    deadline?: Date;
+    enterprise?: any;
+    major?: any;
 }

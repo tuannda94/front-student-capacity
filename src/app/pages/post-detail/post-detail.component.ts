@@ -82,6 +82,15 @@ export class PostDetailComponent implements OnInit {
     this.router.navigateByUrl(`danh-muc-bai-viet?cate=${data}`);
   }
 
+  // Chuyển đến trang tin tức tuyển dụng theo chuyên ngành
+  clickChangeUrlToRecruitmentPostByMajor(data = null) {
+    let url = "tin-tuc-tuyen-dung?";
+    if (data) {
+      url += `major_id=${data}`;
+    }
+    this.router.navigateByUrl(url);
+  }
+
   // Get all key word bài viết
   getAllKeywordPost() {
     this.keywordService.getKeywordWhereType(0).subscribe((res) => {

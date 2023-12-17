@@ -8,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { Title } from "@angular/platform-browser";
 import { KeywordService } from "src/app/services/keyword.service";
 import { Keyword } from "src/app/models/keyword";
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: "app-post-detail",
@@ -19,6 +20,7 @@ export class PostDetailComponent implements OnInit {
   statusPost: boolean = false;
   routeCategoryPost: string = "";
   listTag: Array<Keyword>;
+  content: any;
 
   constructor(
     private postService: ListPostService,
@@ -27,6 +29,7 @@ export class PostDetailComponent implements OnInit {
     public dialog: MatDialog,
     public title: Title,
     private keywordService: KeywordService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +44,7 @@ export class PostDetailComponent implements OnInit {
       .subscribe((res) => {
         if (res.status) {
           this.postDetail = res.payload;
+          this.content = this.getSafeHtml(this.postDetail?.content ?? "");
           this.postDetail.postable_type === "App\\Models\\Contest"
             ? ((this.postDetail.postable_type = "Cuộc thi"), (this.routeCategoryPost = "post-contest"))
             : this.postDetail.postable_type === "App\\Models\\Recruitment"
@@ -98,5 +102,9 @@ export class PostDetailComponent implements OnInit {
         this.listTag = res.payload;
       }
     });
+  }
+
+  getSafeHtml(html: string = ""): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 }

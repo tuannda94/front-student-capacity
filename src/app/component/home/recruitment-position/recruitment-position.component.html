@@ -1,6 +1,6 @@
 <div class="recruitment-position-item my-shadow-3-hover">
   <div class="recruitment-position__img-section">
-    <a [routerLink]="['/tin-tuc/', item.slug]"   (click)="increaseViewCount(item)">
+    <a [routerLink]="['/tin-tuc/', item.slug]" (click)="increaseViewCount(item)">
       <img [src]="item.thumbnail_url" class="recruitment-position__img" alt="" />
     </a>
   </div>
@@ -14,8 +14,8 @@
           data-placement="top"
           title="{{ item.title }}"
           (click)="increaseViewCount(item)"
-          [routerLink]="['/tin-tuc/', item.slug]" 
-          >{{ item.title }}</a
+          [routerLink]="['/tin-tuc/', item.slug]"
+        >{{ item.title }}</a
         >
       </h3>
       <button class="my-btn my-add-favorite__btn" [ngClass]="item.user_wishlist ? 'opacity-100' : ''">
@@ -29,11 +29,14 @@
     <div class="recruitment-position__context-recruitment">
       <i class="fa-regular fa-building"></i>
       <span class="recruitment-position__name-company my-xs"
-        >Doanh nghiệp:
-        <span class="recruitment-position__name-company-item" *ngFor="let company of item.postable.enterprise"
-          >{{ company.name }}
-        </span></span
-      >
+      >Doanh nghiệp:
+        <span *ngIf="item.postable">
+        <span class="recruitment-position__name-company-item" *ngFor="let company of item.postable.enterprise">
+          {{ company.name }}
+        </span>
+        </span>
+        <span *ngIf="!item.postable">Chưa có</span>
+      </span>
     </div>
     <div class="recruitment-position__context-row">
       <div class="">

@@ -7,7 +7,7 @@
             {{ postDetail?.title }}
           </h1>
           <div class="d-flex align-items-center">
-            <i class="fa-regular fa-eye ms-2 me-2"></i> <span>{{ postDetail.view }}</span>
+            <i class="fa-regular fa-eye ms-2 me-2"></i> <span>{{ postDetail?.view ?? 0 }}</span>
           </div>
         </div>
         <ngx-skeleton-loader
@@ -83,7 +83,8 @@
           >
           </ngx-skeleton-loader>
         </div>
-        <div class="post-detail__content-text" [innerHTML]="postDetail?.content"></div>
+<!--        <div class="post-detail__content-text" [innerHTML]="postDetail?.content"></div>-->
+        <div class="post-detail__content-text" [innerHTML]="content"></div>
         <!-- Upload cv -->
         <div class="post_upload-cv text-center" *ngIf="postDetail?.postable_type == 'Tuyển dụng'">
           <button class="my-btn-primary my-btn-m" (click)="openModal()">Ứng tuyển ngay</button>

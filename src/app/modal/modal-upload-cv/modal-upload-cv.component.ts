@@ -10,6 +10,7 @@ import { ListPostService } from "src/app/services/list-post.service";
 import { MajorService } from "src/app/services/major.service";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogConfirmComponent } from "../dialog-confirm/dialog-confirm.component";
+import { StudentStatusService } from "../../services/student-status.service";
 
 @Component({
   selector: "app-modal-upload-cv",
@@ -25,6 +26,8 @@ export class ModalUploadCvComponent implements OnInit {
 
   majors: any[] = [];
 
+  student_statuses: any[] = [];
+
   // set up form control
   formUploadCv = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(2)]),
@@ -33,6 +36,7 @@ export class ModalUploadCvComponent implements OnInit {
     phone: new FormControl("", [Validators.required, Validators.pattern("[0-9]{10}")]),
     file_link: new FormControl(""),
     major_id: new FormControl("", [Validators.required]),
+    student_status: new FormControl("0", [Validators.required]),
   });
 
   get name() {
@@ -59,11 +63,16 @@ export class ModalUploadCvComponent implements OnInit {
     return this.formUploadCv.get("major_id");
   }
 
+  get student_status() {
+    return this.formUploadCv.get("student_status");
+  }
+
   constructor(
     public dialogRef: MatDialogRef<ModalUploadCvComponent>,
     private postService: ListPostService,
     private toast: NgToastService,
     private majorService: MajorService,
+    private studentStatusService: StudentStatusService,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
     public dataPostDetail: { postDetail: Post },
@@ -74,6 +83,15 @@ export class ModalUploadCvComponent implements OnInit {
     this.majorService.getAllForRecruitment().subscribe((res: ResponsePayload) => {
       this.majors = res.payload;
     });
+
+    this.studentStatusService.getListStudentStatuses()
+      .subscribe((res: ResponsePayload) => {
+        this.student_statuses = res.payload;
+        // formDataInput.append("student_status", dataInput.student_status);
+        this.formUploadCv.patchValue({
+          student_status: this.student_statuses[0].key,
+        });
+      });
   }
 
   closeDialog() {
@@ -112,6 +130,7 @@ export class ModalUploadCvComponent implements OnInit {
     formDataInput.append("email", dataInput.email);
     formDataInput.append("phone", dataInput.phone);
     formDataInput.append("major_id", dataInput.major_id);
+    formDataInput.append("student_status", dataInput.student_status);
     formDataInput.append("file_link", this.fileUpload);
     if (this.dataPostDetail.postDetail) formDataInput.append("post_id", this.dataPostDetail.postDetail.id);
 

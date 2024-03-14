@@ -27,6 +27,7 @@ export const environment = {
   challengeListUrl: `${publicApiUrl}/challenge`,
   codeLanguageListUrl: `${publicApiUrl}/code-language`,
   studentStatusListUrl: `${publicApiUrl}/student-statuses`,
+  userUrl: `${publicApiUrl}/users`,
 
   // Router API V1;
   userListUrl: `${jwtApiUrl}/users`,

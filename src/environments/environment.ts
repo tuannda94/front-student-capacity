@@ -1,3 +1,4 @@
+// const baseApiUrl = "https://adminbeecareer.poly.edu.vn/api";
 const baseApiUrl = "http://localhost:8000/api";
 const authApi = `${baseApiUrl}/auth`;
 export const jwtApiUrl = `${baseApiUrl}/v1`;
@@ -28,6 +29,7 @@ export const environment = {
   codeLanguageListUrl: `${publicApiUrl}/code-language`,
   studentStatusListUrl: `${publicApiUrl}/student-statuses`,
   userUrl: `${publicApiUrl}/users`,
+  qaUrl: `${publicApiUrl}/qa`,
 
   // Router API V1;
   userListUrl: `${jwtApiUrl}/users`,

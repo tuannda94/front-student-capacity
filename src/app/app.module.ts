@@ -96,6 +96,9 @@ import { ChallengeComponent } from "./pages/challenge/challenge.component";
 import { ModalSubmitChallengeSuccessComponent } from "./modal/modal-submit-challenge-success/modal-submit-challenge-success.component";
 import { ModalInfoCapacityComponent } from './modal/modal-info-capacity/modal-info-capacity.component';
 
+import { QuestionAndAnswerComponent } from './pages/question-and-answer/question-and-answer.component';
+import { QACategoryComponent } from "./component/qa-category/qa-category.component";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -173,6 +176,8 @@ import { ModalInfoCapacityComponent } from './modal/modal-info-capacity/modal-in
     ChallengeComponent,
     ModalSubmitChallengeSuccessComponent,
     ModalInfoCapacityComponent,
+    QuestionAndAnswerComponent,
+    QACategoryComponent,
   ],
   imports: [
     BrowserModule,

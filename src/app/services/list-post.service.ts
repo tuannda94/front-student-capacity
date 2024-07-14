@@ -27,7 +27,7 @@ export class ListPostService {
 
   getPostByCategory(data: string, page: string | null): Observable<ResponsePayload> {
     let pageQuery = page == null ? "1" : page;
-    return this.http.get<ResponsePayload>(`${environment.postListUrl}?post=${data}&page=${pageQuery}`);
+      return this.http.get<ResponsePayload>(`${environment.postListUrl}?post=${data}&page=${pageQuery}`);
   }
 
   // get posts by params

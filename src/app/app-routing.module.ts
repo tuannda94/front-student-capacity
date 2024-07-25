@@ -157,7 +157,7 @@ const routes: Routes = [
       {
         path: "challenge/:id",
         component: ChallengeExamComponent,
-      },
+      }
     ],
   },
   {

@@ -150,7 +150,7 @@
   </div>
 </div>
 
-<div class="section section-bg--3">
+<!-- <div class="section section-bg--3">
   <div class="container">
     <h2 class="section__title section__title--center my-h3">Tính năng vượt trội khác</h2>
     <div class="section-content outstanding-advantages-section">
@@ -209,7 +209,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <div class="section section-bg--2">
   <div class="container">
     <h2 class="section__title section__title--center my-h3">Tin tức - sự kiện</h2>
@@ -239,7 +239,7 @@
     <div class="section-content">
       <ngx-slick-carousel [config]="sliderCompany" class="recruitment-list">
         <div ngxSlickItem class="recruitment-item mx-3" *ngFor="let item of companies">
-          <img class="recruitment-item__img" [src]="item.logo" alt="" />
+          <img class="recruitment-item__img" [src]="item.logo" [alt]="item.name" />
         </div>
       </ngx-slick-carousel>
     </div>

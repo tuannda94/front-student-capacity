@@ -30,12 +30,12 @@
       <i class="fa-regular fa-building"></i>
       <span class="recruitment-position__name-company my-xs"
       >Doanh nghiệp:
-        <span *ngIf="item.postable">
-        <span class="recruitment-position__name-company-item" *ngFor="let company of item.postable.enterprise">
-          {{ company.name }}
+        <span *ngIf="item.enterprise">
+        <span class="recruitment-position__name-company-item">
+          {{ item.enterprise.name }}
         </span>
         </span>
-        <span *ngIf="!item.postable">Chưa có</span>
+        <span *ngIf="!item.enterprise">Chưa có</span>
       </span>
     </div>
     <div class="recruitment-position__context-row">

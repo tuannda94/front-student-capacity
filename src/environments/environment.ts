@@ -29,7 +29,7 @@ export const environment = {
   codeLanguageListUrl: `${publicApiUrl}/code-language`,
   studentStatusListUrl: `${publicApiUrl}/student-statuses`,
   userUrl: `${publicApiUrl}/users`,
-  qaUrl: `${publicApiUrl}/qa`,
+  qaUrl: `${publicApiUrl}/question-and-answer`,
 
   // Router API V1;
   userListUrl: `${jwtApiUrl}/users`,

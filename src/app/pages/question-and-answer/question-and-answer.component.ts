@@ -12,7 +12,7 @@ import { QAService } from "src/app/services/qa.service";
 
 
 export class QuestionAndAnswerComponent implements OnInit {
-    intership: Array<any> = [];
+    internship: Array<any> = [];
     job: Array<any> = [];
     event: Array<any> = [];
     items: any[] = [
@@ -40,17 +40,17 @@ export class QuestionAndAnswerComponent implements OnInit {
 
         this.qaService.getQAInternship().subscribe(res => {
             if (res.status) {
-                this.intership = res.payload;
+                this.internship = res.payload.data;
             }
         });
         this.qaService.getQAJob().subscribe(res => {
             if (res.status) {
-                this.job = res.payload;
+                this.job = res.payload.data;
             }
         });
         this.qaService.getQAEvent().subscribe(res => {
             if (res.status) {
-                this.event = res.payload;
+                this.event = res.payload.data;
             }
         });
     }

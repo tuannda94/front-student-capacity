@@ -233,9 +233,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  //-----------------------  Danh sách các 3 bài viết
+  //-----------------------  Danh sách các 3 bài viết tin tức-sự kiện
   getListPost() {
-    this.postService.getPostByCategory("post-contest", "1").subscribe((res) => {
+    this.postService.getPostByCategory("event", "1").subscribe((res) => {
       if (res.status == true) {
         let arrResult = res.payload.data;
         this.listPostEvent = arrResult.filter((res: Post, index: number) => {

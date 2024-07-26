@@ -98,6 +98,7 @@ import { ModalInfoCapacityComponent } from './modal/modal-info-capacity/modal-in
 
 import { QuestionAndAnswerComponent } from './pages/question-and-answer/question-and-answer.component';
 import { QACategoryComponent } from "./component/qa-category/qa-category.component";
+import { ContactCompanyComponent } from './pages/contact-company/contact-company.component';
 
 @NgModule({
   declarations: [
@@ -178,6 +179,7 @@ import { QACategoryComponent } from "./component/qa-category/qa-category.compone
     ModalInfoCapacityComponent,
     QuestionAndAnswerComponent,
     QACategoryComponent,
+    ContactCompanyComponent,
   ],
   imports: [
     BrowserModule,

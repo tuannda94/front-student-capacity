@@ -22,8 +22,6 @@ export class ContactCompanyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Liên hệ");
-
     this.formContact = new FormGroup({
       fullname: new FormControl(""),
       companyname: new FormControl(""),

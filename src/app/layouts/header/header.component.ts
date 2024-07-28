@@ -133,6 +133,15 @@ export class HeaderComponent implements OnInit {
     document.querySelector(".overlay")?.classList.remove("d-none");
   }
 
+  scrollToContactForm() {
+    if (window.location.pathname == '/') {
+      const contactForm = document.querySelector("#contactForm");
+      contactForm?.scrollIntoView(false);
+    } else {
+      this.router.navigateByUrl("/#contactForm");
+    }
+  }
+
   closeSaveInfo(status: boolean) {
     const menuRes = document.querySelector(".sidepanel");
     const overlay = document.querySelector(".overlay");

@@ -235,13 +235,22 @@
 </div>
 <div class="section section-bg--2">
   <div class="container">
-    <h2 class="section__title section__title--center my-h3">Kết nối với các doanh nghiệp lớn</h2>
+    <h2 class="section__title section__title--center my-h3">Các doanh nghiệp hợp tác</h2>
     <div class="section-content">
       <ngx-slick-carousel [config]="sliderCompany" class="recruitment-list">
         <div ngxSlickItem class="recruitment-item mx-3" *ngFor="let item of companies">
           <img class="recruitment-item__img" [src]="item.logo" [alt]="item.name" />
         </div>
       </ngx-slick-carousel>
+    </div>
+  </div>
+</div>
+
+<div class="section section-bg--2">
+  <div class="container">
+    <h2 class="section__title section__title--center my-h3">Liên hệ</h2>
+    <div class="section-content" id="contactForm">
+      <app-contact-company></app-contact-company>
     </div>
   </div>
 </div>

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ResponsePayload } from '../models/response-payload';
-import { QA } from '../models/qa.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,5 +21,9 @@ export class QAService {
 
     getQAEvent(): Observable<ResponsePayload> {
         return this.http.get<ResponsePayload>(`${environment.qaUrl}/event`);
+    }
+
+    getQADetail(faq: number): Observable<ResponsePayload> {
+        return this.http.get<ResponsePayload>(`${environment.qaUrl}/detail/${faq}`)
     }
 }

@@ -105,6 +105,13 @@ export class HomeComponent implements OnInit {
     this.getListPost();
     this.getAllCompany();
     // Slider tính năng
+    
+    if(window.location.href.includes("#contactForm")) {
+      setTimeout(() => {
+        const contactForm = document.querySelector("#contactForm");
+        contactForm?.scrollIntoView(false);
+      }, 1000);
+    }
 
     const advantageFrist = document.querySelector(".advantage__tag--1");
     const advantageImage = document.querySelector(".advantage-show__img");

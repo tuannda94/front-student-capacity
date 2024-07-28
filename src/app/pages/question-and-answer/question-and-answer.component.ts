@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Title } from "@angular/platform-browser";
+import { Router } from "@angular/router";
 import { QAService } from "src/app/services/qa.service";
 
 @Component({
@@ -32,7 +33,8 @@ export class QuestionAndAnswerComponent implements OnInit {
 
     constructor(
         private titleService: Title,
-        private qaService: QAService
+        private qaService: QAService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -53,5 +55,9 @@ export class QuestionAndAnswerComponent implements OnInit {
                 this.event = res.payload.data;
             }
         });
+    }
+
+    seeDetail(id: any) {
+        this.router.navigate([`/hoi-dap/${id}`])
     }
 }

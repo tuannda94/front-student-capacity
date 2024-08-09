@@ -29,6 +29,7 @@ import { RankContestComponent } from "./pages/rank-contest/rank-contest.componen
 import { ChallengeComponent } from "./pages/challenge/challenge.component";
 import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
 import { QuestionAndAnswerComponent } from "./pages/question-and-answer/question-and-answer.component";
+import { DetailFaqComponent } from "./pages/detail-faq/detail-faq.component";
 
 const routes: Routes = [
   {
@@ -53,6 +54,11 @@ const routes: Routes = [
         path: "hoi-dap",
         data: { title: "Hỏi đáp" },
         component: QuestionAndAnswerComponent
+      },
+      {
+        path: "hoi-dap/:id",
+        data: { title: "Hỏi đáp" },
+        component: DetailFaqComponent
       },
       {
         path: "xep-hang-cuoc-thi",

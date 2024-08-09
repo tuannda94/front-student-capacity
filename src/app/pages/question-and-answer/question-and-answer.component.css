@@ -39,6 +39,7 @@
 
 .accordion-button {
     border-radius: 15px;
+    font-size: 20px;
 }
 
 .accordion-button:focus{
@@ -58,4 +59,12 @@
 
 .accordion-header{
     margin: 0;
+}
+
+.question {
+    -webkit-line-clamp: 3;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }

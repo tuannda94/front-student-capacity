@@ -99,6 +99,8 @@ import { ModalInfoCapacityComponent } from './modal/modal-info-capacity/modal-in
 import { QuestionAndAnswerComponent } from './pages/question-and-answer/question-and-answer.component';
 import { QACategoryComponent } from "./component/qa-category/qa-category.component";
 import { ContactCompanyComponent } from './component/contact-company/contact-company.component';
+import { DetailFaqComponent } from "./pages/detail-faq/detail-faq.component";
+import { ModalDownRateComponent } from "./modal/modal-down-rate/modal-down-rate.component";
 
 @NgModule({
   declarations: [
@@ -180,6 +182,8 @@ import { ContactCompanyComponent } from './component/contact-company/contact-com
     QuestionAndAnswerComponent,
     QACategoryComponent,
     ContactCompanyComponent,
+    DetailFaqComponent,
+    ModalDownRateComponent
   ],
   imports: [
     BrowserModule,

@@ -30,6 +30,7 @@ import { ChallengeComponent } from "./pages/challenge/challenge.component";
 import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.component";
 import { QuestionAndAnswerComponent } from "./pages/question-and-answer/question-and-answer.component";
 import { DetailFaqComponent } from "./pages/detail-faq/detail-faq.component";
+import { IntroComponent } from "./pages/intro/intro.component";
 
 const routes: Routes = [
   {
@@ -163,6 +164,10 @@ const routes: Routes = [
       {
         path: "challenge/:id",
         component: ChallengeExamComponent,
+      },
+      {
+        path: "gioi-thieu",
+        component: IntroComponent,
       }
     ],
   },

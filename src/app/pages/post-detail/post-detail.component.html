@@ -68,8 +68,9 @@
         >
         </ngx-skeleton-loader>
         <!-- Upload cv -->
-        <div class="post_upload-cv text-center" *ngIf="postDetail?.postable_type == 'Tuyển dụng'">
-          <button class="my-btn-primary my-btn-m" (click)="openModal()">Ứng tuyển ngay</button>
+        <div class="post_upload-cv text-center mt-2" *ngIf="postDetail?.postable_type == 'Tuyển dụng'">
+          <button *ngIf="postDetail?.full_recruitment == 0" class="my-btn-primary my-btn-m" (click)="openModal()">Ứng tuyển ngay</button>
+          <button *ngIf="postDetail?.full_recruitment == 1" class="my-btn-secondary my-btn-m" (click)="fullRecruitmentModal()">Doanh nghiệp đã ngừng tuyển</button>
         </div>
         <div class="post-detail__img-section">
           <img *ngIf="statusPost" [src]="postDetail?.thumbnail_url" alt="" class="post-detail__img" />
@@ -87,7 +88,8 @@
         <div class="post-detail__content-text" [innerHTML]="content"></div>
         <!-- Upload cv -->
         <div class="post_upload-cv text-center" *ngIf="postDetail?.postable_type == 'Tuyển dụng'">
-          <button class="my-btn-primary my-btn-m" (click)="openModal()">Ứng tuyển ngay</button>
+          <button *ngIf="postDetail?.full_recruitment == 0" class="my-btn-primary my-btn-m" (click)="openModal()">Ứng tuyển ngay</button>
+          <button *ngIf="postDetail?.full_recruitment == 1" class="my-btn-secondary my-btn-m" (click)="fullRecruitmentModal()">Doanh nghiệp đã ngừng tuyển</button>
         </div>
         <div class="post-detail__tag-section" *ngIf="listTag">
           <app-list-tag [tags]="listTag"></app-list-tag>

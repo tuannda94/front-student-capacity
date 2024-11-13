@@ -16,4 +16,7 @@ export class Post {
     deadline?: Date;
     enterprise?: any;
     major?: any;
+    full_recruitment: number;
+    position?: string;
+    code_recruitment?: string;
 }

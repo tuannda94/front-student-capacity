@@ -101,6 +101,7 @@ import { QACategoryComponent } from "./component/qa-category/qa-category.compone
 import { ContactCompanyComponent } from './component/contact-company/contact-company.component';
 import { DetailFaqComponent } from "./pages/detail-faq/detail-faq.component";
 import { ModalDownRateComponent } from "./modal/modal-down-rate/modal-down-rate.component";
+import { IntroComponent } from "./pages/intro/intro.component";
 
 @NgModule({
   declarations: [
@@ -183,7 +184,8 @@ import { ModalDownRateComponent } from "./modal/modal-down-rate/modal-down-rate.
     QACategoryComponent,
     ContactCompanyComponent,
     DetailFaqComponent,
-    ModalDownRateComponent
+    ModalDownRateComponent,
+    IntroComponent
   ],
   imports: [
     BrowserModule,

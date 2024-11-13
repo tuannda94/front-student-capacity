@@ -9,6 +9,7 @@ import { Title } from "@angular/platform-browser";
 import { KeywordService } from "src/app/services/keyword.service";
 import { Keyword } from "src/app/models/keyword";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DialogConfirmComponent } from "src/app/modal/dialog-confirm/dialog-confirm.component";
 
 @Component({
   selector: "app-post-detail",
@@ -78,6 +79,17 @@ export class PostDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log("result", result);
+    });
+  }
+
+  fullRecruitmentModal() {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: "600px",
+      data: {
+        isNotShowBtnCancel: true,
+        title: `${this.postDetail.position ?? ''} - <${this.postDetail?.code_recruitment}>`,
+        description: `Doanh nghiệp ${this.postDetail?.enterprise?.name} đã tuyển đủ nhân sự cho vị trí ${this.postDetail.position ?? 'này'}. Bạn vui lòng ứng tuyển vào vị trí phù hợp khác`,
+      },
     });
   }
 

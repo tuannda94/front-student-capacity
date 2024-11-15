@@ -36,7 +36,7 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.backTop();
     this.titleService.setTitle("Danh Sách tin tức");
-    this.getListPostRecruitment();
+    // this.getListPostRecruitment();
     this.getListPostCapacity();
     this.getListPostContest();
     this.getListEvent();

@@ -240,6 +240,7 @@
       <ngx-slick-carousel [config]="sliderCompany" class="recruitment-list">
         <div ngxSlickItem class="recruitment-item mx-3" *ngFor="let item of companies">
           <img class="recruitment-item__img" [src]="item.logo" [alt]="item.name" />
+          <p>{{ item.name }}</p>
         </div>
       </ngx-slick-carousel>
     </div>

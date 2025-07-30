@@ -1,4 +1,4 @@
-const baseApiUrl = "https://adminbeecareer.poly.edu.vn/api";
+const baseApiUrl = "https://beecareer.poly.edu.vn/api";
 const authApi = `${baseApiUrl}/auth`;
 export const jwtApiUrl = `${baseApiUrl}/v1`;
 export const publicApiUrl = `${baseApiUrl}/public`;

@@ -1,6 +1,10 @@
+import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { QaCategory } from "src/app/models/qa-category.model";
+import { ConfigFunctionService } from "src/app/services/config-function.service";
 import { QAService } from "src/app/services/qa.service";
 
 @Component({
@@ -13,51 +17,170 @@ import { QAService } from "src/app/services/qa.service";
 
 
 export class QuestionAndAnswerComponent implements OnInit {
-    internship: Array<any> = [];
-    job: Array<any> = [];
-    event: Array<any> = [];
-    items: any[] = [
-        {
-            id: 1,
-            name: 'Thực tập',
-        },
-        {
-            id: 2,
-            name: 'Việc làm',
-        },
-        {
-            id: 3,
-            name: 'Sự kiện',
-        }
-    ];
+    faqs: Array<any> = [];
+    categories: Array<any> = [];
+    filterObj: any;
+    keyword: string;
+    categoryId: string = "";
+    statusFaq: boolean = false;
+    statusCategory: boolean = false;
+    statusSubmit: boolean = false;
+
+    currentPage: string = '1';
+    first_page_url: string;
+    next_page_url: string;
+    prev_page_url: string;
+    last_page_url: string;
+    last_page: string;
+    links: any;
 
     constructor(
         private titleService: Title,
         private qaService: QAService,
-        private router: Router
+        private router: Router,
+        private location: Location,
+        private route: ActivatedRoute,
+        private configFunctionService: ConfigFunctionService
     ) { }
+
+    formFilter = new FormGroup({
+        filterName: new FormControl(""),
+        filterCategory: new FormControl(""),
+    })
 
     ngOnInit() {
         this.titleService.setTitle("Hỏi đáp");
+        this.configFunctionService.runTop();
+        this.getFaqCategories();
+        this.route.queryParamMap.subscribe((params) => {
+            this.filterObj = { ...params };
+        });
 
-        this.qaService.getQAInternship().subscribe(res => {
+        if (this.filterObj.params) {
+            this.keyword = this.filterObj.params.keyword ?? "";
+            this.categoryId = this.filterObj.params.categoryId ?? "";
+            this.formFilter.controls["filterName"].setValue(this.keyword);
+            this.formFilter.controls["filterCategory"].setValue(this.categoryId);
+        } 
+
+        if (this.keyword != "" || this.categoryId != "") {
+            this.filterFaq();
+        } else {
+            this.getFaqList();
+        }
+
+    }
+    
+    getFaqCategories() {
+        this.qaService.getListCategory().subscribe(res => {
             if (res.status) {
-                this.internship = res.payload.data;
+                this.statusCategory = true;
+                this.categories = res.payload;
             }
-        });
-        this.qaService.getQAJob().subscribe(res => {
+        })
+    }
+
+    getFaqList() {
+        this.qaService.getFaqList().subscribe(res => {
             if (res.status) {
-                this.job = res.payload.data;
-            }
-        });
-        this.qaService.getQAEvent().subscribe(res => {
-            if (res.status) {
-                this.event = res.payload.data;
+                this.statusFaq = true;
+                this.faqs = res.payload.data;
+
+                //data for paginate
+                let totalItemPages = res.payload.links.length;
+                this.first_page_url = res.payload.first_page_url;
+                this.next_page_url = res.payload.next_page_url;
+                this.prev_page_url = res.payload.prev_page_url;
+                this.last_page_url = res.payload.last_page_url;
+                this.last_page = res.payload.last_page;
+                this.links = res.payload.links.slice(1, totalItemPages - 1);
             }
         });
     }
 
     seeDetail(id: any) {
         this.router.navigate([`/hoi-dap/${id}`])
+    }
+
+    setValueKeyword($event: any) {
+        this.formFilter.controls["filterName"].setValue($event.target.value);
+        this.checkBtnSubmit();
+    }
+
+    setValueFilterCategory($event: any) {
+        this.statusSubmit = true;
+        this.formFilter.controls["filterCategory"].setValue($event.target.value);
+    }
+    
+    checkBtnSubmit() {
+        if (
+            this.formFilter.controls["filterCategory"].value ||
+            this.formFilter.controls["filterName"].value
+        ) {
+            this.statusSubmit = true;
+        } else {
+            this.statusSubmit = false;
+        }
+    }
+    resetFilter() {
+        this.formFilter.controls["filterName"].setValue("");
+        this.formFilter.controls["filterCategory"].setValue("");
+        this.keyword = "";
+        this.categoryId = "";
+        this.location.replaceState("/hoi-dap");
+        this.filterFaq();
+    }
+    
+    filterFaq() {
+        this.statusFaq = false;
+        if (this.formFilter.controls["filterName"].value) {
+            this.keyword = this.formFilter.controls["filterName"].value;
+        }
+        if (this.formFilter.controls["filterCategory"].value) {
+            this.categoryId = this.formFilter.controls["filterCategory"].value;
+        }
+
+        if (this.keyword || this.categoryId) {
+            this.router.navigate(["/hoi-dap"], {
+                queryParams: {
+                    keyword: this.keyword,
+                    categoryId: this.categoryId,
+                    page: this.currentPage,
+                },
+                queryParamsHandling: "merge",
+            });
+        }
+        
+        this.qaService.filterFaq(this.keyword, this.categoryId, this.currentPage).subscribe((res) => {
+            if (res.status) {
+                this.statusFaq = true;
+                this.faqs = res.payload.data;
+
+                //data for paginate
+                let totalItemPages = res.payload.links.length;
+                this.first_page_url = res.payload.first_page_url;
+                this.next_page_url = res.payload.next_page_url;
+                this.prev_page_url = res.payload.prev_page_url;
+                this.last_page_url = res.payload.last_page_url;
+                this.last_page = res.payload.last_page;
+                this.links = res.payload.links.slice(1, totalItemPages - 1);
+            }
+        })
+    }
+
+    paginationPages(url: string, active: boolean, pageNumber: string, event: any) {
+        if (pageNumber == "...") {
+            //không xử lý
+        } else {
+            this.faqs = [];
+            this.statusFaq = false;
+            let listTab = document.querySelectorAll(".pagination-item");
+            for (let i = 0; i < listTab.length; i++) {
+                listTab[i]?.classList.remove("active");
+            }
+            event.currentTarget.classList.add("active");
+            this.router.navigateByUrl(`hoi-dap?page=${pageNumber}`);
+            this.getFaqList();
+        }
     }
 }

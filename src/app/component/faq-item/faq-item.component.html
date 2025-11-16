@@ -1,0 +1,22 @@
+<div class="faq-item">
+  <div class="faq-item-left">
+    <a
+      [routerLink]="['/hoi-dap', item.id]"
+      class="faq-item-title"
+      title="{{ item.question }}"
+    >
+      <h2 class="faq-item-title-text" [innerHTML]="item.question"></h2>
+    </a>
+
+    <span
+      class="faq-item-category-tag"
+      [ngClass]="item.category ? 'tag--green' : 'tag--gray'"  
+    >
+      {{ item.category ? item.category.name : 'Không có danh mục' }}
+    </span>
+  </div>
+
+  <span class="faq-item-time">
+    {{ item.created_at ? (item.created_at | formatDate) : 'No data' }}
+  </span>
+</div>

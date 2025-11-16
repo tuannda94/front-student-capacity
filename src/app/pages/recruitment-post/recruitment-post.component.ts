@@ -103,7 +103,6 @@ export class RecruitmentPostComponent implements OnInit {
     });
     this.getListMajor();
 
-    console.log(this.orderObj.params);
     if (this.orderObj.params) {
       this.keyword = this.orderObj.params.keyword ? this.orderObj.params.keyword : "";
       this.major_id = this.orderObj.params.major_id ? this.orderObj.params.major_id : "";
@@ -304,7 +303,7 @@ export class RecruitmentPostComponent implements OnInit {
     }
 
     if (this.status || this.keyword || this.major_id || this.branch_id || this.skill_id || this.page) {
-      this.router.navigate(["/tuyen-dung"], {
+      this.router.navigate(["/tin-tuc-tuyen-dung"], {
         queryParams: {
           status: this.status,
           keyword: this.keyword,

@@ -1,81 +1,103 @@
-<div class="container pt-5 pb-5">
-    <div class="title-faq mb-3 text-center mb-5">
-        Các câu hỏi thường gặp
-    </div>
-    <div class="row">
-        <div class="col-4">
-
-            <div class="mx-auto">
-                <img src="../../../assets/svg/FAQs.svg" width="80%" alt="" srcset="">
-            </div>
-
+<div class="wraper">
+  <div class="container">
+    <div class="algin-items-center">
+      <form
+        class="my-box-filter faq-filter"
+        autocomplete="off"
+        [formGroup]="formFilter"
+        (submit)="filterFaq()"
+      >
+        <div ngbDropdown class="d-inline-block w-100">
+          <input
+            formControlName="filterName"
+            type="text"
+            class="my-input"
+            [attr.disabled]="!statusFaq ? true : null"
+            placeholder="Tìm kiếm câu hỏi ..."
+          />
         </div>
-        <div class="col-8">
-            <div class="row justify-content-center">
-                <div class="">
-                    <!-- <app-qa-category [categories]="items"></app-qa-category> -->
-                    <ul class="nav nav-tabs  nav-tabs-custom nav-justified justify-content-center faq-tab-box"
-                        id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation" *ngFor="let item of items; let i = index">
-                            <button class="nav-link" [ngClass]="{'active': i === 0}" data-bs-toggle="pill"
-                                [attr.data-bs-target]="'#tab-' + i" type="button" role="tab"
-                                [attr.aria-controls]="'tab-' + i" aria-selected="true">
-                                <span class="font-size-16">{{item.name}}</span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="">
-                    <div class="tab-content pt-3" id="pills-tabContent">
-                        <div class="tab-pane fade active show" id="tab-0" role="tabpanel">
-                            <div class="accordion accordion-flush" id="accordionFlushExample" *ngIf="internship && internship.length > 0" >
-                                <div class="accordion-item"
-                                    *ngFor="let item of internship; let j = index">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" (click)="seeDetail(item.id)">
-                                            <p class="fw-bold me-2">{{j+1}}.</p>
-                                            <div class="question" [innerHTML]="item?.question"></div>
-                                        </button>
-                                    </h2>
-                                </div>
-                            </div>
-                            <div *ngIf="internship && internship.length === 0">
-                                <h3>Không có dữ liệu</h3>
-                            </div> 
-                        </div>
-                        <div class="tab-pane fade" id="tab-1" role="tabpanel">
-                            <div class="accordion accordion-flush" id="accordionFlushExample2" *ngIf="job && job.length > 0">
-                                <div class="accordion-item" *ngFor="let item of job; let j = index">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" (click)="seeDetail(item.id)">
-                                            <p class="fw-bold me-2">{{j+1}}.</p>
-                                            <div class="question" [innerHTML]="item?.question"></div>
-                                        </button>
-                                    </h2>
-                                </div>
-                            </div>
-                            <div *ngIf="job && job.length === 0">
-                                <h3>Không có dữ liệu</h3>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tab-2" role="tabpanel">
-                            <div class="accordion accordion-flush" id="accordionFlushExample3" *ngIf="event && event.length > 0">
-                                <div class="accordion-item" *ngFor="let item of event; let j = index">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" (click)="seeDetail(item.id)">
-                                            <p class="fw-bold me-2">{{j+1}}.</p>
-                                            <div class="question" [innerHTML]="item?.question"></div>
-                                        </button>
-                                    </h2>
-                                </div>
-                            </div>
-                            <div  *ngIf="event && event.length === 0">
-                                <h3>Không có dữ liệu</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div ngbDropdown class="d-inline-block w-100">
+          <select
+            formControlName="filterCategory"
+            class="my-input"
+            [attr.disabled]="!statusFaq ? true : null"
+            (change)="setValueFilterCategory($event)"
+          >
+            <option value="" disabled>Chọn danh mục</option>
+            <ng-container *ngFor="let root of categories">
+              <!-- Category cha -->
+              <option [value]="root.id">
+                {{ root.name }}
+              </option>
+
+              <!-- Category con -->
+              <option
+                *ngFor="let child of root.children"
+                [value]="child.id"
+              >
+                &nbsp;&nbsp;&nbsp;&nbsp;└─ {{ child.name }}
+              </option>
+            </ng-container>
+          </select>
         </div>
+        <a class="my-btn-secondary my-btn-s" style="cursor: pointer" (click)="resetFilter()">Làm Mới</a>
+        <button class="my-btn-primary my-btn-s" [disabled]="!statusSubmit" [ngClass]="statusSubmit ? '' : 'opacity-75'">
+          Tìm kiếm
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
     </div>
+
+    <div class="faq__content py-3">
+      <!-- ---Main -->
+      <div *ngIf="statusFaq && faqs.length > 0" class="faq__list ">
+        <div *ngFor="let item of faqs">
+          <app-faq-item class="mb-3" [item]="item"></app-faq-item>
+        </div>
+      </div>
+
+      <div *ngIf="statusFaq">
+        <div *ngIf="faqs.length == 0">
+          <img class="mx-auto d-block mt-5" src="../../../assets/img/no-result.png" alt="No data" />
+          <h1 class="text-center">Không tìm thấy kết quả phù hợp</h1>
+        </div>
+      </div>
+
+      <div *ngIf="!statusFaq">
+        <ngx-skeleton-loader
+          [theme]="{
+            'height.px': '200',
+            'margin-top': '20'
+          }"
+          count="6"
+          animation="line"
+        ></ngx-skeleton-loader>
+      </div>
+
+      <div class="pagination" *ngIf="statusFaq">
+        <ul class="pagination-list">
+          <li
+            class="pagination-list_box pagination-list_first"
+            (click)="paginationPages(first_page_url, false, '1', $event)"
+          >
+            <i class="fa-solid fa-angles-left"></i>
+          </li>
+          <li
+            class="pagination-list_box pagination-item"
+            *ngFor="let page of links"
+            [ngClass]="page.active ? 'active' : ''"
+            (click)="paginationPages(page.url, page.active, page.label, $event)"
+          >
+            {{ page.label }}
+          </li>
+          <li
+            class="pagination-list_box pagination-list_last"
+            (click)="paginationPages(last_page_url, false, last_page, $event)"
+          >
+            <i class="fa-solid fa-angles-right"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

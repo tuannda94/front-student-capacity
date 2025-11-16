@@ -1,70 +1,84 @@
-.nav-tabs-custom .nav-item .nav-link.active {
-    color: #ff6638;
-}
-.nav-tabs-custom .nav-item .nav-link {
-    border: none;
-    color: #000;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-.text-muted {
-    color: #000!important;
-}
-.nav-tabs-custom .nav-item {
-    position: relative;
-    color: #000;
-    
-}
-.nav-tabs-custom .nav-item .nav-link.active:after {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-}
-.nav-tabs-custom .nav-item .nav-link::after {
-    content: "";
-    background: #ff6638;
-    height: 2px;
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: -1px;
-    -webkit-transition: all 250ms ease 0s;
-    transition: all 250ms ease 0s;
-    -webkit-transform: scale(0);
-    transform: scale(0);
+p,
+h3,
+h4,
+h6,
+h1,
+h2,
+h5 {
+  margin-bottom: 0px;
 }
 
-.title-faq {
-    font-size: 30px;
+.wraper {
+  background-color: var(--bg-content);
 }
 
-.accordion-button {
-    border-radius: 15px;
-    font-size: 20px;
+.faq__list {
+  min-height: 500px;
 }
 
-.accordion-button:focus{
-    box-shadow: none;
-
+.faq-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 40px;
 }
 
-.accordion-button:not(.collapsed) { 
-    color: #fff;
-    background-color: #ff6638;
-    /* border-radius: 15px; */
+.pagination {
+  width: 100%;
+  text-align: center;
+  display: block;
 }
 
-.accordion-body {
-    padding: 1.25rem 1rem;
+.pagination-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0;
+  margin: 30px 0;
+  text-align: center;
+  list-style: none;
 }
 
-.accordion-header{
-    margin: 0;
+.pagination-list_box {
+  background: var(--my-gray);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 22.4px;
+  font-weight: 400;
+  display: inline-block;
+  margin: 0px 3px;
+  width: 30px;
+  height: 30px;
+  padding: 5px 5px;
+  color: black;
 }
 
-.question {
-    -webkit-line-clamp: 3;
-    overflow : hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+.pagination-list_box:hover {
+  background: #ff6638;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.pagination-list_dot {
+  text-align: center;
+  font-size: 16px;
+  line-height: 22.4px;
+  font-weight: 400;
+  display: inline-block;
+  margin: 0px 3px;
+  width: 30px;
+  height: 30px;
+  padding: 5px 5px;
+}
+
+.pagination-item.active {
+  background: #ff6638;
+  color: #ffffff;
+}
+
+@media only screen and (max-width: 749px) {
+  .faq__nav-list {
+    visibility: hidden;
+  }
 }

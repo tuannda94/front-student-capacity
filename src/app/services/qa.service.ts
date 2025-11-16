@@ -12,16 +12,12 @@ export class QAService {
 
     constructor(private http: HttpClient) { }
 
-    getQAInternship(): Observable<ResponsePayload> {
-        return this.http.get<ResponsePayload>(`${environment.qaUrl}/internship`);
+    getFaqList(): Observable<ResponsePayload> {
+        return this.http.get<ResponsePayload>(`${environment.qaUrl}`);
     }
 
-    getQAJob(): Observable<ResponsePayload> {
-        return this.http.get<ResponsePayload>(`${environment.qaUrl}/job`);
-    }
-
-    getQAEvent(): Observable<ResponsePayload> {
-        return this.http.get<ResponsePayload>(`${environment.qaUrl}/event`);
+    filterFaq(keyword: string, categoryId: string = '', page: string): Observable<ResponsePayload> {
+        return this.http.get<ResponsePayload>(`${environment.qaUrl}?page=${page}&keyword=${keyword}&category_id=${categoryId}`);
     }
 
     getQADetail(faq: any): Observable<ResponsePayload> {
@@ -34,5 +30,9 @@ export class QAService {
 
     rating(faq: any, data: any): Observable<ResponsePayload> {
         return this.http.post<ResponsePayload>(`${environment.qaUrl}/rate/${faq}`, data);
+    }
+
+    getListCategory(): Observable<ResponsePayload> {
+        return this.http.get<ResponsePayload>(`${environment.qaUrl}/categories`);
     }
 }

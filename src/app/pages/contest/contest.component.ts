@@ -35,7 +35,7 @@ export class ContestComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private titleService: Title,
-    private configFuntionService: ConfigFunctionService,
+    private configFunctionService: ConfigFunctionService,
   ) {}
 
   formSearchMajor = new FormGroup({
@@ -48,7 +48,7 @@ export class ContestComponent implements OnInit {
 
   ngOnInit(): void {
     // Load lên đầu trang
-    this.configFuntionService.runTop();
+    this.configFunctionService.runTop();
 
     this.userService.getUserValue().id != undefined ? (this.checkUserHasLogin = true) : this.checkUserHasLogin;
 
@@ -181,7 +181,7 @@ export class ContestComponent implements OnInit {
           }
         }
       });
-    this.configFuntionService.runTop();
+    this.configFunctionService.runTop();
   }
 
   getTime(item: Contest) {

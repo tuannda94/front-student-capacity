@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { marked } from 'marked';
 import { NgToastService } from 'ng-angular-popup';
 import { map, switchMap } from 'rxjs';
 import { ModalDownRateComponent } from 'src/app/modal/modal-down-rate/modal-down-rate.component';
@@ -17,14 +19,16 @@ export class DetailFaqComponent implements OnInit {
   faq: QA;
   relatedFaqs: any [];
   loading: boolean = false;
+  questionHtml: SafeHtml | null;
+  answerHtml: SafeHtml | null;
 
   constructor(
     private route: ActivatedRoute,
     private qaService: QAService,
     public dialog: MatDialog,
-    private toastService: NgToastService
+    private toastService: NgToastService,
+    private sanitizer: DomSanitizer
   ) {
-    console.log(this.route.snapshot.params['id'])
   }
 
   ngOnInit(): void {
@@ -35,6 +39,8 @@ export class DetailFaqComponent implements OnInit {
       ).subscribe((res) => {
         if (res.status) {
           this.faq = res.payload;
+          this.questionHtml = this.convertMarkdown(this.faq.question);
+          this.answerHtml = this.convertMarkdown(this.faq.answer);
         }
       })
     this.route.paramMap
@@ -46,6 +52,12 @@ export class DetailFaqComponent implements OnInit {
           this.relatedFaqs = res.payload.data;
         }
       })
+  }
+
+  convertMarkdown(input: string): SafeHtml {
+    const html = marked.parse(input || '') as string; 
+
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   upRate() {

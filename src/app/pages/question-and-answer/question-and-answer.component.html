@@ -1,103 +1,110 @@
 <div class="wraper">
   <div class="container">
-    <div class="algin-items-center">
-      <form
-        class="my-box-filter faq-filter"
-        autocomplete="off"
-        [formGroup]="formFilter"
-        (submit)="filterFaq()"
-      >
-        <div ngbDropdown class="d-inline-block w-100">
-          <input
-            formControlName="filterName"
-            type="text"
-            class="my-input"
-            [attr.disabled]="!statusFaq ? true : null"
-            placeholder="Tìm kiếm câu hỏi ..."
-          />
-        </div>
-        <div ngbDropdown class="d-inline-block w-100">
-          <select
-            formControlName="filterCategory"
-            class="my-input"
-            [attr.disabled]="!statusFaq ? true : null"
-            (change)="setValueFilterCategory($event)"
-          >
-            <option value="" disabled>Chọn danh mục</option>
-            <ng-container *ngFor="let root of categories">
-              <!-- Category cha -->
-              <option [value]="root.id">
-                {{ root.name }}
-              </option>
+    <div class="row">
+      <div class="col-3 algin-items-center py-3">
+        <form
+          class="my-box-filter d-flex flex-column"
+          autocomplete="off"
+          [formGroup]="formFilter"
+          (submit)="filterFaq()"
+        >
+          <div class="mb-2 fw-bold">
+            <i class="fa-sharp fa-solid fa-filter me-2"></i>
+            TÌM KIẾM CÂU HỎI
+          </div>
+          <div ngbDropdown class="d-inline-block w-100 mb-2">
+            <input
+              formControlName="filterName"
+              type="text"
+              class="my-input"
+              [attr.disabled]="!statusFaq ? true : null"
+              placeholder="Tìm kiếm theo nội dung câu hỏi ..."
+            />
+          </div>
+          <div ngbDropdown class="d-inline-block w-100 mb-2">
+            <select
+              formControlName="filterCategory"
+              class="my-input"
+              [attr.disabled]="!statusFaq ? true : null"
+              (change)="setValueFilterCategory($event)"
+            >
+              <option value="" disabled>Chọn danh mục</option>
+              <ng-container *ngFor="let root of categories">
+                <!-- Category cha -->
+                <option [value]="root.id">
+                  {{ root.name }}
+                </option>
 
-              <!-- Category con -->
-              <option
-                *ngFor="let child of root.children"
-                [value]="child.id"
-              >
-                &nbsp;&nbsp;&nbsp;&nbsp;└─ {{ child.name }}
-              </option>
-            </ng-container>
-          </select>
+                <!-- Category con -->
+                <option
+                  *ngFor="let child of root.children"
+                  [value]="child.id"
+                >
+                  &nbsp;&nbsp;&nbsp;&nbsp;└─ {{ child.name }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+          <a class="my-btn-secondary my-btn-s mb-2" style="cursor: pointer" (click)="resetFilter()">Làm Mới</a>
+          <button class="my-btn-primary my-btn-s mb-2" [disabled]="!statusSubmit" [ngClass]="statusSubmit ? '' : 'opacity-75'">
+            Tìm kiếm
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+
+      <div class="faq__content col-9 py-3">
+        <!-- ---Main -->
+        <div *ngIf="statusFaq && faqs.length > 0" class="faq__list ">
+          <div *ngFor="let item of faqs">
+            <app-faq-item class="mb-3" [item]="item"></app-faq-item>
+          </div>
         </div>
-        <a class="my-btn-secondary my-btn-s" style="cursor: pointer" (click)="resetFilter()">Làm Mới</a>
-        <button class="my-btn-primary my-btn-s" [disabled]="!statusSubmit" [ngClass]="statusSubmit ? '' : 'opacity-75'">
-          Tìm kiếm
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </form>
+
+        <div *ngIf="statusFaq">
+          <div *ngIf="faqs.length == 0">
+            <img class="mx-auto d-block mt-5" src="../../../assets/img/no-result.png" alt="No data" />
+            <h1 class="text-center">Không tìm thấy kết quả phù hợp</h1>
+          </div>
+        </div>
+
+        <div *ngIf="!statusFaq">
+          <ngx-skeleton-loader
+            [theme]="{
+              'height.px': '200',
+              'margin-top': '20'
+            }"
+            count="6"
+            animation="line"
+          ></ngx-skeleton-loader>
+        </div>
+
+        <div class="pagination" *ngIf="statusFaq">
+          <ul class="pagination-list">
+            <li
+              class="pagination-list_box pagination-list_first"
+              (click)="paginationPages(first_page_url, false, '1', $event)"
+            >
+              <i class="fa-solid fa-angles-left"></i>
+            </li>
+            <li
+              class="pagination-list_box pagination-item"
+              *ngFor="let page of links"
+              [ngClass]="page.active ? 'active' : ''"
+              (click)="paginationPages(page.url, page.active, page.label, $event)"
+            >
+              {{ page.label }}
+            </li>
+            <li
+              class="pagination-list_box pagination-list_last"
+              (click)="paginationPages(last_page_url, false, last_page, $event)"
+            >
+              <i class="fa-solid fa-angles-right"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-
-    <div class="faq__content py-3">
-      <!-- ---Main -->
-      <div *ngIf="statusFaq && faqs.length > 0" class="faq__list ">
-        <div *ngFor="let item of faqs">
-          <app-faq-item class="mb-3" [item]="item"></app-faq-item>
-        </div>
-      </div>
-
-      <div *ngIf="statusFaq">
-        <div *ngIf="faqs.length == 0">
-          <img class="mx-auto d-block mt-5" src="../../../assets/img/no-result.png" alt="No data" />
-          <h1 class="text-center">Không tìm thấy kết quả phù hợp</h1>
-        </div>
-      </div>
-
-      <div *ngIf="!statusFaq">
-        <ngx-skeleton-loader
-          [theme]="{
-            'height.px': '200',
-            'margin-top': '20'
-          }"
-          count="6"
-          animation="line"
-        ></ngx-skeleton-loader>
-      </div>
-
-      <div class="pagination" *ngIf="statusFaq">
-        <ul class="pagination-list">
-          <li
-            class="pagination-list_box pagination-list_first"
-            (click)="paginationPages(first_page_url, false, '1', $event)"
-          >
-            <i class="fa-solid fa-angles-left"></i>
-          </li>
-          <li
-            class="pagination-list_box pagination-item"
-            *ngFor="let page of links"
-            [ngClass]="page.active ? 'active' : ''"
-            (click)="paginationPages(page.url, page.active, page.label, $event)"
-          >
-            {{ page.label }}
-          </li>
-          <li
-            class="pagination-list_box pagination-list_last"
-            (click)="paginationPages(last_page_url, false, last_page, $event)"
-          >
-            <i class="fa-solid fa-angles-right"></i>
-          </li>
-        </ul>
-      </div>
-    </div>
+    
   </div>
 </div>

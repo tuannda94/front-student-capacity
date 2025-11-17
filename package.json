@@ -39,6 +39,7 @@
     "file-saver": "2.0.5",
     "jquery": "3.6.0",
     "laravel-echo": "1.14.0",
+    "marked": "^17.0.0",
     "moment": "2.29.1",
     "monaco-editor": "0.24.0",
     "ng-angular-popup": "0.1.2",

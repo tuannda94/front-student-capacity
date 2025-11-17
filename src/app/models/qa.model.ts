@@ -9,6 +9,7 @@ export class QA {
     id?: any;
     question: string;
     answer: string;
+    view: number;
     listItems: QAItem[];
     category?: QaCategory;
     created_at?: Date; 

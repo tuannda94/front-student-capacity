@@ -162,6 +162,21 @@
     border: 1px solid #ff6638;
   }
 
+.faq-content {
+  background-color: #fff;
+  padding: 16px;
+  margin-bottom: 10px;
+  border-radius: var(--my-rounded-2);
+  border: 1px solid var(--my-dark-gray);
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: box-shadow 0.25s ease;
+}
+
+.faq-content:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
 .faq-item {
   background-color: #fff;
   padding: 16px;

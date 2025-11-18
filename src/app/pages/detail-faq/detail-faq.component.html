@@ -2,16 +2,40 @@
     <div class="container">
       <div class="post-main">
         <div class="post-main-content">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="post-detail__title my-2">
-              Câu hỏi
-            </h1>
+          <div class="faq-content">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <h1 class="post-detail__title my-2 fw-bold">
+                  <i class="fa-solid primary-color fs-4 fa-question-circle"></i>
+                  Câu hỏi
+                </h1>
+                <span
+                  class="faq-item-category-tag"
+                  [ngClass]="faq.category ? 'tag--green' : 'tag--gray'"  
+                >
+                  {{ faq.category ? faq.category.name : 'Không có danh mục' }}
+                </span>
+              </div>
+              
+              <div class="flex">
+                <span class="faq-item-time">
+                  {{ faq.created_at ? (faq.created_at | formatDate) : 'No data' }}
+                </span>
+                <div class="my-2 fw-bold">
+                  <i class="fa-sharp fa-solid fa-eye me-2"></i>
+                  {{ faq.view }}
+                </div>
+              </div>
+            </div>
+            <div class="post-detail__content-text fs-5" [innerHTML]="questionHtml"></div>
           </div>
-          <div class="post-detail__content-text" [innerHTML]="questionHtml"></div>
           
-          <div>
-            <h1 class="post-detail__title my-2">Trả lời</h1>
-            <div class="post-detail__content-text" [innerHTML]="answerHtml"></div>
+          <div class="faq-content">
+            <h1 class="post-detail__title my-2 fw-bold">
+              <i class="fa-solid primary-color fs-4 fa-check-circle"></i>
+              Trả lời
+            </h1>
+            <div class="post-detail__content-text fs-5" [innerHTML]="answerHtml"></div>
           </div>
           <div class="text-center my-2">
             <h2>Thông tin trên có hữu ích không?</h2>

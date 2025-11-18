@@ -12,8 +12,9 @@ export class QAService {
 
     constructor(private http: HttpClient) { }
 
-    getFaqList(): Observable<ResponsePayload> {
-        return this.http.get<ResponsePayload>(`${environment.qaUrl}`);
+    getFaqList(page: string | null): Observable<ResponsePayload> {
+        let pageQuery = page == null ? "1" : page;
+        return this.http.get<ResponsePayload>(`${environment.qaUrl}?page=${pageQuery}`);
     }
 
     filterFaq(keyword: string, categoryId: string = '', page: string): Observable<ResponsePayload> {

@@ -81,7 +81,7 @@ export class QuestionAndAnswerComponent implements OnInit {
     }
 
     getFaqList() {
-        this.qaService.getFaqList().subscribe(res => {
+        this.qaService.getFaqList(this.currentPage).subscribe(res => {
             if (res.status) {
                 this.statusFaq = true;
                 this.faqs = res.payload.data;
@@ -180,6 +180,7 @@ export class QuestionAndAnswerComponent implements OnInit {
             }
             event.currentTarget.classList.add("active");
             this.router.navigateByUrl(`hoi-dap?page=${pageNumber}`);
+            this.currentPage = pageNumber;
             this.getFaqList();
         }
     }

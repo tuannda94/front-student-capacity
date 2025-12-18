@@ -20,11 +20,12 @@ export class QuestionAndAnswerComponent implements OnInit {
     faqs: Array<any> = [];
     categories: Array<any> = [];
     filterObj: any;
-    keyword: string;
-    categoryId: string = "";
+    keyword: any;
+    categoryId: any;
     statusFaq: boolean = false;
     statusCategory: boolean = false;
     statusSubmit: boolean = false;
+    currCate: QaCategory;
 
     currentPage: string = '1';
     first_page_url: string;
@@ -45,7 +46,6 @@ export class QuestionAndAnswerComponent implements OnInit {
 
     formFilter = new FormGroup({
         filterName: new FormControl(""),
-        filterCategory: new FormControl(""),
     })
 
     ngOnInit() {
@@ -60,14 +60,9 @@ export class QuestionAndAnswerComponent implements OnInit {
             this.keyword = this.filterObj.params.keyword ?? "";
             this.categoryId = this.filterObj.params.categoryId ?? "";
             this.formFilter.controls["filterName"].setValue(this.keyword);
-            this.formFilter.controls["filterCategory"].setValue(this.categoryId);
         } 
-
-        if (this.keyword != "" || this.categoryId != "") {
-            this.filterFaq();
-        } else {
-            this.getFaqList();
-        }
+        
+        this.filterFaq();
 
     }
     
@@ -76,26 +71,17 @@ export class QuestionAndAnswerComponent implements OnInit {
             if (res.status) {
                 this.statusCategory = true;
                 this.categories = res.payload;
+                this.currCate = this.categories[0];
+                this.categoryId = this.currCate.id;
+                this.filterFaq();
             }
         })
     }
 
-    getFaqList() {
-        this.qaService.getFaqList(this.currentPage).subscribe(res => {
-            if (res.status) {
-                this.statusFaq = true;
-                this.faqs = res.payload.data;
-
-                //data for paginate
-                let totalItemPages = res.payload.links.length;
-                this.first_page_url = res.payload.first_page_url;
-                this.next_page_url = res.payload.next_page_url;
-                this.prev_page_url = res.payload.prev_page_url;
-                this.last_page_url = res.payload.last_page_url;
-                this.last_page = res.payload.last_page;
-                this.links = res.payload.links.slice(1, totalItemPages - 1);
-            }
-        });
+    searchFaq() {
+        this.statusFaq = false;
+        this.keyword = this.formFilter.controls['filterName'].value;
+        this.filterFaq();
     }
 
     seeDetail(id: any) {
@@ -122,24 +108,33 @@ export class QuestionAndAnswerComponent implements OnInit {
             this.statusSubmit = false;
         }
     }
-    resetFilter() {
-        this.formFilter.controls["filterName"].setValue("");
-        this.formFilter.controls["filterCategory"].setValue("");
-        this.keyword = "";
-        this.categoryId = "";
-        this.location.replaceState("/hoi-dap");
+    
+    updateCategoryFaq(event: any, category: QaCategory) {
+        if (this.statusFaq) {
+            this.currCate = category;
+            const rootCates = document.querySelectorAll(".faq__nav-item");
+            rootCates.forEach((element) => {
+                element.classList.remove("active");
+            })
+            this.categoryId = category.id
+            this.filterFaq();
+            event.currentTarget.classList.add("active");
+        }
+    }
+
+    getByChildCate(event: any, item: QaCategory) {
+        const childCates = document.querySelectorAll(".faq__content-aside-category--item");
+        childCates.forEach((element) => {
+            element.classList.remove("active");
+        });
+
+        this.categoryId = item.id 
+        event.currentTarget.classList.add("active");
         this.filterFaq();
     }
-    
+
     filterFaq() {
         this.statusFaq = false;
-        if (this.formFilter.controls["filterName"].value) {
-            this.keyword = this.formFilter.controls["filterName"].value;
-        }
-        if (this.formFilter.controls["filterCategory"].value) {
-            this.categoryId = this.formFilter.controls["filterCategory"].value;
-        }
-
         if (this.keyword || this.categoryId) {
             this.router.navigate(["/hoi-dap"], {
                 queryParams: {
@@ -153,8 +148,8 @@ export class QuestionAndAnswerComponent implements OnInit {
         
         this.qaService.filterFaq(this.keyword, this.categoryId, this.currentPage).subscribe((res) => {
             if (res.status) {
-                this.statusFaq = true;
                 this.faqs = res.payload.data;
+                this.statusFaq = true;
 
                 //data for paginate
                 let totalItemPages = res.payload.links.length;
@@ -179,9 +174,16 @@ export class QuestionAndAnswerComponent implements OnInit {
                 listTab[i]?.classList.remove("active");
             }
             event.currentTarget.classList.add("active");
-            this.router.navigateByUrl(`hoi-dap?page=${pageNumber}`);
+            this.router.navigate(["/hoi-dap"], {
+                queryParams: {
+                    keyword: this.keyword,
+                    categoryId: this.categoryId,
+                    page: pageNumber,
+                },
+                queryParamsHandling: "merge",
+            });
             this.currentPage = pageNumber;
-            this.getFaqList();
+            this.filterFaq();
         }
     }
 }

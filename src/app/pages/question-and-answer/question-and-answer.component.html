@@ -1,56 +1,64 @@
 <div class="wraper">
-  <div class="container">
-    <div class="row">
-      <div class="col-3 algin-items-center py-3">
-        <form
-          class="my-box-filter d-flex flex-column"
-          autocomplete="off"
-          [formGroup]="formFilter"
-          (submit)="filterFaq()"
+  <div id="#faq__nav" class="my-2 faq__nav">
+    <div class="container d-flex justify-content-between algin-items-center">
+      <ul class="faq__nav-list">
+        <li
+          *ngFor="let cate of categories"
+          (click)="updateCategoryFaq($event, cate)"
+          [ngClass]="currCate.id == cate.id ? 'active' : ''"
+          class="faq__nav-item"
         >
-          <div class="mb-2 fw-bold">
-            <i class="fa-sharp fa-solid fa-filter me-2"></i>
-            TÌM KIẾM CÂU HỎI
-          </div>
-          <div ngbDropdown class="d-inline-block w-100 mb-2">
-            <input
-              formControlName="filterName"
-              type="text"
-              class="my-input"
-              [attr.disabled]="!statusFaq ? true : null"
-              placeholder="Tìm kiếm theo nội dung câu hỏi ..."
-            />
-          </div>
-          <div ngbDropdown class="d-inline-block w-100 mb-2">
-            <select
-              formControlName="filterCategory"
-              class="my-input"
-              [attr.disabled]="!statusFaq ? true : null"
-              (change)="setValueFilterCategory($event)"
-            >
-              <option value="" disabled>Chọn danh mục</option>
-              <ng-container *ngFor="let root of categories">
-                <!-- Category cha -->
-                <option [value]="root.id">
-                  {{ root.name }}
-                </option>
-
-                <!-- Category con -->
-                <option
-                  *ngFor="let child of root.children"
-                  [value]="child.id"
-                >
-                  &nbsp;&nbsp;&nbsp;&nbsp;└─ {{ child.name }}
-                </option>
-              </ng-container>
-            </select>
-          </div>
-          <a class="my-btn-secondary my-btn-s mb-2" style="cursor: pointer" (click)="resetFilter()">Làm Mới</a>
-          <button class="my-btn-primary my-btn-s mb-2" [disabled]="!statusSubmit" [ngClass]="statusSubmit ? '' : 'opacity-75'">
-            Tìm kiếm
+          <a [ngStyle]="{cursor: !statusFaq ? 'auto' : ''}" class="faq__nav-link">{{ cate.name }}</a>
+        </li>
+      </ul>
+      <div class="btn__search-faq">
+        <form
+          class="input-group form-search-faq flex-nowrap"
+          [formGroup]="formFilter"
+          (submit)="searchFaq()"
+        >
+          <input
+            formControlName="filterName"
+            type="text"
+            class="form-control"
+            [attr.disabled]="null"
+            placeholder="Tìm kiếm câu hỏi ..."
+            aria-label="Username"
+            aria-describedby="addon-wrapping"
+          />
+          <button
+            [attr.disabled]="null"
+            class="input-group-text primary-color bg-white border-none"
+          >
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-3 algin-items-center py-3">
+        <div class="faq__content-aside--inner">
+          <div class="faq__content-aside--header">
+            <div class="">
+              <i class="fa-sharp fa-solid fa-filter"></i>
+              Lọc theo danh mục
+            </div>
+          </div>
+          <div class="faq__content-aside-category" *ngIf="statusCategory">
+            <div *ngFor="let item of currCate.children" class=" ">
+              <div
+                class="faq__content-aside-category--item text-collapse"
+                (click)="getByChildCate($event, item)"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                {{ item.name }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="faq__content col-9 py-3">

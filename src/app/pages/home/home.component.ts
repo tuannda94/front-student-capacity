@@ -11,6 +11,7 @@ import { Post } from "src/app/models/post.model";
 import { ListPostService } from "src/app/services/list-post.service";
 import { ResponsePayload } from "src/app/models/response-payload";
 import { Title } from "@angular/platform-browser";
+import { SliderService } from "src/app/services/slider.service";
 
 @Component({
   selector: "app-home",
@@ -32,12 +33,45 @@ export class HomeComponent implements OnInit {
   loadingResultContest: boolean = false;
   statusResult: boolean = false;
   companies: Array<Company>;
+  stats: Array<any>;
   majorIdSelect: number = 1;
   nameMajor: string;
   slugMajor: string;
   arrLinkPost: Array<any>;
   currentIndex: number = 1;
   statusListPostRecruitment: boolean = false;
+  activities = [
+    {
+      title: 'Tin tức',
+      image: 'tin-tuc.jpg',
+      link: '/tin-tuc'
+    },
+    {
+      title: 'Mentorship',
+      image: 'mentorship.jpg',
+      link: '/chuong-trinh-mentor'
+    },
+    {
+      title: 'Vườn ươm khởi nghiệp',
+      image: 'vuon-uom-khoi-nghiep.jpg',
+      link: '/vuon-uom-khoi-nghiep'
+    },
+    {
+      title: 'Đặc quyền sinh viên',
+      image: 'dac-quyen-sinh-vien.jpg',
+      link: '/dac-quyen-sinh-vien'
+    },
+    {
+      title: 'Dịch vụ việc làm',
+      image: 'dich-vu-viec-lam.jpg',
+      link: '/dich-vu'
+    },
+    {
+      title: 'Ngày hội việc làm',
+      image: 'ngay-hoi-viec-lam.jpg',
+      link: '/ngay-hoi-viec-lam'
+    }
+  ];
 
   sliderRecruitmentPosition = {
     slidesToShow: 1,
@@ -90,6 +124,7 @@ export class HomeComponent implements OnInit {
     private companyService: CompanyService,
     private postService: ListPostService,
     private titleService: Title,
+    private sliderService: SliderService,
   ) {}
 
   ngOnInit(): void {
@@ -104,6 +139,8 @@ export class HomeComponent implements OnInit {
     });
     this.getListPost();
     this.getAllCompany();
+    this.getStats();
+    
     // Slider tính năng
     
     if(window.location.href.includes("#contactForm")) {
@@ -178,6 +215,15 @@ export class HomeComponent implements OnInit {
         this.companies = res.payload.data;
       }
     });
+  }
+
+  //get stats to show to homepage
+  getStats() {
+    this.sliderService.getListStat().subscribe((res) => {
+      if (res.status) {
+        this.stats = res.payload;
+      }
+    })
   }
 
   // Control next

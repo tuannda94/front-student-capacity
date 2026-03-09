@@ -29,7 +29,12 @@ export const environment = {
   studentStatusListUrl: `${publicApiUrl}/student-statuses`,
   userUrl: `${publicApiUrl}/users`,
   qaUrl: `${publicApiUrl}/question-and-answer`,
-
+  stats: `${publicApiUrl}/stats`,
+  service: `${publicApiUrl}/services`,
+  mentor: `${publicApiUrl}/mentors`,
+  jobfair: `${publicApiUrl}/events`,
+  privilege: `${publicApiUrl}/privileges`,
+  
   // Router API V1;
   userListUrl: `${jwtApiUrl}/users`,
   roundV1Url: `${jwtApiUrl}/round`,

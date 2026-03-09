@@ -1,0 +1,69 @@
+<app-banner></app-banner>
+<div class="wraper">
+    <div class="container">
+        <div class="mentor-page">          
+            <!-- Title -->
+            <h2 class="mentor-title">Mentorship</h2>
+            <!-- Feature section -->
+            <div class="mentor-features">
+          
+              <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <div>
+                  <h4>Medium length headline</h4>
+                  <p>Lorem ipsum dolor sit amet et delectus accommodare.</p>
+                </div>
+              </div>
+          
+              <div class="feature-item">
+                <div class="feature-icon">🔧</div>
+                <div>
+                  <h4>Medium length headline</h4>
+                  <p>Lorem ipsum dolor sit amet et delectus accommodare.</p>
+                </div>
+              </div>
+          
+              <div class="feature-item">
+                <div class="feature-icon">📦</div>
+                <div>
+                  <h4>Medium length headline</h4>
+                  <p>Lorem ipsum dolor sit amet et delectus accommodare.</p>
+                </div>
+              </div>
+          
+              <div class="feature-item">
+                <div class="feature-icon">📋</div>
+                <div>
+                  <h4>Medium length headline</h4>
+                  <p>Lorem ipsum dolor sit amet et delectus accommodare.</p>
+                </div>
+              </div>
+          
+            </div>
+          
+            <!-- Mentor list -->
+            <div>
+                <h2 class="mentor-section-title">DANH SÁCH MENTOR</h2>
+                
+            </div>
+            <div class="mentor-grid">
+                <div class="mentor-card" *ngFor="let mentor of mentors">
+                    <img class="mentor-avatar" [src]="mentor.avatar">
+                    <div class="mentor-info">
+                      <h3 class="mentor-name">{{ mentor.name }}</h3>
+                      <div class="mentor-role">Mentor</div>
+                      <div class="mentor-class">{{ mentor.email }}</div>
+                      <div class="mentor-class">{{ mentor.class }}</div>
+                      <div class="mentor-location">{{ mentor.location }}</div>
+                      <div class="mentor-field">{{ mentor.field }}</div>
+                    </div>
+                  
+                    <div class="mentor-icon">
+                      ↗
+                    </div>
+                  
+                  </div>
+            </div>
+          </div>
+    </div>
+</div>

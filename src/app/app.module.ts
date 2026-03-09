@@ -103,6 +103,15 @@ import { DetailFaqComponent } from "./pages/detail-faq/detail-faq.component";
 import { ModalDownRateComponent } from "./modal/modal-down-rate/modal-down-rate.component";
 import { IntroComponent } from "./pages/intro/intro.component";
 import { FaqItemComponent } from "./component/faq-item/faq-item.component";
+import { CountUpDirective } from './directives/count-up.directive';
+import { ServiceComponent } from './pages/service/service.component';
+import { MentorshipComponent } from './pages/mentorship/mentorship.component';
+import { JobfairComponent } from './pages/jobfair/jobfair.component';
+import { StartupComponent } from './pages/startup/startup.component';
+import { PrivilegeComponent } from './pages/privilege/privilege.component';
+import { EnterpriseItemComponent } from './component/enterprise-item/enterprise-item.component';
+import { CountupItemComponent } from './component/countup-item/countup-item.component';
+import { EnterpriseSliderComponent } from './component/enterprise-slider/enterprise-slider.component';
 
 @NgModule({
   declarations: [
@@ -187,7 +196,16 @@ import { FaqItemComponent } from "./component/faq-item/faq-item.component";
     DetailFaqComponent,
     ModalDownRateComponent,
     IntroComponent,
-    FaqItemComponent
+    FaqItemComponent,
+    CountUpDirective,
+    ServiceComponent,
+    MentorshipComponent,
+    JobfairComponent,
+    StartupComponent,
+    PrivilegeComponent,
+    EnterpriseItemComponent,
+    CountupItemComponent,
+    EnterpriseSliderComponent
   ],
   imports: [
     BrowserModule,

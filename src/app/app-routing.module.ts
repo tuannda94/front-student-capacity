@@ -31,6 +31,11 @@ import { ChallengeExamComponent } from "./pages/challenge-exam/challenge-exam.co
 import { QuestionAndAnswerComponent } from "./pages/question-and-answer/question-and-answer.component";
 import { DetailFaqComponent } from "./pages/detail-faq/detail-faq.component";
 import { IntroComponent } from "./pages/intro/intro.component";
+import { ServiceComponent } from "./pages/service/service.component";
+import { MentorshipComponent } from "./pages/mentorship/mentorship.component";
+import { JobfairComponent } from "./pages/jobfair/jobfair.component";
+import { StartupComponent } from "./pages/startup/startup.component";
+import { PrivilegeComponent } from "./pages/privilege/privilege.component";
 
 const routes: Routes = [
   {
@@ -168,7 +173,27 @@ const routes: Routes = [
       {
         path: "gioi-thieu",
         component: IntroComponent,
-      }
+      },
+      {
+        path: "dich-vu",
+        component: ServiceComponent,
+      },
+      {
+        path: "chuong-trinh-mentor",
+        component: MentorshipComponent,
+      },
+      {
+        path: "ngay-hoi-viec-lam",
+        component: JobfairComponent,
+      },
+      {
+        path: "vuon-uom-khoi-nghiep",
+        component: StartupComponent,
+      },
+      {
+        path: "dac-quyen-sinh-vien",
+        component: PrivilegeComponent,
+      },
     ],
   },
   {

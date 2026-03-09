@@ -18,24 +18,26 @@
             <a class="fw-bold menu-mobile__item-link text-decoration-none nav-link-item" routerLink="/">Trang chủ</a>
           </li>
           <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <a class="fw-bold menu-mobile__item-link text-decoration-none nav-link-item" routerLink="/gioi-thieu">Giới thiệu</a>
+            <a class="fw-bold menu-mobile__item-link text-decoration-none nav-link-item" routerLink="/gioi-thieu">Về chúng tôi</a>
           </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none" routerLink="/cuoc-thi">
-              Cuộc thi
-            </a>
-          </li>
-
-          <!-- <li class="nav-item" routerLinkActive="active">
+          <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
             <div
               class="fw-bold menu-mobile__item-link position-relative text-decoration-none nav-link-item p-0 d-flex align-items-center"
             >
-              <span>Cuộc thi</span>
+              <span>Hoạt động</span>
               <div class="nav-item__icon">
                 <i class="fa-solid fa-caret-down"></i>
               </div>
 
               <ul class="sub-menu position-absolute">
+                <li class="sub-menu__item" routerLinkActive="active">
+                  <a
+                    class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+                    [routerLink]="['/tin-tuc']"
+                  >
+                    Tin tức
+                  </a>
+                </li>
                 <li class="sub-menu__item" routerLinkActive="active">
                   <a
                     class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
@@ -47,15 +49,46 @@
                 <li class="sub-menu__item" routerLinkActive="active">
                   <a
                     class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
-                    [routerLink]="['/danh-gia-nang-luc']"
+                    [routerLink]="['/dich-vu']"
                   >
-                    Đánh giá năng lực
+                    Dịch vụ việc làm
+                  </a>
+                </li>
+                <li class="sub-menu__item" routerLinkActive="active">
+                  <a
+                    class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+                    [routerLink]="['/chuong-trinh-mentor']"
+                  >
+                    Mentorship
+                  </a>
+                </li>
+                <li class="sub-menu__item" routerLinkActive="active">
+                  <a
+                    class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+                    [routerLink]="['/ngay-hoi-viec-lam']"
+                  >
+                    Ngày hội việc làm
+                  </a>
+                </li>
+                <li class="sub-menu__item" routerLinkActive="active">
+                  <a
+                    class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+                    [routerLink]="['/vuon-uom-khoi-nghiep']"
+                  >
+                    Vườn ươm khởi nghiệp
+                  </a>
+                </li>
+                <li class="sub-menu__item" routerLinkActive="active">
+                  <a
+                    class="fw-bold menu-mobile__item-link sub-menu__link fw-bold menu-mobile__item-link nav-link-item text-decoration-none"
+                    [routerLink]="['/dac-quyen-sinh-vien']"
+                  >
+                    Đặc quyền sinh viên
                   </a>
                 </li>
               </ul>
             </div>
-          </li> -->
-
+          </li>
           <li class="nav-item align-self-stretch d-flex align-items-center" routerLinkActive="active">
             <div
               class="fw-bold menu-mobile__item-link position-relative text-decoration-none nav-link-item p-0 d-flex align-items-center"
@@ -120,13 +153,6 @@
               </ul>
             </div>
           </li> -->
-
-          <li class="nav-item" routerLinkActive="active">
-            <a class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none" routerLink="/tin-tuc">
-              Tin tức
-            </a>
-          </li>
-
           <li class="nav-item" routerLinkActive="active">
             <a class="fw-bold menu-mobile__item-link nav-link-item text-decoration-none" routerLink="/hoi-dap">
               Hỏi đáp

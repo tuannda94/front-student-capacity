@@ -1,0 +1,20 @@
+.section {
+    padding: 64px 0;
+}
+
+.section:last-child {
+    padding-top: -64px;
+    padding-bottom: 64px;
+}
+
+.section-bg--1 {
+    background: var(--my-bg-color);
+}
+
+.section-bg--2 {
+    background: var(--my-bg-white);
+}
+
+.section-bg--3 {
+    background: var(--my-primary-50);
+}

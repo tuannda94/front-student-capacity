@@ -1,4 +1,39 @@
 <app-banner></app-banner>
+<!-- topCards -->
+<div class="section section-bg--1">
+  <div class="container">
+    <div *ngIf="topCards" class="row justify-content-center">
+      <div *ngFor="let card of topCards" class="col-md col-sm-12 mx-auto">
+        <div class="card card-custom">
+          <!-- Image -->
+          <img [src]="card.icon" [alt]="card.name">
+          <!-- Buttons -->
+          <div class="card-body">
+            <div class="row justify-content-center">
+              <div *ngFor="let button of card.data" class="col-6 d-flex justify-content-center">
+                <a class="contest-view-link" [routerLink]="button.url">
+                  <button class="my-btn-secondary my-btn-m my-1">{{button.label}}<i class="fa-solid fa-arrow-right"></i></button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!topCards" class="row justify-content-center">
+      <div *ngFor="let i of [1,2,3]" class="col-md-4 col-sm-12 mx-auto">
+        <ngx-skeleton-loader
+          [theme]="{
+            'height.px': '300',
+            'width': '100%',
+            'margin-bottom': '20'
+          }"
+          appearance="line"
+        ></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Vị trí tuyển dụng gấp -->
 <div class="section section-bg--2">
   <div class="container">
@@ -152,8 +187,42 @@
     </div>
   </div>
 </div>
+
+<!-- Ngày hội việc làm  -->
+<div *ngIf="jobFair" class="section section-bg--2">
+  <div class="container">
+    <div class="row algin-items-stretch">
+      <div class="col-md col-sm-12">
+        <div class="bg-light d-flex align-items-center justify-content-center h-100" style="min-height:200px;">
+            <img [src]="jobFair.icon"
+                  class="img-fluid"
+                  [alt]="jobFair.name">
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="col-md col-sm-12 d-flex flex-column">
+        <h2 class="section__title section__title--center my-h3">
+          <i class="section__title-icon fa-solid fa-calendar"></i>
+          {{jobFair.name}}
+        </h2>
+
+        <p class="text-collapse flex-grow-1">
+          {{jobFair.data[0].description}}
+        </p>
+
+        <div class="text-end">
+          <a class="contest-view-link" routerLink="/ngay-hoi-viec-lam">
+            <button class="my-btn-secondary my-btn-m">Xem thêm<i class="fa-solid fa-arrow-right"></i></button>
+          </a>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Tin nổi bật -->
-<div class="section section-bg--2">
+<div class="section section-bg--1">
   <div class="container">
     <h2 class="section__title section__title--center my-h3">
       <i class="section__title-icon fa-solid fa-newspaper"></i>
@@ -179,8 +248,9 @@
     </div>
   </div>
 </div>
+
 <!-- Doanh nghiệp -->
-<div class="section section-bg--1">
+<div class="section section-bg--2">
   <div class="container">
     <h2 class="section__title section__title--center my-h3">
       <i class="section__title-icon fa-solid fa-building"></i>

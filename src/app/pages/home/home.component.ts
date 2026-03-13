@@ -33,13 +33,18 @@ export class HomeComponent implements OnInit {
   loadingResultContest: boolean = false;
   statusResult: boolean = false;
   companies: Array<Company>;
-  stats: Array<any>;
   majorIdSelect: number = 1;
   nameMajor: string;
   slugMajor: string;
   arrLinkPost: Array<any>;
   currentIndex: number = 1;
   statusListPostRecruitment: boolean = false;
+
+  //thiết lập trang chủ
+  stats: Array<any>;
+  jobFair: any;
+  topCards: Array<any>
+
   activities = [
     {
       title: 'Tin tức',
@@ -217,11 +222,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  //get stats to show to homepage
+  //lấy các thiết lập hiển thị trên trang chủ
   getStats() {
     this.sliderService.getListStat().subscribe((res) => {
       if (res.status) {
-        this.stats = res.payload;
+        this.stats = res.payload.filter((item: any) => item.type == 1);
+        this.topCards = res.payload.filter((item: any) => item.type == 2);
+        this.jobFair = res.payload.find((item: any) => item.type == 3);
+        console.log(this.topCards);
       }
     })
   }

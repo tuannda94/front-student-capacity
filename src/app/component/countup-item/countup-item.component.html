@@ -7,10 +7,10 @@
             [alt]="stat.name"
         />
         <div class="stat-number">
-            <span [countUp]="stat.value" [duration]="2000"></span>+
+            <span [countUp]="stat.data[0].value" [duration]="2000"></span>+
         </div>
         <div class="stat-label">
-            {{ stat.unit }}
+            {{ stat.data[0].unit }}
         </div>
     </div>
 </div>

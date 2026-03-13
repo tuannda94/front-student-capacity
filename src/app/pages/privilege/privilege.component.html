@@ -54,35 +54,36 @@
                   </div>
                 </div>
             </div>
+            <div class="pagination" *ngIf="!isLoading">
+              <ul class="pagination-list">
+                <li
+                  class="pagination-list_box pagination-list_first"
+                  (click)="paginationPages(first_page_url, false, '1', $event)"
+                >
+                  <i class="fa-solid fa-angles-left"></i>
+                </li>
+                <li
+                  class="pagination-list_box pagination-item"
+                  *ngFor="let page of links"
+                  [ngClass]="page.active ? 'active' : ''"
+                  (click)="paginationPages(page.url, page.active, page.label, $event)"
+                >
+                  {{ page.label }}
+                </li>
+                <li
+                  class="pagination-list_box pagination-list_last"
+                  (click)="paginationPages(last_page_url, false, last_page, $event)"
+                >
+                  <i class="fa-solid fa-angles-right"></i>
+                </li>
+              </ul>
+            </div>
           </div>
           <div *ngIf="privileges.length == 0">
             <h1 class="text-center">Không có dữ liệu</h1>
           </div>
         </div>
-        <div class="pagination" *ngIf="!isLoading">
-          <ul class="pagination-list">
-            <li
-              class="pagination-list_box pagination-list_first"
-              (click)="paginationPages(first_page_url, false, '1', $event)"
-            >
-              <i class="fa-solid fa-angles-left"></i>
-            </li>
-            <li
-              class="pagination-list_box pagination-item"
-              *ngFor="let page of links"
-              [ngClass]="page.active ? 'active' : ''"
-              (click)="paginationPages(page.url, page.active, page.label, $event)"
-            >
-              {{ page.label }}
-            </li>
-            <li
-              class="pagination-list_box pagination-list_last"
-              (click)="paginationPages(last_page_url, false, last_page, $event)"
-            >
-              <i class="fa-solid fa-angles-right"></i>
-            </li>
-          </ul>
-        </div>
+        
       </div>
     </div>
 

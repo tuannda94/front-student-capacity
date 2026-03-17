@@ -9,7 +9,7 @@ import { ServiceService } from 'src/app/services/service.service';
   styleUrls: ['./service.component.css']
 })
 export class ServiceComponent implements OnInit {
-
+  page: string = 'service';
   services: Array<any> = [];
   selectedService: any = null;
   isLoading: boolean = true;

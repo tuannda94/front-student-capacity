@@ -8,6 +8,7 @@ import { JobfairService } from 'src/app/services/jobfair.service';
   styleUrls: ['./jobfair.component.css']
 })
 export class JobfairComponent implements OnInit {
+  page: string = 'event';
   jobfair: any;
   sponsorCount: number;
   host: Array<any> = []; //đơn vị tổ chức

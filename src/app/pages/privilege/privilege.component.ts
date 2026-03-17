@@ -10,7 +10,7 @@ import { PrivilegeService } from 'src/app/services/privilege.service';
   styleUrls: ['./privilege.component.css']
 })
 export class PrivilegeComponent implements OnInit {
-
+  page: string = 'privilege';
   privileges: Array<any> = [];
   isLoading: boolean = true;
   selectedPrivilege: any = null;

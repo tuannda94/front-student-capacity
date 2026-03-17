@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   listRecruitmentPosition: Post[] | null;
   advanIndex: number = 0;
 
+  page: string = 'home';
   majors: Array<Major>;
   statusResultMajor: boolean = false;
   users: Array<User>;

@@ -9,26 +9,26 @@ import { MentorService } from 'src/app/services/mentor.service';
   styleUrls: ['./mentorship.component.css']
 })
 export class MentorshipComponent implements OnInit {
+  page: string = 'mentor';
+  mentors: Array<any> = [];
+  constructor(
+    private titleService: Title,
+    private mService: MentorService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
-    mentors: Array<any> = [];
-    constructor(
-      private titleService: Title,
-      private mService: MentorService,
-      private router: Router,
-      private route: ActivatedRoute,
-    ) { }
-  
-    ngOnInit(): void {
-      this.titleService.setTitle('Mentorship');
-  
-      this.getMentors();
-    }
-  
-    getMentors() {
-      this.mService.getListMentor().subscribe(res => {
-        if (res.status) {
-          this.mentors = res.payload;
-        }
-      })
-    }
+  ngOnInit(): void {
+    this.titleService.setTitle('Mentorship');
+
+    this.getMentors();
+  }
+
+  getMentors() {
+    this.mService.getListMentor().subscribe(res => {
+      if (res.status) {
+        this.mentors = res.payload;
+      }
+    })
+  }
 }

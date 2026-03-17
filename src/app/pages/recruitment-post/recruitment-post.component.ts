@@ -30,6 +30,7 @@ import { Location } from "@angular/common";
   styleUrls: ["./recruitment-post.component.css"],
 })
 export class RecruitmentPostComponent implements OnInit {
+  namePage: string = 'recruitment';
   companys: Array<Enterprise>;
   recruitments: Array<Recruitments> = [];
   recruitmentsHot: Array<Recruitments> = [];

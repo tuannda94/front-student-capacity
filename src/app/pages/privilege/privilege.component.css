@@ -4,7 +4,12 @@
     gap:25px;
     align-items:stretch;
 }
-    
+   
+.post-detail__content-text p,
+.post-detail__content-text li {
+  text-align: justify;
+}
+
 .privilege-img{
     width:160px;
     flex-shrink:0;

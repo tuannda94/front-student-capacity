@@ -35,13 +35,13 @@
               </div>
               
               <div class="privilege-content flex-grow-1">
-                  <h3 class="section__title my-h3">{{item.title}}</h3>
-                  <p>{{ item.description }}</p>
+                  <h3 class="section__title my-h3">{{item?.title}}</h3>
+                  <div class="post-detail__content-text" [innerHTML]="item?.short_description"></div>
                   
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="privilege-meta">
-                        <p><i class="fa-solid fa-calendar"></i> Hạn đăng ký: {{item.register_deadline | formatDatePost}}</p>
-                        <p><i class="fa-solid fa-clock"></i> Hạn sử dụng: {{item.expire_date | formatDatePost}}</p>
+                        <p><i class="fa-solid fa-calendar"></i> Hạn đăng ký: {{item?.register_deadline | formatDatePost}}</p>
+                        <p><i class="fa-solid fa-clock"></i> Hạn sử dụng: {{item?.expire_date | formatDatePost}}</p>
                     </div>
                     <button 
                       class="my-btn my-btn-primary my-btn-xs"
@@ -112,7 +112,7 @@
               </span>
             </div>
             <div class="modal-description">
-              <p> {{selectedPrivilege?.description}} </p>
+              <div class="post-detail__content-text" [innerHTML]="selectedPrivilege?.description"></div>
             </div>
             <div class="modal-footer-custom">
               <button class="my-btn my-btn-primary my-btn-xs" (click)="openUrl(selectedPrivilege?.link)">

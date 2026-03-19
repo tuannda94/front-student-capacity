@@ -15,7 +15,7 @@ export class EnterpriseSliderComponent implements OnInit {
     autoplay: true,
     arrows: true,
     slidesToScroll: 1,
-    fadeSpeed: 1000,
+    fadeSpeed: 500,
     responsive: [
       {
         breakpoint: 1024,

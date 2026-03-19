@@ -18,3 +18,8 @@
 .section-bg--3 {
     background: var(--my-primary-50);
 }
+
+.post-detail__content-text p,
+.post-detail__content-text li {
+  text-align: justify;
+}

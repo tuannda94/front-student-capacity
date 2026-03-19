@@ -63,9 +63,9 @@ export class HomeComponent implements OnInit {
       link: '/vuon-uom-khoi-nghiep'
     },
     {
-      title: 'Đặc quyền sinh viên',
-      image: 'dac-quyen-sinh-vien.jpg',
-      link: '/dac-quyen-sinh-vien'
+      title: 'Ngày hội việc làm',
+      image: 'ngay-hoi-viec-lam.jpg',
+      link: '/ngay-hoi-viec-lam'
     },
     {
       title: 'Dịch vụ việc làm',
@@ -73,9 +73,9 @@ export class HomeComponent implements OnInit {
       link: '/dich-vu'
     },
     {
-      title: 'Ngày hội việc làm',
-      image: 'ngay-hoi-viec-lam.jpg',
-      link: '/ngay-hoi-viec-lam'
+      title: 'Đặc quyền sinh viên',
+      image: 'dac-quyen-sinh-vien.jpg',
+      link: '/dac-quyen-sinh-vien'
     }
   ];
 
@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
     autoplay: true,
     arrows: true,
     slidesToScroll: 1,
-    fadeSpeed: 1000,
+    fadeSpeed: 500,
     responsive: [
       {
         breakpoint: 1024,
@@ -230,7 +230,7 @@ export class HomeComponent implements OnInit {
         this.stats = res.payload.filter((item: any) => item.type == 1);
         this.topCards = res.payload.filter((item: any) => item.type == 2);
         this.jobFair = res.payload.find((item: any) => item.type == 3);
-        console.log(this.topCards);
+        console.log(this.stats);
       }
     })
   }
@@ -297,7 +297,7 @@ export class HomeComponent implements OnInit {
 
   //-----------------------  Danh sách các 3 bài viết tin tức-sự kiện
   getListPost() {
-    this.postService.getPostByCategory("event", "1").subscribe((res) => {
+    this.postService.getPostByCategory("post-event", "1").subscribe((res) => {
       if (res.status == true) {
         let arrResult = res.payload.data;
         this.listPostEvent = arrResult.filter((res: Post, index: number) => {

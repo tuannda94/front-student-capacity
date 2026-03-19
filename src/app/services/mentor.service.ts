@@ -11,10 +11,10 @@ export class MentorService {
 
     constructor(private http:HttpClient) { }
   
-    getListMentor(): Observable<ResponsePayload> {
-      // let pageQuery = page == null ? "1" : page;
-      return this.http.get<ResponsePayload>(`${environment.mentor}`);
-      // return this.http.get<ResponsePayload>(`${environment.mentor}?page=${pageQuery}`);
+    getListMentor(page: string | null): Observable<ResponsePayload> {
+      let pageQuery = page == null ? "1" : page;
+      
+      return this.http.get<ResponsePayload>(`${environment.mentor}?page=${pageQuery}`);
     }
 
     filterMentor(keyword: string, page: string): Observable<ResponsePayload> {

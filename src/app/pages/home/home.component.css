@@ -44,10 +44,16 @@
   position: relative;
 }
 
+.post-detail__content-text p,
+.post-detail__content-text li {
+  text-align: justify;
+}
+
+
 /* topCards */
 .card-custom {
-  height: 100%;
   max-width: 400px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
@@ -63,6 +69,15 @@
   align-items:center;
   font-size:14px;
   padding:6px 12px;
+}
+
+.btn-fixed {
+  min-height: 70px; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  padding: 12px 16px;
 }
 
 /*------------- Contest ------------------------------------------------------ */

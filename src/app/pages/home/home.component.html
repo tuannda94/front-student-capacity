@@ -1,18 +1,18 @@
 <app-banner [page]="page"></app-banner>
 <!-- topCards -->
-<div class="section section-bg--1">
+<div class="section section-bg--2">
   <div class="container">
-    <div *ngIf="topCards" class="row justify-content-center">
-      <div *ngFor="let card of topCards" class="col-md col-sm-12 mx-auto">
-        <div class="card card-custom">
+    <div *ngIf="topCards" class="row g-3 justify-content-center">
+      <div *ngFor="let card of topCards" class="col-lg-4 col-md-12">
+        <div class="card card-custom h-100">
           <!-- Image -->
           <img [src]="card.icon" [alt]="card.name">
           <!-- Buttons -->
           <div class="card-body">
-            <div class="row justify-content-center">
+            <div class="row g-3 justify-content-center">
               <div *ngFor="let button of card.data" class="col-6 d-flex justify-content-center">
                 <a class="contest-view-link" [href]="button.url" target="_blank">
-                  <button class="my-btn-secondary my-btn-m my-1">{{button.label}}<i class="fa-solid fa-arrow-right"></i></button>
+                  <button class="my-btn-secondary my-btn-m my-1 w-100 h-100 btn-fixed">{{button.label}}<i class="fa-solid fa-arrow-right"></i></button>
                 </a>
               </div>
             </div>
@@ -20,8 +20,8 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!topCards" class="row justify-content-center">
-      <div *ngFor="let i of [1,2,3]" class="col-md-4 col-sm-12 mx-auto">
+    <div *ngIf="!topCards" class="row g-3 justify-content-center">
+      <div *ngFor="let i of [1,2,3]" class="col-lg-4 col-md-12">
         <ngx-skeleton-loader
           [theme]="{
             'height.px': '300',
@@ -35,7 +35,7 @@
   </div>
 </div>
 <!-- Vị trí tuyển dụng gấp -->
-<div class="section section-bg--2">
+<!-- <div class="section section-bg--2">
   <div class="container">
     <h2 class="section__title section__title--center my-h3">
       <i class="section__title-icon fa-solid fa-clock-rotate-left"></i>
@@ -133,7 +133,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- dịch vụ việc làm -->
 <div class="section section-bg--1">
@@ -161,8 +161,8 @@
       Hoạt động
     </h2>
     <div class="section-content">
-      <div class="row">
-        <div class="col-md col-sm-12" *ngFor="let item of activities">
+      <div class="row g-3">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-12" *ngFor="let item of activities">
           <a [routerLink]="item.link" class="activity-card">
             <div class="activity-thumb">
               <img src="../../../assets/img/{{item.image}}" [alt]="item.title">
@@ -207,9 +207,7 @@
           {{jobFair.name}}
         </h2>
 
-        <p class="text-collapse flex-grow-1">
-          {{jobFair.data[0].description}}
-        </p>
+        <div class="post-detail__content-text" [innerHTML]="jobFair.data[0].description"></div>
 
         <div class="text-end">
           <a class="contest-view-link" routerLink="/ngay-hoi-viec-lam">

@@ -15,7 +15,6 @@ export class BannerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.page);
     this.sliderService.getListSlider(this.page,'', '').subscribe(res => {
       if (res.status) {
         this.banner = res.payload;

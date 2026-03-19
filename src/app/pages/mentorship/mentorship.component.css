@@ -215,8 +215,73 @@
   
   
   /* Icon hover */
-  
   .mentor-card:hover .mentor-icon{
     border-color:white;
     color:white;
   }
+  
+.location-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+  background-color: #e6f4ff;
+  color: #e57a2e;
+  font-weight: 500;
+}
+
+
+      
+.pagination {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+  
+.pagination-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    margin: 30px 0;
+    text-align: center;
+    list-style: none;
+}
+  
+.pagination-list_box {
+    background: var(--my-gray);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 22.4px;
+    font-weight: 400;
+    display: inline-block;
+    margin: 0px 3px;
+    width: 30px;
+    height: 30px;
+    padding: 5px 5px;
+    color: black;
+}
+
+.pagination-list_box:hover {
+    background: #ff6638;
+    color: #ffffff;
+    cursor: pointer;
+}
+  
+.pagination-list_dot {
+    text-align: center;
+    font-size: 16px;
+    line-height: 22.4px;
+    font-weight: 400;
+    display: inline-block;
+    margin: 0px 3px;
+    width: 30px;
+    height: 30px;
+    padding: 5px 5px;
+}
+  
+.pagination-item.active {
+    background: #ff6638;
+    color: #ffffff;
+}

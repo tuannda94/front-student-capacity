@@ -27,13 +27,12 @@ export class PrivilegeComponent implements OnInit {
     private titleService: Title,
     private privilege: PrivilegeService,
     private router: Router,
-    private route: ActivatedRoute,
-    private configFunctionServie: ConfigFunctionService
+    private configFunctionService: ConfigFunctionService
   ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle("Đặc quyền sinh viên");
-    this.configFunctionServie.runTop();
+    this.configFunctionService.runTop();
     this.getPrivileges();
   }
 

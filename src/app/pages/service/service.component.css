@@ -11,13 +11,6 @@
   margin-bottom: 30px;
 }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  align-items: stretch;
-}
-
 .service-card {
   padding: 15px;
   border: 1px solid #e5e5e5;
@@ -75,16 +68,9 @@
   text-shadow: 1px 2px 4px rgba(0,0,0,0.25);
 }
 
-.service-desc {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.4;
-  max-height: 3.8em;
-  overflow: hidden;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+.post-detail__content-text p,
+.post-detail__content-text li {
+  text-align: justify;
 }
 
 .modal-overlay {

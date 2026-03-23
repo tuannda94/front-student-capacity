@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Enterprise } from 'src/app/models/enterprise.model';
 
 @Component({
   selector: 'app-enterprise-slider',
@@ -13,9 +12,11 @@ export class EnterpriseSliderComponent implements OnInit {
     slidesToShow: 5,
     infinite: true,
     autoplay: true,
-    arrows: true,
+    arrows: false,
     slidesToScroll: 1,
-    fadeSpeed: 500,
+    // fadeSpeed: 500,
+    speed: 500,
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 1024,
@@ -38,6 +39,8 @@ export class EnterpriseSliderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    console.log(this.enterprises);
   }
 
 }

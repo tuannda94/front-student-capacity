@@ -10,24 +10,26 @@ import { JobfairService } from 'src/app/services/jobfair.service';
 export class JobfairComponent implements OnInit {
   page: string = 'event';
   jobfair: any;
+  posts: Array<any> = [];
   sponsorCount: number;
   host: Array<any> = []; //đơn vị tổ chức
   sponsors: Array<any> = []; //đơn vị tài trợ kim cương, vàng, bạc
   participants: Array<any> = []; //đơn vị tham gia
   stats: Array<any> = [];
   isLoading: boolean = true;
-  sliderCompany = {
-    slidesToShow: 5,
+  slider = {
+    slidesToShow: 3,
     infinite: true,
     autoplay: true,
     arrows: true,
     slidesToScroll: 1,
-    fadeSpeed: 1000,
+    speed: 1000,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
         },
@@ -35,7 +37,7 @@ export class JobfairComponent implements OnInit {
       {
         breakpoint: 749,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -60,6 +62,8 @@ export class JobfairComponent implements OnInit {
         this.host = this.jobfair.sponsors.filter((sponsor:any) => sponsor.priority == 0);
         this.sponsors = this.jobfair.sponsors.filter((sponsor:any) => [2,3,4].includes(sponsor.priority));
         this.participants = this.jobfair.sponsors.filter((sponsor:any) => sponsor.priority == 1);
+        console.log(this.sponsors);
+        this.posts = this.jobfair.posts;
         this.stats = [
           {
             name: 'doanh nghiệp tham gia',

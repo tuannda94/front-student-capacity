@@ -58,9 +58,9 @@ export class HomeComponent implements OnInit {
       link: '/chuong-trinh-mentor'
     },
     {
-      title: 'Vườn ươm khởi nghiệp',
-      image: 'vuon-uom-khoi-nghiep.jpg',
-      link: '/vuon-uom-khoi-nghiep'
+      title: 'Dịch vụ việc làm',
+      image: 'dich-vu-viec-lam.jpg',
+      link: '/dich-vu'
     },
     {
       title: 'Ngày hội việc làm',
@@ -68,9 +68,9 @@ export class HomeComponent implements OnInit {
       link: '/ngay-hoi-viec-lam'
     },
     {
-      title: 'Dịch vụ việc làm',
-      image: 'dich-vu-viec-lam.jpg',
-      link: '/dich-vu'
+      title: 'Vườn ươm khởi nghiệp',
+      image: 'vuon-uom-khoi-nghiep.jpg',
+      link: '/vuon-uom-khoi-nghiep'
     },
     {
       title: 'Đặc quyền sinh viên',
@@ -88,18 +88,19 @@ export class HomeComponent implements OnInit {
     fadeSpeed: 1000,
   };
 
-  sliderCompany = {
-    slidesToShow: 5,
+  slider = {
+    slidesToShow: 3,
     infinite: true,
     autoplay: true,
-    arrows: true,
+    arrows: false,
     slidesToScroll: 1,
-    fadeSpeed: 500,
+    speed: 1000,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
         },
@@ -107,7 +108,7 @@ export class HomeComponent implements OnInit {
       {
         breakpoint: 749,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -230,7 +231,6 @@ export class HomeComponent implements OnInit {
         this.stats = res.payload.filter((item: any) => item.type == 1);
         this.topCards = res.payload.filter((item: any) => item.type == 2);
         this.jobFair = res.payload.find((item: any) => item.type == 3);
-        console.log(this.stats);
       }
     })
   }
@@ -299,10 +299,7 @@ export class HomeComponent implements OnInit {
   getListPost() {
     this.postService.getPostByCategory("post-event", "1").subscribe((res) => {
       if (res.status == true) {
-        let arrResult = res.payload.data;
-        this.listPostEvent = arrResult.filter((res: Post, index: number) => {
-          return index < 3;
-        });
+        this.listPostEvent = res.payload.data;
       }
     });
   }

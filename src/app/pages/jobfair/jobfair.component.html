@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row align-items-center">
           <!-- Skeleton -->
-          <ng-container *ngIf="isLoading">
+          <ng-container *ngIf="isLoading || !jobfair">
               <ngx-skeleton-loader
                 appearance="line"
                 [theme]="{
@@ -34,7 +34,7 @@
         <div class="container text-center">
           <h3 class="section__title section__title--center my-h3">Doanh nghiệp đồng hành</h3>
           <div class="section-content">
-            <app-enterprise-slider [enterprises]="jobfair?.sponsors"></app-enterprise-slider>
+            <app-enterprise-slider [enterprises]="sponsors"></app-enterprise-slider>
           </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
               <div class="post-detail__content-text" [innerHTML]="jobfair.note"></div>  
             </div>
             <div class="col-md-6">
-              <img src="../../../assets/img/qhdn_hn.png" alt="">
+              <img src="../../../assets/img/thu_ngo.png" alt="">
             </div>
           </div>
           <div class="div text-center mt-3">
@@ -59,24 +59,27 @@
     </div>
     
     <!-- NEWS -->
-    <!-- <div class="section section-bg--2">
+    <div class="section section-bg--2">
       <div class="container text-center">
         <h3 class="section__title section__title--center my-h3">TIN TỨC</h3>
-        <div class="row g-4">
-          <div class="col-md-4" *ngFor="let i of [1,2,3]">
-            <div class="card h-100">
-              <div class="bg-light" style="height:180px"></div>
-              <div class="card-body">
-                <h5 class="card-title">Tiêu đề tin</h5>
-                <p class="card-text text-muted">
-                  Lorem ipsum dolor sit amet consectetur
-                </p>
+        <div class="section-content">
+          <ngx-slick-carousel [config]="slider">
+            <ng-container *ngIf="!posts">
+              <div ngxSlickItem *ngFor="let item of [].constructor(3); let i = index" class="mx-3">
+                <app-post-load-item
+                  class="post-loading"
+                ></app-post-load-item>
               </div>
-            </div>
-          </div>
+            </ng-container>
+            <ng-container>
+              <div ngxSlickItem *ngFor="let item of posts" class="mx-3">
+                <app-post-related-item [postItem]="item"></app-post-related-item>
+              </div>
+            </ng-container>
+          </ngx-slick-carousel>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <div class="section section-bg--1">
       <div class="container text-center">

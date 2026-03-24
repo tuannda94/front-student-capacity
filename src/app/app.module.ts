@@ -112,6 +112,7 @@ import { PrivilegeComponent } from './pages/privilege/privilege.component';
 import { EnterpriseItemComponent } from './component/enterprise-item/enterprise-item.component';
 import { CountupItemComponent } from './component/countup-item/countup-item.component';
 import { EnterpriseSliderComponent } from './component/enterprise-slider/enterprise-slider.component';
+import { MentorItemComponent } from './component/mentor-item/mentor-item.component';
 
 @NgModule({
   declarations: [
@@ -205,7 +206,8 @@ import { EnterpriseSliderComponent } from './component/enterprise-slider/enterpr
     PrivilegeComponent,
     EnterpriseItemComponent,
     CountupItemComponent,
-    EnterpriseSliderComponent
+    EnterpriseSliderComponent,
+    MentorItemComponent
   ],
   imports: [
     BrowserModule,

@@ -32,12 +32,12 @@
             <div ngxSlickItem class="recruitment-item mx-3"
                  *ngFor="let item of enterprises"
             >
-                <div class="logo-wrapper">
-                    <img class="recruitment-item__img"
-                         [src]="item.logo"
-                         [alt]="item.name" />
-                </div>
-                <p class="company-name">{{ item.name }}</p>
+              <div class="logo-wrapper">
+                <img class="recruitment-item__img"
+                  [src]="item.event_id ? item.company.logo : item.logo"
+                  [alt]="item.event_id ? item.company.name : item.name" />
+              </div>
+              <p class="company-name">{{ item.event_id ? item.company.name : item.name }}</p>
             </div>
         </ng-container>
     </ngx-slick-carousel>

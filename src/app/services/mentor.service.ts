@@ -17,6 +17,10 @@ export class MentorService {
       return this.http.get<ResponsePayload>(`${environment.mentor}?page=${pageQuery}`);
     }
 
+    getTopMentor(): Observable<ResponsePayload> {
+      return this.http.get<ResponsePayload>(`${environment.mentor}`);
+    }
+
     filterMentor(keyword: string, page: string): Observable<ResponsePayload> {
       return this.http.get<ResponsePayload>(`${environment.mentor}?page=${page}&keyword=${keyword}`);
     }

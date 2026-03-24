@@ -32,22 +32,8 @@
       <div *ngIf="!isLoading">
         <div *ngIf="mentors.length > 0">
           <div class="mentor-grid">
-            <div class="mentor-card" *ngFor="let mentor of mentors">
-              <img class="mentor-avatar" [src]="mentor.avatar">
-              <div class="mentor-info">
-                <h3 class="mentor-name">{{ mentor?.name }}</h3>
-                <div class="mentor-role">Mentor</div>
-                <div class="mentor-class">{{ mentor?.email }}</div>
-                <div *ngIf="mentor?.info?.education" class="mentor-class">Học vấn: <b>{{ mentor?.info?.education }}</b></div>
-                <div *ngIf="mentor?.info?.experience" class="mentor-class">Kinh nghiệm: <b>{{ mentor?.info?.experience }}</b></div>
-                <div *ngIf="mentor?.info?.position" class="mentor-class">Vị trí công tác: <b>{{ mentor?.info?.position }}</b></div>
-                <div *ngIf="mentor?.info?.location_name" class="mentor-class">Khu vực: 
-                  <span class="location-tag">{{ mentor?.info?.location_name }}</span>
-                </div>
-              </div>
-              <div class="mentor-icon">
-                ↗
-              </div>
+            <div *ngFor="let mentor of mentors">
+              <app-mentor-item [mentor]="mentor"></app-mentor-item>
             </div>
           </div>
         </div>
@@ -79,13 +65,6 @@
           <h1 class="text-center">Không có dữ liệu</h1>
         </div>
       </div>
-      
-      <!-- <div class="mentor-page">
-        <div>
-            <h2 class="mentor-section-title">DANH SÁCH MENTOR</h2>
-        </div>
-        
-      </div> -->
     </div>
   </div>
 </div>

@@ -11,7 +11,6 @@ export class CountupItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.stats);
   }
 
 }

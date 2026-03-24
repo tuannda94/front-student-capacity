@@ -35,6 +35,7 @@ export const environment = {
   mentor: `${publicApiUrl}/mentors`,
   jobfair: `${publicApiUrl}/events`,
   privilege: `${publicApiUrl}/privileges`,
+  project: `${publicApiUrl}/projects`,
 
   // Router API V1;
   userListUrl: `${jwtApiUrl}/users`,

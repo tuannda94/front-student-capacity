@@ -23,3 +23,19 @@
 .post-detail__content-text li {
   text-align: justify;
 }
+
+@media (min-width: 768px) {
+    .post-event-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 24px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .post-event-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 24px;
+    }
+  }

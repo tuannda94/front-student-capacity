@@ -10,8 +10,8 @@
           <!-- Buttons -->
           <div class="card-body">
             <div class="row g-3 justify-content-center">
-              <div *ngFor="let button of card.data" class="col-6 d-flex justify-content-center">
-                <a class="contest-view-link" [href]="button.url" target="_blank">
+              <div *ngFor="let button of card.data" class="col-6">
+                <a class="contest-view-link w-100 h-100 d-block" [href]="button.url" target="_blank">
                   <button class="my-btn-secondary my-btn-m my-1 w-100 h-100 btn-fixed">{{button.label}}<i class="fa-solid fa-arrow-right"></i></button>
                 </a>
               </div>
@@ -143,7 +143,7 @@
       Dịch vụ việc làm
     </h2>
     <div class="section-content">
-      <img src="../../../assets/img/qhdn_hn.png" alt="">
+      <img class="w-100" src="../../../assets/img/qhdn_hn.png" alt="">
       <div class="contest-view mt-2">
         <a class="contest-view-link" routerLink="/dich-vu">
           <button class="my-btn-secondary my-btn-m">Đăng ký dịch vụ<i class="fa-solid fa-arrow-right"></i></button>
@@ -227,17 +227,20 @@
       Tin nổi bật
     </h2>
     <div class="section-content">
-      <div class="post-event-list grid gy-1" *ngIf="!listPostEvent">
-        <app-post-load-item
-          class="post-loading"
-          *ngFor="let item of [].constructor(3); let i = index"
-        ></app-post-load-item>
-      </div>
-      <div class="post-event-list">
-        <div class="post-item" *ngFor="let item of listPostEvent">
-          <app-post-related-item [postItem]="item"></app-post-related-item>
-        </div>
-      </div>
+      <ngx-slick-carousel [config]="slider">
+        <ng-container *ngIf="!listPostEvent">
+          <div ngxSlickItem *ngFor="let item of [].constructor(3); let i = index" class="mx-3">
+            <app-post-load-item
+              class="post-loading"
+            ></app-post-load-item>
+          </div>
+        </ng-container>
+        <ng-container>
+          <div ngxSlickItem *ngFor="let item of listPostEvent" class="mx-3">
+            <app-post-related-item [postItem]="item"></app-post-related-item>
+          </div>
+        </ng-container>
+      </ngx-slick-carousel>
       <div class="contest-view mt-5" *ngIf="listPostEvent">
         <a class="contest-view-link" routerLink="/tin-tuc">
           <button class="my-btn-secondary my-btn-m">Xem tất cả <i class="fa-solid fa-arrow-right"></i></button>

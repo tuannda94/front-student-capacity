@@ -109,7 +109,7 @@
 /* ===== MOBILE ===== */
 @media (max-width: 576px) {
   .card-img-wrapper {
-    height: 150px;
+    height: 400px;
   }
 
   .btn-card {

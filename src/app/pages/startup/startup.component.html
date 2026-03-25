@@ -141,17 +141,17 @@
                     <span class="close-btn" (click)="closeModal()">✕</span>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <img class="col-6 col-xs-12" [src]="selectedProject.thumbnail" alt="">
-                        <div class="col-6 col-xs-12">
+                    <div class="row g-3">
+                        <img class="col-12 col-md-6" [src]="selectedProject.thumbnail" alt="">
+                        <div class="col-12 col-md-6">
                             <div>Lĩnh vực: 
-                                <span class="tag" *ngFor="let topic of selectedProject?.topics"> {{topic.name}} </span>
+                                <span class="tag mx-2 mb-2" *ngFor="let topic of selectedProject?.topics"> {{topic.name}} </span>
                             </div>
                             <div class="my-2">Doanh nghiệp đồng hành: 
-                                <span class="tag mx-2" *ngFor="let enterprise of selectedProject?.enterprises"> {{enterprise.name}} </span>
+                                <span class="tag mx-2 mb-2" *ngFor="let enterprise of selectedProject?.enterprises"> {{enterprise.name}} </span>
                             </div>
                             <div class="my-2">Mentor hỗ trợ: 
-                                <span class="tag mx-2" *ngFor="let mentor of selectedProject?.mentors"> {{mentor.name}} </span>
+                                <span class="tag mx-2 mb-2" *ngFor="let mentor of selectedProject?.mentors"> {{mentor.name}} </span>
                             </div>
                         </div>
                     </div>

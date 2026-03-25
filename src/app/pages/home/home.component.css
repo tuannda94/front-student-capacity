@@ -49,17 +49,29 @@
   text-align: justify;
 }
 
-
-/* topCards */
+/* ===== CARD ===== */
 .card-custom {
-  max-width: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: 0.25s;
+  background: #fff;
+  border: 1px solid #eee;
 }
 
-.card-custom img {
+.card-custom:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* ===== IMAGE ===== */
+.card-img-wrapper {
+  height: 250px;
+  overflow: hidden;
+}
+
+.card-img-wrapper img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -71,13 +83,39 @@
   padding:6px 12px;
 }
 
-.btn-fixed {
-  min-height: 70px; 
+/* ===== BUTTON ===== */
+.btn-card {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  text-align: left;
-  padding: 12px 16px;
+  align-items: center;
+  padding: 12px 14px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  transition: 0.2s;
+}
+
+/* hover button */
+.btn-card:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* giữ chiều cao đều */
+.btn-card {
+  min-height: 60px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 576px) {
+  .card-img-wrapper {
+    height: 150px;
+  }
+
+  .btn-card {
+    font-size: 13px;
+    padding: 10px;
+  }
 }
 
 /*------------- Contest ------------------------------------------------------ */

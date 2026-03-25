@@ -1,41 +1,40 @@
-.privilege-item{
-    border-bottom:1px solid #eee;
-    padding:25px 0;
-    gap:25px;
-    align-items:stretch;
-}
-   
-.post-detail__content-text p,
-.post-detail__content-text li {
-  text-align: justify;
+/* ===== IMAGE ===== */
+.object-fit-cover {
+  object-fit: cover;
 }
 
-.privilege-img{
-    width:160px;
-    flex-shrink:0;
+/* ===== TEXT ===== */
+.content-text p,
+.content-text li {
+  text-align: justify;
+  line-height: 1.6;
 }
-    
+
+/* ===== CARD HOVER ===== */
+.card {
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.privilege-img {
+  height: 250px;
+  overflow: hidden;
+}
+
 .privilege-img img {
-    width:100%;
-    height:100%;
-    object-fit:cover; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-    
-.privilege-content p{
-    color:#555;
-    font-size: 18px;
-    margin-bottom:12px;
-}
-    
-.privilege-meta{
-    font-size:18px;
-    color:#555;
-    gap:20px;
-}
-    
-.privilege-action{
-    display:flex;
-    align-items:center;
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 12px;
+  }
 }
 
 .privilege-modal .modal-content{

@@ -3,16 +3,24 @@
 <div class="section section-bg--2">
   <div class="container">
     <div *ngIf="topCards" class="row g-3 justify-content-center">
-      <div *ngFor="let card of topCards" class="col-lg-4 col-md-12">
-        <div class="card card-custom h-100">
+      <div *ngFor="let card of topCards" class="col-12 col-md-6 col-lg-4">
+        <div class="card card-custom h-100 shadow-sm">
           <!-- Image -->
-          <img [src]="card.icon" [alt]="card.name">
+          <div class="card-img-wrapper">
+            <img [src]="card.icon" [alt]="card.name">
+          </div>
           <!-- Buttons -->
           <div class="card-body">
-            <div class="row g-3 justify-content-center">
+            <div class="row g-3">
               <div *ngFor="let button of card.data" class="col-6">
-                <a class="contest-view-link w-100 h-100 d-block" [href]="button.url" target="_blank">
-                  <button class="my-btn-secondary my-btn-m my-1 w-100 h-100 btn-fixed">{{button.label}}<i class="fa-solid fa-arrow-right"></i></button>
+                <a class="contest-view-link w-100 h-100 d-block" 
+                  [href]="button.url" 
+                  target="_blank"
+                >
+                  <button class="my-btn-secondary my-btn-m my-1 w-100 h-100 btn-card">
+                    {{button.label}}
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
                 </a>
               </div>
             </div>
@@ -21,7 +29,7 @@
       </div>
     </div>
     <div *ngIf="!topCards" class="row g-3 justify-content-center">
-      <div *ngFor="let i of [1,2,3]" class="col-lg-4 col-md-12">
+      <div *ngFor="let i of [1,2,3]" class="col-12 col-md-6 col-lg-4">
         <ngx-skeleton-loader
           [theme]="{
             'height.px': '300',
@@ -202,7 +210,7 @@
 
       <!-- Content -->
       <div class="col-md col-sm-12 d-flex flex-column">
-        <h2 class="section__title section__title--center my-h3">
+        <h2 class="section__title section__title--center my-h3 my-2">
           <i class="section__title-icon fa-solid fa-calendar"></i>
           {{jobFair.name}}
         </h2>

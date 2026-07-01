@@ -137,11 +137,6 @@
                    routerLink="/tin-tuc/{{ item.slug }}"
               >
                 <div class="w-100 mb-3">
-<!--                  <img-->
-<!--                    [src]="item.thumbnail_url"-->
-<!--                    alt=""-->
-<!--                    class="recruitment-list-hot-item-box-img"-->
-<!--                  />-->
                   <a
                     [routerLink]="['/tin-tuc/', item.slug]"
                     class="capacity__related-item-image"
@@ -153,7 +148,7 @@
 
                 <div class="d-flex align-items-center mt-auto justify-content-between capacity__related-content-time">
                   <div class="post-item__info-item">
-                    <i class="fa-solid fa-clock"></i>&ensp;{{ item.published_at | formatDatePost }}
+                    <i class="fa-solid fa-clock"></i>&ensp;{{ (item?.deadline ? item.deadline : item.published_at) | formatDatePost }}
                   </div>
                   <div class="d-flex align-items-center mt-auto">
                     <i class="fa-regular fa-eye ms-2 me-2"></i> <span>{{ item.view }}</span>
